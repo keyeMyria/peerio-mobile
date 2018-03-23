@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View } from 'react-native';
 import { observer } from 'mobx-react/native';
 import ActionSheetLayout from '../layout/action-sheet-layout';
+import FileActionSheetHeader from '../files/file-action-sheet-header';
 
 @observer
 export default class MockActionSheet extends Component {
@@ -29,12 +30,12 @@ export default class MockActionSheet extends Component {
                 action: () => console.log('jump')
             }
         ];
+        const header = <FileActionSheetHeader file={file} onPress={() => console.log('Go to file')} />;
         return (
             <View style={{ flex: 1, flexGrow: 1 }}>
                 <ActionSheetLayout
-                    file={file}
-                    handleFileInfo={() => console.log('info')}
-                    handleCancel={() => console.log('cancel')}
+                    header={header}
+                    hasCancelButton
                     actionButtons={actionButtons}
                     destructiveButtonIndex={1}
                 />
