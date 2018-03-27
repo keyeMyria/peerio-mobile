@@ -63,10 +63,7 @@ defineSupportCode(({ Given, When, Then }) => {
     });
 
     Given('I sign out', async function () {
-        await this.homePage.settingsTab.click();
-        await this.homePage.scrollDownHelper();
-        await this.settingsPage.logoutButton.click();
-        await this.settingsPage.lockButton.click();
+        await this.logout();
     });
 
     When('I sign in', async function () {

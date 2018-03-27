@@ -121,7 +121,7 @@ export default class ChannelInvite extends SafeComponent {
                             textColor={vars.bgGreen}
                             style={{ width: vars.roundedButtonWidth, textAlign: 'center' }}
                         />
-                        {buttons.uppercaseGreenBgButton(tx('button_accept'), this.acceptInvite, hasPaywall)}
+                        {buttons.uppercaseGreenBgButton(tx('button_accept'), this.acceptInvite, hasPaywall, null, 'accept')}
                     </View>
                 </View>
                 <View style={sectionLine} />

@@ -11,6 +11,8 @@ import Avatar from '../shared/avatar';
 import icons from '../helpers/icons';
 import { tx } from '../utils/translator';
 import { vars } from '../../styles/styles';
+import { User } from '../../lib/icebear';
+import testLabel from '../helpers/test-label';
 
 @observer
 export default class MemberList extends SafeComponent {
@@ -77,9 +79,15 @@ export default class MemberList extends SafeComponent {
             alignItems: 'center',
             flexGrow: 1
         };
+
         const isAdmin = channel.isAdmin(contact);
+        const isCurrentUser = contact.username === User.current.username;
+
         return (
-            <View key={contact.username} style={row}>
+            <View
+                key={contact.username}
+                style={row}
+                {...testLabel(`${contact.username}-memberList`)}>
                 <View style={{ flex: 1, flexGrow: 1 }}>
                     <Avatar
                         noBorderBottom
@@ -88,13 +96,22 @@ export default class MemberList extends SafeComponent {
                         message=""
                         hideOnline />
                 </View>
-                <View style={{ flex: 0, flexDirection: 'row', alignItems: 'center' }}>
-                    {isAdmin && <View style={{ backgroundColor: vars.tabsFg, borderRadius: 4, padding: vars.spacing.small.mini2x, overflow: 'hidden', marginRight: vars.spacing.small.maxi2x }}>
-                        <Text style={{ color: vars.white, fontSize: vars.font.size.small }}>
-                            {tx('title_admin')}
-                        </Text>
-                    </View>}
-                    {channel.canIAdmin && <Menu>
+                <View
+                    {...testLabel('moreButton')}
+                    style={{ flex: 0, flexDirection: 'row', alignItems: 'center' }}>
+                    {isAdmin &&
+                        <View style={{
+                            backgroundColor: vars.tabsFg,
+                            borderRadius: 4,
+                            padding: vars.spacing.small.mini2x,
+                            overflow: 'hidden',
+                            marginRight: isCurrentUser ? vars.spacing.huge.midi : vars.spacing.small.maxi2x
+                        }}>
+                            <Text style={{ color: vars.white, fontSize: vars.font.size.small }}>
+                                {tx('title_admin')}
+                            </Text>
+                        </View>}
+                    {channel.canIAdmin && !isCurrentUser && <Menu>
                         <MenuTrigger
                             renderTouchable={() => <TouchableOpacity pressRetentionOffset={vars.pressRetentionOffset} />}
                             style={{ padding: vars.iconPadding }}>
@@ -111,7 +128,7 @@ export default class MemberList extends SafeComponent {
                             </MenuOption>
                             <MenuOption
                                 onSelect={() => channel.removeParticipant(contact)}>
-                                <Text>{tx('button_remove')}</Text>
+                                <Text {...testLabel('Remove')}>{tx('button_remove')}</Text>
                             </MenuOption>
                         </MenuOptions>
                     </Menu>}

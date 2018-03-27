@@ -46,8 +46,7 @@ export default class CreateChannelTextBox extends Component {
     }
 
     render() {
-        const { labelText, placeholderText, property,
-            bottomText, maxLength } = this.props;
+        const { labelText, placeholderText, property, bottomText, maxLength, multiline } = this.props;
         const testID = `textInput-${property}`;
         return (
             <View>
@@ -64,6 +63,7 @@ export default class CreateChannelTextBox extends Component {
                         placeholder={tx(placeholderText)}
                         style={placeholderStyle}
                         maxLength={maxLength}
+                        multiline={multiline}
                         {...testLabel(testID)} />
                 </View>
                 <Text style={bottomTextStyle}>{tx(bottomText)}</Text>

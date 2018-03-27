@@ -120,13 +120,16 @@ export default class CreateChannel extends Component {
                     property="channelName"
                     state={this}
                     bottomText={tx('title_channelNameLimit',
-                        { maxChatNameLength: config.chat.maxChatNameLength })} />
+                        { maxChatNameLength: config.chat.maxChatNameLength })}
+                    maxLength={config.chat.maxChatNameLength} />
                 <CreateChannelTextBox
                     labelText="title_roomPurpose"
                     placeholderText="title_channelTopicPlaceholder"
                     property="channelPurpose"
                     state={this}
-                    bottomText="title_channelTopicOptional" />
+                    bottomText="title_channelTopicOptional"
+                    maxLength={config.chat.maxChatPurposeLength}
+                    multiline />
             </View>
         );
     }

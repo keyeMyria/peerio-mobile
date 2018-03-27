@@ -11,7 +11,7 @@ Feature: Create New Chat
 
     Scenario Outline: User creates a new Room successfully
         When I log in as <new or existing> user
-        And I create a new Room
+        And I create a new room
         Then I can send a message to the current Chat
     Examples:
     | new or existing |

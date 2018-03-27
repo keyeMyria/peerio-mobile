@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.WindowManager;
 
 import com.facebook.react.*;
-import com.facebook.react.BuildConfig;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.modules.core.DeviceEventManagerModule;

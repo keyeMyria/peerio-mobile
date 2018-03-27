@@ -9,8 +9,8 @@ class HomePage extends Page {
         return this.getWhenVisible('~folder');
     }
 
-    get chatsTab() {
-        return this.checkIfVisible('~forum');
+    get isVisible() {
+        return this.app.waitForVisible('~forum');
     }
 
     get settingsTab() {

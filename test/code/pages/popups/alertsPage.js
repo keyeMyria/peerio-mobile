@@ -1,9 +1,13 @@
-const Page = require('../../page');
+const Page = require('../page');
 
 class AlertsPage extends Page {
     async dismissNotificationsAlert() {
-        if (await this.app.alertText()) {
-            await this.app.alertAccept();
+        try {
+            if (await this.app.alertText()) {
+                await this.app.alertAccept();
+            }
+        } catch (e) {
+            // No push alert present
         }
     }
 

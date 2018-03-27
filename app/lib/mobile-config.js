@@ -65,6 +65,9 @@ export default (c, icebear) => {
     }
 
     cfg.platform = Platform.OS;
+    cfg.appleTestUser = 'applereview2607';
+    cfg.appleTestPass = 'icebear';
+    cfg.appleTestServer = 'wss://treetrunks.peerio.com';
     Object.assign(cfg.chat, {
         maxInitialChats: 15,
         initialPageSize: 20, // amount of messages to load to a newly opened chat

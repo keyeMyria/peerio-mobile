@@ -67,7 +67,7 @@ export default {
         );
     },
 
-    uppercaseGreenBgButton(text, onPress, disabled, style) {
+    uppercaseGreenBgButton(text, onPress, disabled, style, accessibilityId) {
         const s = {
             borderRadius: 24,
             paddingHorizontal: vars.spacing.medium.mini2x,
@@ -76,7 +76,7 @@ export default {
             width: vars.roundedButtonWidth
         };
         return (
-            <View>
+            <View {...testLabel(accessibilityId)}>
                 <TouchableOpacity
                     disabled={disabled}
                     onPress={disabled ? null : onPress}

@@ -2,7 +2,7 @@ import { when, observable, action, reaction } from 'mobx';
 import RNRestart from 'react-native-restart';
 import mainState from '../main/main-state';
 import settingsState from '../settings/settings-state';
-import { User, validation, fileStore, socket, TinyDb, warnings } from '../../lib/icebear';
+import { User, validation, fileStore, socket, TinyDb, warnings, config, overrideServer } from '../../lib/icebear';
 import keychain from '../../lib/keychain-bridge';
 import { rnAlertYesNo } from '../../lib/alerts';
 import { popupSignOutAutologin, popupKeychainError } from '../shared/popups';
@@ -124,7 +124,13 @@ class LoginState extends RoutedState {
             });
     }
 
-    @action login = (pin) => {
+    @action login = async (pin) => {
+        if (this.username === config.appleTestUser
+            && config.appleTestServer !== socket.url) {
+            await overrideServer(config.appleTestServer);
+            await TinyDb.system.setValue('apple-review-login', true);
+            this.restart();
+        }
         const user = new User();
         user.username = this.username;
         user.passphrase = (pin || this.passphrase).trim();
@@ -163,6 +169,8 @@ class LoginState extends RoutedState {
         }
         await User.removeLastAuthenticated();
         const { username } = User.current;
+        overrideServer(null);
+        await TinyDb.system.removeValue(`apple-review-login`);
         await TinyDb.system.removeValue(`${username}::${loginConfiguredKey}`);
         await TinyDb.system.removeValue(`user::${username}::touchid`);
         await TinyDb.system.removeValue(`user::${username}::keychain`);
@@ -178,6 +186,14 @@ class LoginState extends RoutedState {
 
     async load() {
         console.log(`login-state.js: loading`);
+        const appleReviewLogin = await TinyDb.system.getValue('apple-review-login');
+        // TODO: remove this after migration
+        if (appleReviewLogin) {
+            this.username = config.appleTestUser;
+            this.passphrase = config.appleTestPass;
+            this.login();
+            return;
+        }
 
         setTimeout(() => { this.isInProgress = false; }, 0);
         const load = async () => {

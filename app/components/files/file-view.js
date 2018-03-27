@@ -102,7 +102,7 @@ export default class FileView extends SafeComponent {
 
                                 <View style={{ flexGrow: 1 }}>
                                     <Text style={hintStyle}>{tx('title_uploaded')}</Text>
-                                    <Text>{moment(file.uploadedAt).format(`MMM DD, YYYY`)}</Text>
+                                    <Text>{moment(file.uploadedAt).format(`MM/DD/YY HH:MM:SS a`)}</Text>
                                 </View>
                             </View>
                         </View>

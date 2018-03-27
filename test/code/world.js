@@ -4,6 +4,7 @@ const ChatListPage = require('./pages/messaging/chatListPage');
 const ContactSelectorDmPage = require('./pages/messaging/contactSelectorDmPage');
 const ChatPage = require('./pages/messaging/chatPage');
 const RoomCreationPage = require('./pages/messaging/roomCreationPage');
+const RoomInvitePage = require('./pages/messaging/roomInvitePage');
 const FilesListPage = require('./pages/files/filesListPage');
 const iOSFactory = require('./helpers/iOSFactory');
 const AndroidFactory = require('./helpers/AndroidFactory');
@@ -16,10 +17,12 @@ const SettingsPage = require('./pages/settings/settingsPage');
 const ProfileSettingsPage = require('./pages/settings/profileSettingsPage');
 const otplib = require('otplib');
 const FileViewPage = require('./pages/files/fileViewPage');
+const AlertsPage = require('./pages/popups/alertsPage');
 
 class World {
-    constructor(opts) {
-        this.context = opts.parameters.platform === 'ios' ? iOSFactory : AndroidFactory;
+    constructor({ attach, parameters }) {
+        this.attach = attach;
+        this.context = parameters.platform === 'ios' ? iOSFactory : AndroidFactory;
     }
 
     openApp() {
@@ -37,11 +40,12 @@ class World {
         this.loginPage = new LoginPage(this.app);
         this.createAccountPage = new CreateAccountPage(this.app);
         this.homePage = new HomePage(this.app);
-        this.alertsPage = this.context.alertsPage(this.app);
+        this.alertsPage = new AlertsPage(this.app);
 
         this.chatListPage = new ChatListPage(this.app);
         this.contactSelectorDmPage = new ContactSelectorDmPage(this.app);
         this.roomCreationPage = new RoomCreationPage(this.app);
+        this.roomInvitePage = new RoomInvitePage(this.app);
         this.chatPage = new ChatPage(this.app);
         this.chatActionSheetPage = this.context.chatActionSheetPage(this.app);
 
@@ -61,6 +65,11 @@ class World {
             .end(); // end server session and close webdriver
     }
 
+    async takeScreenshot() {
+        const image = await this.app.saveScreenshot();
+        this.attach(image, 'image/png');
+    }
+
     async goTo2FASetup() {
         await this.homePage.settingsTab.click();
 
@@ -73,9 +82,8 @@ class World {
 
     async tryEnterTokenInSettings() {
         const token = otplib.authenticator.generate(this.secretKey);
-        await this.twoStepVerificationPage.confirmationCode
-            .setValue(token)
-            .hideDeviceKeyboard();
+        await this.twoStepVerificationPage.confirmationCode.setValue(token);
+        await this.twoStepVerificationPage.hideKeyboardHelper();
         await this.twoStepVerificationPage.confirmButton.click();
     }
 
@@ -88,7 +96,8 @@ class World {
 
     async tryEnterTokenInPrompt() {
         const token = otplib.authenticator.generate(this.secretKey);
-        await this.twoFactorAuthPrompt.tokenInput.setValue(token).hideDeviceKeyboard();
+        await this.twoFactorAuthPrompt.tokenInput.setValue(token);
+        await this.twoFactorAuthPrompt.hideKeyboardHelper();
         await this.twoFactorAuthPrompt.submitButton.click();
         await this.twoFactorAuthPrompt.submitButton.click(); // TODO tap twice
     }
@@ -135,7 +144,7 @@ class World {
     }
 
     async seeWelcomeScreen() {
-        await this.homePage.chatsTab;
+        await this.homePage.isVisible;
     }
 
     async dismissEmailConfirmationPopup() {
@@ -147,15 +156,13 @@ class World {
     async loginExistingAccount(username, passphrase) {
         await this.alertsPage.dismissNotificationsAlert();
         await this.startPage.loginButton.click();
-        await this.loginPage.username.setValue(username).hideDeviceKeyboard();
-        await this.loginPage.passphrase.setValue(passphrase).hideDeviceKeyboard();
 
-        // iOS taps on 'Done' button when hides device keyboard
-        // Android taps outside
-        // 'tapOutside' strategy passed to hideDeviceKeyboard still taps on 'Done' button
-        if (this.context.platform.desiredCapabilities.platformName === 'Android') {
-            await this.loginPage.submitButton.click();
-        }
+        await this.loginPage.username.setValue(username);
+        await this.loginPage.hideKeyboardHelper();
+        await this.loginPage.passphrase.setValue(passphrase);
+        await this.loginPage.hideKeyboardHelper();
+        await this.loginPage.submitButton.click();
+
         await this.seeWelcomeScreen();
         await this.dismissEmailConfirmationPopup();
     }
@@ -167,6 +174,27 @@ class World {
         await this.confirmSavingPasscode();
         await this.seeWelcomeScreen();
         await this.dismissEmailConfirmationPopup();
+    }
+
+    async logout() {
+        await this.homePage.settingsTab.click();
+        await this.homePage.scrollDownHelper();
+        await this.settingsPage.logoutButton.click();
+        await this.settingsPage.lockButton.click();
+
+        await this.app.closeApp();
+        await this.app.launch();
+    }
+
+    async scrollToChat() {
+        await this.homePage.isVisible;
+
+        // Wait for rooms to load, otherwise position will change
+        await this.app.pause(5000);
+
+        while (!(await this.chatListPage.roomWithTitleVisible(this.roomName))) { // eslint-disable-line
+            await this.chatListPage.scrollDownHelper();  // eslint-disable-line
+        }
     }
 }
 

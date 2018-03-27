@@ -15,6 +15,7 @@ import PlusBorderIcon from '../layout/plus-border-icon';
 import CreateActionSheet from './create-action-sheet';
 import { tx } from '../utils/translator';
 import uiState from '../layout/ui-state';
+import { scrollHelper } from '../helpers/test-helper';
 
 const INITIAL_LIST_SIZE = 10;
 const PAGE_SIZE = 2;
@@ -36,6 +37,7 @@ export default class ChatList extends SafeComponent {
     @observable refreshing = false;
     @observable maxLoadedIndex = INITIAL_LIST_SIZE;
     @observable collapsible = true;
+    @observable reverseRoomSorting = false;
 
     get rightIcon() {
         return (<PlusBorderIcon
@@ -53,6 +55,10 @@ export default class ChatList extends SafeComponent {
     }
 
     componentDidMount() {
+        uiState.testAction1 = () => {
+            this.reverseRoomSorting = !this.reverseRoomSorting;
+        };
+
         this.reaction = reaction(() => [
             chatState.routerMain.route === 'chats',
             chatState.routerMain.currentIndex === 0,
@@ -60,14 +66,16 @@ export default class ChatList extends SafeComponent {
             chatInviteStore.received.length,
             this.data,
             this.data.length,
-            this.maxLoadedIndex
+            this.maxLoadedIndex,
+            this.reverseRoomSorting
         ], () => {
             const channels = this.data.filter(d => !!d.isChannel);
             const allChannels = chatInviteStore.received.concat(channels);
             allChannels.sort((a, b) => {
                 const first = (a.name || a.channelName).toLocaleLowerCase();
                 const second = (b.name || b.channelName).toLocaleLowerCase();
-                return first.localeCompare(second);
+                const result = first.localeCompare(second);
+                return this.reverseRoomSorting ? !result : result;
             });
             const dms = this.data.filter(d => !d.isChannel).slice(0, this.maxLoadedIndex);
             this.dataSource = this.dataSource.cloneWithRowsAndSections({
@@ -137,6 +145,7 @@ export default class ChatList extends SafeComponent {
                 onContentSizeChange={this.scroll}
                 enableEmptySections
                 ref={this.scrollViewRef}
+                {...scrollHelper}
             />
         );
     }

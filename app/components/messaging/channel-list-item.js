@@ -5,6 +5,7 @@ import { View, Text, TouchableOpacity } from 'react-native';
 import SafeComponent from '../shared/safe-component';
 import { vars } from '../../styles/styles';
 import chatState from './chat-state';
+import testLabel from '../helpers/test-label';
 
 @observer
 export default class ChannelListItem extends SafeComponent {
@@ -58,6 +59,7 @@ export default class ChannelListItem extends SafeComponent {
         return (
             <View style={{ backgroundColor: vars.bg }}>
                 <TouchableOpacity
+                    {...testLabel(name)}
                     onPress={this.onPress}
                     style={containerStyle} pressRetentionOffset={vars.pressRetentionOffset}>
                     <Text style={[textStyle, (unreadCount > 0 && textUnreadStyle)]}>
