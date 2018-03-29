@@ -115,6 +115,7 @@ const vars = {
     iconMargin: 30,
     imagePreviewSize: 48,
     chatListItemHeight: 48,
+    chatFadingOutBg: 'rgb(237,237,238)',
     contactListHeaderHeight: 48,
     roundedButtonWidth: 134,
     menuWidthRatio: 0.8,

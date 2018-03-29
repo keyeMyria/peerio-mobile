@@ -25,6 +25,7 @@ class UIState extends RoutedState {
     @observable currentScrollView = null;
     @observable currentScrollViewPosition = 0;
     @observable trustDevice2FA = false;
+    @observable declinedChannelId = null;
     @observable languages = {
         en: `English`
         // fr: `French`,
