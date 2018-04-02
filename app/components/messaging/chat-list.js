@@ -2,7 +2,7 @@ import React from 'react';
 import { observer } from 'mobx-react/native';
 import { View, ListView } from 'react-native';
 import { observable, reaction, action } from 'mobx';
-import { chatInviteStore } from '../../lib/icebear';
+import { chatInviteStore, chatNotifier } from '../../lib/icebear';
 import SafeComponent from '../shared/safe-component';
 import ChatZeroStatePlaceholder from './chat-zero-state-placeholder';
 import ChatListItem from './chat-list-item';
@@ -70,13 +70,7 @@ export default class ChatList extends SafeComponent {
             this.reverseRoomSorting
         ], () => {
             const channels = this.data.filter(d => !!d.isChannel);
-            const allChannels = chatInviteStore.received.concat(channels);
-            allChannels.sort((a, b) => {
-                const first = (a.name || a.channelName).toLocaleLowerCase();
-                const second = (b.name || b.channelName).toLocaleLowerCase();
-                const result = first.localeCompare(second);
-                return this.reverseRoomSorting ? !result : result;
-            });
+            const allChannels = chatNotifier.allRooms;
             const dms = this.data.filter(d => !d.isChannel).slice(0, this.maxLoadedIndex);
             this.dataSource = this.dataSource.cloneWithRowsAndSections({
                 title_channels: allChannels,
