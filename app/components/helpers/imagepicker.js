@@ -72,7 +72,7 @@ const cameraSettings = {
     }
 };
 
-const gallerySettings = { noData: true };
+const gallerySettings = { noData: true, mediaType: 'mixed' };
 
 export default {
     launchGallery,
