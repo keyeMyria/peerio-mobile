@@ -28,7 +28,7 @@ export default class ChannelInviteListItem extends SafeComponent {
                 LayoutAnimation.easeInEaseOut();
             }, 1000);
             // TODO: Figure out how to synchronize rejecting invite without destroying component
-            // chatInviteStore.rejectInvite(this.props.id);
+            chatInviteStore.rejectInvite(this.props.id);
             uiState.declinedChannelId = null;
         });
     }
