@@ -10,7 +10,7 @@ import chatState from './chat-state';
 import routes from '../routes/routes';
 import testLabel from '../helpers/test-label';
 import uiState from '../layout/ui-state';
-// import { chatInviteStore } from '../../lib/icebear';
+import { chatInviteStore } from '../../lib/icebear';
 
 @observer
 export default class ChannelInviteListItem extends SafeComponent {
@@ -19,18 +19,20 @@ export default class ChannelInviteListItem extends SafeComponent {
 
     componentDidMount() {
         this.fadeOutReaction = when(() => uiState.declinedChannelId === this.props.id, () => {
-            setTimeout(() => {
-                this.declinedStyle = true;
-            }, 500);
+            this.declinedStyle = true;
             setTimeout(() => {
                 this.animating = true;
-                LayoutAnimation.configureNext({ duration: 4000 });
+                LayoutAnimation.configureNext({ duration: 2000 });
                 LayoutAnimation.easeInEaseOut();
-            }, 1000);
-            // TODO: Figure out how to synchronize rejecting invite without destroying component
+            }, 400);
             chatInviteStore.rejectInvite(this.props.id);
             uiState.declinedChannelId = null;
         });
+    }
+
+    componentWillReceiveProps(nextProps) {
+        this.animating = false;
+        this.declinedStyle = false;
     }
 
     componentWillUnmount() {
