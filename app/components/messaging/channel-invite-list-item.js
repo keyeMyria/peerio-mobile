@@ -71,7 +71,7 @@ export default class ChannelInviteListItem extends SafeComponent {
         const circleStyle = {
             paddingHorizontal: 4,
             paddingVertical: 1,
-            // maxWidth: 32,
+            maxWidth: 32,
             borderRadius: 5,
             backgroundColor: vars.bgGreen,
             overflow: 'hidden',
