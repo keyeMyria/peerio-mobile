@@ -177,13 +177,13 @@ function popupCancelConfirm(title, subTitle, text) {
     }));
 }
 
-function popupInput(title, subTitle, value) {
+function popupInput(title, subTitle, value, textInputProps) {
     return new Promise((resolve) => {
         const o = observable({ value });
         popupState.showPopup({
             title,
             subTitle: textControl(subTitle),
-            contents: inputControl(o),
+            contents: inputControl(o, null, textInputProps),
             buttons: [{
                 id: 'ok', text: tu('button_ok'), action: () => resolve(o.value)
             }]

@@ -125,12 +125,12 @@ class LoginState extends RoutedState {
     }
 
     @action login = async (pin) => {
-        if (this.username === config.appleTestUser
+        /* if (this.username === config.appleTestUser
             && config.appleTestServer !== socket.url) {
             await overrideServer(config.appleTestServer);
             await TinyDb.system.setValue('apple-review-login', true);
             this.restart();
-        }
+        } */
         const user = new User();
         user.username = this.username;
         user.passphrase = (pin || this.passphrase).trim();

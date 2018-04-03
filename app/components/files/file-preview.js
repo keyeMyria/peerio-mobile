@@ -100,7 +100,7 @@ export default class FilePreview extends SafeComponent {
                     </Text>
                     <TextInput
                         autoCorrect={false}
-                        autoCapitalize="none"
+                        autoCapitalize="sentences"
                         value={state.name}
                         onChangeText={text => { state.name = text; }}
                         underlineColorAndroid="transparent"
