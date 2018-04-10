@@ -1,12 +1,14 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
+import { action, when } from 'mobx';
 import SafeComponent from '../shared/safe-component';
 import { vars } from '../../styles/styles';
 import icons from '../helpers/icons';
 import FileTypeIcon from './file-type-icon';
 import FileProgress from './file-progress';
-import { fileHelpers } from '../../lib/icebear';
+import { fileHelpers, config } from '../../lib/icebear';
+import { fileState } from '../states';
 
 const padding = 8;
 const borderWidth = 1;
@@ -39,6 +41,46 @@ const text = {
 };
 
 export default class FileInlineContainer extends SafeComponent {
+    @action.bound fileAction() {
+        const { file, isImage } = this.props;
+        if (file.downloading) return;
+        if (isImage) {
+            if (file.tmpCached) {
+                try {
+                    config.FileStream.launchViewer(file.tmpCachePath);
+                } catch (e) {
+                    console.log(e);
+                }
+            } else file.tryToCacheTemporarily(true);
+        } else {
+            const exists = file && !file.isPartialDownload && file.cached;
+            if (exists) file.launchViewer();
+            else if (!file.cached) fileState.download(file);
+        }
+    }
+
+    get fileTypeIcon() {
+        const { file } = this.props;
+        return (
+            <TouchableOpacity
+                onPress={this.fileAction}
+                pressRetentionOffset={vars.pressRetentionOffset}>
+                <FileTypeIcon type={fileHelpers.getFileIconType(file.ext)} size="smaller" />
+            </TouchableOpacity>);
+    }
+
+    get fileName() {
+        const { file, isImage } = this.props;
+        const name = isImage ? file.name : `${file.name} (${file.sizeFormatted})`;
+        return (!!name &&
+            <TouchableOpacity
+                style={{ flexDirection: 'row', alignItems: 'center', flexGrow: 1, flexShrink: 1 }}
+                onPress={this.fileAction}
+                pressRetentionOffset={vars.pressRetentionOffset}>
+                <Text numberOfLines={1} ellipsizeMode="tail" style={text}>{name}</Text>
+            </TouchableOpacity>);
+    }
+
     render() {
         const { file, isImage, isOpen, extraActionIcon } = this.props;
         const { title, description, fileId, downloading } = file;
@@ -57,7 +99,6 @@ export default class FileInlineContainer extends SafeComponent {
             paddingBottom: (isLocal && isOpen) ? (padding + borderWidth) : 0,
             height: containerHeight
         };
-        const name = isImage ? file.name : `${file.name} (${file.sizeFormatted})`;
         return (
             <View style={container}>
                 <View style={outer} {...this.props}>
@@ -66,8 +107,8 @@ export default class FileInlineContainer extends SafeComponent {
                         {!!description && <Text style={descText}>{description}</Text>}
                     </View>
                     <View style={[header, { marginBottom: downloading && !isImage ? spacingDifference : 0 }]}>
-                        {isLocal && <FileTypeIcon type={fileHelpers.getFileIconType(file.ext)} size="smaller" />}
-                        {!!name && <Text numberOfLines={1} ellipsizeMode="tail" style={text}>{name}</Text>}
+                        {isLocal && this.fileTypeIcon}
+                        {this.fileName}
                         {isLocal && <View style={{ flexDirection: 'row' }}>
                             {extraActionIcon}
                             {!downloading && icons.darkNoPadding(
