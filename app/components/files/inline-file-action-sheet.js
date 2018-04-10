@@ -11,10 +11,22 @@ import { tx } from '../utils/translator';
 export default class InlineFileActionSheet extends SafeComponent {
     @observable file;
 
-    sharefile = () => {
-        fileState.currentFile = this.file;
-        routerModal.shareFileTo();
-    };
+    get shareFile() {
+        return {
+            title: tx('button_share'),
+            action: () => {
+                fileState.currentFile = this.file;
+                routerModal.shareFileTo();
+            }
+        };
+    }
+
+    get deleteFile() {
+        return {
+            title: tx('button_delete'),
+            action: async () => { await fileState.deleteFile(this.file); }
+        };
+    }
 
     get openItem() {
         const exists = this.file && !this.file.isPartialDownload && this.file.cached;
@@ -28,12 +40,12 @@ export default class InlineFileActionSheet extends SafeComponent {
         };
     }
 
+    get cancel() { return { title: tx('button_cancel') }; }
+
     get items() {
-        return [
-            this.openItem,
-            { title: tx('button_share'), action: this.sharefile },
-            { title: tx('button_cancel') }
-        ];
+        if (this.file) return [this.openItem, this.shareFile, this.deleteFile, this.cancel];
+        // cant delete if not downloaded
+        return [this.openItem, this.shareFile, this.cancel];
     }
 
     onPress = index => {

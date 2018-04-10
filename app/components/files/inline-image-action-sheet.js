@@ -12,10 +12,22 @@ import { config } from '../../lib/icebear';
 export default class InlineImageActionSheet extends SafeComponent {
     @observable image;
 
-    shareImage = () => {
-        fileState.currentFile = this.image;
-        routerModal.shareFileTo();
-    };
+    get shareFile() {
+        return {
+            title: tx('button_share'),
+            action: () => {
+                fileState.currentFile = this.image;
+                routerModal.shareFileTo();
+            }
+        };
+    }
+
+    get deleteFile() {
+        return {
+            title: tx('button_delete'),
+            action: async () => { await fileState.deleteFile(this.image); }
+        };
+    }
 
     get openItem() {
         return {
@@ -27,12 +39,12 @@ export default class InlineImageActionSheet extends SafeComponent {
         };
     }
 
+    get cancel() { return { title: tx('button_cancel') }; }
+
     get items() {
-        return [
-            this.openItem,
-            { title: tx('button_share'), action: this.shareImage },
-            { title: tx('button_cancel') }
-        ];
+        if (this.image) return [this.openItem, this.shareFile, this.deleteFile, this.cancel];
+        // cant delete if not downloaded
+        return [this.openItem, this.shareFile, this.cancel];
     }
 
     onPress = index => {
