@@ -36,13 +36,9 @@ const hintStyle = {
 
 @observer
 export default class FileView extends SafeComponent {
-    get file() {
-        return fileState.currentFile || {};
-    }
+    get file() { return fileState.currentFile || {}; }
 
-    get actionsBar() {
-        return <FileActions file={this.file} />;
-    }
+    get actionsBar() { return <FileActions file={this.file} />; }
 
     @action.bound fileAction() {
         const { file } = this;
