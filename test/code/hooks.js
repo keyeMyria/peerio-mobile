@@ -3,7 +3,7 @@ const World = require('./world');
 const chai = require('chai');
 
 chai.should();
-const defaultTimeout = 3000000;
+const defaultTimeout = 120000;
 
 defineSupportCode(({ setDefaultTimeout, setWorldConstructor, Before, After }) => {
     setDefaultTimeout(defaultTimeout);

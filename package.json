@@ -1,6 +1,6 @@
 {
   "name": "peeriomobile",
-  "version": "3.260.0",
+  "version": "3.265.0",
   "private": true,
   "scripts": {
     "postinstall": "./scripts/setup-env.sh && npm run icebear:compile && ./scripts/setup-rn-debugging.sh && ./scripts/copy-android-resources.sh && ./scripts/android-switch-to-rn-fork.sh && node scripts/test-deps.js",
@@ -24,8 +24,8 @@
     "build-android-debug": "cd android && ./gradlew assembleDebug",
     "test": "./scripts/setup_tests.sh && ./scripts/run-tests.sh",
     "cucumber": "source env.sh && ./scripts/cucumber.sh",
-    "test-key-ios": "source env.sh && cucumberjs test/spec/account/profileSettings.feature:38 -r test/code -f node_modules/cucumber-pretty --world-parameters '{\"platform\": \"ios\"}'",
-    "test-key-android": "source env.sh && cucumberjs test/spec/account/profileSettings.feature:38 -r test/code -f node_modules/cucumber-pretty --world-parameters '{\"platform\": \"android\"}'",
+    "test-ios": "source env.sh && cucumberjs test/spec/contacts/contacts.feature -r test/code -f node_modules/cucumber-pretty --world-parameters '{\"platform\": \"ios\"}'",
+    "test-android": "source env.sh && cucumberjs test/spec/contacts/contacts.feature -r test/code -f node_modules/cucumber-pretty --world-parameters '{\"platform\": \"android\"}'",
     "gp-peerio": "npm run build-android && bash scripts/release_android.sh && fastlane android alpha",
     "commit-msg": "validate-commit-msg"
   },

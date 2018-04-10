@@ -16,7 +16,8 @@ export default class LayoutModalExit extends SafeComponent {
             alignItems: 'center',
             padding: vars.spacing.small.mini2x,
             paddingTop: vars.statusBarHeight * 2,
-            paddingBottom: 0
+            paddingBottom: 0,
+            backgroundColor: vars.darkBlueBackground15
         };
         const textStyle = {
             flexGrow: 1,

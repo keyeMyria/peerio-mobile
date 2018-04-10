@@ -12,6 +12,7 @@ import uiState from '../layout/ui-state';
 import contactState from './contact-state';
 import snackbarState from '../snackbars/snackbar-state';
 import buttons from '../helpers/buttons';
+import testLabel from '../helpers/test-label';
 
 const textinputContainer = {
     backgroundColor: vars.white,
@@ -165,10 +166,11 @@ export default class ContactAdd extends SafeComponent {
     renderButton1(text, onPress, disabled) {
         return (
             <TouchableOpacity
+                {...testLabel(text)}
                 onPress={disabled ? null : onPress}
                 pressRetentionOffset={vars.pressRetentionOffset}
                 style={{ paddingRight: vars.spacing.small.maxi2x, paddingVertical: vars.spacing.small.maxi }}>
-                <Text style={{ fontWeight: 'bold', color: disabled ? vars.txtMedium : vars.bg }}>
+                <Text style={{ fontWeight: 'bold', color: disabled ? vars.txtMedium : vars.peerioBlue }}>
                     {tu(text)}
                 </Text>
             </TouchableOpacity>
@@ -207,7 +209,7 @@ export default class ContactAdd extends SafeComponent {
                 <ScrollView
                     onScroll={this.onScroll}
                     keyboardShouldPersistTaps="handled"
-                    style={{ backgroundColor: vars.settingsBg }}
+                    style={{ backgroundColor: vars.darkBlueBackground05 }}
                     ref={ref => { this._scrollView = ref; }}>
                     <View style={{ marginTop: vars.spacing.medium.midi2x }}>
                         {contactState.empty && <View style={{ margin: vars.spacing.small.midi2x }}>
@@ -220,8 +222,11 @@ export default class ContactAdd extends SafeComponent {
                                     autoCorrect={false}
                                     autoCapitalize="none"
                                     onChangeText={text => { this.query = text; }}
-                                    placeholder={tx('title_userSearch')} style={textinput}
-                                    value={this.query} />
+                                    placeholder={tx('title_userSearch')}
+                                    style={textinput}
+                                    value={this.query}
+                                    {...testLabel('contactSearchInput')}
+                                />
                                 {this.renderButton1('button_add', () => this.tryAdding())}
                             </View>
                             {this.inviteBlock}

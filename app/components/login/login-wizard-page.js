@@ -9,7 +9,20 @@ import testLabel from '../helpers/test-label';
 
 const padding = vars.spacing.medium.midi2x;
 
+const innerContainer = {
+    paddingHorizontal: padding
+};
+
+const outerContainer = {
+    backgroundColor: vars.darkBlue,
+    flex: 1,
+    flexGrow: 1,
+    paddingBottom: padding,
+    paddingTop: vars.spacing.huge.minixx + vars.statusBarHeight
+};
+
 const container = {
+    backgroundColor: vars.darkBlue,
     flex: 1,
     flexGrow: 1,
     padding,
@@ -23,7 +36,7 @@ const headerWelcome = {
 
 const header2 = {
     justifyContent: 'center',
-    marginBottom: vars.spacing.small.midi2x
+    marginBottom: vars.spacing.medium.midi
 };
 
 const topCircleSize = 68;
@@ -58,7 +71,7 @@ const circleTop = [helpers.circle(topCircleSize * 2), {
 
 const circleTopSmall = [circleTop, helpers.circle(topCircleSizeSmall * 2), {
     borderWidth: 1,
-    borderColor: vars.bg
+    borderColor: vars.gray54
 }];
 
 const row = {
@@ -67,35 +80,54 @@ const row = {
     height: 90
 };
 
-const title1 = {
-    color: vars.white,
+const headingStyle1 = {
+    color: vars.textWhite100,
     textAlign: 'center',
     fontSize: vars.font.size.massive,
-    fontWeight: '500',
+    fontWeight: vars.font.weight.semiBold,
     marginBottom: vars.spacing.small.maxi
 };
 
-const title1Black = [title1, {
-    color: vars.txtDark,
-    fontSize: vars.font.size.huge,
-    marginBottom: vars.spacing.medium.midi2x
-}];
-
-const title2 = {
-    color: vars.white,
+const headingStyle2 = {
+    color: vars.textWhite100,
     textAlign: 'center',
     fontSize: vars.font.size.bigger
 };
 
-const title2Black = [title2, {
-    marginHorizontal: vars.spacing.huge.midi2x,
-    marginVertical: vars.spacing.small.midi,
-    color: vars.txtDark
-}];
+const subHeadingStyle = {
+    color: vars.textWhite70,
+    textAlign: 'center',
+    fontSize: vars.font.size.bigger
+};
 
-const title3 = {
-    color: vars.white,
-    textAlign: 'center'
+const scrollHeadingStyle = {
+    color: vars.textDarkGrey,
+    fontSize: vars.font.size.huge,
+    textAlign: 'center',
+    fontWeight: vars.font.weight.semiBold,
+    marginBottom: vars.spacing.medium.midi2x
+};
+
+const scrollSubHeadingStyle = {
+    color: vars.textDarkGrey,
+    textAlign: 'center',
+    fontSize: vars.font.size.bigger,
+    marginHorizontal: vars.spacing.huge.midi2x,
+    marginVertical: vars.spacing.small.midi
+};
+
+const footerContainer = {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'flex-end'
+};
+
+const footerText1 = {
+    color: vars.textWhite50
+};
+
+const footerText2 = {
+    color: vars.textWhite100
 };
 
 const buttonRowStyle = {
@@ -104,9 +136,9 @@ const buttonRowStyle = {
 };
 
 export {
-    headerWelcome, header2, inner, innerSmall, title1, title1Black, title2,
-    title2Black, title3, row, circleTop, circleTopSmall,
-    container, topCircleSizeSmall, embeddedImageCircleSize,
+    headerWelcome, header2, inner, innerSmall, headingStyle1, headingStyle2, subHeadingStyle, scrollHeadingStyle,
+    scrollSubHeadingStyle, footerContainer, footerText1, footerText2, row, circleTop, circleTopSmall,
+    innerContainer, outerContainer, container, topCircleSizeSmall, embeddedImageCircleSize,
     padding, buttonRowStyle
 };
 
@@ -122,6 +154,7 @@ export default class LoginWizardPage extends SafeComponent {
             alignItems: 'center'
         };
         const buttonText = {
+            color: vars.textWhite100,
             fontWeight: 'bold',
             fontSize: vars.font.size.bigger
         };

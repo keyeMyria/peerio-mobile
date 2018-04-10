@@ -66,7 +66,7 @@ export default class AccountUpgrade extends SafeComponent {
                 onPress={disabled ? null : onPress}
                 pressRetentionOffset={vars.pressRetentionOffset}
                 style={{ paddingTop: vars.spacing.small.mini }}>
-                <Text style={{ fontWeight: 'bold', color: disabled ? vars.txtMedium : vars.bg }}>
+                <Text style={{ fontWeight: 'bold', color: disabled ? vars.txtMedium : vars.peerioBlue }}>
                     {tu(text)}
                 </Text>
             </TouchableOpacity>
@@ -125,7 +125,7 @@ export default class AccountUpgrade extends SafeComponent {
         return (
             <ScrollView
                 keyboardShouldPersistTaps="handled"
-                style={{ backgroundColor: vars.settingsBg }}>
+                style={{ backgroundColor: vars.darkBlueBackground05 }}>
                 {plans.map(this.renderPlan)}
             </ScrollView>
         );

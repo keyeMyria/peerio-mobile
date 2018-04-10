@@ -14,7 +14,7 @@ export default class ButtonText extends SafeComponent {
         if (disabled) fontColor = vars.extraSubtleText;
         else if (secondary) fontColor = vars.subtleText;
         else if (textColor) fontColor = textColor;
-        else fontColor = vars.bg;
+        else fontColor = vars.peerioBlue;
         const textStyle = {
             color: fontColor,
             fontWeight: 'bold'

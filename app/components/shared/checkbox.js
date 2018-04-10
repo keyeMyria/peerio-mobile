@@ -15,8 +15,8 @@ export default class CheckBox extends Component {
 
     render() {
         const { isChecked } = this.props;
-        const borderColor = isChecked ? vars.bg : 'gray';
-        const backgroundColor = isChecked ? vars.subtleBg : undefined;
+        const borderColor = isChecked ? vars.peerioBlue : 'gray';
+        const backgroundColor = isChecked ? vars.peerioBlueBackground15 : undefined;
         const container = {
             flexDirection: 'row',
             flexGrow: 1,

@@ -52,7 +52,8 @@ export default class ChatInfo extends SafeComponent {
                 contact={contact}
                 key={username || i}
                 message=""
-                hideOnline />
+                hideOnline
+                backgroundColor={vars.darkBlueBackground05} />
         );
     };
 
@@ -61,7 +62,7 @@ export default class ChatInfo extends SafeComponent {
         const body = (
             <View>
                 {chat.otherParticipants && this.lineBlock(
-                    <View style={{ paddingVertical: vars.spacing.small.midi2x }}>
+                    <View style={{ paddingVertical: vars.spacing.small.midi2x, backgroundColor: vars.subtleBlueBackground }}>
                         {chat.otherParticipants.map(this.participant)}
                     </View>
                 )}
@@ -71,7 +72,7 @@ export default class ChatInfo extends SafeComponent {
         const rightIcon = icons.iconImage(
             chat.isFavorite ? pinOn : pinOff,
             () => chat.toggleFavoriteState(),
-            vars.sublteGrayOpacity
+            vars.opacity54
         );
         return (<LayoutModalExit
             body={body}

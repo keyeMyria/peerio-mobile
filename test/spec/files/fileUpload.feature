@@ -13,7 +13,7 @@ Feature: File Upload
         When I log in as <new or existing> user
         Then I create a new room
         And I upload a file from gallery to the current Chat
-        When I exit the current Chat
+        When I exit the current chat
         Then I can download the file from Files
     Examples:
         | new or existing |

@@ -6,23 +6,16 @@ import TextBox from '../controls/textbox';
 import ActivityOverlay from '../controls/activity-overlay';
 import loginState from './login-state';
 import LoginWizardPage, {
-    header, title1, title3, title2, row, container
+    row, container, headingStyle1, subHeadingStyle, footerContainer, footerText1, footerText2
 } from './login-wizard-page';
 import { vars } from '../../styles/styles';
 import DebugMenuTrigger from '../shared/debug-menu-trigger';
-
-const header2 = [header, { marginBottom: vars.spacing.medium.midi2x, justifyContent: 'flex-end' }];
 
 const inner2 = {
     borderRadius: 4,
     backgroundColor: vars.white,
     justifyContent: 'center',
     minHeight: 300
-};
-
-const footer = {
-    justifyContent: 'flex-end',
-    alignItems: 'center'
 };
 
 const formStyle = {
@@ -32,7 +25,7 @@ const formStyle = {
 
 const findKeyText = {
     alignSelf: 'center',
-    color: vars.bg,
+    color: vars.peerioBlue,
     fontSize: vars.font.size.normal
 };
 
@@ -40,16 +33,16 @@ export default class LoginClean extends LoginWizardPage {
     render() {
         return (
             <View style={container}>
-                <View style={header2}>
-                    <DebugMenuTrigger>
-                        <View style={header2}>
-                            <Text style={title1}>
-                                {t('title_welcome')}
-                            </Text>
-                            <Text style={title2}>{t('title_login')}</Text>
-                        </View>
-                    </DebugMenuTrigger>
-                </View>
+                <DebugMenuTrigger>
+                    <View style={{ justifyContent: 'center' }}>
+                        <Text style={[headingStyle1, { marginBottom: vars.spacing.large.midi }]}>
+                            {t('title_welcome')}
+                        </Text>
+                        <Text style={[subHeadingStyle, { marginBottom: vars.spacing.medium.midi }]}>
+                            {t('title_login')}
+                        </Text>
+                    </View>
+                </DebugMenuTrigger>
                 <View>
                     <View style={inner2}>
                         <View style={formStyle}>
@@ -74,9 +67,15 @@ export default class LoginClean extends LoginWizardPage {
                             loginState.isInProgress, !loginState.passphrase || !loginState.isValid())}
                     </View>
                 </View>
-                <View style={footer}>
-                    <Text style={title3}>
-                        {tx('title_signupHere')}
+                <View style={footerContainer}>
+                    <Text style={footerText1}>
+                        {tx('title_createNewAccount')}
+                    </Text>
+                    <Text style={footerText2}>
+                        {tx('title_signupLink')}
+                    </Text>
+                    <Text style={footerText1}>
+                        {tx('title_here')}
                     </Text>
                 </View>
                 <ActivityOverlay large visible={loginState.isInProgress} />

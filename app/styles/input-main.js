@@ -2,7 +2,7 @@ import vars from './vars';
 
 const sendIconStyleNormal = {
     alignItems: 'center',
-    backgroundColor: vars.checkboxIconInactive,
+    backgroundColor: vars.black12,
     borderRadius: vars.iconSizeSmall,
     justifyContent: 'center',
     height: vars.iconSizeSmall * 2,
@@ -36,6 +36,6 @@ export default {
     sendIconStyleNormal,
 
     sendIconStyleActive: [sendIconStyleNormal, {
-        backgroundColor: vars.bg
+        backgroundColor: vars.peerioBlue
     }]
 };

@@ -14,7 +14,7 @@ export default class AvatarCircle extends SafeComponent {
     renderThrow() {
         const { large, medium, contact, loading, invited } = this.props;
         let ratio = 1;
-        if (large) ratio = 3;
+        if (large) ratio = 2 + (2 / 3);
         if (medium) ratio = 2;
         const width = avatarDiameter * ratio;
         const height = width;

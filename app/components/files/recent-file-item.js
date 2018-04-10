@@ -39,7 +39,6 @@ export default class RecentFileItem extends SafeComponent {
             justifyContent: 'space-between',
             borderBottomWidth: 1,
             borderBottomColor: 'rgba(0, 0, 0, .12)',
-            backgroundColor: 'white',
             height,
             width,
             paddingLeft: vars.spacing.medium.mini2x
@@ -50,25 +49,23 @@ export default class RecentFileItem extends SafeComponent {
             </View>
         );
         return (
-            <View style={{ backgroundColor: 'white' }}>
-                <View style={fileInfoContainerStyle}>
-                    <View style={[itemContainerStyle, { width }]}>
-                        <View style={{ flex: 0, paddingRight: vars.fileInnerItemPaddingRight }}>
-                            {<FileTypeIcon
-                                size="small"
-                                type={fileHelpers.getFileIconType(file.ext)}
-                            />}
-                        </View>
-                        <View style={{ flexGrow: 1, flexShrink: 1, marginLeft: vars.spacing.medium.mini2x }}>
-                            <Text style={nameStyle} numberOfLines={1} ellipsizeMode="tail">{file.name}</Text>
-                            <Text style={infoStyle}>
-                                {moment(file.uploadedAt).format('DD/MM/YYYY')}
-                                {' - '}
-                                {file.fileOwner}
-                            </Text>
-                        </View>
-                        {arrow}
+            <View style={fileInfoContainerStyle}>
+                <View style={[itemContainerStyle, { width }]}>
+                    <View style={{ flex: 0, paddingRight: vars.fileInnerItemPaddingRight }}>
+                        {<FileTypeIcon
+                            size="small"
+                            type={fileHelpers.getFileIconType(file.ext)}
+                        />}
                     </View>
+                    <View style={{ flexGrow: 1, flexShrink: 1, marginLeft: vars.spacing.medium.mini2x }}>
+                        <Text style={nameStyle} numberOfLines={1} ellipsizeMode="tail">{file.name}</Text>
+                        <Text style={infoStyle}>
+                            {moment(file.uploadedAt).format('DD/MM/YYYY')}
+                            {' - '}
+                            {file.fileOwner}
+                        </Text>
+                    </View>
+                    {arrow}
                 </View>
             </View>
         );

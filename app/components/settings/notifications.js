@@ -12,7 +12,7 @@ const bgStyle = {
     flex: 1,
     paddingVertical: vars.listViewPaddingVertical / 2,
     paddingHorizontal: vars.listViewPaddingHorizontal,
-    backgroundColor: vars.settingsBg
+    backgroundColor: vars.darkBlueBackground05
 };
 
 const spacer = {

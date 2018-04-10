@@ -2,7 +2,6 @@ import React from 'react';
 import { observer } from 'mobx-react/native';
 import { View, Text, TouchableOpacity } from 'react-native';
 import SafeComponent from '../shared/safe-component';
-import { gradient } from '../controls/effects';
 import routerMain from '../routes/router-main';
 import { vars } from '../../styles/styles';
 import BackIcon from './back-icon';
@@ -16,6 +15,13 @@ export default class HeaderMain extends SafeComponent {
         if (routerMain.isBackVisible) {
             leftIcon = <BackIcon testID="buttonChatBack" />;
         }
+        const bigContainerStyle = {
+            paddingTop: vars.statusBarHeight,
+            height: vars.headerHeight,
+            flex: -1,
+            justifyContent: 'flex-end',
+            backgroundColor: vars.darkBlue
+        };
         const textStyle = {
             flex: 1,
             flexGrow: 1,
@@ -50,8 +56,8 @@ export default class HeaderMain extends SafeComponent {
         const paddingRight = !rightIcon && leftIcon ? iconPlaceHolderWidth : 0;
         const paddingLeft = rightIcon && !leftIcon ? iconPlaceHolderWidth : 0;
         const title = this.props.title || routerMain.title;
-        const header = (
-            <View>
+        return (
+            <View style={bigContainerStyle}>
                 <View key={`header_${routerMain.route}_${routerMain.currentIndex}`} style={containerStyle}>
                     <View style={{ flex: 0 }}>
                         {leftIcon}
@@ -78,13 +84,6 @@ export default class HeaderMain extends SafeComponent {
                 </View>
             </View>
         );
-        return gradient({
-            paddingTop: vars.statusBarHeight,
-            height: vars.headerHeight,
-            flex: -1,
-            justifyContent: 'flex-end',
-            backgroundColor: vars.bg
-        }, header);
     }
 }
 

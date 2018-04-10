@@ -5,7 +5,7 @@ import { observer } from 'mobx-react/native';
 import { vars } from '../../styles/styles';
 
 const style = {
-    backgroundColor: vars.bg,
+    backgroundColor: vars.peerioBlue,
     borderRadius: 16,
     flexDirection: 'row',
     alignItems: 'center',

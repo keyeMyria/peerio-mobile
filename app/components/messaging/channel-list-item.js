@@ -31,37 +31,38 @@ export default class ChannelListItem extends SafeComponent {
         };
 
         const textStyle = {
-            fontSize: vars.fontTitleSize,
-            color: vars.txtDark
+            fontSize: vars.font.size.bigger,
+            color: vars.subtleText
         };
 
         const textUnreadStyle = {
-            fontWeight: 'bold'
+            fontWeight: vars.font.weight.semiBold,
+            color: vars.unreadTextColor
         };
 
-        const circleRadius = 12;
         const circleStyle = {
-            width: circleRadius * 2,
-            height: circleRadius * 2,
-            borderRadius: circleRadius,
-            backgroundColor: vars.bg,
+            width: vars.unreadCircleWidth,
+            height: vars.unreadCircleHeight,
+            borderRadius: 14,
+            backgroundColor: vars.peerioTeal,
             overflow: 'hidden',
             alignItems: 'center',
             justifyContent: 'center'
         };
 
         const textCircleStyle = {
-            fontSize: vars.font.size.small,
-            fontWeight: 'bold',
-            color: vars.white
+            fontSize: vars.font.size.normal,
+            fontWeight: vars.font.weight.semiBold,
+            color: vars.unreadTextColor
         };
 
         return (
-            <View style={{ backgroundColor: vars.bg }}>
+            <View style={{ backgroundColor: vars.chatItemPressedBackground }}>
                 <TouchableOpacity
                     {...testLabel(name)}
                     onPress={this.onPress}
-                    style={containerStyle} pressRetentionOffset={vars.pressRetentionOffset}>
+                    style={containerStyle}
+                    pressRetentionOffset={vars.pressRetentionOffset}>
                     <Text style={[textStyle, (unreadCount > 0 && textUnreadStyle)]}>
                         {`# ${name}`}
                     </Text>

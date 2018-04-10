@@ -81,7 +81,7 @@ export default class ContactList extends SafeComponent {
         );
     }
 
-    get rightIcon() { return <PlusBorderIcon action={contactState.fabAction} />; }
+    get rightIcon() { return <PlusBorderIcon action={contactState.fabAction} testID="addContactButton" />; }
 
     get contactListComponent() {
         return !contactState.empty ?

@@ -80,19 +80,22 @@ export default class ChannelInfo extends SafeComponent {
             height: vars.chatListItemHeight
         };
         return (
-            <TouchableOpacity
-                {...testLabel(title)}
-                pressRetentionOffset={vars.retentionOffset}
-                onPress={action}>
-                <View style={containerStyle}>
-                    {icon ?
-                        icons.darkNoPadding(icon, action) :
-                        icons.iconImageNoPadding(image, action)}
-                    <Text style={{ marginLeft: vars.spacing.medium.maxi2x, color: vars.lighterBlackText }}>
-                        {title}
-                    </Text>
-                </View>
-            </TouchableOpacity>
+            <View style={{ backgroundColor: vars.chatItemPressedBackground }}>
+                <TouchableOpacity
+                    style={{ backgroundColor: vars.darkBlueBackground05 }}
+                    pressRetentionOffset={vars.retentionOffset}
+                    onPress={action}
+                    {...testLabel(title)} >
+                    <View style={containerStyle}>
+                        {icon ?
+                            icons.darkNoPadding(icon, action) :
+                            icons.iconImageNoPadding(image, action)}
+                        <Text style={{ marginLeft: vars.spacing.medium.maxi2x, color: vars.lighterBlackText }}>
+                            {title}
+                        </Text>
+                    </View>
+                </TouchableOpacity>
+            </View>
         );
     }
 

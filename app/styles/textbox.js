@@ -11,7 +11,7 @@ const alertInvisible = {
 };
 
 const alertVisible = {
-    borderBottomColor: vars.txtAlert,
+    borderBottomColor: vars.red,
     borderBottomWidth: 2
 };
 
@@ -20,17 +20,16 @@ const textbox = {
     marginLeft: vars.inputPaddingLeft,
     padding: 0,
     height: 28,
-    color: vars.inputBgInactiveText,
+    color: vars.textBlack87,
     fontSize: vars.font.size.normal
 };
 
-const radius = [{
+const radius = {
     height: vars.inputHeight,
     overflow: 'hidden',
     borderRadius: 4,
-    borderWidth: 1,
-    borderColor: vars.bg
-}];
+    borderWidth: 1
+};
 
 const outerContainer = {
     marginBottom: 10,
@@ -67,7 +66,7 @@ export default {
         normal: {
             container: hintContainer,
             text: {
-                color: vars.txtMedium,
+                color: vars.black38,
                 alignSelf: 'center',
                 fontSize: vars.font.size.normal
             }
@@ -75,7 +74,7 @@ export default {
         small: {
             container: [hintContainer, { top: -vars.inputHeight / 2 }],
             text: {
-                color: vars.txtMedium,
+                color: vars.peerioBlue,
                 alignSelf: 'center',
                 fontSize: vars.font.size.small
             }

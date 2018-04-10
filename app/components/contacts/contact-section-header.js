@@ -13,7 +13,7 @@ export default class ContactSectionHeader extends SafeComponent {
         const style = {
             height: vars.contactListHeaderHeight,
             justifyContent: 'center',
-            backgroundColor: vars.lightGrayBg
+            backgroundColor: vars.darkBlueBackground05
         };
 
         const textStyle = {

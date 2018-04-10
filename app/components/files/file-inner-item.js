@@ -14,7 +14,7 @@ import FileProgress from './file-progress';
 import { fileHelpers } from '../../lib/icebear';
 
 const { width } = Dimensions.get('window');
-const height = 64;
+const height = vars.filesListItemHeight;
 const checkBoxWidth = height;
 
 const fileInfoContainerStyle = {
@@ -40,7 +40,7 @@ export default class FileInnerItem extends SafeComponent {
         const iconBgColor = 'transparent';
         const icon = checked ? 'check-box' : 'check-box-outline-blank';
         const outer = {
-            backgroundColor: 'white',
+            backgroundColor: checked ? vars.peerioBlueBackground05 : vars.darkBlueBackground05,
             padding: vars.spacing.small.mini2x,
             flex: 0,
             width: checkBoxWidth,
@@ -62,6 +62,7 @@ export default class FileInnerItem extends SafeComponent {
         const action = () => !file.uploading && this.onPress();
         const iconRight = file.uploading ? icons.dark('close', () => fileState.cancelUpload(file)) :
             icons.dark('keyboard-arrow-right', action);
+        const checked = this.props.file && this.props.file.selected;
         const nameStyle = {
             color: vars.txtDark,
             fontSize: vars.font.size.normal,
@@ -80,7 +81,7 @@ export default class FileInnerItem extends SafeComponent {
             justifyContent: 'space-between',
             borderBottomWidth: 1,
             borderBottomColor: 'rgba(0, 0, 0, .12)',
-            backgroundColor: 'white',
+            backgroundColor: checked ? vars.peerioBlueBackground05 : vars.darkBlueBackground05,
             height,
             width,
             borderWidth: 0,
@@ -103,10 +104,11 @@ export default class FileInnerItem extends SafeComponent {
         );
         const testID = `file${this.props.rowID}`;
         return (
-            <View style={{ backgroundColor: 'white' }}>
+            <View style={{ backgroundColor: vars.chatItemPressedBackground }}>
                 <TouchableOpacity
                     onPress={action}
-                    {...testLabel(testID)}>
+                    {...testLabel(testID)}
+                    style={{ backgroundColor: vars.darkBlueBackground05 }}>
                     <View style={[fileInfoContainerStyle, { opacity }]}>
                         {this.checkbox()}
                         <View style={[itemContainerStyle, { width }]}>

@@ -23,7 +23,7 @@ const wrapper = {
 };
 
 const titleStyle = {
-    color: vars.bg,
+    color: vars.peerioBlue,
     fontSize: vars.font.size.massive,
     fontStyle: 'italic',
     marginTop: vars.spacing.medium.maxi2x,

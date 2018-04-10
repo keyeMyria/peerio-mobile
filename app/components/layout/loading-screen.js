@@ -170,7 +170,7 @@ export default class LoadingScreen extends Component {
 
     render() {
         const container = {
-            backgroundColor: 'white',
+            backgroundColor: vars.darkBlueBackground05,
             flex: 1,
             flexGrow: 1,
             alignItems: 'center'

@@ -11,7 +11,7 @@ import ButtonText from '../controls/button-text';
 import popupState from '../layout/popup-state';
 import routes from '../routes/routes';
 import fileState from './file-state';
-import { fileHelpers, chatStore, config } from '../../lib/icebear';
+import { fileHelpers, chatStore } from '../../lib/icebear';
 import FilePreview from './file-preview';
 
 // TODO Workaround negative margin

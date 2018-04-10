@@ -16,14 +16,14 @@ export default class ChatChannelInvitesSection extends SafeComponent {
             marginTop: 10,
             marginBottom: 6,
             borderRadius: 5,
-            borderColor: vars.bg,
+            borderColor: vars.peerioBlue,
             borderWidth: 1,
             alignItems: 'center',
             justifyContent: 'center'
         };
 
         const textStyle = {
-            color: vars.bg,
+            color: vars.peerioBlue,
             paddingVertical: 9,
             fontSize: vars.font.size.bigger,
             fontWeight: '500'

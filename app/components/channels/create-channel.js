@@ -14,18 +14,18 @@ import { User, config, socket } from '../../lib/icebear';
 import SnackBarConnection from '../snackbars/snackbar-connection';
 import testLabel from '../helpers/test-label';
 
-const fillView = { flex: 1, flexGrow: 1, backgroundColor: vars.white };
+const fillView = { flex: 1, flexGrow: 1, backgroundColor: vars.darkBlueBackground05 };
 
 const { width } = Dimensions.get('window');
 
 const card = {
     width,
-    backgroundColor: vars.white,
+    backgroundColor: vars.darkBlueBackground05,
     flexGrow: 1
 };
 
 const titleStyle = {
-    color: vars.bg,
+    color: vars.peerioBlue,
     fontSize: vars.font.size.bigger,
     marginLeft: vars.spacing.small.maxi
 };
@@ -71,8 +71,8 @@ export default class CreateChannel extends Component {
     }
 
     nextIcon() {
-        if (this.step === 1) return icons.text(tu('button_go'), () => this.next(), null, 'buttonGo');
-        return icons.text(tu('button_next'), () => this.next(), null, 'buttonNext');
+        if (this.step === 1) return icons.text(tu('button_go'), () => this.next(), { color: vars.peerioBlue }, 'buttonGo');
+        return icons.text(tu('button_next'), () => this.next(), { color: vars.peerioBlue }, 'buttonNext');
     }
 
     nextIconDisabled() {
@@ -82,6 +82,7 @@ export default class CreateChannel extends Component {
 
     exitRow(testId) {
         const container = {
+            backgroundColor: vars.darkBlueBackground15,
             flex: 0,
             flexDirection: 'row',
             alignItems: 'center',
@@ -97,7 +98,7 @@ export default class CreateChannel extends Component {
             flexShrink: 1,
             fontSize: vars.font.size.huge,
             fontWeight: vars.font.weight.semiBold,
-            color: vars.txtDark
+            color: vars.textBlack54
         };
         return (
             <View style={container}

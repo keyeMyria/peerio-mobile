@@ -1,9 +1,9 @@
 import React from 'react';
 import { View } from 'react-native';
 import SafeComponent from '../shared/safe-component';
+import { vars } from '../../styles/styles';
 
 const outerCircle = {
-    borderColor: '#7a7a7a',
     width: 20,
     height: 20,
     borderRadius: 12,
@@ -17,16 +17,16 @@ const innerCircle = {
     width: 11,
     height: 11,
     borderRadius: 6,
-    backgroundColor: '#4083d2'
+    backgroundColor: vars.peerioBlue
 };
 
 export default class Circle extends SafeComponent {
     render() {
         const { isSelected } = this.props;
-
+        const borderColor = isSelected ? vars.peerioBlue : vars.toggleDefault;
         return (
             <View style={{ padding: 10 }}>
-                <View style={outerCircle}>
+                <View style={[outerCircle, { borderColor }]}>
                     {isSelected ? <View style={innerCircle} /> : null}
                 </View>
             </View>

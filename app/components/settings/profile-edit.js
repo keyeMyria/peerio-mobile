@@ -156,7 +156,7 @@ export default class ProfileEdit extends SafeComponent {
                 onPress={disabled ? null : onPress}
                 pressRetentionOffset={vars.pressRetentionOffset}
                 style={{ paddingRight: vars.spacing.small.maxi2x, paddingVertical: vars.spacing.small.maxi }}>
-                <Text style={{ fontWeight: 'bold', color: disabled ? vars.txtMedium : vars.bg }}>
+                <Text style={{ fontWeight: 'bold', color: disabled ? vars.txtMedium : vars.peerioBlue }}>
                     {tu(text)}
                 </Text>
             </TouchableOpacity>
@@ -190,7 +190,7 @@ export default class ProfileEdit extends SafeComponent {
                 {emailIcon}
                 <View style={{ height: vars.inputHeight, flex: 1, flexGrow: 1, paddingTop: vars.spacing.small.mini2x }}>
                     {this.renderText(address)}
-                    {confirmed && primary ? this.renderText(tx('title_primaryEmail'), { color: vars.bg, marginTop: -8 }) : null}
+                    {confirmed && primary ? this.renderText(tx('title_primaryEmail'), { color: vars.peerioBlue, marginTop: -8 }) : null}
                     {!confirmed ? this.renderText(tx('error_unconfirmedEmail'), { color: vars.txtAlert, marginTop: -8 }) : null}
                 </View>
                 {confirmed && !primary ? primaryLink : null}
@@ -246,7 +246,7 @@ export default class ProfileEdit extends SafeComponent {
             <ScrollView
                 onScroll={this.onScroll}
                 keyboardShouldPersistTaps="handled"
-                style={{ backgroundColor: vars.settingsBg }}
+                style={{ backgroundColor: vars.darkBlueBackground05 }}
                 ref={ref => { this._scrollView = ref; }}>
                 <View style={[flexRow, { backgroundColor: contact.hasAvatar ? vars.txtDate : contact.color }]}>
                     {contact.hasAvatar ? this.avatar : this.avatarLetter}

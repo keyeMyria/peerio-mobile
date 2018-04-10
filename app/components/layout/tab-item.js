@@ -48,7 +48,7 @@ export default class TabItem extends SafeComponent {
 
     renderThrow() {
         const { text, route, icon, bubble } = this.props;
-        const color = routerMain.route === route ? vars.bg : vars.tabsFg;
+        const color = routerMain.route === route ? vars.peerioBlue : vars.tabsFg;
         const indicator = bubble ? (
             <View style={{ position: 'absolute', right: -5, top: 0 }}>
                 {icons.bubble('')}

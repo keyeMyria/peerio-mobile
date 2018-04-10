@@ -5,7 +5,7 @@ import { observer } from 'mobx-react/native';
 import { t, tx } from '../utils/translator';
 import loginState from './login-state';
 import LoginWizardPage, {
-    headerWelcome, inner, padding, title1, title1Black, title2, title2Black, row, circleTop, container, embeddedImageCircleSize
+    headerWelcome, inner, padding, headingStyle1, subHeadingStyle, scrollHeadingStyle, scrollSubHeadingStyle, row, circleTop, container, embeddedImageCircleSize
 } from './login-wizard-page';
 import ActivityOverlay from '../controls/activity-overlay';
 import { vars } from '../../styles/styles';
@@ -70,8 +70,8 @@ export default class LoginStart extends LoginWizardPage {
             <View style={container}>
                 <DebugMenuTrigger>
                     <View style={headerWelcome}>
-                        <Text style={title1}>{t('title_welcome')}</Text>
-                        <Text style={title2}>{t('title_welcomeSubHeading')}</Text>
+                        <Text style={headingStyle1}>{t('title_welcome')}</Text>
+                        <Text style={subHeadingStyle}>{t('title_welcomeSubHeading')}</Text>
                     </View>
                 </DebugMenuTrigger>
                 <View style={{ flex: 0.7, alignItems: 'center' }}>
@@ -84,8 +84,8 @@ export default class LoginStart extends LoginWizardPage {
                         {this._scrollItems.map(({ title, subtitle }, i) => (
                             <View style={scrollStyle} key={title}>
                                 <View>
-                                    <Text style={title1Black}>{title}</Text>
-                                    <Text style={title2Black}>{subtitle}</Text>
+                                    <Text style={scrollHeadingStyle}>{title}</Text>
+                                    <Text style={scrollSubHeadingStyle}>{subtitle}</Text>
                                 </View>
                                 <View style={{ flex: 1, paddingBottom: vars.spacing.medium.midi2x, justifyContent: 'flex-end' }}>
                                     {this.progress(i)}

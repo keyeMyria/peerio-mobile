@@ -3,6 +3,13 @@ class Page {
         this.app = app;
     }
 
+    get snackbar() {
+        return this.app
+            .waitForExist('~snackbar')
+            .waitForVisible('~snackbar')
+            .element('~snackbar');
+    }
+
     // Taps the test-helper hideKeyboard touchable to hide the keyboard
     // it seems to be more reliable than any appium function
     async hideKeyboardHelper() {
@@ -75,6 +82,15 @@ class Page {
             .waitForVisible(container)
             .element(container)
             .element(element);
+    }
+
+    // Get a ref to an element and check if element is present inside it
+    checkElementInContainer(container, element) {
+        return this.app
+            .waitForExist(container)
+            .waitForVisible(container)
+            .element(container)
+            .isExisting(element);
     }
 }
 

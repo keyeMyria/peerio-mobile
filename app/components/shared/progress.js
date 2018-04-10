@@ -31,12 +31,12 @@ export default class Progress extends SafeComponent {
         const pbContainer = {
             marginTop: -height,
             height,
-            backgroundColor: '#CFCFCF',
+            backgroundColor: vars.progressBarBackground,
             opacity: this.hidden ? 0 : 1
         };
         const pbProgress = {
             height,
-            backgroundColor: vars.bg,
+            backgroundColor: vars.peerioTeal,
             borderWidth: 0,
             borderColor: 'red',
             width: this.currentWidth

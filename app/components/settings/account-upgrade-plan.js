@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { Text, View, ActivityIndicator, ScrollView } from 'react-native';
+import { Text, View, ActivityIndicator, ScrollView, Dimensions } from 'react-native';
 import { observer } from 'mobx-react/native';
 import AccountUpgradeToggle from './account-upgrade-toggle';
 import PaymentsInfoPopup from '../payments/payments-info-popup';
@@ -8,6 +8,8 @@ import payments from '../payments/payments';
 import { vars } from '../../styles/styles';
 import { popupControl } from '../shared/popups';
 import { tx } from '../utils/translator';
+
+const { width } = Dimensions.get('window');
 
 const topTitleText = {
     fontSize: vars.accountTitleFontSize,
@@ -138,7 +140,7 @@ export default class AccountUpgradePlan extends Component {
     render() {
         const { title, includes, info, storage } = this.props.plan;
         return (
-            <View style={{ flexDirection: 'column', flexGrow: 1, flex: 1, justifyContent: 'space-between' }}>
+            <View style={{ width, flexDirection: 'column', flexGrow: 1, flex: 1, justifyContent: 'space-between' }}>
                 <ScrollView>
                     <View style={block1}>
                         <Text style={topTitleText}>

@@ -42,7 +42,7 @@ export default {
                     pressRetentionOffset={vars.pressRetentionOffset}
                     style={{ paddingRight: vars.spacing.small.maxi2x, paddingVertical: vars.spacing.small.maxi }}>
                     <Text
-                        style={{ fontWeight: 'bold', color: disabled ? vars.txtMedium : vars.bg }}>
+                        style={{ fontWeight: 'bold', color: disabled ? vars.txtMedium : vars.peerioBlue }}>
                         {tu(text)}
                     </Text>
                 </TouchableOpacity>
@@ -50,7 +50,7 @@ export default {
         );
     },
 
-    uppercaseBlueBgButton(text, onPress, disabled, hidden) {
+    uppercasePeerioBlueBgButton(text, onPress, disabled, hidden) {
         const opacity = hidden ? 0.0 : 1.0;
         return (
             <View style={{ opacity }}>
@@ -58,7 +58,7 @@ export default {
                     disabled={disabled}
                     onPress={disabled ? null : onPress}
                     pressRetentionOffset={vars.pressRetentionOffset}
-                    style={{ borderRadius: 2, paddingHorizontal: vars.spacing.medium.mini2x, paddingVertical: vars.spacing.small.maxi, backgroundColor: disabled ? vars.txtMedium : vars.bg }}>
+                    style={{ borderRadius: 2, paddingHorizontal: vars.spacing.medium.mini2x, paddingVertical: vars.spacing.small.maxi, backgroundColor: disabled ? vars.txtMedium : vars.peerioBlue }}>
                     <Text style={{ fontWeight: 'bold', textAlign: 'center', color: vars.white }}>
                         {tu(text)}
                     </Text>
@@ -90,43 +90,39 @@ export default {
         );
     },
 
-    uppercaseBlueButtonNoPadding(text, onPress, disabled) {
-        return (
-            <TouchableOpacity
-                onPress={disabled ? null : onPress}
-                pressRetentionOffset={vars.pressRetentionOffset}
-                style={{ padding: vars.spacing.medium.mini }}>
-                <Text style={{ fontWeight: 'bold', color: disabled ? vars.txtMedium : vars.bg }}>
-                    {tu(text)}
-                </Text>
-            </TouchableOpacity>
-        );
-    },
-
-    uppercaseGrayButtonNoPadding(text, onPress, disabled) {
-        return (
-            <TouchableOpacity
-                onPress={disabled ? null : onPress}
-                pressRetentionOffset={vars.pressRetentionOffset}
-                style={{ paddingRight: vars.spacing.small.maxi2x }}>
-                <Text style={{ fontWeight: 'bold', color: disabled ? vars.lightGrayBg : vars.txtDate }}>
-                    {tu(text)}
-                </Text>
-            </TouchableOpacity>
-        );
-    },
-
     uppercaseRedButton(text, onPress, disabled) {
         return (
             <TouchableOpacity
                 onPress={disabled ? null : onPress}
                 pressRetentionOffset={vars.pressRetentionOffset}
                 style={{ paddingRight: vars.spacing.small.maxi2x, paddingVertical: vars.spacing.small.maxi }}>
-                <Text style={{ fontWeight: 'bold', color: disabled ? vars.txtMedium : vars.txtAlert }}>
+                <Text style={{ fontWeight: 'bold', color: disabled ? vars.txtMedium : vars.red }}>
                     {tu(text)}
                 </Text>
             </TouchableOpacity>
         );
-    }
+    },
 
+    uppercasePeerioBlueButton(text, onPress, disabled, style, accessibilityId) {
+        const s = {
+            borderRadius: 24,
+            paddingHorizontal: vars.spacing.medium.mini2x,
+            paddingVertical: vars.spacing.small.maxi,
+            backgroundColor: disabled ? vars.mediumGrayBg : vars.peerioBlue,
+            width: vars.roundedButtonWidth
+        };
+        return (
+            <View {...testLabel(accessibilityId)}>
+                <TouchableOpacity
+                    disabled={disabled}
+                    onPress={disabled ? null : onPress}
+                    pressRetentionOffset={vars.pressRetentionOffset}
+                    style={[s, style]}>
+                    <Text style={{ fontWeight: 'bold', textAlign: 'center', color: vars.white }}>
+                        {tu(text)}
+                    </Text>
+                </TouchableOpacity>
+            </View>
+        );
+    }
 };

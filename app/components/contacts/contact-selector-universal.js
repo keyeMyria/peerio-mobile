@@ -73,7 +73,7 @@ export default class ContactSelectorUniversal extends SafeComponent {
             paddingHorizontal: vars.spacing.small.midi,
             marginHorizontal: vars.spacing.medium.mini2x,
             marginBottom: vars.spacing.small.midi,
-            borderColor: vars.bg,
+            borderColor: vars.peerioBlue,
             borderWidth: 1,
             height,
             borderRadius: height
@@ -88,7 +88,7 @@ export default class ContactSelectorUniversal extends SafeComponent {
             rightIcon = icons.coloredSmall('close', () => {
                 this.findUserText = '';
                 this.onChangeFindUserText('');
-            }, vars.bg);
+            }, vars.peerioBlue);
         }
 
         if (this.inProgress || contactState.inProgress) {
@@ -119,9 +119,10 @@ export default class ContactSelectorUniversal extends SafeComponent {
 
     exitRow() {
         const container = {
+            backgroundColor: vars.darkBlueBackground15,
             flexGrow: 1,
             flexDirection: 'row',
-            paddingTop: vars.spacing.small.midi2x,
+            paddingTop: vars.statusBarHeight * 2,
             paddingHorizontal: vars.spacing.small.midi2x,
             alignItems: 'center'
         };
@@ -132,11 +133,11 @@ export default class ContactSelectorUniversal extends SafeComponent {
             flexShrink: 1,
             fontSize: vars.font.size.big,
             fontWeight: vars.font.weight.semiBold,
-            color: vars.txtDark
+            color: vars.textBlack54
         };
         return (
             <View style={container}>
-                {icons.dark('close', this.props.onExit)}
+                {icons.dark('close', this.props.onExit, null, null, 'closeButton')}
                 <Text style={textStyle}>{tx(this.props.title)}</Text>
             </View>
         );
@@ -243,7 +244,7 @@ export default class ContactSelectorUniversal extends SafeComponent {
             );
         }
         return (
-            <View style={{ paddingTop: vars.statusBarHeight * 2 }}>
+            <View>
                 {this.exitRow()}
                 {this.props.subTitleComponent}
                 <View style={{ marginTop: vars.spacing.medium.mini2x }}>
@@ -257,7 +258,7 @@ export default class ContactSelectorUniversal extends SafeComponent {
         const header = this.header();
         const body = this.body();
         const layoutStyle = {
-            backgroundColor: 'white'
+            backgroundColor: vars.darkBlueBackground05
         };
         const snackbar = (
             <Bottom>

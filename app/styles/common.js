@@ -17,7 +17,7 @@ export default {
             flex: 1,
             flexDirection: 'column',
             justifyContent: 'space-between',
-            backgroundColor: vars.bg
+            backgroundColor: vars.peerioBluebg
         },
         footer: {
         }

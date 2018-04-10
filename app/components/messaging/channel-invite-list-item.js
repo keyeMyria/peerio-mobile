@@ -73,21 +73,21 @@ export default class ChannelInviteListItem extends SafeComponent {
             paddingVertical: 1,
             maxWidth: 32,
             borderRadius: 5,
-            backgroundColor: vars.bgGreen,
+            backgroundColor: vars.peerioBlue,
             overflow: 'hidden',
             alignItems: 'center',
             justifyContent: 'center'
         };
 
         const textNewStyle = {
-            fontSize: vars.font.size.smallerx,
+            fontSize: vars.font.size.smaller,
             color: vars.white
         };
 
         return (
             <View
-                {...testLabel(channelName)}
-                style={{ backgroundColor: vars.bg }}>
+                style={{ backgroundColor: vars.chatItemPressedBackground }}
+                {...testLabel(channelName)}>
                 <TouchableOpacity
                     onPress={this.onPress}
                     style={containerStyle} pressRetentionOffset={vars.pressRetentionOffset}>

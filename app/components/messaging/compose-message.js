@@ -11,11 +11,11 @@ export default class ComposeMessage extends Component {
 
     get roomRedirectText() {
         return (
-            <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+            <View style={{ marginTop: vars.spacing.small.midi2x, flexDirection: 'row', justifyContent: 'center' }}>
                 <Text style={{ fontSize: vars.font.size.normal, color: vars.subtleText }}>
                     {tx('title_chatWithGroup')}
                 </Text>
-                <Text style={{ fontSize: vars.font.size.normal, color: vars.bg }}>
+                <Text style={{ fontSize: vars.font.size.normal, color: vars.peerioBlue }}>
                     {tx('title_createRoom')}
                 </Text>
             </View>);

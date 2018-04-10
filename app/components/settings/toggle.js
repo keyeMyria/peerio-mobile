@@ -6,8 +6,8 @@ import { reaction } from 'mobx';
 import SafeComponent from '../shared/safe-component';
 import { vars, helpers } from '../../styles/styles';
 
-const inactiveColor = '#9B9B9B';
-const activeColor = vars.bg;
+const inactiveColor = vars.toggleInactive;
+const activeColor = vars.toggleActive;
 
 @observer
 export default class Toggle extends SafeComponent {
@@ -28,7 +28,7 @@ export default class Toggle extends SafeComponent {
             borderRadius: 2,
             width: 36,
             height: 4,
-            backgroundColor: active ? vars.txtLight : '#CFCFCF'
+            backgroundColor: active ? vars.toggleLineActive : vars.toggleLineInactive
         };
 
         const circle = helpers.circle(24);

@@ -153,7 +153,7 @@ export default class ComposeMessage extends SafeComponent {
 
     recipient(r) {
         const bubble = {
-            backgroundColor: vars.bg,
+            backgroundColor: vars.peerioBlue,
             alignItems: 'center',
             justifyContent: 'center',
             borderRadius: 8,
@@ -263,7 +263,7 @@ export default class ComposeMessage extends SafeComponent {
     attachment(f) {
         const container = {
             flex: 0,
-            backgroundColor: vars.bg,
+            backgroundColor: vars.peerioBlue,
             borderRadius: 4,
             padding: vars.spacing.small.mini2x,
             margin: vars.spacing.small.mini2x

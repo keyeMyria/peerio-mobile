@@ -162,7 +162,7 @@ export default class FileInlineImage extends SafeComponent {
             color: vars.txtDark
         };
         const text = {
-            color: vars.bg,
+            color: vars.peerioBlue,
             fontStyle: 'italic',
             marginVertical: 10
         };
@@ -215,7 +215,7 @@ export default class FileInlineImage extends SafeComponent {
 
     get displayImageOffer() {
         const text = {
-            color: vars.bg,
+            color: vars.peerioBlue,
             fontStyle: 'italic',
             textAlign: 'center',
             marginVertical: 10
@@ -236,7 +236,7 @@ export default class FileInlineImage extends SafeComponent {
         return (
             <View style={{ flexDirection: 'row' }}>
                 <View style={{ paddingTop: 2, marginRight: 4 }}>
-                    {icons.coloredAsText('check-circle', vars.snackbarBgGreen, 14)}
+                    {icons.coloredAsText('check-circle', vars.peerioTeal, 14)}
                 </View>
                 <Text style={text}>
                     <T k="title_updateSettingsAnyTime">{toSettingsParser}</T>

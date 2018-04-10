@@ -8,7 +8,7 @@ import { vars } from '../../styles/styles';
 import signupState from './signup-state';
 import { tx } from '../utils/translator';
 import LoginWizardPage, {
-    header, innerSmall, circleTopSmall, title2, row, container, topCircleSizeSmall
+    header2, innerSmall, circleTopSmall, headingStyle2, row, container, topCircleSizeSmall
 } from '../login/login-wizard-page';
 import testLabel from '../helpers/test-label';
 
@@ -20,13 +20,14 @@ const formStyle = {
 };
 
 const textNormal = {
-    color: vars.txtDark,
+    color: vars.lighterBlackText,
     fontSize: vars.font.size.normal,
     lineHeight: 24,
     marginBottom: vars.spacing.small.maxi
 };
 
 const titleDark = [textNormal, {
+    color: vars.black,
     fontWeight: 'bold'
 }];
 
@@ -59,8 +60,8 @@ export default class SignupConfirmBackup extends LoginWizardPage {
     render() {
         return (
             <View style={container} onLayout={this._layout}>
-                <View style={header}>
-                    <Text style={title2}>{tx('title_AccountKey')}</Text>
+                <View style={header2}>
+                    <Text style={headingStyle2}>{tx('title_AccountKey')}</Text>
                 </View>
                 <View style={{ flex: 0.7, flexGrow: 1, alignItems: 'flex-start' }}>
                     <View style={innerSmall}>

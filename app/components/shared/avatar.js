@@ -265,7 +265,7 @@ export default class Avatar extends SafeComponent {
 
     get date() {
         const unreadStyle = this.props.unread
-            ? { color: vars.bg, fontWeight: '600' }
+            ? { color: vars.peerioBlue, fontWeight: '600' }
             : null;
         const { timestampText } = this.props;
         return timestampText ?
@@ -295,7 +295,7 @@ export default class Avatar extends SafeComponent {
 
     get checkedStyle() {
         if (this.props.checkbox) return null;
-        return { backgroundColor: vars.bg };
+        return { backgroundColor: vars.peerioBlue };
     }
 
     get avatar() {
@@ -431,9 +431,12 @@ export default class Avatar extends SafeComponent {
         const { inlineImage, files } = this;
         const shrinkStrategy = { flexShrink: 1 };
         if (inlineImage || files) shrinkStrategy.flexGrow = 1;
+        const backgroundColor = {
+            backgroundColor: this.props.backgroundColor ? this.props.backgroundColor : vars.white
+        };
         return (
             <View style={{ flexGrow: 1 }}>
-                <View style={[itemStyle, this.errorStyle]}>
+                <View style={[itemStyle, this.errorStyle, backgroundColor]}>
                     <View
                         pointerEvents={this.props.disableMessageTapping ? 'none' : undefined}
                         style={[this.itemContainerStyle, { paddingLeft: 68, marginRight: 22 }, shrinkStrategy]}>
@@ -455,8 +458,11 @@ export default class Avatar extends SafeComponent {
     }
 
     renderFull() {
+        const backgroundColor = {
+            backgroundColor: this.props.backgroundColor ? this.props.backgroundColor : vars.white
+        };
         return (
-            <View style={[itemStyle, this.borderStyle, this.errorStyle, this.paddingStyle]}>
+            <View style={[itemStyle, this.borderStyle, this.errorStyle, this.paddingStyle, backgroundColor]}>
                 {this.checkbox}
                 <View style={[{ flexGrow: 1, maxWidth: width, flexShrink: 1, borderWidth: 0 }]}>
                     <View
@@ -490,7 +496,9 @@ export default class Avatar extends SafeComponent {
             1 : 0.2;
         const testID = this.props.contact ? this.props.contact.username : null; // May not cover all cases
         return (
-            <View style={{ backgroundColor: vars.bgHighlight }} ref={ref => { this._ref = ref; }}>
+            <View
+                style={{ backgroundColor: vars.chatItemPressedBackground }}
+                ref={ref => { this._ref = ref; }}>
                 <TouchableOpacity
                     pressRetentionOffset={vars.retentionOffset}
                     onPress={this.onPressAll}
@@ -552,5 +560,6 @@ Avatar.propTypes = {
     disableMessageTapping: PropTypes.bool,
     extraPaddingVertical: PropTypes.number,
     extraPaddingTop: PropTypes.number,
-    onLayout: PropTypes.func
+    onLayout: PropTypes.func,
+    backgroundColor: PropTypes.any
 };

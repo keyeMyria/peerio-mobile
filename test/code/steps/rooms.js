@@ -9,9 +9,9 @@ defineSupportCode(({ When, Then }) => {
         await this.chatPage.roomWithTitle(this.roomName).click();
         await this.chatPage.addMembersButton.click();
 
-        await this.contactSelectorDmPage.textInput.setValue(process.env.CHAT_RECIPIENT_USER);
-        await this.contactSelectorDmPage.hideKeyboardHelper();
-        await this.contactSelectorDmPage.recipientContact.click();
+        await this.contactSelectorPage.textInput.setValue(process.env.CHAT_RECIPIENT_USER);
+        await this.contactSelectorPage.hideKeyboardHelper();
+        await this.contactSelectorPage.recipientContact.click();
 
         await this.chatPage.buttonExitChat.click();
     });

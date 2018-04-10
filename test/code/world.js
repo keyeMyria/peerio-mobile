@@ -1,7 +1,7 @@
 const webDriver = require('webdriverio');
 const CreateAccountPage = require('./pages/login/createAccountPage');
 const ChatListPage = require('./pages/messaging/chatListPage');
-const ContactSelectorDmPage = require('./pages/messaging/contactSelectorDmPage');
+const ContactSelectorPage = require('./pages/messaging/contactSelectorPage');
 const ChatPage = require('./pages/messaging/chatPage');
 const RoomCreationPage = require('./pages/messaging/roomCreationPage');
 const RoomInvitePage = require('./pages/messaging/roomInvitePage');
@@ -18,6 +18,7 @@ const ProfileSettingsPage = require('./pages/settings/profileSettingsPage');
 const otplib = require('otplib');
 const FileViewPage = require('./pages/files/fileViewPage');
 const AlertsPage = require('./pages/popups/alertsPage');
+const ContactsPage = require('./pages/contacts/contactsPage');
 
 class World {
     constructor({ attach, parameters }) {
@@ -43,7 +44,7 @@ class World {
         this.alertsPage = new AlertsPage(this.app);
 
         this.chatListPage = new ChatListPage(this.app);
-        this.contactSelectorDmPage = new ContactSelectorDmPage(this.app);
+        this.contactSelectorPage = new ContactSelectorPage(this.app);
         this.roomCreationPage = new RoomCreationPage(this.app);
         this.roomInvitePage = new RoomInvitePage(this.app);
         this.chatPage = new ChatPage(this.app);
@@ -52,6 +53,8 @@ class World {
         this.filesListPage = new FilesListPage(this.app);
         this.fileViewPage = new FileViewPage(this.app);
         this.fileUploadPage = this.context.fileUploadPage(this.app);
+
+        this.contactsPage = new ContactsPage(this.app);
 
         this.settingsPage = new SettingsPage(this.app);
         this.twoStepVerificationPage = new TwoStepVerificationPage(this.app);
@@ -195,6 +198,40 @@ class World {
         while (!(await this.chatListPage.roomWithTitleVisible(this.roomName))) { // eslint-disable-line
             await this.chatListPage.scrollDownHelper();  // eslint-disable-line
         }
+    }
+
+    async openContactsPickerForDM() {
+        await this.homePage.chatTab.click();
+        await this.chatListPage.buttonCreateNewChat.click();
+        await this.chatActionSheetPage.newDmOption.click();
+    }
+
+    async searchForRecipient() {
+        await this.contactSelectorPage.textInput.setValue(process.env.CHAT_RECIPIENT_USER);
+        await this.contactSelectorPage.hideKeyboardHelper();
+    }
+
+    async scrollToContact() {
+        await this.homePage.contactsTab.click();
+        while (!(await this.contactsPage.contactVisible)) { // eslint-disable-line
+            await this.contactsPage.scrollDownHelper();  // eslint-disable-line
+        }
+    }
+
+    async favoriteContact() {
+        await this.scrollToContact();
+        await this.contactsPage.contactFound.click();
+        await this.contactsPage.favoriteButton.click();
+        await this.contactsPage.backButton.click();
+    }
+
+    async addContactWithName(name) {
+        await this.contactsPage.searchContactInput.setValue(name);
+        await this.contactsPage.hideKeyboardHelper();
+        await this.contactsPage.searchContactButton.click();
+
+        const snackbarMessage = await this.contactsPage.snackbar.getText();
+        snackbarMessage.should.match(/has been added/);
     }
 }
 

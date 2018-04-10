@@ -19,7 +19,7 @@ const container = {
 };
 
 const titleText = {
-    color: vars.bg,
+    color: vars.peerioBlue,
     marginVertical: 2,
     ellipsizeMode: 'tail'
 };

@@ -12,7 +12,7 @@ const popupTextStyle = {
 
 const linkStyle = [popupTextStyle, {
     textDecorationLine: 'underline',
-    color: vars.bg
+    color: vars.peerioBlue
 }];
 
 @observer

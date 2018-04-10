@@ -25,7 +25,7 @@ const bgStyle = {
     flex: 1,
     paddingVertical,
     paddingHorizontal,
-    backgroundColor: vars.settingsBg
+    backgroundColor: vars.darkBlueBackground05
 };
 
 const labelStyle = {

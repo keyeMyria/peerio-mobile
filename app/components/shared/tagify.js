@@ -33,7 +33,7 @@ export default (m, username) => {
         const t = token.isLink ? str : tagifyUsername(str);
         const s = token.isLink ? {
             textDecorationLine: 'underline',
-            color: vars.bg
+            color: vars.peerioBlue
         } : null;
         return <Text onPress={p} key={i} style={s}>{t}</Text>;
     });

@@ -79,10 +79,13 @@ export default class MemberList extends SafeComponent {
             alignItems: 'center',
             flexGrow: 1
         };
-
+        const adminTextStyle = {
+            color: vars.subtleText,
+            fontSize: vars.font.size.smallerx,
+            fontWeight: vars.font.weight.semiBold
+        };
         const isAdmin = channel.isAdmin(contact);
         const isCurrentUser = contact.username === User.current.username;
-
         return (
             <View
                 key={contact.username}
@@ -94,20 +97,21 @@ export default class MemberList extends SafeComponent {
                         contact={contact}
                         key={username}
                         message=""
-                        hideOnline />
+                        hideOnline
+                        backgroundColor={vars.darkBlueBackground05} />
                 </View>
                 <View
                     {...testLabel('moreButton')}
                     style={{ flex: 0, flexDirection: 'row', alignItems: 'center' }}>
                     {isAdmin &&
                         <View style={{
-                            backgroundColor: vars.tabsFg,
+                            backgroundColor: vars.adminBadgeColor,
                             borderRadius: 4,
                             padding: vars.spacing.small.mini2x,
                             overflow: 'hidden',
                             marginRight: isCurrentUser ? vars.spacing.huge.midi : vars.spacing.small.maxi2x
                         }}>
-                            <Text style={{ color: vars.white, fontSize: vars.font.size.small }}>
+                            <Text style={adminTextStyle}>
                                 {tx('title_admin')}
                             </Text>
                         </View>}

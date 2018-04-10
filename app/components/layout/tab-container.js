@@ -16,7 +16,7 @@ import TabItem from './tab-item';
 const bottomRowStyle = {
     flex: 0,
     flexDirection: 'row',
-    backgroundColor: vars.tabsBg,
+    backgroundColor: vars.darkBlueBackground15,
     height: vars.tabsHeight,
     padding: 0,
     paddingBottom: vars.iPhoneXBottom

@@ -1,11 +1,11 @@
 import React from 'react';
 import { observer } from 'mobx-react/native';
 import { Text, Animated, TouchableWithoutFeedback } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
 import { reaction } from 'mobx';
 import SafeComponent from '../shared/safe-component';
 import { warnings, warningStates } from '../../lib/icebear';
 import { vars } from '../../styles/styles';
+import testLabel from '../helpers/test-label';
 
 @observer
 export default class SnackbarBase extends SafeComponent {
@@ -23,7 +23,6 @@ export default class SnackbarBase extends SafeComponent {
 
     // to override
     getText() { return null; }
-    isGreen() { return false; }
 
     get isVisible() {
         const w = warnings.current;
@@ -68,7 +67,7 @@ export default class SnackbarBase extends SafeComponent {
 
     renderThrow() {
         const s = {
-            backgroundColor: this.isGreen() ? vars.snackbarBgGreen : vars.snackbarBg,
+            backgroundColor: vars.darkBlue,
             justifyContent: 'flex-start',
             paddingLeft: vars.spacing.medium.mini2x,
             overflow: 'hidden',
@@ -80,18 +79,14 @@ export default class SnackbarBase extends SafeComponent {
             flex: 1,
             flexGrow: 1,
             flexShrink: 1,
-            color: vars.highlight,
+            color: vars.white,
             marginRight: vars.spacing.medium.mini2x
         };
         return (
-            <TouchableWithoutFeedback onPress={() => this.tap()}>
+            <TouchableWithoutFeedback
+                {...testLabel('snackbar')}
+                onPress={() => this.tap()}>
                 <Animated.View style={s}>
-                    {this.isGreen() && <Icon
-                        name="check"
-                        size={16}
-                        color={vars.white}
-                        style={{ marginRight: vars.spacing.medium.mini2x }} />
-                    }
                     <Text numberOfLines={2} ellipsizeMode="tail" style={textStyle}>{this.getText()}</Text>
                 </Animated.View>
             </TouchableWithoutFeedback>

@@ -137,7 +137,7 @@ export default class TextBox extends SafeComponent {
             <Text
                 style={{
                     height: 14,
-                    color: vars.txtDark,
+                    color: vars.red,
                     fontSize: vars.font.size.smaller,
                     backgroundColor: 'transparent'
                 }}>{t(this.validationMessage)}</Text>
@@ -150,16 +150,16 @@ export default class TextBox extends SafeComponent {
         const { customIcon } = this.props;
         return customIcon ?
             <View style={textbox.iconContainer}>
-                {icons.colored(customIcon, null, vars.buttonGreen)}
+                {icons.colored(customIcon, null, vars.peerioTeal)}
             </View> : null;
     }
 
     get secretIcon() {
         return !this.props.secureTextEntry ? null : (
             <View style={textbox.iconContainer}>
-                {icons.dark(
-                    this.showSecret ? 'visibility-off' : 'visibility',
-                    this.toggleSecret, { backgroundColor: 'transparent' })}
+                {this.showSecret ?
+                    icons.colored('visibility', this.toggleSecret, vars.peerioTeal, 'transparent') :
+                    icons.dark('visibility', this.toggleSecret, { backgroundColor: 'transparent' })}
             </View>
         );
     }
@@ -184,7 +184,6 @@ export default class TextBox extends SafeComponent {
             this.offsetHeight = frameHeight;
         });
     };
-
     renderThrow() {
         // console.log('re-render');
         const returnKeyType = this.props.returnKeyType || 'default';
@@ -196,11 +195,18 @@ export default class TextBox extends SafeComponent {
             fontSize = Math.floor(fontSize * astl / this.value.length);
         }
         const { secretIcon, customIcon, start, end } = this;
+        // temporary hack until textbox component is replaced with new one
+        let borderColorOverride;
+        if (this.value || this.focused) {
+            borderColorOverride = vars.peerioBlue;
+        } else {
+            borderColorOverride = vars.black38;
+        }
         return (
             <View style={textbox.outerContainer} onLayout={this.layout} ref={ref => { this._container = ref; }}>
                 <View style={[style.outer]}>
                     <View
-                        style={[style.radius]}>
+                        style={[style.radius, { borderColor: borderColorOverride }]}>
                         {this.hint}
                         <View
                             style={[textbox.inputContainer, icAlert]}>

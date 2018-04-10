@@ -18,7 +18,7 @@ const bgStyle = {
     flex: 1,
     paddingVertical,
     paddingHorizontal,
-    backgroundColor: vars.settingsBg
+    backgroundColor: vars.darkBlueBackground05
 };
 
 const headerStyle = {
@@ -57,7 +57,11 @@ export default class TwoFactorAuthCodesGenerate extends SafeComponent {
                         {tx('title_2FABackupCode')}
                     </Text>
                     <View style={buttonCenterStyle}>
-                        {buttons.uppercaseBlueBgButton(tx('button_2FAGenerateCodes'), () => this.reissueCodes())}
+                        {buttons.uppercasePeerioBlueButton(
+                            tx('button_2FAGenerateCodes'),
+                            () => this.reissueCodes(),
+                            null,
+                            { width: vars.wideRoundedButtonWidth })}
                     </View>
                 </View>
                 <View style={{ left: paddingHorizontal + 12, bottom: paddingVertical, position: 'absolute' }}>

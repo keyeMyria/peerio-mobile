@@ -19,15 +19,21 @@ export default class ChatListItem extends SafeComponent {
             width: vars.spacing.large.mini2x,
             paddingVertical: 1,
             borderRadius: 14,
-            backgroundColor: vars.bg,
+            backgroundColor: vars.peerioTeal,
             overflow: 'hidden',
             alignItems: 'center',
             justifyContent: 'center'
         };
 
+        const circleTextStyle = {
+            fontSize: vars.font.size.normal,
+            fontWeight: vars.font.weight.semiBold,
+            color: vars.unreadTextColor
+        };
+
         return (
             <View style={circleStyle}>
-                <Text style={{ color: vars.white }}>
+                <Text style={circleTextStyle}>
                     {`${chat.unreadCount}`}
                 </Text>
             </View>

@@ -2,6 +2,178 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.265.0"></a>
+# [3.265.0](https://github.com/PeerioTechnologies/peerio-mobile/compare/v3.260.0...v3.265.0) (2018-04-04)
+
+
+### Bug Fixes
+
+* add try-catch block for alerts ([5b79ff1](https://github.com/PeerioTechnologies/peerio-mobile/commit/5b79ff1))
+* android inline image upload fix [ch3876] ([26a5ffb](https://github.com/PeerioTechnologies/peerio-mobile/commit/26a5ffb))
+* display avatar for invited users [ch3878] ([0714d1d](https://github.com/PeerioTechnologies/peerio-mobile/commit/0714d1d))
+* fileUploadActionSheet ([faf6e87](https://github.com/PeerioTechnologies/peerio-mobile/commit/faf6e87))
+* rooms bugs (self entry in room info, room name character limit) ([#142](https://github.com/PeerioTechnologies/peerio-mobile/issues/142)) ([4dac29c](https://github.com/PeerioTechnologies/peerio-mobile/commit/4dac29c))
+
+
+### Features
+
+* Add file preview to files upload ([#127](https://github.com/PeerioTechnologies/peerio-mobile/issues/127)) ([1fce9c0](https://github.com/PeerioTechnologies/peerio-mobile/commit/1fce9c0))
+* add video option ([#152](https://github.com/PeerioTechnologies/peerio-mobile/issues/152)) ([15be397](https://github.com/PeerioTechnologies/peerio-mobile/commit/15be397))
+* added time to file upload date in file details view ([#147](https://github.com/PeerioTechnologies/peerio-mobile/issues/147)) ([52fd1ec](https://github.com/PeerioTechnologies/peerio-mobile/commit/52fd1ec))
+* auto capitalize file rename [branch ch4227] ([#145](https://github.com/PeerioTechnologies/peerio-mobile/issues/145)) ([556cb51](https://github.com/PeerioTechnologies/peerio-mobile/commit/556cb51))
+* e2e test for profile edit [branch ch3554] ([#144](https://github.com/PeerioTechnologies/peerio-mobile/issues/144)) ([71751c9](https://github.com/PeerioTechnologies/peerio-mobile/commit/71751c9))
+* redirect apple test user to a different server ([472c353](https://github.com/PeerioTechnologies/peerio-mobile/commit/472c353))
+
+
+
+<a name="3.264.0"></a>
+# [3.264.0](https://github.com/PeerioTechnologies/peerio-mobile/compare/v3.260.0...v3.264.0) (2018-04-03)
+
+
+### Bug Fixes
+
+* add try-catch block for alerts ([5b79ff1](https://github.com/PeerioTechnologies/peerio-mobile/commit/5b79ff1))
+* android inline image upload fix [ch3876] ([26a5ffb](https://github.com/PeerioTechnologies/peerio-mobile/commit/26a5ffb))
+* branding small problems ([c397d3e](https://github.com/PeerioTechnologies/peerio-mobile/commit/c397d3e))
+* debug menu color ([991f609](https://github.com/PeerioTechnologies/peerio-mobile/commit/991f609))
+* display avatar for invited users [ch3878] ([0714d1d](https://github.com/PeerioTechnologies/peerio-mobile/commit/0714d1d))
+* fileUploadActionSheet ([faf6e87](https://github.com/PeerioTechnologies/peerio-mobile/commit/faf6e87))
+* fix icon sizes ([b0e035b](https://github.com/PeerioTechnologies/peerio-mobile/commit/b0e035b))
+* login and sign up background color ([d9570ea](https://github.com/PeerioTechnologies/peerio-mobile/commit/d9570ea))
+* made generate 2fa code button wider to fit text in one line ([8f63b62](https://github.com/PeerioTechnologies/peerio-mobile/commit/8f63b62))
+* rooms bugs (self entry in room info, room name character limit) ([#142](https://github.com/PeerioTechnologies/peerio-mobile/issues/142)) ([4dac29c](https://github.com/PeerioTechnologies/peerio-mobile/commit/4dac29c))
+* vertical alignment for purpose box ([0fdbbb0](https://github.com/PeerioTechnologies/peerio-mobile/commit/0fdbbb0))
+
+
+### Features
+
+* Add file preview to files upload ([#127](https://github.com/PeerioTechnologies/peerio-mobile/issues/127)) ([1fce9c0](https://github.com/PeerioTechnologies/peerio-mobile/commit/1fce9c0))
+* add video option ([#152](https://github.com/PeerioTechnologies/peerio-mobile/issues/152)) ([15be397](https://github.com/PeerioTechnologies/peerio-mobile/commit/15be397))
+* added branding colors and vars ([e769446](https://github.com/PeerioTechnologies/peerio-mobile/commit/e769446))
+* added time to file upload date in file details view ([#147](https://github.com/PeerioTechnologies/peerio-mobile/issues/147)) ([52fd1ec](https://github.com/PeerioTechnologies/peerio-mobile/commit/52fd1ec))
+* change launch screen ios ([cbe7620](https://github.com/PeerioTechnologies/peerio-mobile/commit/cbe7620))
+* changed app theme ([5f3fe52](https://github.com/PeerioTechnologies/peerio-mobile/commit/5f3fe52))
+* e2e test for profile edit [branch ch3554] ([#144](https://github.com/PeerioTechnologies/peerio-mobile/issues/144)) ([71751c9](https://github.com/PeerioTechnologies/peerio-mobile/commit/71751c9))
+* new branding app icons ([147d20a](https://github.com/PeerioTechnologies/peerio-mobile/commit/147d20a))
+* new file type icons ([d4bfaeb](https://github.com/PeerioTechnologies/peerio-mobile/commit/d4bfaeb))
+* redirect apple test user to a different server ([472c353](https://github.com/PeerioTechnologies/peerio-mobile/commit/472c353))
+* sign up badge colors [branch CH4521] ([ce79807](https://github.com/PeerioTechnologies/peerio-mobile/commit/ce79807))
+* sign-up and sign-in ui color themes ([1e00d69](https://github.com/PeerioTechnologies/peerio-mobile/commit/1e00d69))
+* undo popup overlay color ([688d1b6](https://github.com/PeerioTechnologies/peerio-mobile/commit/688d1b6))
+
+
+
+<a name="3.263.0"></a>
+# [3.263.0](https://github.com/PeerioTechnologies/peerio-mobile/compare/v3.260.0...v3.263.0) (2018-04-03)
+
+
+### Bug Fixes
+
+* add try-catch block for alerts ([5b79ff1](https://github.com/PeerioTechnologies/peerio-mobile/commit/5b79ff1))
+* android inline image upload fix [ch3876] ([26a5ffb](https://github.com/PeerioTechnologies/peerio-mobile/commit/26a5ffb))
+* branding small problems ([c397d3e](https://github.com/PeerioTechnologies/peerio-mobile/commit/c397d3e))
+* debug menu color ([991f609](https://github.com/PeerioTechnologies/peerio-mobile/commit/991f609))
+* display avatar for invited users [ch3878] ([0714d1d](https://github.com/PeerioTechnologies/peerio-mobile/commit/0714d1d))
+* fileUploadActionSheet ([faf6e87](https://github.com/PeerioTechnologies/peerio-mobile/commit/faf6e87))
+* fix icon sizes ([b0e035b](https://github.com/PeerioTechnologies/peerio-mobile/commit/b0e035b))
+* login and sign up background color ([d9570ea](https://github.com/PeerioTechnologies/peerio-mobile/commit/d9570ea))
+* made generate 2fa code button wider to fit text in one line ([8f63b62](https://github.com/PeerioTechnologies/peerio-mobile/commit/8f63b62))
+* rooms bugs (self entry in room info, room name character limit) ([#142](https://github.com/PeerioTechnologies/peerio-mobile/issues/142)) ([4dac29c](https://github.com/PeerioTechnologies/peerio-mobile/commit/4dac29c))
+* vertical alignment for purpose box ([0fdbbb0](https://github.com/PeerioTechnologies/peerio-mobile/commit/0fdbbb0))
+
+
+### Features
+
+* Add file preview to files upload ([#127](https://github.com/PeerioTechnologies/peerio-mobile/issues/127)) ([1fce9c0](https://github.com/PeerioTechnologies/peerio-mobile/commit/1fce9c0))
+* add video option ([#152](https://github.com/PeerioTechnologies/peerio-mobile/issues/152)) ([15be397](https://github.com/PeerioTechnologies/peerio-mobile/commit/15be397))
+* added branding colors and vars ([e769446](https://github.com/PeerioTechnologies/peerio-mobile/commit/e769446))
+* added time to file upload date in file details view ([#147](https://github.com/PeerioTechnologies/peerio-mobile/issues/147)) ([52fd1ec](https://github.com/PeerioTechnologies/peerio-mobile/commit/52fd1ec))
+* change launch screen ios ([cbe7620](https://github.com/PeerioTechnologies/peerio-mobile/commit/cbe7620))
+* changed app theme ([5f3fe52](https://github.com/PeerioTechnologies/peerio-mobile/commit/5f3fe52))
+* e2e test for profile edit [branch ch3554] ([#144](https://github.com/PeerioTechnologies/peerio-mobile/issues/144)) ([71751c9](https://github.com/PeerioTechnologies/peerio-mobile/commit/71751c9))
+* new branding app icons ([147d20a](https://github.com/PeerioTechnologies/peerio-mobile/commit/147d20a))
+* new file type icons ([d4bfaeb](https://github.com/PeerioTechnologies/peerio-mobile/commit/d4bfaeb))
+* redirect apple test user to a different server ([472c353](https://github.com/PeerioTechnologies/peerio-mobile/commit/472c353))
+* sign up badge colors [branch CH4521] ([ce79807](https://github.com/PeerioTechnologies/peerio-mobile/commit/ce79807))
+* sign-up and sign-in ui color themes ([1e00d69](https://github.com/PeerioTechnologies/peerio-mobile/commit/1e00d69))
+* undo popup overlay color ([688d1b6](https://github.com/PeerioTechnologies/peerio-mobile/commit/688d1b6))
+
+
+
+<a name="3.262.0"></a>
+# [3.262.0](https://github.com/PeerioTechnologies/peerio-mobile/compare/v3.260.0...v3.262.0) (2018-04-03)
+
+
+### Bug Fixes
+
+* add try-catch block for alerts ([5b79ff1](https://github.com/PeerioTechnologies/peerio-mobile/commit/5b79ff1))
+* android inline image upload fix [ch3876] ([26a5ffb](https://github.com/PeerioTechnologies/peerio-mobile/commit/26a5ffb))
+* branding small problems ([c397d3e](https://github.com/PeerioTechnologies/peerio-mobile/commit/c397d3e))
+* debug menu color ([991f609](https://github.com/PeerioTechnologies/peerio-mobile/commit/991f609))
+* display avatar for invited users [ch3878] ([0714d1d](https://github.com/PeerioTechnologies/peerio-mobile/commit/0714d1d))
+* fileUploadActionSheet ([faf6e87](https://github.com/PeerioTechnologies/peerio-mobile/commit/faf6e87))
+* fix icon sizes ([b0e035b](https://github.com/PeerioTechnologies/peerio-mobile/commit/b0e035b))
+* login and sign up background color ([d9570ea](https://github.com/PeerioTechnologies/peerio-mobile/commit/d9570ea))
+* made generate 2fa code button wider to fit text in one line ([8f63b62](https://github.com/PeerioTechnologies/peerio-mobile/commit/8f63b62))
+* rooms bugs (self entry in room info, room name character limit) ([#142](https://github.com/PeerioTechnologies/peerio-mobile/issues/142)) ([4dac29c](https://github.com/PeerioTechnologies/peerio-mobile/commit/4dac29c))
+* vertical alignment for purpose box ([0fdbbb0](https://github.com/PeerioTechnologies/peerio-mobile/commit/0fdbbb0))
+
+
+### Features
+
+* Add file preview to files upload ([#127](https://github.com/PeerioTechnologies/peerio-mobile/issues/127)) ([1fce9c0](https://github.com/PeerioTechnologies/peerio-mobile/commit/1fce9c0))
+* add video option ([#152](https://github.com/PeerioTechnologies/peerio-mobile/issues/152)) ([15be397](https://github.com/PeerioTechnologies/peerio-mobile/commit/15be397))
+* added branding colors and vars ([e769446](https://github.com/PeerioTechnologies/peerio-mobile/commit/e769446))
+* added time to file upload date in file details view ([#147](https://github.com/PeerioTechnologies/peerio-mobile/issues/147)) ([52fd1ec](https://github.com/PeerioTechnologies/peerio-mobile/commit/52fd1ec))
+* change launch screen ios ([cbe7620](https://github.com/PeerioTechnologies/peerio-mobile/commit/cbe7620))
+* changed app theme ([5f3fe52](https://github.com/PeerioTechnologies/peerio-mobile/commit/5f3fe52))
+* e2e test for profile edit [branch ch3554] ([#144](https://github.com/PeerioTechnologies/peerio-mobile/issues/144)) ([71751c9](https://github.com/PeerioTechnologies/peerio-mobile/commit/71751c9))
+* new branding app icons ([147d20a](https://github.com/PeerioTechnologies/peerio-mobile/commit/147d20a))
+* new file type icons ([d4bfaeb](https://github.com/PeerioTechnologies/peerio-mobile/commit/d4bfaeb))
+* redirect apple test user to a different server ([472c353](https://github.com/PeerioTechnologies/peerio-mobile/commit/472c353))
+* sign up badge colors [branch CH4521] ([ce79807](https://github.com/PeerioTechnologies/peerio-mobile/commit/ce79807))
+* sign-up and sign-in ui color themes ([1e00d69](https://github.com/PeerioTechnologies/peerio-mobile/commit/1e00d69))
+* undo popup overlay color ([688d1b6](https://github.com/PeerioTechnologies/peerio-mobile/commit/688d1b6))
+
+
+
+<a name="3.261.0"></a>
+# [3.261.0](https://github.com/PeerioTechnologies/peerio-mobile/compare/v3.260.0...v3.261.0) (2018-04-03)
+
+
+### Bug Fixes
+
+* add try-catch block for alerts ([5b79ff1](https://github.com/PeerioTechnologies/peerio-mobile/commit/5b79ff1))
+* android inline image upload fix [ch3876] ([26a5ffb](https://github.com/PeerioTechnologies/peerio-mobile/commit/26a5ffb))
+* branding small problems ([c397d3e](https://github.com/PeerioTechnologies/peerio-mobile/commit/c397d3e))
+* debug menu color ([991f609](https://github.com/PeerioTechnologies/peerio-mobile/commit/991f609))
+* display avatar for invited users [ch3878] ([0714d1d](https://github.com/PeerioTechnologies/peerio-mobile/commit/0714d1d))
+* fileUploadActionSheet ([faf6e87](https://github.com/PeerioTechnologies/peerio-mobile/commit/faf6e87))
+* fix icon sizes ([b0e035b](https://github.com/PeerioTechnologies/peerio-mobile/commit/b0e035b))
+* login and sign up background color ([d9570ea](https://github.com/PeerioTechnologies/peerio-mobile/commit/d9570ea))
+* made generate 2fa code button wider to fit text in one line ([8f63b62](https://github.com/PeerioTechnologies/peerio-mobile/commit/8f63b62))
+* rooms bugs (self entry in room info, room name character limit) ([#142](https://github.com/PeerioTechnologies/peerio-mobile/issues/142)) ([4dac29c](https://github.com/PeerioTechnologies/peerio-mobile/commit/4dac29c))
+* vertical alignment for purpose box ([0fdbbb0](https://github.com/PeerioTechnologies/peerio-mobile/commit/0fdbbb0))
+
+
+### Features
+
+* Add file preview to files upload ([#127](https://github.com/PeerioTechnologies/peerio-mobile/issues/127)) ([1fce9c0](https://github.com/PeerioTechnologies/peerio-mobile/commit/1fce9c0))
+* add video option ([#152](https://github.com/PeerioTechnologies/peerio-mobile/issues/152)) ([15be397](https://github.com/PeerioTechnologies/peerio-mobile/commit/15be397))
+* added branding colors and vars ([e769446](https://github.com/PeerioTechnologies/peerio-mobile/commit/e769446))
+* added time to file upload date in file details view ([#147](https://github.com/PeerioTechnologies/peerio-mobile/issues/147)) ([52fd1ec](https://github.com/PeerioTechnologies/peerio-mobile/commit/52fd1ec))
+* change launch screen ios ([cbe7620](https://github.com/PeerioTechnologies/peerio-mobile/commit/cbe7620))
+* changed app theme ([5f3fe52](https://github.com/PeerioTechnologies/peerio-mobile/commit/5f3fe52))
+* e2e test for profile edit [branch ch3554] ([#144](https://github.com/PeerioTechnologies/peerio-mobile/issues/144)) ([71751c9](https://github.com/PeerioTechnologies/peerio-mobile/commit/71751c9))
+* new branding app icons ([147d20a](https://github.com/PeerioTechnologies/peerio-mobile/commit/147d20a))
+* new file type icons ([d4bfaeb](https://github.com/PeerioTechnologies/peerio-mobile/commit/d4bfaeb))
+* redirect apple test user to a different server ([472c353](https://github.com/PeerioTechnologies/peerio-mobile/commit/472c353))
+* sign up badge colors [branch CH4521] ([ce79807](https://github.com/PeerioTechnologies/peerio-mobile/commit/ce79807))
+* sign-up and sign-in ui color themes ([1e00d69](https://github.com/PeerioTechnologies/peerio-mobile/commit/1e00d69))
+* undo popup overlay color ([688d1b6](https://github.com/PeerioTechnologies/peerio-mobile/commit/688d1b6))
+
+
+
 <a name="3.260.0"></a>
 # [3.260.0](https://github.com/PeerioTechnologies/peerio-mobile/compare/v3.259.0...v3.260.0) (2018-02-23)
 

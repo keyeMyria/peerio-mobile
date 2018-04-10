@@ -7,6 +7,7 @@ import { MenuContext } from 'react-native-popup-menu';
 import SafeComponent from '../shared/safe-component';
 import SnackBarConnection from '../snackbars/snackbar-connection';
 import uiState from '../layout/ui-state';
+import { vars } from '../../styles/styles';
 
 @observer
 export default class Layout1 extends SafeComponent {
@@ -59,7 +60,8 @@ export default class Layout1 extends SafeComponent {
 
         const fillerStyle = {
             flexGrow: 1,
-            justifyContent: 'space-between'
+            justifyContent: 'space-between',
+            backgroundColor: vars.darkBlueBackground05
         };
 
         return (

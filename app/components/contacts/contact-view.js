@@ -34,8 +34,10 @@ export default class ContactView extends SafeComponent {
     renderInvitedUser(contact) {
         return (
             <View style={{ flex: 1, flexGrow: 1 }}>
-                <View style={[flexRow, { backgroundColor: vars.lightGrayBg, paddingRight: vars.spacing.small.maxi }]}>
-                    <AvatarCircle large invited contact={contact} />
+                <View style={[flexRow, { backgroundColor: vars.darkBlueBackground05, paddingRight: vars.spacing.small.maxi }]}>
+                    <View style={{ marginHorizontal: vars.spacing.medium.mini2x }}>
+                        <AvatarCircle large invited contact={contact} />
+                    </View>
                     <View style={{ flexGrow: 1, flexShrink: 1 }}>
                         <Text
                             ellipsizeMode="tail"
@@ -63,8 +65,10 @@ export default class ContactView extends SafeComponent {
         );
         const body = (
             <View style={{ flex: 1, flexGrow: 1 }}>
-                <View style={[flexRow, { backgroundColor: vars.lightGrayBg, paddingRight: vars.spacing.small.maxi }]}>
-                    <AvatarCircle large contact={contact} />
+                <View style={[flexRow, { backgroundColor: vars.darkBlueBackground05, paddingRight: vars.spacing.small.maxi }]}>
+                    <View style={{ marginHorizontal: vars.spacing.medium.mini2x }}>
+                        <AvatarCircle large contact={contact} />
+                    </View>
                     <View style={{ flexGrow: 1, flexShrink: 1 }}>
                         <Text
                             ellipsizeMode="tail"
@@ -78,7 +82,8 @@ export default class ContactView extends SafeComponent {
                         <Text style={{ color: vars.txtDark }}>@{username}</Text>
                     </View>
                     {icons.dark('forum', () => this.startChat())}
-                    {icons.dark(isAdded ? 'star' : 'star-border', () => this.toggleFav())}
+                    {isAdded ? icons.colored('star', () => this.toggleFav(), vars.yellow, null, 'favoriteButton') :
+                        icons.dark('star-border', () => this.toggleFav(), null, null, 'favoriteButton')}
                 </View>
                 <View style={{ margin: vars.spacing.medium.maxi2x }}>
                     {tofuErrorControl}

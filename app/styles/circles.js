@@ -15,7 +15,7 @@ const smallCircle = {
     borderRadius: vars.circle / 2,
     marginLeft: vars.circle,
     marginRight: vars.circle,
-    backgroundColor: vars.bg,
+    backgroundColor: vars.peerioBlue,
     borderWidth: 1,
     borderColor: 'rgba(255, 255, 255, 0.5)'
 };

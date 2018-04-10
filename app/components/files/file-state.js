@@ -5,7 +5,7 @@ import RoutedState from '../routes/routed-state';
 import { fileStore, TinyDb, socket, fileHelpers, clientApp, chatStore } from '../../lib/icebear';
 import { tx } from '../utils/translator';
 import { rnAlertYesNo } from '../../lib/alerts';
-import { popupInputWithPreview, popupInput, popupYesCancel, popupOkCancel } from '../shared/popups';
+import { popupInputWithPreview, popupYesCancel, popupOkCancel } from '../shared/popups';
 import { promiseWhen } from '../helpers/sugar';
 
 class FileState extends RoutedState {

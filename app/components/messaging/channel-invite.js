@@ -119,10 +119,10 @@ export default class ChannelInvite extends SafeComponent {
                             text="Decline"
                             onPress={this.declineInvite}
                             testID="decline"
-                            textColor={vars.bgGreen}
+                            textColor={vars.peerioBlue}
                             style={{ width: vars.roundedButtonWidth, textAlign: 'center' }}
                         />
-                        {buttons.uppercaseGreenBgButton(tx('button_accept'), this.acceptInvite, hasPaywall, null, 'accept')}
+                        {buttons.uppercasePeerioBlueButton(tx('button_accept'), this.acceptInvite, hasPaywall, null, 'accept')}
                     </View>
                 </View>
                 <View style={sectionLine} />

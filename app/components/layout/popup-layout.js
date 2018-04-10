@@ -9,7 +9,7 @@ import { vars } from '../../styles/styles';
 import uiState from './ui-state';
 
 const colors = {
-    systemWarning: vars.yellowLine
+    systemWarning: vars.yellow
 };
 
 @observer

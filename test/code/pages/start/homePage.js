@@ -1,20 +1,24 @@
 const Page = require('../page');
 
 class HomePage extends Page {
-    get welcomeMessage() {
-        return this.getWhenVisible('~title_startSecureChat');
+    get chatTab() {
+        return this.getWhenVisible('~forum');
     }
 
     get filesTab() {
         return this.getWhenVisible('~folder');
     }
 
-    get isVisible() {
-        return this.app.waitForVisible('~forum');
+    get contactsTab() {
+        return this.getWhenVisible('~people');
     }
 
     get settingsTab() {
         return this.getWhenVisible('~settings');
+    }
+
+    get isVisible() {
+        return this.app.waitForVisible('~forum');
     }
 }
 

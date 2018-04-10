@@ -10,9 +10,7 @@ import SafeComponent from '../shared/safe-component';
 import RadioGroup from '../controls/radio-group';
 
 const container = {
-    backgroundColor: '#f0f0f0',
-    borderWidth: 1,
-    borderColor: '#949494',
+    backgroundColor: vars.darkBlueBackground05,
     borderRadius: 6,
     paddingHorizontal: 24,
     paddingTop: 21,
@@ -24,9 +22,14 @@ const titleContainer = {
 };
 
 const titleText = {
-    fontSize: 18,
-    color: 'black',
+    fontSize: vars.font.size.big,
+    color: vars.textBlack87,
     paddingLeft: 8
+};
+
+const descriptionText = {
+    fontSize: vars.font.size.normal,
+    color: vars.textBlack87
 };
 
 const options = [
@@ -49,7 +52,7 @@ export default class InlineUrlPreviewConsent extends SafeComponent {
                 onPress={onPress}
                 pressRetentionOffset={vars.pressRetentionOffset}
                 style={{ paddingLeft: 40, paddingVertical: 16 }}>
-                <Text style={{ fontWeight: 'bold', color: colorIsPrimary ? vars.bg : null }}>
+                <Text style={{ fontWeight: 'bold', color: colorIsPrimary ? vars.peerioBlue : vars.black54 }}>
                     {text}
                 </Text>
             </TouchableOpacity>
@@ -87,7 +90,7 @@ export default class InlineUrlPreviewConsent extends SafeComponent {
             <View style={container}>
                 <View style={titleContainer}>
                     <Icon
-                        name="warning"
+                        name="security"
                         size={vars.iconSize}
                         color="gray"
                     />
@@ -96,10 +99,12 @@ export default class InlineUrlPreviewConsent extends SafeComponent {
                     </Text>
                 </View>
                 {this.spacer}
-                <Text>
+                <Text style={descriptionText}>
                     {tx('title_UrlPreviewsWarning')}
                 </Text>
-                <T k="title_learnMore" />
+                <Text style={{ color: vars.peerioBlue }}>
+                    <T k="title_learnMore" />
+                </Text>
                 {this.spacer}
                 <RadioGroup
                     onSelect={this.onSelectRadioButton}

@@ -8,7 +8,7 @@ import testLabel from '../helpers/test-label';
 const goStyle = {
     fontSize: vars.font.size.normal,
     fontWeight: vars.font.weight.semiBold,
-    color: vars.bg
+    color: vars.peerioBlue
 };
 
 const disabledStyle = {
@@ -75,8 +75,8 @@ const icons = {
         return icons.basic(name, vars.darkIcon, onPress, style, size, true);
     },
 
-    colored(name, onPress, colorFg, backgroundColor) {
-        return icons.basic(name, colorFg, onPress, backgroundColor ? { backgroundColor } : {});
+    colored(name, onPress, colorFg, backgroundColor, testId) {
+        return icons.basic(name, colorFg, onPress, backgroundColor ? { backgroundColor } : {}, null, null, testId);
     },
 
     coloredSmall(name, onPress, colorFg, backgroundColor) {
@@ -124,8 +124,8 @@ const icons = {
         );
     },
 
-    bubble: (text) => icons.circle(text, 14, 8, vars.notificationIcon, vars.white),
-    unreadBubble: (text) => icons.circle(text, 24, 12, vars.bg, vars.white),
+    bubble: (text) => icons.circle(text, 14, 8, vars.red, vars.white),
+    unreadBubble: (text) => icons.circle(text, 24, 12, vars.peerioBlue, vars.white),
 
     circle(text, radius, margin, bgColor, fgColor) {
         const notificationStyle = {
@@ -190,7 +190,7 @@ const icons = {
         const paddingHorizontal = vars.pinnedChatPaddingHorizontal;
         return (
             <TouchableOpacity
-                style={{ paddingHorizontal, opacity: vars.sublteGrayOpacity }}
+                style={{ paddingHorizontal, opacity: vars.opacity54 }}
                 onPress={onPress}
                 pressRetentionOffset={vars.retentionOffset}>
                 <Image style={{ width, height }} source={source} />

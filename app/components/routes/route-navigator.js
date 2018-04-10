@@ -3,9 +3,7 @@ import React, { Component } from 'react';
 import { View } from 'react-native';
 import { observer } from 'mobx-react/native';
 import { reaction, observable } from 'mobx';
-import BgPattern from '../controls/bg-pattern';
 import { navigator } from '../../styles/styles';
-import { gradient } from '../controls/effects';
 import uiState from '../layout/ui-state';
 
 @observer
@@ -31,11 +29,14 @@ export default class RouteNavigator extends Component {
     render() {
         const { route } = this;
         const hidden = { overflow: 'hidden' };
-        const inner = route ? gradient({
-            testID: `route${route.key}Scene`,
-            removeClippedSubviews: false,
-            style: [navigator.card, hidden]
-        }, [<BgPattern key="bg" />, this.route ? this.renderScene(this.route) : null]) : null;
+        const inner = route ?
+            (<View
+                testID={`route${route.key}Scene`}
+                removeClippedSubviews={false}
+                style={[navigator.card, hidden]}>
+                {this.route ? this.renderScene(this.route) : null}
+            </View>)
+            : null;
         return (
             <View
                 testID="navigatorContainer"

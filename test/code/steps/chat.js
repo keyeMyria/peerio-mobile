@@ -1,13 +1,10 @@
 const { defineSupportCode } = require('cucumber');
 
 defineSupportCode(({ When, Then }) => {
-    When('I start a new DM with a User', async function () {
-        await this.chatListPage.buttonCreateNewChat.click();
-        await this.chatActionSheetPage.newDmOption.click();
-        await this.contactSelectorDmPage.textInput.setValue(process.env.CHAT_RECIPIENT_USER);
-        await this.contactSelectorDmPage.hideKeyboardHelper();
-        await this.contactSelectorDmPage.recipientContact.click();
-        await this.contactSelectorDmPage.recipientContact.click(); // TODO tap twice
+    When('I start a new DM with someone', async function () {
+        await this.openContactsPickerForDM();
+        await this.searchForRecipient();
+        await this.contactSelectorPage.recipientContact.click();
     });
 
     When('I create a new room', async function () {
@@ -21,11 +18,11 @@ defineSupportCode(({ When, Then }) => {
         await this.chatPage.buttonExitChat.click();
     });
 
-    When('I exit the current Chat', async function () {
+    When('I exit the current chat', async function () {
         await this.chatPage.buttonExitChat.click();
     });
 
-    Then('I can send a message to the current Chat', async function () {
+    Then('I can send a message to the current chat', async function () {
         const message = `Test Message ${new Date()}`;
         await this.chatPage.textInput.setValue(message);
         await this.chatPage.hideKeyboardHelper();

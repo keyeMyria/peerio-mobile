@@ -72,7 +72,7 @@ export default class Progress extends SafeComponent {
             marginTop: -1,
             marginBottom: -1,
             height: innerHeight,
-            backgroundColor: vars.semiTransparentBg,
+            backgroundColor: vars.peerioBlueBackground15,
             borderWidth: 0,
             borderColor: 'red',
             width: this.currentWidth
