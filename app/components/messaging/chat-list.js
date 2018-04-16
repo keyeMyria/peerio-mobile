@@ -16,6 +16,7 @@ import CreateActionSheet from './create-action-sheet';
 import { tx } from '../utils/translator';
 import uiState from '../layout/ui-state';
 import { scrollHelper } from '../helpers/test-helper';
+import UnreadMessageIndicator from './unread-message-indicator';
 
 const INITIAL_LIST_SIZE = 10;
 const PAGE_SIZE = 2;
@@ -38,6 +39,8 @@ export default class ChatList extends SafeComponent {
     @observable maxLoadedIndex = INITIAL_LIST_SIZE;
     @observable collapsible = true;
     @observable reverseRoomSorting = false;
+    @observable currentScrollPosition = 0;
+    @observable unreadMessagePosition = 0;
 
     get rightIcon() {
         return (<PlusBorderIcon
@@ -105,19 +108,27 @@ export default class ChatList extends SafeComponent {
     };
 
     item = (chat) => {
+        const onLayout = (e) => {
+            if (chat.unreadCount > 0 || chat.kegDbId) {
+                // scrollAmount = positionOfItem - viewHeight + itemHeight
+                // example: scrollAmount = 600 - 500 + 50 => Scroll down 150 px
+                this.unreadMessagePosition = e.nativeEvent.layout.y - this.scrollViewOffset + e.nativeEvent.layout.height;
+            }
+        };
         if (chat.kegDbId) {
             return (
-                <ChannelInviteListItem
-                    id={chat.kegDbId}
-                    channelName={chat.channelName}
-                    username={chat.username}
-                />);
+                <View onLayout={onLayout}>
+                    <ChannelInviteListItem
+                        id={chat.kegDbId}
+                        channelName={chat.channelName}
+                        username={chat.username} />
+                </View>);
         }
         if (!chat.id) return null;
         else if (chat.isChannel) {
-            return <ChannelListItem chat={chat} />;
+            return <View onLayout={onLayout}> <ChannelListItem chat={chat} /> </View>;
         }
-        return <ChatListItem key={chat.id} chat={chat} />;
+        return <View onLayout={onLayout}> <ChatListItem key={chat.id} chat={chat} /> </View>;
     };
 
     onEndReached = () => {
@@ -129,6 +140,14 @@ export default class ChatList extends SafeComponent {
         this.scrollView = sv;
         uiState.currentScrollView = sv;
     }
+
+    get unreadMessageIndicatorVisible() { return this.currentScrollPosition < (this.unreadMessagePosition); }
+
+    @action.bound scrollToUnread() { this.scrollView.scrollTo({ y: this.unreadMessagePosition, animated: true }); }
+
+    @action.bound onScroll(e) { this.currentScrollPosition = e.nativeEvent.contentOffset.y; }
+
+    @action.bound onListViewLayout(e) { this.scrollViewOffset = e.nativeEvent.layout.height; }
 
     listView() {
         if (chatState.routerMain.currentIndex !== 0) return null;
@@ -145,6 +164,8 @@ export default class ChatList extends SafeComponent {
                 onContentSizeChange={this.scroll}
                 enableEmptySections
                 ref={this.scrollViewRef}
+                onScroll={this.onScroll}
+                onLayout={this.onListViewLayout}
                 {...scrollHelper}
             />
         );
@@ -160,6 +181,9 @@ export default class ChatList extends SafeComponent {
                 <View style={{ flexGrow: 1, flex: 1 }}>
                     {body}
                 </View>
+                <UnreadMessageIndicator
+                    visible={this.unreadMessageIndicatorVisible}
+                    action={this.scrollToUnread} />
                 <CreateActionSheet ref={(sheet) => { actionSheet = sheet; }} />
                 <ProgressOverlay enabled={chatState.store.loading} />
             </View>
