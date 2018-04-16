@@ -126,9 +126,9 @@ export default class ChatList extends SafeComponent {
         }
         if (!chat.id) return null;
         else if (chat.isChannel) {
-            return <View onLayout={onLayout}> <ChannelListItem chat={chat} /> </View>;
+            return <View onLayout={onLayout}><ChannelListItem chat={chat} /></View>;
         }
-        return <View onLayout={onLayout}> <ChatListItem key={chat.id} chat={chat} /> </View>;
+        return <View onLayout={onLayout}><ChatListItem key={chat.id} chat={chat} /></View>;
     };
 
     onEndReached = () => {
