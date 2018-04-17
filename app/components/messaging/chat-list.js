@@ -40,7 +40,9 @@ export default class ChatList extends SafeComponent {
     @observable collapsible = true;
     @observable reverseRoomSorting = false;
     @observable currentScrollPosition = 0;
-    @observable unreadMessagePosition = 0;
+    @observable lowestUnreadMessagePosition = 0;
+    @observable highestUnreadMessagePosition = 0;
+    @observable scrollViewOffset = null;
 
     get rightIcon() {
         return (<PlusBorderIcon
@@ -110,9 +112,12 @@ export default class ChatList extends SafeComponent {
     item = (chat) => {
         const onLayout = (e) => {
             if (chat.unreadCount > 0 || chat.kegDbId) {
-                // scrollAmount = positionOfItem - viewHeight + itemHeight
-                // example: scrollAmount = 600 - 500 + 50 => Scroll down 150 px
-                this.unreadMessagePosition = e.nativeEvent.layout.y - this.scrollViewOffset + e.nativeEvent.layout.height;
+                if (!this.highestPositionTaken) { // Handles top most unread mesage, reading taken only once
+                    this.highestUnreadMessagePosition = e.nativeEvent.layout.y;
+                    this.highestPositionTaken = true;
+                }
+                // Handles bottom most unread mesage, reading taken multiple times and overwrites previous
+                this.lowestUnreadMessagePosition = e.nativeEvent.layout.y + e.nativeEvent.layout.height;
             }
         };
         if (chat.kegDbId) {
@@ -141,9 +146,21 @@ export default class ChatList extends SafeComponent {
         uiState.currentScrollView = sv;
     }
 
-    get unreadMessageIndicatorVisible() { return this.currentScrollPosition < (this.unreadMessagePosition); }
+    get topIndicatorVisible() {
+        return this.currentScrollPosition > this.highestUnreadMessagePosition;
+    }
 
-    @action.bound scrollToUnread() { this.scrollView.scrollTo({ y: this.unreadMessagePosition, animated: true }); }
+    get bottomIndicatorVisible() {
+        return this.currentScrollPosition < (this.lowestUnreadMessagePosition - this.scrollViewOffset);
+    }
+
+    @action.bound scrollUpToUnread() {
+        this.scrollView.scrollTo({ y: this.highestUnreadMessagePosition, animated: true });
+    }
+
+    @action.bound scrollDownToUnread() {
+        this.scrollView.scrollTo({ y: this.lowestUnreadMessagePosition - this.scrollViewOffset, animated: true });
+    }
 
     @action.bound onScroll(e) { this.currentScrollPosition = e.nativeEvent.contentOffset.y; }
 
@@ -182,8 +199,12 @@ export default class ChatList extends SafeComponent {
                     {body}
                 </View>
                 <UnreadMessageIndicator
-                    visible={this.unreadMessageIndicatorVisible}
-                    action={this.scrollToUnread} />
+                    visible={this.bottomIndicatorVisible}
+                    action={this.scrollDownToUnread} />
+                <UnreadMessageIndicator
+                    isAlignedTop
+                    visible={this.topIndicatorVisible}
+                    action={this.scrollUpToUnread} />
                 <CreateActionSheet ref={(sheet) => { actionSheet = sheet; }} />
                 <ProgressOverlay enabled={chatState.store.loading} />
             </View>

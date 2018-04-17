@@ -20,30 +20,39 @@ export default class UnreadMessageIndicator extends SafeComponent {
     }
 
     renderThrow() {
-        const { visible, action } = this.props;
+        const { isAlignedTop, visible, action } = this.props;
         if (!visible) return null;
         const container = {
             position: 'absolute',
-            bottom: 0,
             right: 0,
             left: 0,
             height: 36,
             marginHorizontal: vars.spacing.small.midi2x,
-            borderTopLeftRadius: 10,
-            borderTopRightRadius: 10,
             backgroundColor: vars.peerioBlue,
             justifyContent: 'center',
             alignItems: 'center'
         };
+        const topAlignStyle = {
+            top: 0,
+            borderBottomLeftRadius: 10,
+            borderBottomRightRadius: 10
+        };
+        const bottomAlignStyle = {
+            bottom: 0,
+            borderTopLeftRadius: 10,
+            borderTopRightRadius: 10
+        };
+        const alignmentStlye = isAlignedTop ? topAlignStyle : bottomAlignStyle;
         const text = {
             color: 'white',
             marginRight: vars.spacing.small.mini2x
         };
+        const iconName = isAlignedTop ? 'keyboard-arrow-up' : 'keyboard-arrow-down';
         return (
-            <TouchableOpacity style={container} onPress={action}>
+            <TouchableOpacity style={[container, alignmentStlye]} onPress={action}>
                 <View style={{ flexDirection: 'row', marginTop: vars.spacing.small.mini2x }}>
                     <Text semiBold style={text}>{tx('title_unreadMessages')}</Text>
-                    {icons.plainWhite('keyboard-arrow-down', vars.iconSize)}
+                    {icons.plainWhite(iconName, vars.iconSize)}
                 </View>
             </TouchableOpacity>
         );
@@ -51,6 +60,7 @@ export default class UnreadMessageIndicator extends SafeComponent {
 }
 
 UnreadMessageIndicator.propTypes = {
+    isAlignedTop: PropTypes.bool,
     visible: PropTypes.bool,
     action: PropTypes.any
 };
