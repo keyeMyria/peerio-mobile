@@ -314,6 +314,21 @@ export default class FileInlineImage extends SafeComponent {
         );
     }
 
+    /**
+     * Opens the image if it cached, else attempts to cache it.
+     * Checking if image is downloaded is not done since it is done as a pre-condition to this function.
+     */
+    @action.bound imageAction() {
+        const { image } = this.props;
+        if (image.tmpCached) {
+            try {
+                config.FileStream.launchViewer(image.tmpCachePath);
+            } catch (e) {
+                console.log(e);
+            }
+        } else image.tryToCacheTemporarily(true);
+    }
+
     renderThrow() {
         const { image } = this.props;
         const { fileId, downloading } = image;
@@ -329,7 +344,6 @@ export default class FileInlineImage extends SafeComponent {
             minHeight: loaded ? undefined : 140,
             justifyContent: 'center'
         };
-
         return (
             <View>
                 <FileInlineContainer
@@ -346,14 +360,16 @@ export default class FileInlineImage extends SafeComponent {
                     {this.opened &&
                         <View style={inner}>
                             {!downloading && this.loadImage && width && height ?
-                                <Image
-                                    onProgress={this.handleProgress}
-                                    onLoadEnd={this.handleLoadEnd}
-                                    onLoad={this.onLoad}
-                                    onError={this.onErrorLoadingImage}
-                                    source={{ uri: source.uri, width, height }}
-                                    style={{ width, height }}
-                                /> : null }
+                                <TouchableOpacity onPress={this.fileAction} >
+                                    <Image
+                                        onProgress={this.handleProgress}
+                                        onLoadEnd={this.handleLoadEnd}
+                                        onLoad={this.onLoad}
+                                        onError={this.onErrorLoadingImage}
+                                        source={{ uri: source.uri, width, height }}
+                                        style={{ width, height }} />
+                                </TouchableOpacity>
+                                : null }
                             {!this.loadImage && !this.tooBig && this.displayImageOffer}
                             {!this.loadImage && this.tooBig && !this.oversizeCutoff && this.displayTooBigImageOffer}
                             {this.oversizeCutoff && this.displayCutOffImageOffer}
