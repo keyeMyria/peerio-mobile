@@ -42,15 +42,17 @@ export default class UnreadMessageIndicator extends SafeComponent {
             borderTopLeftRadius: 10,
             borderTopRightRadius: 10
         };
-        const alignmentStlye = isAlignedTop ? topAlignStyle : bottomAlignStyle;
+        const alignmentStyle = isAlignedTop ? topAlignStyle : bottomAlignStyle;
+        const marginTopStyle = !isAlignedTop ? { marginTop: vars.spacing.small.mini2x } : null;
         const text = {
             color: 'white',
-            marginRight: vars.spacing.small.mini2x
+            marginRight: vars.spacing.small.mini2x,
+            marginTop: isAlignedTop ? vars.spacing.small.mini : null
         };
         const iconName = isAlignedTop ? 'keyboard-arrow-up' : 'keyboard-arrow-down';
         return (
-            <TouchableOpacity style={[container, alignmentStlye]} onPress={action}>
-                <View style={{ flexDirection: 'row', marginTop: vars.spacing.small.mini2x }}>
+            <TouchableOpacity style={[container, alignmentStyle]} onPress={action}>
+                <View style={[marginTopStyle, { flexDirection: 'row' }]}>
                     <Text semiBold style={text}>{tx('title_unreadMessages')}</Text>
                     {icons.plainWhite(iconName, vars.iconSize)}
                 </View>
