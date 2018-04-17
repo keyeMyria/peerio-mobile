@@ -141,7 +141,6 @@ export default class ContactAdd extends SafeComponent {
             username: User.current.username
         });
         const title = tx('title_socialShareInvite');
-        // const url = 'https://www.peerio.com';
         console.log(title, message);
         Share.share({ message, title });
     }

@@ -31,7 +31,6 @@ class PaymentStorageUsage extends SafeComponent {
 
 const paymentCheckout = () => {
     settingsState.upgrade();
-    // Linking.openURL('https://www.peerio.com/checkout.html');
 };
 
 addSystemWarningAction('UPGRADE', paymentCheckout);

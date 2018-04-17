@@ -67,7 +67,7 @@ export default class SnackbarBase extends SafeComponent {
 
     renderThrow() {
         const s = {
-            backgroundColor: vars.darkBlue,
+            backgroundColor: vars.snackbarBg,
             justifyContent: 'flex-start',
             paddingLeft: vars.spacing.medium.mini2x,
             overflow: 'hidden',

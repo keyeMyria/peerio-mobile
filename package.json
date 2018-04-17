@@ -1,6 +1,6 @@
 {
   "name": "peeriomobile",
-  "version": "3.265.0",
+  "version": "3.271.0",
   "private": true,
   "scripts": {
     "postinstall": "./scripts/setup-env.sh && npm run icebear:compile && ./scripts/setup-rn-debugging.sh && ./scripts/copy-android-resources.sh && ./scripts/android-switch-to-rn-fork.sh && node scripts/test-deps.js",
@@ -52,7 +52,7 @@
     "path": "0.12.7",
     "pbkdf2": "github:PeerioTechnologies/pbkdf2",
     "peerio-copy": "github:PeerioTechnologies/peerio-copy#icebear",
-    "peerio-icebear": "github:PeerioTechnologies/peerio-icebear#dev",
+    "peerio-icebear": "github:PeerioTechnologies/peerio-icebear#feat-app-label",
     "peerio-translator": "github:PeerioTechnologies/peerio-translator#v1.0.0",
     "process": "0.11.9",
     "prop-types": "15.5.10",

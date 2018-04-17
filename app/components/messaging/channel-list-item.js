@@ -53,7 +53,7 @@ export default class ChannelListItem extends SafeComponent {
         const textCircleStyle = {
             fontSize: vars.font.size.normal,
             fontWeight: vars.font.weight.semiBold,
-            color: vars.unreadTextColor
+            color: vars.badgeText
         };
 
         return (

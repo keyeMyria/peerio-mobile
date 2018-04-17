@@ -36,7 +36,7 @@ function enablePushNotifications() {
         },
 
         // GCM sender id
-        senderID: '605156423279',
+        senderID: process.env.BRANDED_SENDER_ID || '605156423279',
 
         permissions: {
             alert: true,

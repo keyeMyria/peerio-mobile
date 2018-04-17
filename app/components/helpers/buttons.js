@@ -42,7 +42,7 @@ export default {
                     pressRetentionOffset={vars.pressRetentionOffset}
                     style={{ paddingRight: vars.spacing.small.maxi2x, paddingVertical: vars.spacing.small.maxi }}>
                     <Text
-                        style={{ fontWeight: 'bold', color: disabled ? vars.txtMedium : vars.peerioBlue }}>
+                        style={{ fontWeight: 'bold', color: disabled ? vars.txtMedium : vars.peerioPurple }}>
                         {tu(text)}
                     </Text>
                 </TouchableOpacity>

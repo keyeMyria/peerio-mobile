@@ -3,13 +3,19 @@ import { setUrlMap, setTagHandler } from 'peerio-translator';
 import tagHandlers from '../components/controls/tag-handlers';
 import rnFileStream from './rn-file-stream';
 import KeyValueStorage from '../store/key-value-storage';
+import stringReplacements from './string-replacements';
+
+const { setStringReplacement } = require('peerio-translator');
 
 export default (c, icebear) => {
     const cfg = c;
     cfg.ghostFrontendUrl = 'https://mail.peerio.com';
     // --- TRANSLATOR
     cfg.translator = {};
-    cfg.translator.stringReplacements = []; // white label only
+    cfg.translator.stringReplacements = stringReplacements; // white label only
+    cfg.translator.stringReplacements.forEach((replacementObject) => {
+        setStringReplacement(replacementObject.original, replacementObject.replacement);
+    });
     cfg.translator.urlMap = {
         fingerprint: 'https://peerio.zendesk.com/hc/en-us/articles/204394135',
         mpDetail: 'https://peerio.zendesk.com/hc/en-us/articles/214633103-What-is-a-Peerio-Master-Password-',
@@ -33,13 +39,17 @@ export default (c, icebear) => {
         download: 'https://peerio.com',
         learnUrlTracking: 'https://peerio.zendesk.com/hc/en-us/articles/115005090766',
         identityVerification: 'https://peerio.zendesk.com/hc/en-us/articles/204480655-Verifying-a-Peerio-ID-',
-        jitsiLink: 'https://jitsi.org/'
+        jitsiLink: 'https://jitsi.org/',
+        termsUrl: 'https://peerio.com/conditions.html',
+        privacyUrl: 'https://peerio.com/privacy.html'
     };
 
     setUrlMap(cfg.translator.urlMap);
     for (const name in tagHandlers) {
         setTagHandler(name, tagHandlers[name]);
     }
+
+    cfg.logRecipients = ['support@peerio.com'];
 
     cfg.download.parallelism = 2;
     cfg.download.maxDownloadChunkSize = 1024 * 1024;
@@ -65,6 +75,7 @@ export default (c, icebear) => {
     }
 
     cfg.platform = Platform.OS;
+    cfg.appLabel = process.env.APP_LABEL;
     cfg.appleTestUser = 'applereview2607';
     cfg.appleTestPass = 'icebear';
     cfg.appleTestServer = 'wss://treetrunks.peerio.com';

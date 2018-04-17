@@ -82,7 +82,7 @@ export default class ChannelInfo extends SafeComponent {
         return (
             <View style={{ backgroundColor: vars.chatItemPressedBackground }}>
                 <TouchableOpacity
-                    style={{ backgroundColor: vars.darkBlueBackground05 }}
+                    style={{ backgroundColor: vars.channelInfoBg }}
                     pressRetentionOffset={vars.retentionOffset}
                     onPress={action}
                     {...testLabel(title)} >
@@ -132,7 +132,7 @@ export default class ChannelInfo extends SafeComponent {
         if (!chat) return null;
         const { canIAdmin, canILeave } = chat;
         const body = (
-            <View>
+            <View style={{ backgroundColor: vars.channelInfoBg }}>
                 {this.lineBlock(canIAdmin ? this.topicTextBox : this.topicTextView)}
                 {this.lineBlock(
                     <View>

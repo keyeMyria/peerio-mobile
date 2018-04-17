@@ -36,7 +36,7 @@ export default class FileItem extends SafeComponent {
     renderThrow() {
         const { file } = this.props;
         return (
-            <View style={{ backgroundColor: vars.darkBlueBackground05, paddingHorizontal: vars.spacing.medium.mini2x }}>
+            <View style={{ backgroundColor: vars.filesBg, paddingHorizontal: vars.spacing.medium.mini2x }}>
                 {file.isFolder ?
                     <FolderInnerItem folder={file} onLongPress={this.props.onLongPress} onPress={() => this.props.onChangeFolder(file)} /> :
                     <FileInnerItem onPress={f => this.press(f)} file={file} rowID={this.props.rowID} />}
