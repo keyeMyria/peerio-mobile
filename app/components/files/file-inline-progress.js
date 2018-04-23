@@ -7,12 +7,21 @@ import fileState from '../files/file-state';
 import icons from '../helpers/icons';
 import FileInlineContainer from './file-inline-container';
 import FileSignatureError from './file-signature-error';
+import { tx } from '../utils/translator';
 
 @observer
 export default class FileInlineProgress extends SafeComponent {
+    get fileDeletedHack() {
+        return (
+            <Text style={{ fontStyle: 'italic' }}>
+                {tx('error_fileDeleted')}
+            </Text>
+        );
+    }
+
     renderThrow() {
         const file = fileState.store.getById(this.props.file);
-        if (!file) return <Text>{`no file ${this.props.file}`}</Text>;
+        if (!file) return this.fileDeletedHack;
         if (file.signatureError) return <FileSignatureError />;
         return (
             <FileInlineContainer

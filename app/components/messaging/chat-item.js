@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { View } from 'react-native';
 import { observer } from 'mobx-react/native';
+import { observable } from 'mobx';
 import SafeComponent from '../shared/safe-component';
 import Avatar from '../shared/avatar';
 import contactState from '../contacts/contact-state';
@@ -9,6 +10,25 @@ import fileState from '../files/file-state';
 import { systemMessages } from '../../lib/icebear';
 import IdentityVerificationNotice from './identity-verification-notice';
 import { vars } from '../../styles/styles';
+
+class TestStore {
+    constructor() {
+        this.fileStoreGet = fileState.store.getById.bind(fileState.store);
+        fileState.store.getById = this.get;
+    }
+
+    map = observable.map();
+    get = (id) => {
+        const result = this.map.get(id);
+        !result && setTimeout(() => {
+            console.log('setting to true');
+            this.map.set(id, this.fileStoreGet(id));
+        }, 3000);
+        return this.map.get(id);
+    };
+}
+
+const testStore = new TestStore();
 
 @observer
 export default class ChatItem extends SafeComponent {
