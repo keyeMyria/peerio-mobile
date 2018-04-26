@@ -79,9 +79,6 @@ export default class AccountUpgradeSwiper extends Component {
                     <AccountUpgradePlan
                         style={card}
                         plan={plans[1]} />
-                    <AccountUpgradePlan
-                        style={card}
-                        plan={plans[2]} />
                 </ScrollView>
                 {this.exitRow}
                 <AccountUpgradeNavigator key="navigator" selected={this.selected} onJumpTo={this.jumpTo} />

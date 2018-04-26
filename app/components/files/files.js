@@ -125,6 +125,10 @@ export default class Files extends SafeComponent {
         );
     }
 
+    get isZeroState() {
+        return !this.data.length && !fileState.store.loading && fileState.currentFolder.isRoot;
+    }
+
     get noFilesInFolder() {
         if (this.data.length || fileState.currentFolder.isRoot) return null;
         const s = {
@@ -279,19 +283,17 @@ export default class Files extends SafeComponent {
                 </Text>
             );
         }
-        return !fileState.store.loading && <FilesPlaceholder />;
+        return this.isZeroState && <FilesPlaceholder />;
     }
 
-    @action.bound fileUploadActionSheetRef(ref) {
-        fileUploadActionSheet = ref;
-    }
+    @action.bound fileUploadActionSheetRef(ref) { fileUploadActionSheet = ref; }
 
     renderThrow() {
         return (
             <View
                 style={{ flex: 1 }}>
                 <View style={{ flex: 1, backgroundColor: vars.white }}>
-                    {this.searchTextbox()}
+                    {!this.isZeroState && this.searchTextbox()}
                     {upgradeForFiles()}
                     {!this.data.length && !fileState.currentFolder.isRoot ?
                         this.noFilesInFolder : null}

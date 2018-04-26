@@ -41,7 +41,7 @@ export default class FileUploadActionSheet extends SafeComponent {
 
     get takePhoto() {
         return {
-            title: tx('title_takePhoto'),
+            title: tx('button_takeAPicture'),
             event: () => this.doUpload(imagepicker.getImageFromCamera)
         };
     }

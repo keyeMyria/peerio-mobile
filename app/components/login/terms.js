@@ -3,6 +3,7 @@ import {
     Linking
 } from 'react-native';
 import { t } from 'peerio-translator';
+import { config } from '../../lib/icebear';
 import Button from '../controls/button';
 import Center from '../controls/center';
 import loginState from '../login/login-state';
@@ -15,7 +16,7 @@ export default class Terms extends Component {
 
     terms() {
         if (loginState.isInProgress) return;
-        Linking.openURL('https://www.peerio.com/');
+        Linking.openURL(config.translator.urlMap.termsUrl);
     }
 
     render() {

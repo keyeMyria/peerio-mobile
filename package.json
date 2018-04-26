@@ -1,6 +1,6 @@
 {
   "name": "peeriomobile",
-  "version": "3.270.0",
+  "version": "3.272.0",
   "private": true,
   "scripts": {
     "postinstall": "./scripts/setup-env.sh && npm run icebear:compile && ./scripts/setup-rn-debugging.sh && ./scripts/copy-android-resources.sh && ./scripts/android-switch-to-rn-fork.sh && node scripts/test-deps.js",

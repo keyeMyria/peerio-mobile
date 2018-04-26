@@ -98,7 +98,7 @@ export default class MemberList extends SafeComponent {
                         key={username}
                         message=""
                         hideOnline
-                        backgroundColor={vars.darkBlueBackground05} />
+                        backgroundColor={vars.channelInfoBg} />
                 </View>
                 <View
                     {...testLabel('moreButton')}

@@ -121,7 +121,7 @@ export default class ChannelInvite extends SafeComponent {
                             textColor={vars.peerioBlue}
                             style={{ width: vars.roundedButtonWidth, textAlign: 'center' }}
                         />
-                        {buttons.uppercasePeerioBlueButton(tx('button_accept'), this.acceptInvite, hasPaywall, null, 'accept')}
+                        {buttons.roundBlueBgButton(tx('button_accept'), this.acceptInvite, hasPaywall, null, 'accept')}
                     </View>
                 </View>
                 <View style={sectionLine} />

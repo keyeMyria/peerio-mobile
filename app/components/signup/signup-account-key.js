@@ -118,12 +118,12 @@ export default class SignupStep1 extends LoginWizardPage {
                         <Text {...testLabel('passphrase')} style={accountKeyText} selectable>
                             {signupState.passphrase}
                         </Text>
-                        {buttons.uppercaseBlueButton(tx('button_copy'), this.copyAccountKey, false, savingScreenshot)}
+                        {buttons.blueTextButton(tx('button_copy'), this.copyAccountKey, false, savingScreenshot)}
                     </View>
                 </View>
                 <Text style={textNormal}>{tx('title_accountKey2')}</Text>
                 <View style={{ width: 240, alignSelf: 'center', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: vars.spacing.large.midi2x }}>
-                    {/* buttons.uppercasePeerioBlueBgButton(tx(saveTitle), () => this.saveAccountKey(), keySaved, savingScreenshot) */}
+                    {/* buttons.blueBgButton(tx(saveTitle), () => this.saveAccountKey(), keySaved, savingScreenshot) */}
                     {/* signupState.keyBackedUp && icons.plaindark('check-circle') */}
                 </View>
             </View>

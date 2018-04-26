@@ -93,7 +93,7 @@ function popupAbout() {
     const contents = (
         <View>
             {textControl(text)}
-            {showPoweredBy && <Image source={image} resizeMode="contain" style={{ width: '80%' }} />}
+            {showPoweredBy && <Image source={image} resizeMode="contain" style={{ marginTop: 10, width: '60%' }} />}
         </View>
     );
     return new Promise((resolve) => {

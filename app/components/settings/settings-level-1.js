@@ -32,9 +32,9 @@ export default class SettingsLevel1 extends SafeComponent {
     }
 
     testShare() {
-        const message = 'chat and share files securely using Peerio. https://www.peerio.com';
+        const message = 'chat and share files securely using Peerio. https://www.testurl.com';
         const title = 'peerio';
-        const url = 'https://www.peerio.com';
+        const url = 'https://www.testurl.com';
         Share.share({ message, title, url });
     }
 

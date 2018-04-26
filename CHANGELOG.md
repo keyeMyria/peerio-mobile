@@ -2,6 +2,42 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.272.0"></a>
+# [3.272.0](https://github.com/PeerioTechnologies/peerio-mobile/compare/v3.271.0...v3.272.0) (2018-04-18)
+
+
+### Bug Fixes
+
+* add ios subject line ([#175](https://github.com/PeerioTechnologies/peerio-mobile/issues/175)) ([d45b234](https://github.com/PeerioTechnologies/peerio-mobile/commit/d45b234))
+* loading screen line colors [branch ch5694] ([#169](https://github.com/PeerioTechnologies/peerio-mobile/issues/169)) ([c062ae8](https://github.com/PeerioTechnologies/peerio-mobile/commit/c062ae8))
+* replace copy ([#176](https://github.com/PeerioTechnologies/peerio-mobile/issues/176)) ([773be82](https://github.com/PeerioTechnologies/peerio-mobile/commit/773be82))
+* updated round blue bg button style and naming convention of all buttons [branch ch5325] ([#168](https://github.com/PeerioTechnologies/peerio-mobile/issues/168)) ([4157466](https://github.com/PeerioTechnologies/peerio-mobile/commit/4157466))
+* white bg colors ([#171](https://github.com/PeerioTechnologies/peerio-mobile/issues/171)) ([8faf4d4](https://github.com/PeerioTechnologies/peerio-mobile/commit/8faf4d4))
+
+
+### Features
+
+* android special ids ([e99c7af](https://github.com/PeerioTechnologies/peerio-mobile/commit/e99c7af))
+* introduce branding to medcryptor ([3e473f9](https://github.com/PeerioTechnologies/peerio-mobile/commit/3e473f9))
+* use appLabel sdk ([b933cec](https://github.com/PeerioTechnologies/peerio-mobile/commit/b933cec))
+
+
+
+<a name="3.271.0"></a>
+# [3.271.0](https://github.com/PeerioTechnologies/peerio-mobile/compare/v3.270.0...v3.271.0) (2018-04-16)
+
+
+### Bug Fixes
+
+* material icon color [branch ch5729] ([#170](https://github.com/PeerioTechnologies/peerio-mobile/issues/170)) ([6cd216c](https://github.com/PeerioTechnologies/peerio-mobile/commit/6cd216c))
+
+
+### Features
+
+* add appLabel config support [ch5740] ([20e56c2](https://github.com/PeerioTechnologies/peerio-mobile/commit/20e56c2))
+
+
+
 <a name="3.270.0"></a>
 # [3.270.0](https://github.com/PeerioTechnologies/peerio-mobile/compare/v3.269.0...v3.270.0) (2018-04-13)
 

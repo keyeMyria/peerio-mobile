@@ -6,8 +6,8 @@ import { socket } from '../../lib/icebear';
 class PaymentsAndroid extends PaymentsBase {
     premiumYearlyID = 'com.peerio.app.messenger.premium.20.yearly';
     premiumMonthlyID = 'com.peerio.app.messenger.premium.20.monthly';
-    professionalYearlyID = 'com.peerio.app.messenger.professional.500.yearly';
-    professionalMonthlyID = 'com.peerio.app.messenger.professional.500.monthly';
+    professionalYearlyID = process.env.PRO_YEARLY_PLAN || 'com.peerio.app.messenger.professional.500.yearly';
+    professionalMonthlyID = process.env.PRO_MONTHLY_PLAN || 'com.peerio.app.messenger.professional.500.monthly';
 
     async purchaseProduct(productId) {
         let result = {};

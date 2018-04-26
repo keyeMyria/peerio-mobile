@@ -149,11 +149,11 @@ authenticator app.`}
                         </View>
                     </View>
                     <View style={rowRight}>
-                        {buttons.uppercaseBlueButton(tx('title_download'), () => this.downloadCodes())}
+                        {buttons.blueTextButton(tx('title_download'), () => this.downloadCodes())}
                     </View>
                 </View>
                 <View style={{ left: paddingHorizontal + 12, bottom: paddingVertical, position: 'absolute' }}>
-                    {buttons.uppercaseRedButton('button_2FADeactivate', this.disable2fa)}
+                    {buttons.redTextButton('button_2FADeactivate', this.disable2fa)}
                 </View>
             </View>
         );

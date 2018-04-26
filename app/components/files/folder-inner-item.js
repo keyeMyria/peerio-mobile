@@ -9,18 +9,17 @@ import icons from '../helpers/icons';
 import { tx } from '../utils/translator';
 
 const height = vars.filesListItemHeight;
+const width = vars.listItemHeight;
 const itemContainerStyle = {
     flex: 1,
     flexGrow: 1,
     flexDirection: 'row',
+    height,
     alignItems: 'center',
     justifyContent: 'space-between',
     backgroundColor: vars.filesBg,
     borderBottomWidth: 1,
     borderBottomColor: 'rgba(0, 0, 0, .12)',
-    height,
-    borderWidth: 0,
-    borderColor: 'red',
     paddingLeft: vars.spacing.medium.mini2x
 };
 
@@ -36,8 +35,8 @@ export default class FolderInnerItem extends SafeComponent {
     get radio() {
         if (!this.props.radio) return null;
         const outer = {
-            width: vars.listItemHeight,
-            height: vars.listItemHeight,
+            width,
+            height,
             alignItems: 'center',
             justifyContent: 'center',
             borderBottomWidth: 1,

@@ -118,7 +118,7 @@ export default class ContactAdd extends SafeComponent {
                 const atInd = this.query.indexOf('@');
                 const isEmail = atInd > -1 && atInd === this.query.lastIndexOf('@');
                 if (isEmail) {
-                    warnings.add(`User is not found on Peerio, please invite`);
+                    warnings.add(t('error_userNotFoundSendInvite'));
                     LayoutAnimation.easeInEaseOut();
                     this.toInvite = this.inviteContactDuck(this.query);
                 } else if (!isLegacy) {
@@ -141,9 +141,8 @@ export default class ContactAdd extends SafeComponent {
             username: User.current.username
         });
         const title = tx('title_socialShareInvite');
-        // const url = 'https://www.peerio.com';
         console.log(title, message);
-        Share.share({ message, title });
+        Share.share({ message, title }, { subject: title });
     }
 
     get emailButton() {
@@ -194,7 +193,7 @@ export default class ContactAdd extends SafeComponent {
             <View style={{ overflow: 'hidden', height: email ? undefined : 0, opacity: invited ? 0.5 : 1 }}>
                 <View style={inviteContainer}>
                     <Text>{email}</Text>
-                    {buttons.uppercaseBlueButton(tx('button_invite'), () => {
+                    {buttons.blueTextButton(tx('button_invite'), () => {
                         mockContact.invited = true;
                         contactStore.invite(email);
                     }, invited)}

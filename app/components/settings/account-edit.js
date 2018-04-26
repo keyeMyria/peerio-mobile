@@ -76,7 +76,7 @@ export default class AccountEdit extends SafeComponent {
                     {this.toggle('title_dataCollectionMessage', 'dataCollection')}
                 </View>
                 <View style={{ marginTop: vars.spacing.medium.mini2x, marginLeft: vars.spacing.medium.maxi2x, marginBottom: vars.spacing.large.midi, flex: 1, flexGrow: 1, justifyContent: 'flex-end' }}>
-                    {buttons.uppercaseRedButton('button_accountDelete', () => this.deleteAccount())}
+                    {buttons.redTextButton('button_accountDelete', () => this.deleteAccount())}
                 </View>
             </ScrollView>
         );
