@@ -1,70 +1,47 @@
 import React from 'react';
 import { observer } from 'mobx-react/native';
-import { observable, when } from 'mobx';
-import ActionSheet from 'react-native-actionsheet';
+import { when } from 'mobx';
 import SafeComponent from '../shared/safe-component';
-import routerModal from '../routes/router-modal';
-import fileState from '../files/file-state';
 import { tx } from '../utils/translator';
+import { fileState } from '../states';
+import routerModal from '../routes/router-modal';
+import ActionSheetLayout from '../layout/action-sheet-layout';
 import { config } from '../../lib/icebear';
 
 @observer
 export default class InlineImageActionSheet extends SafeComponent {
-    @observable image;
-
-    get shareFile() {
-        return {
-            title: tx('button_share'),
-            action: () => {
-                fileState.currentFile = this.image;
-                routerModal.shareFileTo();
+    static show(file) {
+        const { isLegacy } = file;
+        const exists = file && !file.isPartialDownload && file.tmpCached;
+        const title = exists ? tx('button_open') : tx('button_download');
+        const actionButtons = [
+            {
+                title: 'button_share',
+                disabled: isLegacy,
+                action: () => {
+                    fileState.currentFile = file;
+                    routerModal.shareFileTo();
+                }
+            },
+            {
+                title,
+                action: () => {
+                    if (file.tmpCached) config.FileStream.launchViewer(file.tmpCachePath);
+                    else file.tryToCacheTemporarily(true);
+                }
+            },
+            {
+                title: 'button_delete',
+                isDestructive: true,
+                action: async () => {
+                    const result = await fileState.deleteFile(file);
+                    if (result) ActionSheetLayout.hide();
+                }
             }
-        };
-    }
-
-    get deleteFile() {
-        return {
-            title: tx('button_delete'),
-            action: async () => { await fileState.deleteFile(this.image); }
-        };
-    }
-
-    get openItem() {
-        return {
-            title: tx('button_open'),
-            action: () => {
-                when(() => this.image.tmpCached, () => config.FileStream.launchViewer(this.image.tmpCachePath));
-                if (!this.image.tmpCached) this.image.tryToCacheTemporarily(true);
-            }
-        };
-    }
-
-    get cancel() { return { title: tx('button_cancel') }; }
-
-    get items() {
-        if (this.image) return [this.openItem, this.shareFile, this.deleteFile, this.cancel];
-        // cant delete if not downloaded
-        return [this.openItem, this.shareFile, this.cancel];
-    }
-
-    onPress = index => {
-        const { action } = this.items[index];
-        action && action();
-    };
-
-    show = (image) => {
-        this.image = image;
-        this._actionSheet.show();
-    };
-
-    renderThrow() {
-        return (
-            <ActionSheet
-                ref={sheet => { this._actionSheet = sheet; }}
-                options={this.items.map(i => i.title)}
-                cancelButtonIndex={this.items.length - 1}
-                onPress={this.onPress}
-            />
-        );
+        ];
+        ActionSheetLayout.show({
+            hasCancelButton: true,
+            actionButtons
+        });
     }
 }

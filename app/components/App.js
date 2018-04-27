@@ -19,6 +19,7 @@ import './utils/bridge';
 import socketResetIfDead from './utils/socket-reset';
 import TestHelper from './helpers/test-helper';
 import MockComponent from './mocks';
+import ActionSheetLayout from './layout/action-sheet-layout';
 
 const { height, width } = Dimensions.get('window');
 
@@ -115,6 +116,7 @@ export default class App extends SafeComponent {
                 <RouteNavigator key="navigator" routes={routerApp} />
                 <ModalLayout key="modals" />
                 <PopupLayout key="popups" />
+                <ActionSheetLayout key="actionSheets" />
                 {uiState.picker}
                 <Text key="debug" style={{ height: 0 }} testID="debugText">{uiState.debugText}</Text>
                 <StatusBar barStyle="light-content" hidden={false} key="statusBar" />

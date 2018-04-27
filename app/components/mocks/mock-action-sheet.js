@@ -55,7 +55,7 @@ export default class MockActionSheet extends Component {
         return (
             <View style={{ flexGrow: 1 }}>
                 <View style={{ justifyContent: 'center', flexGrow: 1 }}>
-                    {buttons.uppercaseBlueBgButton('Select image', this.showActionSheet)}
+                    {buttons.uppercaseBlueButton('Select image', this.showActionSheet)}
                 </View>
                 <ActionSheetLayout />
             </View>

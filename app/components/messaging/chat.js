@@ -83,8 +83,8 @@ export default class Chat extends SafeComponent {
         const actions = getOrMake(
             key, this._itemActionMap, () => ({
                 ref: ref => { this._refs[key] = ref; },
-                onInlineImageAction: image => this._inlineImageActionSheet.show(image, item, this.chat),
-                onInlineFileAction: file => this._inlineFileActionSheet.show(file, item, this.chat),
+                onInlineImageAction: image => InlineImageActionSheet.show(image),
+                onInlineFileAction: file => InlineFileActionSheet.show(file),
                 onRetryCancel: () => this._actionSheet.show(item, this.chat)
             }));
         return (
@@ -324,8 +324,6 @@ export default class Chat extends SafeComponent {
                 </View>
                 <ProgressOverlay enabled={/* chatState.loading || */ !this.initialScrollDone} />
                 <ChatActionSheet ref={sheet => { this._actionSheet = sheet; }} />
-                <InlineImageActionSheet ref={sheet => { this._inlineImageActionSheet = sheet; }} />
-                <InlineFileActionSheet ref={sheet => { this._inlineFileActionSheet = sheet; }} />
             </View>
         );
     }

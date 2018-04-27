@@ -1,10 +1,11 @@
 import React from 'react';
 import { observer } from 'mobx-react/native';
-import { View, Text, TouchableOpacity, TouchableWithoutFeedback, Dimensions, LayoutAnimation } from 'react-native';
+import { View, Text, TouchableOpacity, TouchableWithoutFeedback, Dimensions, LayoutAnimation, Platform } from 'react-native';
 import { action, observable } from 'mobx';
 import SafeComponent from '../shared/safe-component';
 import { vars } from '../../styles/styles';
 import { tx } from '../utils/translator';
+import { uiState } from '../states';
 
 const { width, height } = Dimensions.get('window');
 const borderRadius = 16;
@@ -38,9 +39,14 @@ const lonelyButtonContainer = [buttonContainer, {
 
 const cancelButtonContainer = [buttonContainer, {
     backgroundColor: vars.white,
-    marginTop: vars.spacing.small.midi2x,
     borderRadius
 }];
+
+const cancelButtonWrapper = {
+    backgroundColor: vars.white,
+    marginTop: vars.spacing.small.midi2x,
+    borderRadius
+};
 
 const buttonTextStyle = {
     fontSize: vars.font.size.huge,
@@ -56,6 +62,10 @@ const redButtonTextStyle = [buttonTextStyle, {
     color: vars.desctructiveButtonFontColor
 }];
 
+const disabledButtonTextStyle = [buttonTextStyle, {
+    color: vars.disabledButtonFontColor
+}];
+
 const state = observable({
     visible: false,
     animating: false,
@@ -64,6 +74,12 @@ const state = observable({
 
 @observer
 export default class ActionSheetLayout extends SafeComponent {
+    executeAction(button) {
+        if (button.disabled) return;
+        ActionSheetLayout.hide();
+        button.action();
+    }
+
     actionButtons() {
         const { header, actionButtons } = state.config;
         return (actionButtons.map((button, i) => {
@@ -74,28 +90,59 @@ export default class ActionSheetLayout extends SafeComponent {
             else if (!topButton && !bottomButton) container = centerButtonContainer;
             else if (topButton) container = topButtonContainer;
             else if (bottomButton) container = bottomButtonContainer;
-            const text = button.isDestructive ? redButtonTextStyle : buttonTextStyle;
+            let text;
+            if (button.isDestructive) {
+                text = redButtonTextStyle;
+            } else if (button.disabled) {
+                text = disabledButtonTextStyle;
+            } else text = buttonTextStyle;
             return (
-                <TouchableOpacity style={container} onPress={button.action}>
-                    <Text style={text}>
-                        {tx(button.title)}
-                    </Text>
-                </TouchableOpacity>);
+                <View style={[container, { backgroundColor: vars.lightGrayBg }]} >
+                    <TouchableOpacity
+                        style={container}
+                        onPress={() => this.executeAction(button)} >
+                        <Text style={text}>
+                            {tx(button.title)}
+                        </Text>
+                    </TouchableOpacity>
+                </View>);
         }));
     }
 
     @action static show(config) {
+        // Temporary hack for android animation bug
         // fade in of background
         LayoutAnimation.easeInEaseOut();
-        state.animating = true;
-        setTimeout(() => {
-            // slide-in of menu
-            LayoutAnimation.easeInEaseOut();
-            state.animating = false;
-        }, 10);
+        if (Platform.OS === 'ios') {
+            state.animating = true;
+            setTimeout(() => {
+                // slide-in of menu
+                LayoutAnimation.easeInEaseOut();
+                state.animating = false;
+            }, 10);
+        }
         state.visible = true;
         state.config = config;
-        console.log('show');
+        uiState.actionSheetShown = true;
+    }
+
+    @action.bound static hide() {
+        if (!state.visible) return;
+        // slide-out of menu
+        LayoutAnimation.easeInEaseOut();
+        if (Platform.OS === 'ios') {
+            state.animating = true;
+            setTimeout(() => {
+                // fade in of background
+                LayoutAnimation.easeInEaseOut();
+                state.visible = false;
+                state.config = null;
+            }, 10);
+        } else {
+            state.visible = false;
+            state.config = null;
+        }
+        uiState.actionSheetShown = false;
     }
 
     @action.bound handleCancel() {
@@ -107,17 +154,19 @@ export default class ActionSheetLayout extends SafeComponent {
             LayoutAnimation.easeInEaseOut();
             state.visible = false;
             state.config = null;
-            console.log('cancel');
         }, 10);
+        uiState.actionSheetShown = false;
     }
 
     cancelOption() {
         return (
-            <TouchableOpacity style={cancelButtonContainer} onPress={this.handleCancel}>
-                <Text style={boldButtonTextStyle}>
-                    {tx('button_cancel')}
-                </Text>
-            </TouchableOpacity>
+            <View style={cancelButtonWrapper} >
+                <TouchableOpacity style={cancelButtonContainer} onPress={this.handleCancel}>
+                    <Text style={boldButtonTextStyle}>
+                        {tx('button_cancel')}
+                    </Text>
+                </TouchableOpacity>
+            </View>
         );
     }
 
@@ -134,12 +183,13 @@ export default class ActionSheetLayout extends SafeComponent {
             flexGrow: 1,
             justifyContent: 'flex-end',
             alignItems: 'center',
-            backgroundColor: '#00000020'
+            backgroundColor: '#00000020',
+            zIndex: 15
         };
         const container = {
             paddingBottom: vars.spacing.small.midi2x,
             position: 'absolute',
-            bottom: state.animating ? -height : 0
+            bottom: state.animating && Platform.OS !== 'android' ? -height : 0
         };
         return (
             <TouchableWithoutFeedback onPress={this.handleCancel}>
