@@ -12,7 +12,7 @@ let currentScrollPosition = 0;
  * to the test script. Note that it overrides ref and onScroll
  * event handlers
  */
-const scrollHelper = !process.env.NO_DEV_BAR ? null : {
+const scrollHelper = process.env.NO_DEV_BAR ? null : {
     ref: ref => {
         currentScrollPosition = 0;
         currentScrollView = ref;
