@@ -1,7 +1,7 @@
 import React from 'react';
 import { observer } from 'mobx-react/native';
-import { View, ListView } from 'react-native';
-import { observable, reaction, action } from 'mobx';
+import { View, ListView, LayoutAnimation } from 'react-native';
+import { observable, reaction, action, computed } from 'mobx';
 import { chatInviteStore } from '../../lib/icebear';
 import SafeComponent from '../shared/safe-component';
 import ChatZeroStatePlaceholder from './chat-zero-state-placeholder';
@@ -40,8 +40,8 @@ export default class ChatList extends SafeComponent {
     @observable collapsible = true;
     @observable reverseRoomSorting = false;
     @observable currentScrollPosition = 0;
-    @observable lowestUnreadMessagePosition = 0;
-    @observable highestUnreadMessagePosition = 0;
+    @observable lowestUnreadMessagePosition = null;
+    @observable highestUnreadMessagePosition = null;
     @observable scrollViewOffset = null;
 
     get rightIcon() {
@@ -52,11 +52,6 @@ export default class ChatList extends SafeComponent {
 
     get data() {
         return chatState.store.chats;
-    }
-
-    componentWillUnmount() {
-        this.reaction && this.reaction();
-        this.reaction = null;
     }
 
     componentDidMount() {
@@ -90,6 +85,13 @@ export default class ChatList extends SafeComponent {
             });
             this.collapsible = !(channels.length === 0 ^ dms.length === 0);
             this.forceUpdate();
+        }, true);
+
+        this.indicatorReaction = reaction(() => [
+            this.topIndicatorVisible,
+            this.bottomIndicatorVisible
+        ], () => {
+            LayoutAnimation.easeInEaseOut();
         }, true);
     }
 
@@ -146,11 +148,13 @@ export default class ChatList extends SafeComponent {
         uiState.currentScrollView = sv;
     }
 
-    get topIndicatorVisible() {
+    @computed get topIndicatorVisible() {
+        if (!this.highestUnreadMessagePosition) return false;
         return this.currentScrollPosition > this.highestUnreadMessagePosition;
     }
 
-    get bottomIndicatorVisible() {
+    @computed get bottomIndicatorVisible() {
+        if (!this.lowestUnreadMessagePosition) return false;
         return this.currentScrollPosition < (this.lowestUnreadMessagePosition - this.scrollViewOffset);
     }
 
@@ -193,18 +197,12 @@ export default class ChatList extends SafeComponent {
             this.listView() : <ChatZeroStatePlaceholder />;
 
         return (
-            <View
-                style={{ flexGrow: 1, flex: 1 }}>
+            <View style={{ flexGrow: 1, flex: 1 }}>
                 <View style={{ flexGrow: 1, flex: 1 }}>
                     {body}
                 </View>
-                <UnreadMessageIndicator
-                    visible={this.bottomIndicatorVisible}
-                    action={this.scrollDownToUnread} />
-                <UnreadMessageIndicator
-                    isAlignedTop
-                    visible={this.topIndicatorVisible}
-                    action={this.scrollUpToUnread} />
+                {this.bottomIndicatorVisible && <UnreadMessageIndicator action={this.scrollDownToUnread} />}
+                {this.topIndicatorVisible && <UnreadMessageIndicator isAlignedTop action={this.scrollUpToUnread} />}
                 <CreateActionSheet ref={(sheet) => { actionSheet = sheet; }} />
                 <ProgressOverlay enabled={chatState.store.loading} />
             </View>

@@ -1,8 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { observer } from 'mobx-react/native';
-import { reaction } from 'mobx';
-import { TouchableOpacity, View, Text, LayoutAnimation } from 'react-native';
+import { TouchableOpacity, View, Text } from 'react-native';
 // TODO fix imports after merging Fonts
 // import { TouchableOpacity, View } from 'react-native';
 // import Text from './controls/custom-text';
@@ -13,15 +12,8 @@ import { tx } from '../utils/translator';
 
 @observer
 export default class UnreadMessageIndicator extends SafeComponent {
-    componentDidMount() {
-        reaction(() => this.props.visible, () => {
-            LayoutAnimation.easeInEaseOut();
-        }, true);
-    }
-
     renderThrow() {
-        const { isAlignedTop, visible, action } = this.props;
-        if (!visible) return null;
+        const { isAlignedTop, action } = this.props;
         const container = {
             position: 'absolute',
             right: 0,
@@ -51,7 +43,10 @@ export default class UnreadMessageIndicator extends SafeComponent {
         };
         const iconName = isAlignedTop ? 'keyboard-arrow-up' : 'keyboard-arrow-down';
         return (
-            <TouchableOpacity style={[container, alignmentStyle]} onPress={action}>
+            <TouchableOpacity
+                pressRetentionOffset={vars.offset}
+                style={[container, alignmentStyle]}
+                onPress={action}>
                 <View style={[marginTopStyle, { flexDirection: 'row' }]}>
                     <Text semiBold style={text}>{tx('title_unreadMessages')}</Text>
                     {icons.plainWhite(iconName, vars.iconSize)}
@@ -63,6 +58,5 @@ export default class UnreadMessageIndicator extends SafeComponent {
 
 UnreadMessageIndicator.propTypes = {
     isAlignedTop: PropTypes.bool,
-    visible: PropTypes.bool,
     action: PropTypes.any
 };
