@@ -45,8 +45,10 @@
 	<string>Upload images and photos to your encrypted storage</string>
 	<key>NSContactsUsageDescription</key>
 	<string>Access your contacts to find and chat with them</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Access your location always</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Access your location</string>
+	<string>Access your location when in use</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>Upload images and photos to your encrypted storage</string>
 	<key>NSPhotoLibraryUsageDescription</key>
