@@ -14,7 +14,7 @@ export default class ChatSectionHeader extends SafeComponent {
         const style = {
             paddingLeft: vars.spacing.medium.midi,
             paddingRight: vars.spacing.medium.mini2x,
-            height: 48,
+            height: vars.chatListItemHeight,
             justifyContent: 'space-between',
             backgroundColor: vars.darkBlueBackground05,
             flexDirection: 'row',

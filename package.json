@@ -82,6 +82,7 @@
     "react-native-push-notification": "3.0.0",
     "react-native-randombytes": "2.1.0",
     "react-native-restart": "github:PeerioTechnologies/react-native-restart",
+    "react-native-section-list-get-item-layout": "2.2.2",
     "react-native-share": "1.0.19",
     "react-native-sound": "github:PeerioTechnologies/react-native-sound#fix-android-notification-sound",
     "react-native-sqlcipher-storage": "github:PeerioTechnologies/react-native-sqlcipher-storage",

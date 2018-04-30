@@ -159,6 +159,7 @@ const vars = {
     iconMargin: 30,
     imagePreviewSize: 48,
     chatListItemHeight: 48,
+    chatListItemDMHeight: 61,
     contactListHeaderHeight: 48,
     roundedButtonWidth: 134,
     wideRoundedButtonWidth: 190,

@@ -1,8 +1,9 @@
 import React from 'react';
 import { observer } from 'mobx-react/native';
-import { View, ListView, LayoutAnimation } from 'react-native';
+import { View, LayoutAnimation, SectionList } from 'react-native';
+import sectionListGetItemLayout from 'react-native-section-list-get-item-layout';
 import { observable, reaction, action, computed } from 'mobx';
-import { chatInviteStore } from '../../lib/icebear';
+import { chatInviteStore, chatStore } from '../../lib/icebear';
 import SafeComponent from '../shared/safe-component';
 import ChatZeroStatePlaceholder from './chat-zero-state-placeholder';
 import ChatListItem from './chat-list-item';
@@ -17,9 +18,9 @@ import { tx } from '../utils/translator';
 import uiState from '../layout/ui-state';
 import { scrollHelper } from '../helpers/test-helper';
 import UnreadMessageIndicator from './unread-message-indicator';
+import { vars } from '../../styles/styles';
 
 const INITIAL_LIST_SIZE = 10;
-const PAGE_SIZE = 2;
 
 // action sheet is outside of component scope for a reason.
 let actionSheet = null;
@@ -28,21 +29,15 @@ let actionSheet = null;
 export default class ChatList extends SafeComponent {
     constructor(props) {
         super(props);
-        this.dataSource = new ListView.DataSource({
-            rowHasChanged: (r1, r2) => r1 !== r2,
-            sectionHeaderHasChanged: (r1, r2) => r1 !== r2
-        });
+        this.dataSource = [];
     }
 
-    @observable dataSource = null;
-    @observable refreshing = false;
-    @observable maxLoadedIndex = INITIAL_LIST_SIZE;
-    @observable collapsible = true;
+    dataSource = null;
     @observable reverseRoomSorting = false;
-    @observable currentScrollPosition = 0;
-    @observable lowestUnreadMessagePosition = null;
-    @observable highestUnreadMessagePosition = null;
-    @observable scrollViewOffset = null;
+    @observable minSectionIndex = null;
+    @observable minItemIndex = null;
+    @observable maxSectionIndex = null;
+    @observable maxItemIndex = null;
 
     get rightIcon() {
         return (<PlusBorderIcon
@@ -50,42 +45,40 @@ export default class ChatList extends SafeComponent {
             testID="buttonCreateNewChat" />);
     }
 
-    get data() {
-        return chatState.store.chats;
+    get dataSource() {
+        return [
+            // all channels and invites
+            { title: 'title_channels', index: 0, data: this.firstSectionItems },
+            // all dms
+            { title: 'title_directMessages', index: 1, data: this.secondSectionItems },
+            { title: 'dummy', data: [], index: 2 }
+        ];
+    }
+
+    @computed get firstSectionItems() {
+        const allChannels = chatInviteStore.received.concat(
+            chatStore.channels);
+        allChannels.sort((a, b) => {
+            const first = (a.name || a.channelName).toLocaleLowerCase();
+            const second = (b.name || b.channelName).toLocaleLowerCase();
+            const result = first.localeCompare(second);
+            return this.reverseRoomSorting ? !result : result;
+        });
+        return allChannels;
+    }
+
+    @computed get secondSectionItems() {
+        return chatState.store.chats.filter(d => !d.isChannel).slice();
     }
 
     componentDidMount() {
+        setInterval(() => {
+            chatState.store.channels[10].unreadCount++;
+            chatState.store.chats[chatState.store.chats.length - 1].unreadCount++;
+        }, 1000);
         uiState.testAction1 = () => {
             this.reverseRoomSorting = !this.reverseRoomSorting;
         };
-
-        this.reaction = reaction(() => [
-            chatState.routerMain.route === 'chats',
-            chatState.routerMain.currentIndex === 0,
-            chatInviteStore.received,
-            chatInviteStore.received.length,
-            this.data,
-            this.data.length,
-            this.maxLoadedIndex,
-            this.reverseRoomSorting
-        ], () => {
-            const channels = this.data.filter(d => !!d.isChannel);
-            const allChannels = chatInviteStore.received.concat(channels);
-            allChannels.sort((a, b) => {
-                const first = (a.name || a.channelName).toLocaleLowerCase();
-                const second = (b.name || b.channelName).toLocaleLowerCase();
-                const result = first.localeCompare(second);
-                return this.reverseRoomSorting ? !result : result;
-            });
-            const dms = this.data.filter(d => !d.isChannel).slice(0, this.maxLoadedIndex);
-            this.dataSource = this.dataSource.cloneWithRowsAndSections({
-                title_channels: allChannels,
-                title_directMessages: dms,
-                dummy: []
-            });
-            this.collapsible = !(channels.length === 0 ^ dms.length === 0);
-            this.forceUpdate();
-        }, true);
 
         this.indicatorReaction = reaction(() => [
             this.topIndicatorVisible,
@@ -95,10 +88,18 @@ export default class ChatList extends SafeComponent {
         }, true);
     }
 
-    sectionHeader = (data, key) => {
-        const i = (title, component) => {
+    componentWillUnmount() {
+        this.reaction && this.reaction();
+        this.reaction = null;
+        this.indicatorReaction && this.indicatorReaction();
+        this.indicatorReaction = null;
+    }
+
+    sectionHeader = (item) => {
+        const { data, title } = item.section;
+        const i = (t, component) => {
             const r = {};
-            r[title] = component;
+            r[t] = component;
             return r;
         };
         const titles = {
@@ -108,39 +109,24 @@ export default class ChatList extends SafeComponent {
                 <ChatSectionHeader state="collapseDMs" title={tx('title_directMessages')} />),
             ...i('dummy', <View />)
         };
-        return data && data.length ? titles[key] : null;
+        return data && data.length ? titles[title] : null;
     };
 
-    item = (chat) => {
-        const onLayout = (e) => {
-            if (chat.unreadCount > 0 || chat.kegDbId) {
-                if (!this.highestPositionTaken) { // Handles top most unread mesage, reading taken only once
-                    this.highestUnreadMessagePosition = e.nativeEvent.layout.y;
-                    this.highestPositionTaken = true;
-                }
-                // Handles bottom most unread mesage, reading taken multiple times and overwrites previous
-                this.lowestUnreadMessagePosition = e.nativeEvent.layout.y + e.nativeEvent.layout.height;
-            }
-        };
+    item = (item) => {
+        const chat = item.item;
         if (chat.kegDbId) {
             return (
-                <View onLayout={onLayout}>
-                    <ChannelInviteListItem
-                        id={chat.kegDbId}
-                        channelName={chat.channelName}
-                        username={chat.username} />
-                </View>);
+                <ChannelInviteListItem
+                    id={chat.kegDbId}
+                    channelName={chat.channelName}
+                    username={chat.username} />
+            );
         }
         if (!chat.id) return null;
         else if (chat.isChannel) {
-            return <View onLayout={onLayout}><ChannelListItem chat={chat} /></View>;
+            return <ChannelListItem chat={chat} />;
         }
-        return <View onLayout={onLayout}><ChatListItem key={chat.id} chat={chat} /></View>;
-    };
-
-    onEndReached = () => {
-        console.log('chat-list.js: on end reached');
-        this.maxLoadedIndex += PAGE_SIZE;
+        return <ChatListItem key={chat.id} chat={chat} />;
     };
 
     @action.bound scrollViewRef(sv) {
@@ -148,52 +134,130 @@ export default class ChatList extends SafeComponent {
         uiState.currentScrollView = sv;
     }
 
+    @action.bound actionSheetRef(ref) {
+        actionSheet = ref;
+    }
+
+    @computed get firstUnreadItemPosition() {
+        for (const { data, index } of this.dataSource) {
+            const itemIndex = data.findIndex(f => !!f.unreadCount);
+            if (itemIndex !== -1) return { section: index, index: itemIndex };
+        }
+        return null;
+    }
+
+    @computed get lastUnreadItemPosition() {
+        for (let j = this.dataSource.length - 1; j >= 0; --j) {
+            const { data, index } = this.dataSource[j];
+            for (let i = data.length - 1; i >= 0; --i) {
+                if (data[i].unreadCount) return { section: index, index: i };
+            }
+        }
+        return null;
+    }
+
     @computed get topIndicatorVisible() {
-        if (!this.highestUnreadMessagePosition) return false;
-        return this.currentScrollPosition > this.highestUnreadMessagePosition;
+        const pos = this.firstUnreadItemPosition;
+        if (!pos) return false;
+        if (pos.section < this.minSectionIndex) return true;
+        if (pos.section === this.minSectionIndex) return pos.index < this.minItemIndex;
+        return false;
     }
 
     @computed get bottomIndicatorVisible() {
-        if (!this.lowestUnreadMessagePosition) return false;
-        return this.currentScrollPosition < (this.lowestUnreadMessagePosition - this.scrollViewOffset);
+        const pos = this.lastUnreadItemPosition;
+        if (!pos) return false;
+        if (pos.section > this.maxSectionIndex) return true;
+        if (pos.section === this.maxSectionIndex) return pos.index > this.maxItemIndex;
+        return false;
     }
 
+    /**
+     * Scrolls to the topmost unread item in the list
+     */
     @action.bound scrollUpToUnread() {
-        this.scrollView.scrollTo({ y: this.highestUnreadMessagePosition, animated: true });
+        const pos = this.firstUnreadItemPosition;
+        if (!pos) return;
+        this.scrollView.scrollToLocation({
+            itemIndex: pos.index,
+            sectionIndex: pos.section,
+            viewPosition: 0
+        });
     }
 
+    /**
+     * Scrolls to the bottommost unread item in the list
+     */
     @action.bound scrollDownToUnread() {
-        this.scrollView.scrollTo({ y: this.lowestUnreadMessagePosition - this.scrollViewOffset, animated: true });
+        const pos = this.lastUnreadItemPosition;
+        if (!pos) return;
+        this.scrollView.scrollToLocation({
+            itemIndex: pos.index + 1,
+            sectionIndex: pos.section,
+            viewPosition: 1
+        });
     }
 
-    @action.bound onScroll(e) { this.currentScrollPosition = e.nativeEvent.contentOffset.y; }
+    /**
+     * Whenever there is a scroll event which changes viewable items
+     * This property handler gets called
+     * @param {*} data
+     */
+    @action.bound onViewableItemsChanged(data) {
+        let minSectionIndex = Number.MAX_SAFE_INTEGER;
+        let minItemIndex = Number.MAX_SAFE_INTEGER;
+        let maxSectionIndex = -1;
+        let maxItemIndex = -1;
+        data.viewableItems.forEach(i => {
+            const itemIndex = i.index;
+            const sectionIndex = i.section.index;
+            if (sectionIndex < minSectionIndex
+                || (sectionIndex === minSectionIndex && itemIndex < minItemIndex)) {
+                minSectionIndex = sectionIndex;
+                // section headers have zero item index so there's a workaround
+                minItemIndex = itemIndex || 0;
+            }
+            if (sectionIndex > maxSectionIndex
+                || (sectionIndex === maxSectionIndex && itemIndex > maxItemIndex)) {
+                maxSectionIndex = sectionIndex;
+                // section headers have zero item index so there's a workaround
+                maxItemIndex = itemIndex || 0;
+            }
+        });
+        Object.assign(this, { minSectionIndex, minItemIndex, maxSectionIndex, maxItemIndex });
+    }
 
-    @action.bound onListViewLayout(e) { this.scrollViewOffset = e.nativeEvent.layout.height; }
+    getItemLayout = sectionListGetItemLayout({
+        // first section is channels
+        // second section is DMs
+        getItemHeight: (rowData, sectionIndex /* , rowIndex */) => sectionIndex === 0 ?
+            vars.chatListItemHeight : vars.chatListItemDMHeight,
+        getSectionHeaderHeight: () => vars.chatListItemHeight
+    });
 
     listView() {
         if (chatState.routerMain.currentIndex !== 0) return null;
         return (
-            <ListView
+            <SectionList
                 style={{ flexGrow: 1 }}
-                initialListSize={INITIAL_LIST_SIZE}
-                pageSize={PAGE_SIZE}
-                dataSource={this.dataSource}
-                renderRow={this.item}
+                initialNumToRender={INITIAL_LIST_SIZE}
+                sections={this.dataSource}
+                renderItem={this.item}
                 renderSectionHeader={this.sectionHeader}
                 onEndReached={this.onEndReached}
                 onEndReachedThreshold={20}
-                onContentSizeChange={this.scroll}
                 enableEmptySections
                 ref={this.scrollViewRef}
-                onScroll={this.onScroll}
-                onLayout={this.onListViewLayout}
+                onViewableItemsChanged={this.onViewableItemsChanged}
+                getItemLayout={this.getItemLayout}
+                stickySectionHeadersEnabled={false}
                 {...scrollHelper}
             />
         );
     }
 
     renderThrow() {
-        const body = ((this.data.length || chatInviteStore.received.length) && chatState.store.loaded) ?
+        const body = ((chatStore.chats.length || chatInviteStore.received.length) && chatState.store.loaded) ?
             this.listView() : <ChatZeroStatePlaceholder />;
 
         return (
@@ -201,9 +265,9 @@ export default class ChatList extends SafeComponent {
                 <View style={{ flexGrow: 1, flex: 1 }}>
                     {body}
                 </View>
-                {this.bottomIndicatorVisible && <UnreadMessageIndicator action={this.scrollDownToUnread} />}
                 {this.topIndicatorVisible && <UnreadMessageIndicator isAlignedTop action={this.scrollUpToUnread} />}
-                <CreateActionSheet ref={(sheet) => { actionSheet = sheet; }} />
+                {this.bottomIndicatorVisible && <UnreadMessageIndicator action={this.scrollDownToUnread} />}
+                <CreateActionSheet ref={this.actiohSheetRef} />
                 <ProgressOverlay enabled={chatState.store.loading} />
             </View>
         );
