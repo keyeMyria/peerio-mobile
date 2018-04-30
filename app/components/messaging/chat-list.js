@@ -108,6 +108,10 @@ export default class ChatList extends SafeComponent {
         return data && data.length ? titles[title] : null;
     };
 
+    keyExtractor(item) {
+        return item.kegDbId || item.id || item.title;
+    }
+
     item = (item) => {
         const chat = item.item;
         if (chat.kegDbId) {
@@ -247,6 +251,7 @@ export default class ChatList extends SafeComponent {
                 onViewableItemsChanged={this.onViewableItemsChanged}
                 getItemLayout={this.getItemLayout}
                 stickySectionHeadersEnabled={false}
+                keyExtractor={this.keyExtractor}
                 {...scrollHelper}
             />
         );
