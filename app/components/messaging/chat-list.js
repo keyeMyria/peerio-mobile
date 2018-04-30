@@ -72,10 +72,6 @@ export default class ChatList extends SafeComponent {
     }
 
     componentDidMount() {
-        setInterval(() => {
-            chatState.store.channels[10].unreadCount++;
-            chatState.store.chats[chatState.store.chats.length - 1].unreadCount++;
-        }, 1000);
         uiState.testAction1 = () => {
             this.reverseRoomSorting = !this.reverseRoomSorting;
         };
