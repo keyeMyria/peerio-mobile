@@ -77,8 +77,8 @@ export default class DmContactInvite extends SafeComponent {
         const { invitation } = this;
         const inviter = contactStore.getContact(invitation.name);
         // TODO determine if user is existing or new, modify title_dmInviteHeading copy accordingly
-        // const headerCopy = !newUser ? tx('title_dmInviteHeading') : tx('title_newUserDmInviteHeading');
-        const headerCopy = tx('title_dmInviteHeading');
+        // const headerCopy = !newUser ? 'title_dmInviteHeading' : 'title_newUserDmInviteHeading';
+        const headerCopy = 'title_dmInviteHeading';
         return (
             <View style={container}>
                 <Image source={emojiTada} style={emojiStyle} resizeMode="contain" />
