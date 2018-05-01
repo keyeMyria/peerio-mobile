@@ -76,12 +76,14 @@ export default class DmContactInvite extends SafeComponent {
     renderThrow() {
         const { invitation } = this;
         const inviter = contactStore.getContact(invitation.name);
-        // TODO determine if user is existing or new, modify copy accordingly
+        // TODO determine if user is existing or new, modify title_dmInviteHeading copy accordingly
+        // const headerCopy = !newUser ? tx('title_dmInviteHeading') : tx('title_newUserDmInviteHeading');
+        const headerCopy = tx('title_dmInviteHeading');
         return (
             <View style={container}>
                 <Image source={emojiTada} style={emojiStyle} resizeMode="contain" />
                 <Text style={headingStyle}>
-                    {tx('title_dmInviteHeading', { contactName: inviter.username })}
+                    {tx(headerCopy, { contactName: inviter.username })}
                 </Text>
                 <View style={{ alignItems: 'center' }}>
                     <AvatarCircle contact={inviter} large />
@@ -95,8 +97,7 @@ export default class DmContactInvite extends SafeComponent {
                         {buttons.blueTextButton(tx('button_dismiss'), this.decline)}
                     </View>
                     <View style={{ flex: 1, alignItems: 'flex-start', justifyContent: 'center' }}>
-                        {buttons.roundBlueBgButton(tx('message'), this.accept)}
-                        {/* {buttons.roundBlueBgButton(tx('button_message'), this.accept)} */}
+                        {buttons.roundBlueBgButton(tx('button_message'), this.accept)}
                     </View>
                 </View>
                 <ProgressOverlay enabled={this.waiting} />
