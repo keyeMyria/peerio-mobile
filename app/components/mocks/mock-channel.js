@@ -85,7 +85,7 @@ export default class MockChannel extends Component {
         return (
             <View style={{ backgroundColor: 'white', flex: 1, flexGrow: 1 }}>
                 <HeaderMain />
-                <Chat archiveNotice />
+                <Chat />
                 <StatusBar barStyle="light-content" />
             </View>
         );

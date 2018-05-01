@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { observer } from 'mobx-react/native';
-import { ScrollView, View, Text, TouchableOpacity, ActivityIndicator, Dimensions, Platform } from 'react-native';
+import { ScrollView, View, Image, Text, TouchableOpacity, ActivityIndicator, Dimensions, Platform } from 'react-native';
 import { observable, when, reaction, computed } from 'mobx';
 import SafeComponent from '../shared/safe-component';
 import ProgressOverlay from '../shared/progress-overlay';
@@ -256,22 +256,14 @@ export default class Chat extends SafeComponent {
         );
     }
 
-    get archiveNotice() {
-        // TODO: archive notice
-        return true || this.props.archiveNotice ? ( // eslint-disable-line
-            <Text style={{
-                textAlign: 'left',
-                marginTop: 0,
-                marginRight: vars.spacing.medium.mini2x,
-                marginBottom: vars.spacing.medium.mini2x,
-                color: vars.txtMedium
-            }}>
-                {tx('title_chatArchive')}
-            </Text>
-        ) : null;
+    @computed get zeroStateItem() {
+        // TODO determine if chat is from invite or regular DM
+        return this.zeroStateChat;
+        // if (isPendingInvite) return this.zeroStateChat;
+        // return this.zeroStateChatInvite;
     }
 
-    @computed get zeroStateItem() {
+    get zeroStateChat() {
         const zsContainer = {
             borderBottomWidth: 0,
             borderBottomColor: '#CFCFCF',
@@ -308,10 +300,51 @@ export default class Chat extends SafeComponent {
                 }}>
                     {tx('title_chatBeginning', { chatName: chat.name })}
                 </Text>
-                {this.archiveNotice}
-                <IdentityVerificationNotice />
+                <IdentityVerificationNotice fullWidth />
             </View>
         );
+    }
+
+    get zeroStateChatInvite() {
+        const { chat } = this;
+        if (chat.isChannel) return null; // TODO remove after determining if chat is from invite or regular DM
+        const participant = chat.otherParticipants[0];
+        const emojiTada = require('../../assets/emoji/tada.png');
+        const container = {
+            flex: 1,
+            flexGrow: 1,
+            paddingTop: vars.dmInvitePaddingTop,
+            alignItems: 'center',
+            marginBottom: vars.spacing.small.midi
+        };
+        const emojiStyle = {
+            alignSelf: 'center',
+            width: vars.iconSizeMedium,
+            height: vars.iconSizeMedium,
+            marginBottom: vars.spacing.small.mini2x
+        };
+        const headingStyle = {
+            color: vars.lighterBlackText,
+            textAlign: 'center',
+            fontSize: vars.font.size.bigger,
+            lineHeight: 22,
+            marginBottom: vars.spacing.medium.maxi
+        };
+        // TODO determine if user is existing or new, modify copy accordingly
+        return (
+            <View style={container}>
+                <Image source={emojiTada} style={emojiStyle} resizeMode="contain" />
+                <Text style={headingStyle}>
+                    {tx('title_dmInviteHeading', { contactName: participant.username })}
+                </Text>
+                <View style={{ alignItems: 'center' }}>
+                    <AvatarCircle contact={participant} large />
+                </View>
+                <Text style={{ textAlign: 'center', marginBottom: vars.spacing.medium.maxi2x }}>
+                    {participant.usernameTag}
+                </Text>
+                <IdentityVerificationNotice />
+            </View>);
     }
 
     renderThrow() {
@@ -332,6 +365,5 @@ export default class Chat extends SafeComponent {
 }
 
 Chat.propTypes = {
-    hideInput: PropTypes.bool,
-    archiveNotice: PropTypes.bool
+    hideInput: PropTypes.bool
 };

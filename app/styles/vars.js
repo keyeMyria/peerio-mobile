@@ -177,6 +177,8 @@ const vars = {
     loadingScreenMarginTop: scaleDim(206),
     chatZeroStateImageWidth: scaleDim(327),
     chatZeroStateImageHeight: scaleDim(125),
+    dmInvitePaddingTop: scaleDim(90),
+    verificationMessageWidth: scaleDim(260),
     modalPaddingVertical: 40,
     modalPaddingHorizontal: 40,
     wizardPadding: 36,

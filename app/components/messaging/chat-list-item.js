@@ -11,10 +11,31 @@ import { vars } from '../../styles/styles';
 
 @observer
 export default class ChatListItem extends SafeComponent {
-    get rightIcon() {
-        const { chat } = this.props;
-        if (chat.unreadCount === 0) return null;
+    renderNewBadge() {
+        const circleStyle = {
+            width: vars.roomInviteCircleWidth,
+            height: vars.roomInviteCircleHeight,
+            borderRadius: 5,
+            backgroundColor: vars.invitedBadgeColor,
+            overflow: 'hidden',
+            alignItems: 'center',
+            justifyContent: 'center'
+        };
+        const textNewStyle = {
+            fontSize: vars.font.size.smaller,
+            fontWeight: vars.font.weight.semiBold,
+            color: vars.unreadTextColor
+        };
+        return (
+            <View style={circleStyle}>
+                <Text semibold style={textNewStyle}>
+                    {tx('title_new')}
+                </Text>
+            </View>);
+    }
 
+    renderUnreadCountBadge() {
+        const { chat } = this.props;
         const circleStyle = {
             width: vars.spacing.large.mini2x,
             paddingVertical: 1,
@@ -30,7 +51,6 @@ export default class ChatListItem extends SafeComponent {
             fontWeight: vars.font.weight.semiBold,
             color: vars.badgeText
         };
-
         return (
             <View style={circleStyle}>
                 <Text style={circleTextStyle}>
@@ -40,25 +60,33 @@ export default class ChatListItem extends SafeComponent {
         );
     }
 
-    renderMostRecentMessage(c) {
-        const m = c.mostRecentMessage;
-        if (!m) return null;
-        if (m.systemData) {
-            return <Text numberOfLines={1} ellipsizeMode="tail" style={{ fontStyle: 'italic' }}>{systemMessages.getSystemMessageText(m)}</Text>;
-        }
-        let { username } = m.sender;
-        if (username === User.current.username) username = tx('title_you');
-        return (
-            <Text numberOfLines={1} ellipsizeMode="tail">
-                <Text style={{ fontWeight: 'bold' }}>{username}{`: `}</Text>
-                <Text style={{ color: vars.txtMedium }}>
-                    {m.files && m.files.length
-                        ? tx('title_filesShared', { count: m.files.length })
-                        : m.text}
-                </Text>
-            </Text>
-        );
+    get rightIcon() {
+        const { chat } = this.props;
+        if (chat.isPendingDM) return this.renderNewBadge();
+        if (chat.unreadCount === 0) return null;
+        return this.renderUnreadCountBadge();
     }
+
+    // --- Feature disabled ---
+    // renderMostRecentMessage(c) {
+    //     const m = c.mostRecentMessage;
+    //     if (!m) return null;
+    //     if (m.systemData) {
+    //         return <Text numberOfLines={1} ellipsizeMode="tail" style={{ fontStyle: 'italic' }}>{systemMessages.getSystemMessageText(m)}</Text>;
+    //     }
+    //     let { username } = m.sender;
+    //     if (username === User.current.username) username = tx('title_you');
+    //     return (
+    //         <Text numberOfLines={1} ellipsizeMode="tail">
+    //             <Text style={{ fontWeight: 'bold' }}>{username}{`: `}</Text>
+    //             <Text style={{ color: vars.txtMedium }}>
+    //                 {m.files && m.files.length
+    //                     ? tx('title_filesShared', { count: m.files.length })
+    //                     : m.text}
+    //             </Text>
+    //         </Text>
+    //     );
+    // }
 
     renderThrow() {
         if (chatState.collapseDMs) return null;
@@ -78,7 +106,15 @@ export default class ChatListItem extends SafeComponent {
         }
 
         const key = chat.id;
-        const onPress = () => chatState.routerMain.chats(chat);
+        let onPress;
+
+        if (chat.isPendingDM) {
+            onPress = () => chatState.routerMain.dmContactInvite({
+                name: chat.name,
+                id: chat.id,
+                username: chat.name
+            });
+        } else onPress = () => chatState.routerMain.chats(chat);
         const unread = chat.unreadCount > 0;
         return (
             <Avatar

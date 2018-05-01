@@ -14,7 +14,7 @@ export default class ChannelInviteListItem extends SafeComponent {
     onPress = () => {
         const { id, channelName, username } = this.props;
         routes.main.channelInvite({
-            channelName,
+            name: channelName,
             id,
             username
         });

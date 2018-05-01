@@ -17,6 +17,7 @@ import ContactView from '../contacts/contact-view';
 import ContactList from '../contacts/contact-list';
 import ChannelInvite from '../messaging/channel-invite';
 import ContactListInvite from '../contacts/contact-list-invite';
+import DmContactInvite from '../messaging/dm-contact-invite';
 import { fileState, mainState, ghostState, chatState, settingsState, contactState, contactAddState, invitationState } from '../states';
 // import { enablePushNotifications } from '../../lib/push';
 import routes from './routes';
@@ -50,6 +51,7 @@ class RouterMain extends Router {
         this.add('contactInvite', [<ContactListInvite />], contactAddState);
         this.add('settings', [<SettingsLevel1 />, <SettingsLevel2 />, <SettingsLevel3 />], settingsState);
         this.add('channelInvite', [<ChannelInvite />], invitationState);
+        this.add('dmContactInvite', [<DmContactInvite />], invitationState);
     }
 
     @action initialRoute() {
