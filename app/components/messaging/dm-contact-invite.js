@@ -59,6 +59,7 @@ export default class DmContactInvite extends SafeComponent {
         // TODO call SDK decline
     }
 
+    // TODO call SDK accept
     @action.bound async accept() {
         const { invitation } = this;
         const { id } = invitation;
