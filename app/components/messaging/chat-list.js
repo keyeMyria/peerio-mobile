@@ -134,9 +134,7 @@ export default class ChatList extends SafeComponent {
         uiState.currentScrollView = sv;
     }
 
-    @action.bound actionSheetRef(ref) {
-        actionSheet = ref;
-    }
+    actionSheetRef = (ref) => { actionSheet = ref; };
 
     @computed get firstUnreadItemPosition() {
         for (const { data, index } of this.dataSource) {
@@ -268,7 +266,7 @@ export default class ChatList extends SafeComponent {
                 </View>
                 {this.topIndicatorVisible && <UnreadMessageIndicator isAlignedTop action={this.scrollUpToUnread} />}
                 {this.bottomIndicatorVisible && <UnreadMessageIndicator action={this.scrollDownToUnread} />}
-                <CreateActionSheet ref={this.actiohSheetRef} />
+                <CreateActionSheet ref={this.actionSheetRef} />
                 <ProgressOverlay enabled={chatState.store.loading} />
             </View>
         );
