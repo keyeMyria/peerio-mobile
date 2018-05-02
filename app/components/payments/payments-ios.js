@@ -1,13 +1,14 @@
 import { NativeModules, AlertIOS } from 'react-native';
 import PaymentsBase from './payments-base';
 import { socket } from '../../lib/icebear';
+import whitelabel from '../../lib/whitelabel-config';
 
 const { InAppUtils } = NativeModules;
 
 const premiumYearlyID = 'com.peerio.app.messenger.premium.20.yearly';
 const premiumMonthlyID = 'com.peerio.app.messenger.premium.20.monthly';
-const professionalYearlyID = process.env.PRO_YEARLY_PLAN || 'com.peerio.app.messenger.professional.500.yearly';
-const professionalMonthlyID = process.env.PRO_MONTHLY_PLAN || 'com.peerio.app.messenger.professional.500.monthly';
+const professionalYearlyID = whitelabel.PRO_YEARLY_PLAN || 'com.peerio.app.messenger.professional.500.yearly';
+const professionalMonthlyID = whitelabel.PRO_MONTHLY_PLAN || 'com.peerio.app.messenger.professional.500.monthly';
 
 const products = [
     premiumYearlyID,

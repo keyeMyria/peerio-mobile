@@ -2,12 +2,13 @@ import { Alert } from 'react-native';
 import InAppBilling from 'react-native-billing';
 import PaymentsBase from './payments-base';
 import { socket } from '../../lib/icebear';
+import whitelabel from '../../lib/whitelabel-config';
 
 class PaymentsAndroid extends PaymentsBase {
     premiumYearlyID = 'com.peerio.app.messenger.premium.20.yearly';
     premiumMonthlyID = 'com.peerio.app.messenger.premium.20.monthly';
-    professionalYearlyID = process.env.PRO_YEARLY_PLAN || 'com.peerio.app.messenger.professional.500.yearly';
-    professionalMonthlyID = process.env.PRO_MONTHLY_PLAN || 'com.peerio.app.messenger.professional.500.monthly';
+    professionalYearlyID = whitelabel.PRO_YEARLY_PLAN || 'com.peerio.app.messenger.professional.500.yearly';
+    professionalMonthlyID = whitelabel.PRO_MONTHLY_PLAN || 'com.peerio.app.messenger.professional.500.monthly';
 
     async purchaseProduct(productId) {
         let result = {};

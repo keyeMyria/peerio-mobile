@@ -2,6 +2,7 @@ import PushNotification from 'react-native-push-notification';
 import { Platform } from 'react-native';
 import { when, observable } from 'mobx';
 import { socket } from '../lib/icebear';
+import whitelabel from './whitelabel-config';
 
 const pushState = observable({
     registered: false,
@@ -36,7 +37,7 @@ function enablePushNotifications() {
         },
 
         // GCM sender id
-        senderID: process.env.BRANDED_SENDER_ID || '605156423279',
+        senderID: whitelabel.BRANDED_SENDER_ID || '605156423279',
 
         permissions: {
             alert: true,
