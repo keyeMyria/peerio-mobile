@@ -33,10 +33,12 @@ export default class FilesPlaceholder extends SafeComponent {
             paddingRight: vars.spacing.medium.midi2x
         };
         const headerStyle = {
+            color: vars.textBlack54,
             textAlign: 'center',
             fontSize: vars.font.size.huge
         };
         const infoStyle = {
+            color: vars.textBlack54,
             textAlign: 'center',
             fontSize: vars.font.size.bigger
         };
