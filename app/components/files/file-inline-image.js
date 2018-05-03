@@ -360,7 +360,7 @@ export default class FileInlineImage extends SafeComponent {
                     {this.opened &&
                         <View style={inner}>
                             {!downloading && this.loadImage && width && height ?
-                                <TouchableOpacity onPress={this.fileAction} >
+                                <TouchableOpacity onPress={this.imageAction} >
                                     <Image
                                         onProgress={this.handleProgress}
                                         onLoadEnd={this.handleLoadEnd}
