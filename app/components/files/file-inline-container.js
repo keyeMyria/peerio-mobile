@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
-import { action } from 'mobx';
+import { action, when } from 'mobx';
 import SafeComponent from '../shared/safe-component';
 import { vars } from '../../styles/styles';
 import icons from '../helpers/icons';
@@ -41,6 +41,9 @@ const text = {
 };
 
 export default class FileInlineContainer extends SafeComponent {
+    // Behaves differently based on whether file is an image or not
+    // If file/image is cached, open in viewer
+    // If file/image is NOT cached, download and then when download is finished open in viewer
     @action.bound fileAction() {
         const { file, isImage } = this.props;
         if (file.downloading) return;
@@ -55,7 +58,10 @@ export default class FileInlineContainer extends SafeComponent {
         } else {
             const exists = file && !file.isPartialDownload && file.cached;
             if (exists) file.launchViewer();
-            else if (!file.cached) fileState.download(file);
+            else if (!file.cached) {
+                when(() => file.cached, () => file.launchViewer());
+                fileState.download(file);
+            }
         }
     }
 

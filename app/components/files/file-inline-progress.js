@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { action } from 'mobx';
+import { action, when } from 'mobx';
 import { observer } from 'mobx-react/native';
 import { View, ActivityIndicator, Text, TouchableOpacity } from 'react-native';
 import SafeComponent from '../shared/safe-component';
 import { vars } from '../../styles/styles';
-import { T } from '../utils/translator';
+import { tx } from '../utils/translator';
 import fileState from '../files/file-state';
 import icons from '../helpers/icons';
 import FileInlineContainer from './file-inline-container';
@@ -26,13 +26,14 @@ export default class FileInlineProgress extends SafeComponent {
     get downloadProgress() {
         if (!this.file) return 0;
         const { progress, progressMax } = this.file;
-        return Math.min(Math.ceil(progress / progressMax * 100), 100)
+        return Math.min(Math.ceil(progress / progressMax * 100), 100);
     }
 
     @action.bound onOpen() {
         if (this.fileExists && !this.file.downloading) {
             this.file.launchViewer();
         } else {
+            when(() => this.fileExists, () => this.file.launchViewer());
             fileState.download(this.file);
         }
     }
@@ -43,47 +44,40 @@ export default class FileInlineProgress extends SafeComponent {
 
     renderThrow() {
         const file = fileState.store.getById(this.props.file);
-
+        const downloadStatusContainer = {
+            alignItems: 'center',
+            justifyContent: 'center',
+            height: 48,
+            marginTop: vars.spacing.small.midi2x,
+            marginBottom: file.downloading ? vars.spacing.small.midi2x : 0,
+            backgroundColor: vars.darkBlueBackground05,
+            borderRadius: 4
+        };
+        const textStyle = {
+            color: vars.peerioBlue,
+            fontWeight: vars.font.weight.semiBold,
+            fontStyle: 'italic'
+        };
+        const onPress = file.downloading ? this.onCancel : this.onOpen;
         if (!file) return <Text>{`no file ${this.props.file}`}</Text>;
         if (file.signatureError) return <FileSignatureError />;
         return (
             <FileInlineContainer
                 file={file}
                 onAction={this.props.onAction}>
-                {this.filePreviouslyDownloaded
-                    ? null
-                    : <TouchableOpacity
-                        style={{
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            height: 48,
-                            marginTop: vars.spacing.small.midi2x,
-                            marginBottom: file.downloading ? vars.spacing.small.midi2x : 0,
-                            backgroundColor: vars.darkBlueBackground05,
-                            borderRadius: 4
-                        }}
-                        onPress={file.downloading
-                            ? this.onCancel
-                            : this.onOpen
-                        }
-                    >
-                        <Text style={{
-                            color: vars.peerioBlue,
-                            fontWeight: vars.font.weight.semiBold,
-                            fontStyle: 'italic'
-                        }}>
+                {!this.filePreviouslyDownloaded &&
+                    <TouchableOpacity
+                        style={downloadStatusContainer}
+                        onPress={onPress}>
+                        <Text style={textStyle}>
                             {file.downloading && !this.fileExists &&
-                                <Text><T k="button_cancelDownload" /> ({this.downloadProgress}%)</Text>
-                            }
+                                <Text>{tx('button_cancelDownload')} ({this.downloadProgress}%)</Text>}
                             {!file.downloading && !this.fileExists &&
-                                <Text><T k="button_downloadToView" /> ({file.sizeFormatted})</Text>
-                            }
+                                <Text>{tx('button_downloadToView')} ({file.sizeFormatted})</Text>}
                             {!file.downloading && this.fileExists &&
-                                <Text><T k="button_openFile" /></Text>
-                            }
+                                <Text>{tx('button_openFile')}</Text>}
                         </Text>
-                    </TouchableOpacity>
-                }
+                    </TouchableOpacity>}
                 <View style={{ flex: 0 }}>
                     {!file.uploading && this.props.transparentOnFinishUpload && <ActivityIndicator />}
                     {file.uploading && icons.darkNoPadding('close', () => fileState.cancelUpload(file))}
