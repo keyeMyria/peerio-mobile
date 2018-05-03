@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
-import { action, when } from 'mobx';
+import { action } from 'mobx';
 import SafeComponent from '../shared/safe-component';
 import { vars } from '../../styles/styles';
 import icons from '../helpers/icons';
@@ -106,15 +106,17 @@ export default class FileInlineContainer extends SafeComponent {
                         {!!title && <Text style={titleText}>{title}</Text>}
                         {!!description && <Text style={descText}>{description}</Text>}
                     </View>
-                    <View style={[header, { marginBottom: downloading && !isImage ? spacingDifference : 0 }]}>
+                    <View style={header}>
                         {isLocal && this.fileTypeIcon}
                         {this.fileName}
                         {isLocal && <View style={{ flexDirection: 'row' }}>
                             {extraActionIcon}
-                            {!downloading && icons.darkNoPadding(
+                            {icons.darkNoPadding(
                                 'more-vert',
                                 () => this.props.onAction(file),
-                                { marginHorizontal: vars.spacing.small.midi2x }
+                                { marginHorizontal: vars.spacing.small.midi2x },
+                                null,
+                                downloading ? true : null
                             )}
                         </View>}
                     </View>

@@ -35,7 +35,7 @@ ios/peeriomobile.xcodeproj/project.xcworkspace/xcshareddata
 local.properties
 index.android.bundle*
 android/app/src/main/assets
-android/app/src/main/res/raw
+android/app/src/main/res
 
 # node.js
 #

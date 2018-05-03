@@ -42,7 +42,7 @@ export default class ChannelInviteListItem extends SafeComponent {
             width: vars.roomInviteCircleWidth,
             height: vars.roomInviteCircleHeight,
             borderRadius: 5,
-            backgroundColor: vars.peerioBlue,
+            backgroundColor: vars.invitedBadgeColor,
             overflow: 'hidden',
             alignItems: 'center',
             justifyContent: 'center'
@@ -50,7 +50,7 @@ export default class ChannelInviteListItem extends SafeComponent {
 
         const textNewStyle = {
             fontSize: vars.font.size.smaller,
-            color: vars.white
+            color: vars.invitedBadgeText
         };
 
         return (

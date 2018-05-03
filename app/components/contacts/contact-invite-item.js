@@ -32,7 +32,7 @@ export default class ContactInviteItem extends SafeComponent {
                 contact={contact}
                 title2={username}
                 title={fullName}
-                rightIcon={(invited !== null) && buttons.uppercaseBlueButton(title, () => this.invite(), invited)}
+                rightIcon={(invited !== null) && buttons.blueTextButton(title, () => this.invite(), invited)}
                 hideOnline
                 invited />
         );

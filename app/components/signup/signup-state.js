@@ -3,9 +3,7 @@ import capitalize from 'capitalize';
 import { observable, action, when } from 'mobx';
 import { mainState, uiState, loginState } from '../states';
 import RoutedState from '../routes/routed-state';
-import { User, validation, socket, crypto } from '../../lib/icebear';
-
-const { validators, addValidation } = validation;
+import { User, socket, crypto } from '../../lib/icebear';
 
 class SignupState extends RoutedState {
     @observable username = '';
@@ -16,8 +14,8 @@ class SignupState extends RoutedState {
     @observable _current = 0;
     get current() { return this._current; }
     set current(i) { uiState.hideAll().then(() => { this._current = i; }); }
-    // two pages of signup wizard
-    @observable count = 3;
+    // five pages of signup wizard
+    @observable count = 5;
     _prefix = 'signup';
     avatarBuffers = null;
     @observable avatarData = null;
@@ -25,8 +23,6 @@ class SignupState extends RoutedState {
 
     get nextAvailable() {
         switch (this.current) {
-            // enter profile info
-            case 0: return this.isValid() && socket.connected;
             // save pin and register
             case 1: return socket.connected;
             default: return false;
@@ -55,23 +51,25 @@ class SignupState extends RoutedState {
     generatePassphrase = () => crypto.keys.getRandomAccountKeyHex();
 
     @action async next() {
-        if (!this.isValid()) return;
-        if (!this.passphrase) {
-            this.passphrase = await this.generatePassphrase();
-        }
-
-        if (this.keyBackedUp && (this.current === 1) ||
-            (this.current >= this.count - 1)) await this.finish();
+        if (!this.passphrase) this.passphrase = await this.generatePassphrase();
+        if (this.keyBackedUp && (this.current === 2)) await this.finishAccountCreation();
         this.current++;
     }
 
     @action prev() { (this.current > 0) ? this.current-- : this.exit(); }
 
-    @action async finish() {
-        if (!this.isValid()) return Promise.resolve();
+    @action async finishSignUp() {
+        return mainState.activateAndTransition(User.current)
+            .catch((e) => {
+                console.log(e);
+                User.current = null;
+                this.reset();
+            });
+    }
+
+    // After account is created, user goes to Contact Sync rather than main route
+    @action async finishAccountCreation() {
         this.isInProgress = true;
-        // this.passphrase = await this.generatePassphrase();
-        // console.log(this.passphrase);
         const user = new User();
         User.current = user;
         const { username, email, firstName, lastName, passphrase, avatarBuffers, keyBackedUp } = this;
@@ -84,12 +82,6 @@ class SignupState extends RoutedState {
         user.localeCode = localeCode;
         return user.createAccountAndLogin()
             .then(() => loginState.enableAutomaticLogin(user))
-            .then(() => mainState.activateAndTransition(user))
-            .catch((e) => {
-                console.log(e);
-                User.current = null;
-                this.reset();
-            })
             .then(() => mainState.saveUser())
             .then(() => keyBackedUp && User.current.setAccountKeyBackedUp())
             .then(() => avatarBuffers && User.current.saveAvatar(avatarBuffers))
@@ -98,11 +90,6 @@ class SignupState extends RoutedState {
 }
 
 const signupState = new SignupState();
-
-addValidation(signupState, 'firstName', validators.firstName, 0);
-addValidation(signupState, 'lastName', validators.lastName, 1);
-addValidation(signupState, 'username', validators.username, 2);
-addValidation(signupState, 'email', validators.email, 3);
 
 if (__DEV__ && process.env.PEERIO_QUICK_SIGNUP) {
     when(() => !process.env.PEERIO_AUTOLOGIN && signupState.isConnected && signupState.isActive, () => {

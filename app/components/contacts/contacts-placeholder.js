@@ -28,7 +28,7 @@ export default class ContactsPlaceholder extends Component {
             <View style={s}>
                 <View style={inner}>
                     <Text>{t('title_importInviteText')}</Text>
-                    {buttons.uppercaseBlueButton(tx('button_importOrInvite'), () => this.importOrInvite())}
+                    {buttons.blueTextButton(tx('button_importOrInvite'), () => this.importOrInvite())}
                 </View>
                 <View style={{ flex: 1, flexGrow: 3 }} />
             </View>

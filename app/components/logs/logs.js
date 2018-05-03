@@ -3,7 +3,7 @@ import { Text, View, TouchableOpacity, NativeModules, Alert, ListView } from 're
 import stringify from 'json-stringify-safe';
 import moment from 'moment';
 import { vars } from '../../styles/styles';
-import { User } from '../../lib/icebear';
+import { User, config } from '../../lib/icebear';
 
 const { RNMail } = NativeModules;
 
@@ -27,8 +27,8 @@ export default class Logs extends Component {
     }
 
     sendLogs() {
-        const subject = `Peerio Support // logs from ${User.current ? User.current.username : 'n/a'}`;
-        const recipients = ['support@peerio.com'];
+        const subject = `Support // logs from ${User.current ? User.current.username : 'n/a'}`;
+        const recipients = config.logRecipients;
         if (console.logVersion) console.logVersion();
         const body = `<pre>${console.stack.map(mapFormat).map(mapGlue).join('\n')}</pre>`;
         RNMail.mail(

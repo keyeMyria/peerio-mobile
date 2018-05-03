@@ -18,12 +18,13 @@ const disabledStyle = {
 };
 
 const icons = {
-    basic(name, color, onPress, style, size, noPadding, testID) {
+    basic(name, color, onPress, style, size, noPadding, testID, disabled) {
         return (
             <TouchableOpacity
                 pressRetentionOffset={vars.retentionOffset}
                 onPress={onPress}
                 style={{ justifyContent: 'center' }}
+                disabled={disabled}
                 {...testLabel(testID)}>
                 <View style={{ padding: noPadding ? 0 : vars.iconPadding }}>
                     <Icon
@@ -71,8 +72,9 @@ const icons = {
         return icons.basic(name, vars.gold, onPress, style, size);
     },
 
-    darkNoPadding(name, onPress, style, size) {
-        return icons.basic(name, vars.darkIcon, onPress, style, size, true);
+    darkNoPadding(name, onPress, style, size, disabled) {
+        const iconStyle = disabled ? vars.disabledIcon : vars.darkIcon;
+        return icons.basic(name, iconStyle, onPress, style, size, true, undefined, disabled);
     },
 
     colored(name, onPress, colorFg, backgroundColor, testId) {

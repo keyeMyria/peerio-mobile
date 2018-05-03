@@ -50,7 +50,7 @@ export default class ChannelUpgradeOffer extends Component {
                     </Text>
                 </View>
                 <View style={buttonStyle}>
-                    {buttons.uppercaseWhiteButtonNoPadding(tx('button_upgrade'), () => settingsState.upgrade(), false, { fontWeight: '600' })}
+                    {buttons.whiteTextButtonNoPadding(tx('button_upgrade'), () => settingsState.upgrade(), false, { fontWeight: '600' })}
                 </View>
             </View>
         ));

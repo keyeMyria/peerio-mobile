@@ -71,7 +71,6 @@ export default class AccountUpgradeNavigator extends Component {
             textAlign: 'center'
         };
         const t1 = [t];
-        const t2 = [t, { width: 120 }];
         const t3 = [t];
 
         if (height < 500) return null;
@@ -82,12 +81,9 @@ export default class AccountUpgradeNavigator extends Component {
                     {this.plan(0)}
                     {this.line}
                     {this.plan(1)}
-                    {this.line}
-                    {this.plan(2)}
                 </View>
                 <View style={row}>
                     <Text style={t1}>{tx('title_basicPlan')}</Text>
-                    <Text style={t2}>{tx('title_premiumPlan')}</Text>
                     <Text style={t3}>{tx('title_proPlan')}</Text>
                 </View>
             </View>

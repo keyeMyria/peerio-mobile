@@ -1,6 +1,6 @@
 import React from 'react';
 import { observer } from 'mobx-react/native';
-import { View, ListView, Animated, Text, TextInput, Platform } from 'react-native';
+import { View, ListView, Animated, Text } from 'react-native';
 import { observable, reaction, action } from 'mobx';
 import SafeComponent from '../shared/safe-component';
 import FilesPlaceholder from './files-placeholder';
@@ -17,6 +17,7 @@ import { tx } from '../utils/translator';
 import icons from '../helpers/icons';
 import ButtonText from '../controls/button-text';
 import uiState from '../layout/ui-state';
+import SearchBar from '../controls/search-bar';
 
 const iconClear = require('../../assets/file_icons/ic_close.png');
 
@@ -125,6 +126,13 @@ export default class Files extends SafeComponent {
         );
     }
 
+    get isZeroState() {
+        return !fileState.store.files.length &&
+            // no folders and no files
+            !fileState.store.loading
+            && fileState.currentFolder.isRoot;
+    }
+
     get noFilesInFolder() {
         if (this.data.length || fileState.currentFolder.isRoot) return null;
         const s = {
@@ -166,36 +174,13 @@ export default class Files extends SafeComponent {
         fileState.store.filterByName(val);
     };
 
+    @action.bound onChangeText(text) {
+        this.clean = !text.length;
+        this.onChangeFindFilesText(text);
+    }
+
     searchTextbox() {
-        const height = vars.searchInputHeight;
-        const container = {
-            flexGrow: 1,
-            flexDirection: 'row',
-            alignItems: 'center',
-            backgroundColor: 'white',
-            paddingHorizontal: vars.spacing.small.midi2x,
-            marginVertical: vars.spacing.small.midi,
-            marginHorizontal: vars.spacing.medium.mini2x,
-            borderColor: vars.black12,
-            borderWidth: 1,
-            height,
-            borderRadius: height
-        };
-        const fontSize = vars.font.size.bigger;
-        const marginTop =
-            Platform.OS === 'android' ? (height - fontSize + 2) / 2 : 0;
-        const placeholderStyle = {
-            flexGrow: 1,
-            height,
-            lineHeight: height * 1.5,
-            paddingTop: 0,
-            marginTop,
-            marginLeft: vars.spacing.small.midi,
-            fontSize
-        };
-
         const leftIcon = icons.plain('search', vars.iconSize, vars.black12);
-
         let rightIcon = null;
         if (fileState.findFilesText) {
             rightIcon = icons.iconImage(
@@ -207,26 +192,15 @@ export default class Files extends SafeComponent {
                 vars.opacity54
             );
         }
-
         return (
-            <View>
-                <View style={container}>
-                    {leftIcon}
-                    <TextInput
-                        underlineColorAndroid="transparent"
-                        value={fileState.findFilesText}
-                        returnKeyType="done"
-                        onSubmitEditing={this.onSubmit}
-                        onChangeText={text => { this.clean = !text.length; this.onChangeFindFilesText(text); }}
-                        autoCapitalize="none"
-                        autoCorrect={false}
-                        placeholder={tx('title_searchAllFiles')}
-                        ref={ti => { this.textInput = ti; }}
-                        style={placeholderStyle} />
-                    {rightIcon}
-                </View>
-            </View>
-        );
+            <SearchBar
+                textValue={fileState.findFilesText}
+                placeholderText={tx('title_searchAllFiles')}
+                onChangeText={this.onChangeText}
+                onSubmit={this.onSubmit}
+                leftIcon={leftIcon}
+                rightIcon={rightIcon}
+            />);
     }
 
     toolbar() {
@@ -279,19 +253,17 @@ export default class Files extends SafeComponent {
                 </Text>
             );
         }
-        return !fileState.store.loading && <FilesPlaceholder />;
+        return this.isZeroState && <FilesPlaceholder />;
     }
 
-    @action.bound fileUploadActionSheetRef(ref) {
-        fileUploadActionSheet = ref;
-    }
+    @action.bound fileUploadActionSheetRef(ref) { fileUploadActionSheet = ref; }
 
     renderThrow() {
         return (
             <View
                 style={{ flex: 1 }}>
                 <View style={{ flex: 1, backgroundColor: vars.white }}>
-                    {this.searchTextbox()}
+                    {!this.isZeroState && this.searchTextbox()}
                     {upgradeForFiles()}
                     {!this.data.length && !fileState.currentFolder.isRoot ?
                         this.noFilesInFolder : null}

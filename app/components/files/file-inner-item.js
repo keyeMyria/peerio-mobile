@@ -12,6 +12,7 @@ import FileTypeIcon from './file-type-icon';
 import testLabel from '../helpers/test-label';
 import FileProgress from './file-progress';
 import { fileHelpers } from '../../lib/icebear';
+import FileViewActionSheet from './file-view-action-sheet';
 
 const { width } = Dimensions.get('window');
 const height = vars.filesListItemHeight;
@@ -23,6 +24,8 @@ const fileInfoContainerStyle = {
     borderWidth: 0,
     borderColor: 'green'
 };
+
+let actionSheet = null;
 
 @observer
 export default class FileInnerItem extends SafeComponent {
@@ -40,7 +43,7 @@ export default class FileInnerItem extends SafeComponent {
         const iconBgColor = 'transparent';
         const icon = checked ? 'check-box' : 'check-box-outline-blank';
         const outer = {
-            backgroundColor: checked ? vars.peerioBlueBackground05 : vars.darkBlueBackground05,
+            backgroundColor: checked ? vars.peerioBlueBackground05 : vars.filesBg,
             padding: vars.spacing.small.mini2x,
             flex: 0,
             width: checkBoxWidth,
@@ -60,8 +63,12 @@ export default class FileInnerItem extends SafeComponent {
         const { file } = this.props;
         if (file.signatureError) return <View style={{ marginHorizontal: vars.spacing.small.midi }}><FileSignatureError /></View>;
         const action = () => !file.uploading && this.onPress();
+        const menuAction = () => {
+            fileState.currentFile = file;
+            actionSheet.show();
+        };
         const iconRight = file.uploading ? icons.dark('close', () => fileState.cancelUpload(file)) :
-            icons.dark('keyboard-arrow-right', action);
+            icons.dark('more-vert', menuAction);
         const checked = this.props.file && this.props.file.selected;
         const nameStyle = {
             color: vars.txtDark,
@@ -81,7 +88,7 @@ export default class FileInnerItem extends SafeComponent {
             justifyContent: 'space-between',
             borderBottomWidth: 1,
             borderBottomColor: 'rgba(0, 0, 0, .12)',
-            backgroundColor: checked ? vars.peerioBlueBackground05 : vars.darkBlueBackground05,
+            backgroundColor: checked ? vars.peerioBlueBackground05 : vars.filesBg,
             height,
             width,
             borderWidth: 0,
@@ -108,7 +115,7 @@ export default class FileInnerItem extends SafeComponent {
                 <TouchableOpacity
                     onPress={action}
                     {...testLabel(testID)}
-                    style={{ backgroundColor: vars.darkBlueBackground05 }}>
+                    style={{ backgroundColor: vars.filesBg }}>
                     <View style={[fileInfoContainerStyle, { opacity }]}>
                         {this.checkbox()}
                         <View style={[itemContainerStyle, { width }]}>
@@ -132,6 +139,7 @@ export default class FileInnerItem extends SafeComponent {
                     </View>
                 </TouchableOpacity>
                 <FileProgress file={file} />
+                <FileViewActionSheet ref={ref => { actionSheet = ref; }} />
             </View>
         );
     }

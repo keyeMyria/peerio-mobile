@@ -30,7 +30,7 @@ export default class ContactInviteItemPrompt extends SafeComponent {
                     <Text style={{ color: vars.txtDate }}>{t('title_inviteContactByEmail2', { email })}</Text>
                 </View>
                 <View style={{ alignSelf: 'flex-end', marginTop: vars.spacing.small.maxi2x }}>
-                    {buttons.uppercaseGreenBgButton(title, this.invite, invited)}
+                    {buttons.roundBlueBgButton(title, this.invite, invited)}
                 </View>
             </View>
         );

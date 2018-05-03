@@ -131,7 +131,7 @@ export default class TwoFactorAuth extends SafeComponent {
                             flexDirection: 'row',
                             justifyContent: 'flex-end'
                         }}>
-                            {buttons.uppercaseBlueButton(tx('button_2FACopyKey'), () => this.copyKey(), !this.key2fa)}
+                            {buttons.blueTextButton(tx('button_2FACopyKey'), () => this.copyKey(), !this.key2fa)}
                         </View>
                     </View>
                 </View>
@@ -163,7 +163,7 @@ export default class TwoFactorAuth extends SafeComponent {
                             placeholder="123456"
                             onChangeText={text => { this.confirmCode = text; }}
                             value={this.confirmCode} />
-                        {buttons.uppercaseBlueButton(tx('button_confirm'),
+                        {buttons.blueTextButton(tx('button_confirm'),
                             () => this.confirm(), !this.confirmCode || !this.key2fa, false, 'button_confirm')}
                     </View>
                 </View>

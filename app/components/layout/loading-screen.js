@@ -11,6 +11,8 @@ import routerMain from '../routes/router-main';
 import { tx } from '../utils/translator';
 import SnackBarConnection from '../snackbars/snackbar-connection';
 
+const lineDormant = require('../../assets/loading_screens/line-dormant.png');
+
 const smallIcon = {
     height: vars.iconSize,
     width: vars.iconSize,
@@ -112,24 +114,24 @@ export default class LoadingScreen extends Component {
             result[name] = {};
             if (!socket.connected) {
                 if (i === numberOfSteps) result[name].line = null; // Icon on the far right should not have a line
-                else result[name].line = this.lines.dormant;
+                else result[name].line = lineDormant;
                 result[name].icon = this.icons[name].source.dormant;
                 result[name].iconStyle = smallIcon;
                 result.statusText = tx('title_waitingToConnect');
             } else if (i < this.loadingStep) {
                 if (i === numberOfSteps) result[name].line = null; // Icon on the far right should not have a line
-                else result[name].line = this.lines.done;
+                else result[name].line = this.icons[name].line.done;
                 result[name].icon = this.icons[name].source.done;
                 result[name].iconStyle = smallIcon;
             } else if (i === this.loadingStep) {
                 if (i === numberOfSteps) result[name].line = null; // Icon on the far right should not have a line
-                else result[name].line = this.lines.inProgress;
+                else result[name].line = this.icons[name].line.inProgress;
                 result[name].icon = this.icons[name].source.inProgress;
                 result[name].iconStyle = [bigIcon, this.animationStyle];
                 result.statusText = tx(this.icons[name].copy);
             } else {
                 if (i === numberOfSteps) result[name].line = null; // Icon on the far right should not have a line
-                else result[name].line = this.lines.dormant;
+                else result[name].line = lineDormant;
                 result[name].icon = this.icons[name].source.dormant;
                 result[name].iconStyle = smallIcon;
             }
@@ -228,12 +230,6 @@ export default class LoadingScreen extends Component {
         'title_randomMessage4'
     ];
 
-    lines = {
-        dormant: require('../../assets/loading_screens/line-dormant.png'),
-        inProgress: require('../../assets/loading_screens/line-inProgress.png'),
-        done: require('../../assets/loading_screens/line-done.png')
-    };
-
     icons = {
         connecting: {
             copy: 'title_connecting',
@@ -241,6 +237,10 @@ export default class LoadingScreen extends Component {
                 dormant: require('../../assets/loading_screens/connecting-dormant.png'),
                 inProgress: require('../../assets/loading_screens/connecting-inProgress.png'),
                 done: require('../../assets/loading_screens/connecting-done.png')
+            },
+            line: {
+                inProgress: require('../../assets/loading_screens/line-inProgress1.png'),
+                done: require('../../assets/loading_screens/line-done1.png')
             }
         },
         authenticating: {
@@ -249,6 +249,10 @@ export default class LoadingScreen extends Component {
                 dormant: require('../../assets/loading_screens/authenticating-dormant.png'),
                 inProgress: require('../../assets/loading_screens/authenticating-inProgress.png'),
                 done: require('../../assets/loading_screens/authenticating-done.png')
+            },
+            line: {
+                inProgress: require('../../assets/loading_screens/line-inProgress2.png'),
+                done: require('../../assets/loading_screens/line-done2.png')
             }
         },
         decrypting: {
@@ -257,6 +261,10 @@ export default class LoadingScreen extends Component {
                 dormant: require('../../assets/loading_screens/decrypting-dormant.png'),
                 inProgress: require('../../assets/loading_screens/decrypting-inProgress.png'),
                 done: require('../../assets/loading_screens/decrypting-done.png')
+            },
+            line: {
+                inProgress: require('../../assets/loading_screens/line-inProgress3.png'),
+                done: require('../../assets/loading_screens/line-done3.png')
             }
         },
         confirming: {
@@ -265,6 +273,10 @@ export default class LoadingScreen extends Component {
                 dormant: require('../../assets/loading_screens/confirming-dormant.png'),
                 inProgress: require('../../assets/loading_screens/confirming-inProgress.png'),
                 done: require('../../assets/loading_screens/confirming-done.png')
+            },
+            line: {
+                inProgress: require('../../assets/loading_screens/line-inProgress4.png'),
+                done: require('../../assets/loading_screens/line-done4.png')
             }
         },
         done: {

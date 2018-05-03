@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, WebView, View } from 'react-native';
+import { Text, WebView, Image, View, Platform } from 'react-native';
 import { observable } from 'mobx';
 import { t, tu, tx } from '../utils/translator';
 import TextInputStateful from '../controls/text-input-stateful';
@@ -7,7 +7,7 @@ import popupState from '../layout/popup-state';
 import locales from '../../lib/locales';
 import CheckBox from './checkbox';
 import { vars } from '../../styles/styles';
-import { User } from '../../lib/icebear';
+import { User, config } from '../../lib/icebear';
 import testLabel from '../helpers/test-label';
 import FilePreview from '../files/file-preview';
 
@@ -74,6 +74,32 @@ function popupYes(title, subTitle, text) {
             title,
             subTitle: subTitle ? textControl(subTitle) : null,
             contents: text ? textControl(text) : null,
+            buttons: [{
+                id: 'ok', text: tu('button_ok'), action: resolve
+            }]
+        });
+    });
+}
+
+function popupAbout() {
+    const showPoweredBy = process.env.EXECUTABLE_NAME === 'medcryptor';
+    const image = require('../../assets/poweredByPeerio_colour.png');
+    const text = (<Text>
+        Version: {config.appVersion}{'\n'}
+        SDK: {config.sdkVersion} {'\n'}
+        OS: {Platform.OS} {'\n'}
+        OS Version: {Platform.Version}
+    </Text>);
+    const contents = (
+        <View>
+            {textControl(text)}
+            {showPoweredBy && <Image source={image} resizeMode="contain" style={{ marginTop: 10, width: '60%' }} />}
+        </View>
+    );
+    return new Promise((resolve) => {
+        popupState.showPopup({
+            title: 'About',
+            contents,
             buttons: [{
                 id: 'ok', text: tu('button_ok'), action: resolve
             }]
@@ -228,6 +254,20 @@ function popupInputCancel(title, placeholder, cancelable) {
     });
 }
 
+function popupContactPermission(title, subTitle, text) {
+    return new Promise((resolve) => {
+        popupState.showPopup({
+            title,
+            subTitle: textControl(subTitle),
+            contents: text ? textControl(text) : null,
+            buttons: [
+                { id: 'deny', text: tu('button_deny'), action: () => resolve(false), secondary: true },
+                { id: 'ok', text: tu('button_grantAccess'), action: () => resolve(true) }
+            ]
+        });
+    });
+}
+
 let tos = '';
 
 function popupTOS() {
@@ -358,6 +398,7 @@ export {
     popupYesSkip,
     popupInput,
     popupInputWithPreview,
+    popupContactPermission,
     popupTOS,
     popupKeychainError,
     popup2FA,
@@ -369,5 +410,6 @@ export {
     popupControl,
     popupSignOutAutologin,
     popupCancelConfirm,
-    popupSetupVideo
+    popupSetupVideo,
+    popupAbout
 };

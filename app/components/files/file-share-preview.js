@@ -11,7 +11,7 @@ import ButtonText from '../controls/button-text';
 import popupState from '../layout/popup-state';
 import routes from '../routes/routes';
 import fileState from './file-state';
-import { fileHelpers, chatStore } from '../../lib/icebear';
+import { User, fileHelpers, chatStore } from '../../lib/icebear';
 import FilePreview from './file-preview';
 
 // TODO Workaround negative margin
@@ -100,10 +100,17 @@ export default class FileSharePreview extends SafeComponent {
                 `@${contact.username}`
             );
         } else if (!chat.isChannel) { // Share with current User
-            const user = chatStore.activeChat.otherParticipants[0];
+            const recipient = chatStore.activeChat.otherParticipants[0];
+            if (!recipient) { // DM with self, i.e; there are no other participants
+                const user = User.current;
+                return this.recipientText(
+                    `${user.fullName} `,
+                    `@${user.username}`
+                );
+            }
             return this.recipientText(
-                `${user.fullName} `,
-                `@${user.username}`
+                `${recipient.fullName} `,
+                `@${recipient.username}`
             );
         } // Share with current Room
         return this.recipientText(

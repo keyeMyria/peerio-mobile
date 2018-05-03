@@ -236,7 +236,7 @@ export default class FileInlineImage extends SafeComponent {
         return (
             <View style={{ flexDirection: 'row' }}>
                 <View style={{ paddingTop: 2, marginRight: 4 }}>
-                    {icons.coloredAsText('check-circle', vars.peerioTeal, 14)}
+                    {icons.coloredAsText('check-circle', vars.confirmColor, 14)}
                 </View>
                 <Text style={text}>
                     <T k="title_updateSettingsAnyTime">{toSettingsParser}</T>

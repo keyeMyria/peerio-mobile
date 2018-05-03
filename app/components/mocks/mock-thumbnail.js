@@ -39,7 +39,7 @@ export default class MockThumbnail extends Component {
                 <View style={{ margin: 10 }}>
                     <Text>{this.path}</Text>
                 </View>
-                {buttons.uppercasePeerioBlueBgButton('Select image', this.showActionSheet)}
+                {buttons.blueBgButton('Select image', this.showActionSheet)}
                 <FilesActionSheet ref={this.setRef} />
             </View>
         );
