@@ -256,6 +256,21 @@ export default class Chat extends SafeComponent {
         );
     }
 
+    get archiveNotice() {
+        // TODO: archive notice
+        return true || this.props.archiveNotice ? ( // eslint-disable-line
+            <Text style={{
+                textAlign: 'left',
+                marginTop: 0,
+                marginRight: vars.spacing.medium.mini2x,
+                marginBottom: vars.spacing.medium.mini2x,
+                color: vars.txtMedium
+            }}>
+                {tx('title_chatArchive')}
+            </Text>
+        ) : null;
+    }
+
     @computed get zeroStateItem() {
         // TODO determine if chat is from invite or regular DM
         return this.zeroStateChat;
