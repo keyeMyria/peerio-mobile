@@ -5,7 +5,7 @@ class InvitationState extends RoutedState {
     @observable currentInvitation;
 
     get title() {
-        return this.currentInvitation ? this.currentInvitation.name : '';
+        return this.currentInvitation ? this.currentInvitation.channelName : '';
     }
 
     onTransition(active, inv) {

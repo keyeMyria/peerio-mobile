@@ -62,7 +62,7 @@ export default class ChatListItem extends SafeComponent {
 
     get rightIcon() {
         const { chat } = this.props;
-        if (chat.isPendingDM) return this.renderNewBadge();
+        if (chat.isInvite) return this.renderNewBadge();
         if (chat.unreadCount === 0) return null;
         return this.renderUnreadCountBadge();
     }
@@ -107,14 +107,8 @@ export default class ChatListItem extends SafeComponent {
 
         const key = chat.id;
         let onPress;
-
-        if (chat.isPendingDM) {
-            onPress = () => chatState.routerMain.dmContactInvite({
-                name: chat.name,
-                id: chat.id,
-                username: chat.name
-            });
-        } else onPress = () => chatState.routerMain.chats(chat);
+        if (chat.isInvite) onPress = () => chatState.routerMain.dmContactInvite(chat);
+        else onPress = () => chatState.routerMain.chats(chat);
         const unread = chat.unreadCount > 0;
         return (
             <Avatar

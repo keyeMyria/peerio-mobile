@@ -257,7 +257,6 @@ export default class Chat extends SafeComponent {
     }
 
     get archiveNotice() {
-        // TODO: archive notice
         return true || this.props.archiveNotice ? ( // eslint-disable-line
             <Text style={{
                 textAlign: 'left',
@@ -272,10 +271,9 @@ export default class Chat extends SafeComponent {
     }
 
     @computed get zeroStateItem() {
-        // TODO determine if chat is from invite or regular DM
+        const { chat } = this;
+        if (chat.isInvite) return this.zeroStateChatInvite;
         return this.zeroStateChat;
-        // if (isPendingInvite) return this.zeroStateChat;
-        // return this.zeroStateChatInvite;
     }
 
     get zeroStateChat() {
@@ -323,7 +321,6 @@ export default class Chat extends SafeComponent {
 
     get zeroStateChatInvite() {
         const { chat } = this;
-        if (chat.isChannel) return null; // TODO remove after determining if chat is from invite or regular DM
         const participant = chat.otherParticipants[0];
         const emojiTada = require('../../assets/emoji/tada.png');
         const container = {
@@ -346,12 +343,12 @@ export default class Chat extends SafeComponent {
             lineHeight: 22,
             marginBottom: vars.spacing.medium.maxi
         };
-        // TODO determine if user is existing or new, modify copy accordingly
+        const headingCopy = chat.isReceived ? 'title_newUserDmInviteHeading' : 'title_dmInviteHeading';
         return (
             <View style={container}>
                 <Image source={emojiTada} style={emojiStyle} resizeMode="contain" />
                 <Text style={headingStyle}>
-                    {tx('title_dmInviteHeading', { contactName: participant.username })}
+                    {tx(headingCopy, { contactName: participant.username })}
                 </Text>
                 <View style={{ alignItems: 'center' }}>
                     <AvatarCircle contact={participant} large />

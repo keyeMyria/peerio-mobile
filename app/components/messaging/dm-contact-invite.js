@@ -11,9 +11,7 @@ import { contactStore } from '../../lib/icebear';
 import routerMain from '../routes/router-main';
 import chatState from '../messaging/chat-state';
 import AvatarCircle from '../shared/avatar-circle';
-import icons from '../helpers/icons';
 import ProgressOverlay from '../shared/progress-overlay';
-import { invitationState } from '../states';
 import IdentityVerificationNotice from './identity-verification-notice';
 
 const emojiTada = require('../../assets/emoji/tada.png');
@@ -50,23 +48,32 @@ const buttonContainer = {
 export default class DmContactInvite extends SafeComponent {
     @observable waiting = false;
 
-    get invitation() { return invitationState.currentInvitation; }
+    get chatInvite() { return chatState.currentChat; }
 
     get leftIcon() { return <BackIcon action={routerMain.chats} />; }
 
-    @action.bound decline() {
-        routerMain.chats();
-        // TODO call SDK decline
-    }
-
-    // TODO call SDK accept
-    @action.bound async accept() {
-        const { invitation } = this;
-        const { id } = invitation;
+    @action.bound async decline() {
+        const { chatInvite } = this;
+        const { id } = chatInvite;
         let newChat = null;
         try {
             this.waiting = true;
             newChat = await chatState.store.getChatWhenReady(id);
+            newChat.dismiss();
+        } catch (e) {
+            console.error(e);
+        }
+        routerMain.chats();
+    }
+
+    @action.bound async accept() {
+        const { chatInvite } = this;
+        const { id } = chatInvite;
+        let newChat = null;
+        try {
+            this.waiting = true;
+            newChat = await chatState.store.getChatWhenReady(id);
+            newChat.start();
         } catch (e) {
             console.error(e);
         }
@@ -74,16 +81,14 @@ export default class DmContactInvite extends SafeComponent {
     }
 
     renderThrow() {
-        const { invitation } = this;
-        const inviter = contactStore.getContact(invitation.name);
-        // TODO determine if user is existing or new, modify title_dmInviteHeading copy accordingly
-        // const headerCopy = !newUser ? 'title_dmInviteHeading' : 'title_newUserDmInviteHeading';
-        const headerCopy = 'title_dmInviteHeading';
+        const { chatInvite } = this;
+        const inviter = contactStore.getContact(chatInvite.name);
+        const headingCopy = chatInvite.isReceived ? 'title_newUserDmInviteHeading' : 'title_dmInviteHeading';
         return (
             <View style={container}>
                 <Image source={emojiTada} style={emojiStyle} resizeMode="contain" />
                 <Text style={headingStyle}>
-                    {tx(headerCopy, { contactName: inviter.username })}
+                    {tx(headingCopy, { contactName: inviter.username })}
                 </Text>
                 <View style={{ alignItems: 'center' }}>
                     <AvatarCircle contact={inviter} large />

@@ -51,7 +51,7 @@ class RouterMain extends Router {
         this.add('contactInvite', [<ContactListInvite />], contactAddState);
         this.add('settings', [<SettingsLevel1 />, <SettingsLevel2 />, <SettingsLevel3 />], settingsState);
         this.add('channelInvite', [<ChannelInvite />], invitationState);
-        this.add('dmContactInvite', [<DmContactInvite />], invitationState);
+        this.add('dmContactInvite', [<DmContactInvite />], chatState);
     }
 
     @action initialRoute() {

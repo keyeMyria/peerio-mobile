@@ -65,7 +65,7 @@ class ChatState extends RoutedState {
     }
 
     get title() {
-        if (this.routerMain.currentIndex === 0) return tx('title_chats');
+        if (this.routerMain.currentIndex === 0 && this.routerMain.current.key === 'chats') return tx('title_chats');
         return this.currentChat ? this.currentChat.name : '';
     }
 
