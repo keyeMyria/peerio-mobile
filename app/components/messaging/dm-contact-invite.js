@@ -48,13 +48,13 @@ const buttonContainer = {
 export default class DmContactInvite extends SafeComponent {
     @observable waiting = false;
 
-    get chatInvite() { return chatState.currentChat; }
+    get chat() { return chatState.currentChat; }
 
     get leftIcon() { return <BackIcon action={routerMain.chats} />; }
 
     @action.bound async decline() {
-        const { chatInvite } = this;
-        const { id } = chatInvite;
+        const { chat } = this;
+        const { id } = chat;
         let newChat = null;
         try {
             this.waiting = true;
@@ -67,8 +67,8 @@ export default class DmContactInvite extends SafeComponent {
     }
 
     @action.bound async accept() {
-        const { chatInvite } = this;
-        const { id } = chatInvite;
+        const { chat } = this;
+        const { id } = chat;
         let newChat = null;
         try {
             this.waiting = true;
@@ -81,9 +81,9 @@ export default class DmContactInvite extends SafeComponent {
     }
 
     renderThrow() {
-        const { chatInvite } = this;
-        const inviter = contactStore.getContact(chatInvite.name);
-        const headingCopy = chatInvite.isReceived ? 'title_newUserDmInviteHeading' : 'title_dmInviteHeading';
+        const { chat } = this;
+        const inviter = contactStore.getContact(chat.name);
+        const headingCopy = chat.isReceived ? 'title_newUserDmInviteHeading' : 'title_dmInviteHeading';
         return (
             <View style={container}>
                 <Image source={emojiTada} style={emojiStyle} resizeMode="contain" />
