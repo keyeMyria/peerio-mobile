@@ -8,7 +8,7 @@ import { TouchableOpacity, View, Text } from 'react-native';
 import SafeComponent from '../shared/safe-component';
 import icons from '../helpers/icons';
 import { vars } from '../../styles/styles';
-import { tx } from '../utils/translator';
+import { tu } from '../utils/translator';
 
 @observer
 export default class UnreadMessageIndicator extends SafeComponent {
@@ -44,11 +44,11 @@ export default class UnreadMessageIndicator extends SafeComponent {
         const iconName = isAlignedTop ? 'keyboard-arrow-up' : 'keyboard-arrow-down';
         return (
             <TouchableOpacity
-                pressRetentionOffset={vars.offset}
+                pressRetentionOffset={vars.pressRetentionOffset}
                 style={[container, alignmentStyle]}
                 onPress={action}>
                 <View style={[marginTopStyle, { flexDirection: 'row' }]}>
-                    <Text semiBold style={text}>{tx('title_unreadMessages')}</Text>
+                    <Text semiBold style={text}>{tu('title_unreadMessages')}</Text>
                     {icons.plainWhite(iconName, vars.iconSize)}
                 </View>
             </TouchableOpacity>

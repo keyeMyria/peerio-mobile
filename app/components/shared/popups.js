@@ -254,6 +254,20 @@ function popupInputCancel(title, placeholder, cancelable) {
     });
 }
 
+function popupContactPermission(title, subTitle, text) {
+    return new Promise((resolve) => {
+        popupState.showPopup({
+            title,
+            subTitle: textControl(subTitle),
+            contents: text ? textControl(text) : null,
+            buttons: [
+                { id: 'deny', text: tu('button_deny'), action: () => resolve(false), secondary: true },
+                { id: 'ok', text: tu('button_grantAccess'), action: () => resolve(true) }
+            ]
+        });
+    });
+}
+
 let tos = '';
 
 function popupTOS() {
@@ -384,6 +398,7 @@ export {
     popupYesSkip,
     popupInput,
     popupInputWithPreview,
+    popupContactPermission,
     popupTOS,
     popupKeychainError,
     popup2FA,

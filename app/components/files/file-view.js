@@ -1,116 +1,105 @@
 import React from 'react';
 import { observer } from 'mobx-react/native';
-import { Text, View, TouchableOpacity } from 'react-native';
+import { View, Text } from 'react-native';
 import { action } from 'mobx';
-import moment from 'moment';
 import SafeComponent from '../shared/safe-component';
-import icons from '../helpers/icons';
 import { vars } from '../../styles/styles';
 import FileProgress from './file-progress';
-import FileActions from './file-actions';
 import { fileState } from '../states';
-import { tx } from '../utils/translator';
 import FileTypeIcon from './file-type-icon';
 import { fileHelpers } from '../../lib/icebear';
+import FileViewActionSheet from './file-view-action-sheet';
+import ButtonText from '../controls/button-text';
+import MenuIcon from '../layout/menu-icon';
+import { tx } from '../utils/translator';
 
-const firstRowStyle = {
-    flex: 0,
-    flexDirection: 'row',
-    marginTop: vars.spacing.small.maxi2x,
-    paddingRight: vars.spacing.medium.mini2x
+const textStyle = {
+    textAlign: 'center',
+    fontSize: vars.font.size.bigger,
+    color: vars.extraSubtleText,
+    marginBottom: vars.spacing.medium.mini2x
 };
 
-const secondRowStyle = {
-    marginTop: vars.spacing.medium.mini2x
+const fileProgressContainer = {
+    justifyContent: 'center',
+    height: vars.progressBarHeight,
+    paddingHorizontal: vars.spacing.huge.midi2x,
+    marginTop: vars.spacing.medium.midi2x,
+    marginBottom: vars.spacing.small.midi2x
 };
 
-const firstColumnStyle = {
-    flexGrow: 1,
-    flexShrink: 1,
-    paddingTop: vars.iconPadding
+const centered = {
+    alignItems: 'center'
 };
 
-const hintStyle = {
-    color: 'rgba(0,0,0,.54)'
-};
+let actionSheet = null;
 
 @observer
 export default class FileView extends SafeComponent {
+    get rightIcon() {
+        return (
+            <MenuIcon action={() => actionSheet.show()} />
+        );
+    }
+
     get file() {
         return fileState.currentFile || {};
     }
 
-    get actionsBar() {
-        return <FileActions file={this.file} />;
+    get enabled() {
+        return this.file && this.file.readyForDownload || fileState.showSelection;
     }
 
-    @action.bound fileAction() {
+    get fileExists() {
+        return !!this.file && !this.file.isPartialDownload && this.file.cached;
+    }
+
+    @action.bound onCancel() {
+        fileState.cancelDownload(this.file);
+    }
+
+    @action.bound onOpen() {
         const { file } = this;
-        const enabled = file && file.readyForDownload || fileState.showSelection;
-        if (enabled) {
-            if (file && !file.isPartialDownload && file.cached) {
-                file.launchViewer();
-            } else {
-                fileState.download(file);
-            }
-        }
+        file.launchViewer();
+    }
+
+    @action.bound onDownload() {
+        fileState.download(this.file);
     }
 
     renderThrow() {
-        const { file } = this;
-        let icon = null;
-        if (file.downloading) icon = 'file-download';
-        if (file.uploading) icon = 'file-upload';
-        if (icon) icon = icons.plaindark(icon, vars.iconFileViewSize);
-        return (
-            <View
-                style={{
-                    flexGrow: 1,
-                    justifyContent: 'space-between'
-                }}>
-                <View>
-                    <View style={firstRowStyle}>
-                        <View style={{
-                            marginLeft: vars.spacing.small.mini2x,
-                            marginRight: vars.spacing.small.maxi2x
-                        }}>
-                            <TouchableOpacity
-                                onPress={this.fileAction}
-                                pressRetentionOffset={vars.pressRetentionOffset}>
-                                {icon ||
-                                <FileTypeIcon
-                                    size="large"
-                                    type={fileHelpers.getFileIconType(file.ext)}
-                                />}
-                            </TouchableOpacity>
-                        </View>
-                        <View style={firstColumnStyle}>
-                            <View style={{ flexGrow: 1, flexShrink: 1 }}>
-                                <TouchableOpacity
-                                    onPress={this.fileAction}
-                                    pressRetentionOffset={vars.pressRetentionOffset}>
-                                    <Text
-                                        ellipsizeMode="tail"
-                                        numberOfLines={1}>{file.name}</Text>
-                                </TouchableOpacity>
-                            </View>
-                            <View style={secondRowStyle}>
-                                <View style={{ flexGrow: 1 }}>
-                                    <Text style={hintStyle}>{tx('title_fileSize')}</Text>
-                                    <Text>{file.sizeFormatted} {file.ext}</Text>
-                                </View>
+        const { file, enabled, fileExists } = this;
 
-                                <View style={{ flexGrow: 1 }}>
-                                    <Text style={hintStyle}>{tx('title_uploaded')}</Text>
-                                    <Text>{moment(file.uploadedAt).format(`MM/DD/YY HH:MM:SS a`)}</Text>
-                                </View>
-                            </View>
-                        </View>
-                    </View>
-                    <View style={secondRowStyle}>
-                        <FileProgress file={file} />
-                    </View>
+        let button;
+        if (file.downloading) {
+            button = <ButtonText text={tx('button_cancel')} onPress={this.onCancel} disabled={!enabled} />;
+        } else if (fileExists) {
+            button = <ButtonText text={tx('button_open')} onPress={this.onOpen} disabled={!enabled} />;
+        } else {
+            button = <ButtonText text={tx('button_download')} onPress={this.onDownload} disabled={!enabled} />;
+        }
+
+        return (
+            <View style={{ flexGrow: 1, justifyContent: 'center', backgroundColor: vars.darkBlueBackground05 }}>
+                <View style={centered}>
+                    {<FileTypeIcon size="medium" type={fileHelpers.getFileIconType(file.ext)} /> }
                 </View>
+
+                <View style={fileProgressContainer}>
+                    {file.downloading && <FileProgress file={file} />}
+                </View>
+
+                <View style={centered}>
+                    <Text style={textStyle}>
+                        {tx(file.downloading
+                            ? 'title_downloadingFile'
+                            : 'title_noPreview'
+                        )}
+                    </Text>
+                    {button}
+                </View>
+
+                <FileViewActionSheet ref={ref => { actionSheet = ref; }} />
             </View>
         );
     }

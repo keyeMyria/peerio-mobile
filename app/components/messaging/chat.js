@@ -256,20 +256,6 @@ export default class Chat extends SafeComponent {
         );
     }
 
-    get archiveNotice() {
-        return true || this.props.archiveNotice ? ( // eslint-disable-line
-            <Text style={{
-                textAlign: 'left',
-                marginTop: 0,
-                marginRight: vars.spacing.medium.mini2x,
-                marginBottom: vars.spacing.medium.mini2x,
-                color: vars.txtMedium
-            }}>
-                {tx('title_chatArchive')}
-            </Text>
-        ) : null;
-    }
-
     @computed get zeroStateItem() {
         const { chat } = this;
         if (chat.isInvite) return this.zeroStateChatInvite;
@@ -313,7 +299,6 @@ export default class Chat extends SafeComponent {
                 }}>
                     {tx('title_chatBeginning', { chatName: chat.name })}
                 </Text>
-                {this.archiveNotice}
                 <IdentityVerificationNotice fullWidth />
             </View>
         );

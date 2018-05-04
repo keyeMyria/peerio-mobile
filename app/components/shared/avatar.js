@@ -293,11 +293,6 @@ export default class Avatar extends SafeComponent {
         return (paddingVertical || paddingTop) ? { paddingVertical, paddingTop } : null;
     }
 
-    get checkedStyle() {
-        if (this.props.checkbox) return null;
-        return { backgroundColor: vars.peerioBlue };
-    }
-
     get avatar() {
         if (this.props.hideAvatar) return null;
         const { height } = this.props;

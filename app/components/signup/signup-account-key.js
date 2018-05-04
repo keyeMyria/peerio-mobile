@@ -153,7 +153,7 @@ export default class SignupStep1 extends LoginWizardPage {
                 </ViewShot>
                 <View style={buttonRowStyle}>
                     {this.button('button_back', () => signupState.prev())}
-                    {this.button(signupState.keyBackedUp ? 'button_finish' : 'button_next', () => signupState.next(), false, !signupState.nextAvailable)}
+                    {this.button('button_next', () => signupState.next(), false, !signupState.nextAvailable)}
                 </View>
                 <SignupAvatarActionSheet ref={sheet => { this._actionSheet = sheet; }} />
                 <ActivityOverlay large visible={signupState.isInProgress} />

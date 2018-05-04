@@ -1,39 +1,43 @@
 import React from 'react';
+import { when } from 'mobx';
 import { observer } from 'mobx-react/native';
-import { observable, when } from 'mobx';
 import ActionSheet from 'react-native-actionsheet';
 import SafeComponent from '../shared/safe-component';
-import routerModal from '../routes/router-modal';
 import fileState from '../files/file-state';
 import { tx } from '../utils/translator';
 import routes from '../routes/routes';
+import routerModal from '../routes/router-modal';
 
 @observer
-export default class InlineFileActionSheet extends SafeComponent {
-    @observable file;
-
-    sharefile = () => {
-        fileState.currentFile = this.file;
-        routerModal.shareFileTo();
-    };
-
+export default class FileViewActionSheet extends SafeComponent {
     get fileExists() {
-        return this.file && !this.file.isPartialDownload && this.file.cached;
+        const file = fileState.currentFile;
+        return !!file && !file.isPartialDownload && file.cached;
     }
 
     get openItem() {
+        const file = fileState.currentFile;
         const title = this.fileExists ? tx('button_open') : tx('button_download');
         return {
             title,
             action: () => {
-                when(() => this.fileExists, this.file.launchViewer());
-                if (!this.file.cached) fileState.download(this.file);
+                when(() => this.fileExists, file.launchViewer());
+                if (!file.cached) fileState.download(file);
             }
         };
     }
 
+    shareFile = () => {
+        routerModal.shareFileTo();
+    };
+    get shareItem() {
+        return {
+            title: tx('button_share'),
+            action: () => this.shareFile()
+        };
+    }
+
     moveFile = () => {
-        fileState.currentFile = this.file;
         routes.modal.moveFileTo();
     };
     get moveItem() {
@@ -44,7 +48,6 @@ export default class InlineFileActionSheet extends SafeComponent {
     }
 
     deleteFile = () => {
-        fileState.currentFile = this.file;
         fileState.delete();
     };
     get deleteItem() {
@@ -58,9 +61,10 @@ export default class InlineFileActionSheet extends SafeComponent {
         const array = [];
         array.push(this.openItem);
         if (this.fileExists) { array.push(this.moveItem); }
-        array.push({ title: tx('button_share'), action: this.sharefile });
+        array.push(this.shareItem);
         if (this.fileExists) { array.push(this.deleteItem); }
         array.push({ title: tx('button_cancel') });
+
         return array;
     }
 
@@ -69,10 +73,7 @@ export default class InlineFileActionSheet extends SafeComponent {
         action && action();
     };
 
-    show = (file) => {
-        this.file = file;
-        this._actionSheet.show();
-    };
+    show = () => this._actionSheet.show();
 
     renderThrow() {
         return (

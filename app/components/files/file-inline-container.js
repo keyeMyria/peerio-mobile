@@ -41,7 +41,7 @@ const text = {
 export default class FileInlineContainer extends SafeComponent {
     render() {
         const { file, isImage, isOpen, extraActionIcon } = this.props;
-        const { title, description, fileId, downloading } = file;
+        const { title, description, fileId, downloading, name } = file;
         const isLocal = !!fileId;
         const spacingDifference = padding - vars.progressBarHeight;
         let containerHeight = isLocal ? 30 : 0;
@@ -57,7 +57,6 @@ export default class FileInlineContainer extends SafeComponent {
             paddingBottom: (isLocal && isOpen) ? (padding + borderWidth) : 0,
             height: containerHeight
         };
-        const name = isImage ? file.name : `${file.name} (${file.sizeFormatted})`;
         return (
             <View style={container}>
                 <View style={outer} {...this.props}>
@@ -65,15 +64,17 @@ export default class FileInlineContainer extends SafeComponent {
                         {!!title && <Text style={titleText}>{title}</Text>}
                         {!!description && <Text style={descText}>{description}</Text>}
                     </View>
-                    <View style={[header, { marginBottom: downloading && !isImage ? spacingDifference : 0 }]}>
+                    <View style={header}>
                         {isLocal && <FileTypeIcon type={fileHelpers.getFileIconType(file.ext)} size="smaller" />}
                         {!!name && <Text numberOfLines={1} ellipsizeMode="tail" style={text}>{name}</Text>}
                         {isLocal && <View style={{ flexDirection: 'row' }}>
                             {extraActionIcon}
-                            {!downloading && icons.darkNoPadding(
+                            {icons.darkNoPadding(
                                 'more-vert',
                                 () => this.props.onAction(file),
-                                { marginHorizontal: vars.spacing.small.midi2x }
+                                { marginHorizontal: vars.spacing.small.midi2x },
+                                null,
+                                downloading ? true : null
                             )}
                         </View>}
                     </View>

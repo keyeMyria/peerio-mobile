@@ -22,6 +22,10 @@ import { vars } from '../../styles/styles';
 
 const INITIAL_LIST_SIZE = 10;
 
+const viewabilityConfig = {
+    viewAreaCoveragePercentThreshold: 100
+};
+
 // action sheet is outside of component scope for a reason.
 let actionSheet = null;
 
@@ -155,18 +159,22 @@ export default class ChatList extends SafeComponent {
     }
 
     @computed get topIndicatorVisible() {
+        // if view hasn't been updated with viewable range
+        if (this.minSectionIndex === null) return false;
         const pos = this.firstUnreadItemPosition;
         if (!pos) return false;
         if (pos.section < this.minSectionIndex) return true;
-        if (pos.section === this.minSectionIndex) return pos.index < this.minItemIndex;
+        if (pos.section === this.minSectionIndex) return pos.index < this.minItemIndex - 1;
         return false;
     }
 
     @computed get bottomIndicatorVisible() {
+        // if view hasn't been updated with viewable range
+        if (this.maxSectionIndex === null) return false;
         const pos = this.lastUnreadItemPosition;
         if (!pos) return false;
         if (pos.section > this.maxSectionIndex) return true;
-        if (pos.section === this.maxSectionIndex) return pos.index > this.maxItemIndex;
+        if (pos.section === this.maxSectionIndex) return pos.index >= this.maxItemIndex;
         return false;
     }
 
@@ -250,7 +258,8 @@ export default class ChatList extends SafeComponent {
                 getItemLayout={this.getItemLayout}
                 stickySectionHeadersEnabled={false}
                 keyExtractor={this.keyExtractor}
-                {...scrollHelper}
+                viewabilityConfig={viewabilityConfig}
+                // {...scrollHelper} TODO removed temporarily because it breaks unread message indicator
             />
         );
     }
