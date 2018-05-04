@@ -6,7 +6,7 @@ import { vars } from '../../styles/styles';
 export default class FileTypeIcon extends React.Component {
     /* props
         size: small, medium, large
-        type: img, audio, video, txt, zip, pdf, ai, psd, word, xls, ppt, other
+        type: image, audio, video, txt, zip, pdf, ai, psd, word, xls, ppt, other
     */
 
     render() {
@@ -31,7 +31,7 @@ export default class FileTypeIcon extends React.Component {
         const fileType = this.props.type;
         let iconSource;
         switch (fileType) {
-            case 'img':
+            case 'image':
                 iconSource = require('../../assets/file_icons/detail_view/ic-mobile-file-img-160dp.png');
                 break;
             case 'audio':

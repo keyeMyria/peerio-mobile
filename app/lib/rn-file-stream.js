@@ -5,6 +5,7 @@ import pathUtils from 'path';
 
 const icebear = require('./peerio-icebear');
 
+const { fileHelpers } = icebear;
 const { bytesToB64, b64ToBytes } = icebear.crypto.cryptoUtil;
 
 const ROOT = Platform.OS === 'ios' ? RNFS.CachesDirectoryPath : RNFS.ExternalDirectoryPath;
@@ -84,7 +85,9 @@ export default (fileStream) => {
          */
         static launchViewer(path, title) {
             console.debug(`rn-file-stream.js: opening viewer for ${path}`);
-            return FileOpener.open(path, 'image/jpeg', title || path);
+            const extension = fileHelpers.getFileExtension(path);
+            const mimeType = fileHelpers.getMimeType(extension);
+            return FileOpener.open(path, mimeType, title || path);
         }
 
         static getStat(path) {
