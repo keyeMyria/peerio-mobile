@@ -315,6 +315,7 @@ export default class Chat extends SafeComponent {
                 }}>
                     {tx('title_chatBeginning', { chatName: chat.name })}
                 </Text>
+                {this.archiveNotice}
                 <IdentityVerificationNotice fullWidth />
             </View>
         );
