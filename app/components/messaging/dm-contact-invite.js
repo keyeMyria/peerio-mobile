@@ -53,31 +53,13 @@ export default class DmContactInvite extends SafeComponent {
     get leftIcon() { return <BackIcon action={routerMain.chats} />; }
 
     @action.bound async decline() {
-        const { chat } = this;
-        const { id } = chat;
-        let newChat = null;
-        try {
-            this.waiting = true;
-            newChat = await chatState.store.getChatWhenReady(id);
-            newChat.dismiss();
-        } catch (e) {
-            console.error(e);
-        }
+        this.chat.dismiss();
         routerMain.chats();
     }
 
     @action.bound async accept() {
-        const { chat } = this;
-        const { id } = chat;
-        let newChat = null;
-        try {
-            this.waiting = true;
-            newChat = await chatState.store.getChatWhenReady(id);
-            newChat.start();
-        } catch (e) {
-            console.error(e);
-        }
-        routerMain.chats(newChat);
+        this.chat.start();
+        routerMain.chats(this.chat);
     }
 
     renderThrow() {
