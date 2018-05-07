@@ -1,6 +1,7 @@
 import React from 'react';
 import { observer } from 'mobx-react/native';
-import { View, ScrollView, Share, Text, Platform } from 'react-native';
+import { View, ScrollView, Share, Platform } from 'react-native';
+import Text from '../controls/custom-text';
 import SafeComponent from '../shared/safe-component';
 import { vars } from '../../styles/styles';
 import SettingsItem from './settings-item';

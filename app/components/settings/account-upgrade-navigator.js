@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { View, Text, Dimensions, TouchableOpacity } from 'react-native';
+import { View, Dimensions, TouchableOpacity } from 'react-native';
 import { observer } from 'mobx-react/native';
+import Text from '../controls/custom-text';
 import { vars } from '../../styles/styles';
 import icons from '../helpers/icons';
 import plans from '../payments/payments-config';

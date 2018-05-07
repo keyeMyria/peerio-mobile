@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
-import {
-    Text,
-    TouchableOpacity,
-    View
-} from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
+import Text from '../controls/custom-text';
 import { t } from '../utils/translator';
 import loginState from './login-state';
-import { common, button, wizard } from '../../styles/styles';
+import { vars, common, button, wizard } from '../../styles/styles';
 
 export default class LoginSavedFooter extends Component {
     render() {
@@ -18,12 +15,12 @@ export default class LoginSavedFooter extends Component {
                     <TouchableOpacity
                         style={button.base}
                         onPress={() => enabled && loginState.useMasterPassword()}>
-                        <Text style={button.text.normal}>{t('button_useAccountKey')}</Text>
+                        <Text style={{ color: vars.highlight }}>{t('button_useAccountKey')}</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
                         style={button.base}
                         onPress={() => enabled && loginState.changeUserAction()}>
-                        <Text style={button.text.normal}>{t('button_changeUserMobile')}</Text>
+                        <Text style={{ color: vars.highlight }}>{t('button_changeUserMobile')}</Text>
                     </TouchableOpacity>
                 </View>
             </View>

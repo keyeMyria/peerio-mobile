@@ -1,5 +1,6 @@
 import React from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
+import Text from '../controls/custom-text';
 import { vars } from '../../styles/styles';
 import { tu } from '../utils/translator';
 import testLabel from '../helpers/test-label';
@@ -54,8 +55,7 @@ export default {
                     onPress={disabled ? null : onPress}
                     pressRetentionOffset={vars.pressRetentionOffset}
                     style={buttonStyle}>
-                    <Text
-                        style={{ fontWeight: 'bold', color: disabled ? vars.txtMedium : vars.peerioPurple }}>
+                    <Text bold style={{ color: disabled ? vars.txtMedium : vars.peerioBlue }}>
                         {tu(text)}
                     </Text>
                 </TouchableOpacity>
@@ -77,7 +77,7 @@ export default {
                 onPress={disabled ? null : onPress}
                 pressRetentionOffset={vars.pressRetentionOffset}
                 style={buttonStyle}>
-                <Text style={{ fontWeight: 'bold', textAlign: 'center', color: vars.white }}>
+                <Text bold style={{ textAlign: 'center', color: vars.white }}>
                     {tu(text)}
                 </Text>
             </TouchableOpacity>
@@ -107,7 +107,7 @@ export default {
                 pressRetentionOffset={vars.pressRetentionOffset}
                 style={touchableStyle}>
                 <View style={buttonStyle}>
-                    <Text style={{ fontWeight: 'bold', textAlign: 'center', color: vars.white }}>
+                    <Text bold style={{ textAlign: 'center', color: vars.white }}>
                         {tu(text)}
                     </Text>
                 </View>
@@ -125,7 +125,7 @@ export default {
                 onPress={disabled ? null : onPress}
                 pressRetentionOffset={vars.pressRetentionOffset}
                 style={buttonStyle}>
-                <Text style={{ fontWeight: 'bold', color: disabled ? vars.txtMedium : vars.red }}>
+                <Text bold style={{ color: disabled ? vars.txtMedium : vars.red }}>
                     {tu(text)}
                 </Text>
             </TouchableOpacity>

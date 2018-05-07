@@ -2,7 +2,6 @@ import { observable, action } from 'mobx';
 import { User, chatStore, TinyDb } from '../../lib/icebear';
 import keychain from '../../lib/keychain-bridge';
 import RoutedState from '../routes/routed-state';
-import preferenceStore from '../settings/preference-store';
 import { popupYes } from '../shared/popups';
 import { tx } from '../utils/translator';
 
@@ -36,10 +35,6 @@ class MainState extends RoutedState {
         }
         this.loading = false;
         console.log('main-state.js: loaded');
-    }
-
-    @action async init() {
-        preferenceStore.init();
     }
 
     @action async checkPin() {

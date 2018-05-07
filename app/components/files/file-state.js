@@ -179,6 +179,11 @@ class FileState extends RoutedState {
         return popupYesCancel(tx('title_confirmCancelUpload')).then(r => r && file.cancelUpload());
     }
 
+
+    cancelDownload(file) {
+        file.cancelDownload();
+    }
+
     onTransition(active, file) {
         console.log('files on transition');
         clientApp.isInFilesView = active && !!file;

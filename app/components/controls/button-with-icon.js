@@ -1,12 +1,9 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import {
-    View,
-    Text,
-    TouchableOpacity
-} from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { vars, button } from '../../styles/styles';
+import Text from '../controls/custom-text';
+import { vars } from '../../styles/styles';
 import testLabel from '../helpers/test-label';
 
 const defaultTextStyle = {
@@ -21,14 +18,8 @@ const containerStyle = {
 
 export default class ButtonWithIcon extends Component {
     render() {
-        const style = button;
-        let textStyle = this.props.bold ?
-            style.text.bold : style.text.normal;
+        const { textStyle } = this.props;
         const opacity = { opacity: this.props.disabled ? 0.5 : 1 };
-        if (this.props.textStyle) {
-            textStyle = [textStyle, this.props.textStyle];
-        }
-
         const text = this.props.text || '';
         const press = () => {
             !this.props.disabled && this.props.onPress && this.props.onPress();
@@ -47,7 +38,7 @@ export default class ButtonWithIcon extends Component {
                         size={vars.iconSize}
                         color="gray"
                     />
-                    <Text style={[defaultTextStyle, textStyle, opacity]}>
+                    <Text bold={this.props.bold} style={[{ color: vars.highlight }, defaultTextStyle, textStyle, opacity]}>
                         {text}
                     </Text>
                 </View>

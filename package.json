@@ -1,6 +1,6 @@
 {
   "name": "peeriomobile",
-  "version": "3.274.0",
+  "version": "3.277.0",
   "private": true,
   "scripts": {
     "postinstall": "./scripts/setup-env.sh && npm run icebear:compile && ./scripts/setup-rn-debugging.sh && ./scripts/copy-android-resources.sh && ./scripts/android-switch-to-rn-fork.sh && node scripts/test-deps.js",
@@ -82,6 +82,7 @@
     "react-native-push-notification": "3.0.0",
     "react-native-randombytes": "2.1.0",
     "react-native-restart": "github:PeerioTechnologies/react-native-restart",
+    "react-native-section-list-get-item-layout": "2.2.2",
     "react-native-share": "1.0.19",
     "react-native-sound": "github:PeerioTechnologies/react-native-sound#fix-android-notification-sound",
     "react-native-sqlcipher-storage": "github:PeerioTechnologies/react-native-sqlcipher-storage",
@@ -97,7 +98,7 @@
   "devDependencies": {
     "appium": "1.7.1",
     "authorize-ios": "1.0.4",
-    "babel-eslint": "8.0.2",
+    "babel-eslint": "8.2.3",
     "babel-plugin-console-kungfu": "github:PeerioTechnologies/babel-plugin-console-kungfu#v1.0.0",
     "babel-plugin-transform-async-to-bluebird": "1.1.1",
     "babel-plugin-transform-decorators-legacy": "1.3.4",

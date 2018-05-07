@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { observer } from 'mobx-react/native';
-import { Text } from 'react-native';
+import Text from '../controls/custom-text';
 import SafeComponent from '../shared/safe-component';
 import Avatar from '../shared/avatar';
 import contactState from './contact-state';
@@ -27,7 +27,7 @@ export default class ContactItem extends SafeComponent {
                 contact={contact}
                 isDeleted={isDeleted}
                 title={username || email}
-                title2={fullName || <Text style={{ fontStyle: 'italic' }}>(invited)</Text>}
+                title2={fullName || <Text italic>(invited)</Text>}
                 hideOnline
                 invited={isInvited} />
         );

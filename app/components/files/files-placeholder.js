@@ -1,6 +1,7 @@
 import React from 'react';
 import { observer } from 'mobx-react/native';
-import { View, Text, Dimensions, Image } from 'react-native';
+import { View, Dimensions, Image } from 'react-native';
+import Text from '../controls/custom-text';
 import SafeComponent from '../shared/safe-component';
 import { tx } from '../utils/translator';
 import { vars } from '../../styles/styles';

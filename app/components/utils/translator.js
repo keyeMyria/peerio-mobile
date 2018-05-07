@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { Text } from 'react-native';
 import { t, has } from 'peerio-translator';
 import { reaction } from 'mobx';
+import Text from '../controls/custom-text';
 import uiState from '../layout/ui-state';
 
 class T extends Component {

@@ -65,6 +65,18 @@
 		<string>Zocial.ttf</string>
 		<string>MaterialCommunityIcons.ttf</string>
 		<string>SimpleLineIcons.ttf</string>
+		<string>OpenSans.ttf</string>
+		<string>OpenSansBold.ttf</string>
+		<string>OpenSansBoldItalic.ttf</string>
+		<string>OpenSansItalic.ttf</string>
+		<string>OpenSansSemiBold.ttf</string>
+		<string>OpenSansSemiBoldItalic.ttf</string>
+		<string>OpenSans-Bold.ttf</string>
+		<string>OpenSans-BoldItalic.ttf</string>
+		<string>OpenSans-Italic.ttf</string>
+		<string>OpenSans-Regular.ttf</string>
+		<string>OpenSans-SemiBold.ttf</string>
+		<string>OpenSans-SemiBoldItalic.ttf</string>
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>

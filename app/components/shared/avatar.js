@@ -1,8 +1,9 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { observer } from 'mobx-react/native';
-import { View, Text, TouchableOpacity, Dimensions, LayoutAnimation, Linking } from 'react-native';
+import { View, TouchableOpacity, Dimensions, LayoutAnimation, Linking } from 'react-native';
 import { observable, reaction } from 'mobx';
+import Text from '../controls/custom-text';
 import SafeComponent from '../shared/safe-component';
 import icons from '../helpers/icons';
 import { vars } from '../../styles/styles';
@@ -90,7 +91,6 @@ const fullnameTextStyle = {
 
 const usernameTextStyle = {
     color: vars.txtMedium,
-    fontStyle: 'italic',
     fontSize: vars.font.size.normal,
     fontWeight: 'normal'
 };
@@ -104,7 +104,6 @@ const lastMessageTextStyle = {
     flex: 1,
     flexGrow: 1,
     flexShrink: 1,
-    fontWeight: vars.font.weight.regular,
     color: vars.txtMedium,
     fontSize: vars.font.size.normal,
     lineHeight: 22,
@@ -112,12 +111,7 @@ const lastMessageTextStyle = {
     borderColor: 'green'
 };
 
-const systemMessageStyle = {
-    fontStyle: 'italic'
-};
-
 const lastMessageWithIcon = {
-    fontWeight: vars.font.weight.regular,
     color: vars.txtMedium,
     fontSize: vars.font.size.normal,
     lineHeight: 22,
@@ -216,7 +210,7 @@ export default class Avatar extends SafeComponent {
             );
         }
         return systemMessage && (
-            <Text style={[lastMessageTextStyle, systemMessageStyle]}>
+            <Text italic style={lastMessageTextStyle}>
                 {systemMessage}
             </Text>
         );
@@ -258,18 +252,18 @@ export default class Avatar extends SafeComponent {
 
     get fileUnavailable() {
         return this.props.hasDeletedFile ?
-            <Text style={{ fontStyle: 'italic' }}>
+            <Text italic>
                 {tx('error_fileDeleted')}
             </Text> : null;
     }
 
     get date() {
         const unreadStyle = this.props.unread
-            ? { color: vars.peerioBlue, fontWeight: '600' }
+            ? { color: vars.peerioBlue }
             : null;
         const { timestampText } = this.props;
         return timestampText ?
-            <Text style={[dateTextStyle, unreadStyle]}>
+            <Text semibold={this.props.unread} style={[dateTextStyle, unreadStyle]}>
                 {timestampText}
             </Text> : null;
     }
@@ -291,11 +285,6 @@ export default class Avatar extends SafeComponent {
         const paddingVertical = this.props.extraPaddingVertical;
         const paddingTop = this.props.extraPaddingTop;
         return (paddingVertical || paddingTop) ? { paddingVertical, paddingTop } : null;
-    }
-
-    get checkedStyle() {
-        if (this.props.checkbox) return null;
-        return { backgroundColor: vars.peerioBlue };
     }
 
     get avatar() {
@@ -325,15 +314,12 @@ export default class Avatar extends SafeComponent {
     }
 
     get title() {
-        const unreadStyle = this.props.unread
-            ? { fontWeight: '600' }
-            : null;
         const { contact, title, title2 } = this.props;
         return (
             <View style={nameContainerStyle}>
                 <View style={{ flexShrink: 1, flexDirection: 'row', alignItems: 'center' }}>
                     <Text ellipsizeMode="tail" numberOfLines={title2 ? 2 : 1}>
-                        <Text style={[nameTextStyle, unreadStyle]}>
+                        <Text semibold={this.props.unread} style={nameTextStyle}>
                             {title ||
                                 <Text>
                                     {contact ? contact.fullName : ''}
@@ -354,19 +340,15 @@ export default class Avatar extends SafeComponent {
     }
 
     get name() {
-        const fullnameBoldStyle = this.props.fullnameIsBold ? { fontWeight: vars.font.weight.bold } : null;
-        const unreadStyle = this.props.unread
-            ? { fontWeight: vars.font.weight.seminBold }
-            : null;
         const { contact, title } = this.props;
         const text = contact ? contact.username : title;
         return (
             <View style={nameContainerStyle}>
                 <View style={{ flexShrink: 1, flexDirection: 'row', alignItems: 'center' }}>
                     <Text ellipsizeMode="tail" numberOfLines={1}>
-                        <Text style={[fullnameTextStyle, unreadStyle, fullnameBoldStyle]}>
+                        <Text bold={this.props.fullnameIsBold} semibold={this.props.unread} style={fullnameTextStyle}>
                             {contact ? contact.fullName : ''}
-                            <Text style={[usernameTextStyle, unreadStyle]}>
+                            <Text semibold={this.props.unread} italic style={usernameTextStyle}>
                                 {` `}{text}
                             </Text>
                         </Text>

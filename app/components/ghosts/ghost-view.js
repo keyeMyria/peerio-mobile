@@ -1,6 +1,6 @@
 import React from 'react';
 import { observer } from 'mobx-react/native';
-import { Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import Share from 'react-native-share';
 import moment from 'moment';
 import SafeComponent from '../shared/safe-component';
@@ -28,7 +28,7 @@ const lightText = {
 };
 
 const boldText = {
-    fontWeight: 'bold',
+    fontWeight: '700',
     fontSize: vars.font.size.big,
     height: 36
 };

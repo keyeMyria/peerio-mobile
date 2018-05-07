@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import { Animated, View, Text, Image, Easing } from 'react-native';
+import { Animated, View, Image, Easing } from 'react-native';
 import { observer } from 'mobx-react/native';
 import { observable, computed } from 'mobx';
+import Text from '../controls/custom-text';
 import { vars } from '../../styles/styles';
 import loginState from '../login/login-state';
-import routerApp from '../routes/router-app';
+import routes from '../routes/routes';
 import { socket } from '../../lib/icebear';
 import { promiseWhen } from '../helpers/sugar';
-import routerMain from '../routes/router-main';
 import { tx } from '../utils/translator';
 import SnackBarConnection from '../snackbars/snackbar-connection';
 
@@ -54,14 +54,14 @@ export default class LoadingScreen extends Component {
             this.goToNextStep();
             await promiseWhen(() => socket.authenticated);
             this.goToNextStep();
-            await promiseWhen(() => routerMain.chatStateLoaded);
+            await promiseWhen(() => routes.main.chatStateLoaded);
             this.goToNextStep();
-            await promiseWhen(() => routerMain.fileStateLoaded);
+            await promiseWhen(() => routes.main.fileStateLoaded);
             this.goToNextStep();
-            await promiseWhen(() => routerMain.contactStateLoaded);
+            await promiseWhen(() => routes.main.contactStateLoaded);
         } catch (e) {
             console.log('loading-screen.js: loading screen error');
-            if (!loginState.loaded) routerApp.routes.loginStart.transition();
+            if (!loginState.loaded) routes.app.routes.loginStart.transition();
             console.error(e);
             return;
         }

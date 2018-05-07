@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 import { observer } from 'mobx-react/native';
+import Text from '../controls/custom-text';
 import SafeComponent from '../shared/safe-component';
 import LayoutModalExit from '../layout/layout-modal-exit';
 import contactState from '../contacts/contact-state';
@@ -40,10 +41,10 @@ export default class ContactView extends SafeComponent {
                     </View>
                     <View style={{ flexGrow: 1, flexShrink: 1 }}>
                         <Text
+                            bold
                             ellipsizeMode="tail"
                             numberOfLines={2}
                             style={{
-                                fontWeight: 'bold',
                                 color: vars.txtDark,
                                 fontSize: vars.font.size.bigger,
                                 marginVertical: vars.spacing.small.mini2x
@@ -71,10 +72,10 @@ export default class ContactView extends SafeComponent {
                     </View>
                     <View style={{ flexGrow: 1, flexShrink: 1 }}>
                         <Text
+                            bold
                             ellipsizeMode="tail"
                             numberOfLines={2}
                             style={{
-                                fontWeight: 'bold',
                                 color: vars.txtDark,
                                 fontSize: vars.font.size.bigger,
                                 marginVertical: vars.spacing.small.mini2x

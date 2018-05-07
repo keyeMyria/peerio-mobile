@@ -1,29 +1,29 @@
 import React from 'react';
-import { TouchableOpacity, View, Text, Image } from 'react-native';
+import { TouchableOpacity, View, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Jumpy from '../shared/jumpy';
 import { vars } from '../../styles/styles';
 import testLabel from '../helpers/test-label';
+import Text from '../controls/custom-text';
 
 const goStyle = {
     fontSize: vars.font.size.normal,
-    fontWeight: vars.font.weight.semiBold,
     color: vars.peerioBlue
 };
 
 const disabledStyle = {
     fontSize: vars.font.size.normal,
-    fontWeight: vars.font.weight.semiBold,
     color: vars.disabled
 };
 
 const icons = {
-    basic(name, color, onPress, style, size, noPadding, testID) {
+    basic(name, color, onPress, style, size, noPadding, testID, disabled) {
         return (
             <TouchableOpacity
                 pressRetentionOffset={vars.retentionOffset}
                 onPress={onPress}
                 style={{ justifyContent: 'center' }}
+                disabled={disabled}
                 {...testLabel(testID)}>
                 <View style={{ padding: noPadding ? 0 : vars.iconPadding }}>
                     <Icon
@@ -71,8 +71,9 @@ const icons = {
         return icons.basic(name, vars.gold, onPress, style, size);
     },
 
-    darkNoPadding(name, onPress, style, size) {
-        return icons.basic(name, vars.darkIcon, onPress, style, size, true);
+    darkNoPadding(name, onPress, style, size, disabled) {
+        const iconStyle = disabled ? vars.disabledIcon : vars.darkIcon;
+        return icons.basic(name, iconStyle, onPress, style, size, true, undefined, disabled);
     },
 
     colored(name, onPress, colorFg, backgroundColor, testId) {
@@ -106,7 +107,7 @@ const icons = {
                 onPress={onPress}
                 {...testLabel(testID)}>
                 <View style={{ height: size, width: size, alignItems: 'center', justifyContent: 'center' }}>
-                    <Text style={[goStyle, style]}>{text}</Text>
+                    <Text semibold style={[goStyle, style]}>{text}</Text>
                 </View>
             </TouchableOpacity>
         );
@@ -118,7 +119,7 @@ const icons = {
             <TouchableOpacity
                 pressRetentionOffset={vars.retentionOffset} >
                 <View style={{ height: size, width: size, alignItems: 'center', justifyContent: 'center' }}>
-                    <Text style={[disabledStyle, style]}>{text}</Text>
+                    <Text semibold style={[disabledStyle, style]}>{text}</Text>
                 </View>
             </TouchableOpacity>
         );
@@ -141,12 +142,11 @@ const icons = {
         const textStyle = {
             color: fgColor,
             fontSize: vars.font.size.normal,
-            fontWeight: vars.font.weight.bold,
             textAlign: 'center'
         };
         return (
             <View style={notificationStyle}>
-                <Text style={textStyle}>{`${text}`} </Text>
+                <Text bold style={textStyle}>{`${text}`} </Text>
             </View>
         );
     },

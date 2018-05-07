@@ -1,6 +1,6 @@
 import React from 'react';
 import { observer } from 'mobx-react/native';
-import { View, ScrollView, Text, TouchableOpacity, LayoutAnimation, Share } from 'react-native';
+import { View, ScrollView, TouchableOpacity, LayoutAnimation, Share } from 'react-native';
 import { observable, reaction, when } from 'mobx';
 import ProgressOverlay from '../shared/progress-overlay';
 import SafeComponent from '../shared/safe-component';
@@ -13,6 +13,7 @@ import contactState from './contact-state';
 import snackbarState from '../snackbars/snackbar-state';
 import buttons from '../helpers/buttons';
 import testLabel from '../helpers/test-label';
+import Text from '../controls/custom-text';
 
 const textinputContainer = {
     backgroundColor: vars.white,
@@ -46,7 +47,8 @@ const textinput = {
     color: vars.txtDark,
     marginLeft: vars.inputPaddingLeft,
     flex: 1,
-    flexGrow: 1
+    flexGrow: 1,
+    fontFamily: vars.peerioFontFamily
 };
 
 const textStatic = {
@@ -169,7 +171,7 @@ export default class ContactAdd extends SafeComponent {
                 onPress={disabled ? null : onPress}
                 pressRetentionOffset={vars.pressRetentionOffset}
                 style={{ paddingRight: vars.spacing.small.maxi2x, paddingVertical: vars.spacing.small.maxi }}>
-                <Text style={{ fontWeight: 'bold', color: disabled ? vars.txtMedium : vars.peerioBlue }}>
+                <Text bold style={{ color: disabled ? vars.txtMedium : vars.peerioBlue }}>
                     {tu(text)}
                 </Text>
             </TouchableOpacity>

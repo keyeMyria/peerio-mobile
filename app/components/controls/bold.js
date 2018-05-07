@@ -1,17 +1,11 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import {
-    Text
-} from 'react-native';
-import { vars } from '../../styles/styles';
+import Text from '../controls/custom-text';
 
 export default class Bold extends Component {
     render() {
-        const style = {
-            fontWeight: vars.font.weight.bold
-        };
         return (
-            <Text style={[style, this.props.style]}>
+            <Text bold style={this.props.style}>
                 {this.props.children}
             </Text>
         );

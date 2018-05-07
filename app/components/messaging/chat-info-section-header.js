@@ -1,8 +1,9 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { observer } from 'mobx-react/native';
-import { Text, TouchableOpacity } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import Text from '../controls/custom-text';
 import SafeComponent from '../shared/safe-component';
 import { vars } from '../../styles/styles';
 
@@ -24,16 +25,12 @@ export default class ChatInfoSectionHeader extends SafeComponent {
             marginLeft: vars.spacing.medium.mini2x,
             marginRight: vars.spacing.medium.mini2x
         };
-
-        const textStyle = {
-            fontWeight: 'bold',
-            color: vars.subtleText
-        };
+        const textStyle = { color: vars.subtleText };
         return (
             <TouchableOpacity
                 pressRetentionOffset={vars.retentionOffset}
                 style={style} onPress={toggleCollapsed} disabled={!collapsible}>
-                <Text style={textStyle}>{title}</Text>
+                <Text bold style={textStyle}>{title}</Text>
                 {collapsible &&
                 <Icon
                     name={collapsed
