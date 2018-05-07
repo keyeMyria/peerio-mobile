@@ -17,31 +17,31 @@ export default (c, icebear) => {
         setStringReplacement(replacementObject.original, replacementObject.replacement);
     });
     cfg.translator.urlMap = {
-        fingerprint: 'https://peerio.zendesk.com/hc/en-us/articles/204394135',
-        mpDetail: 'https://peerio.zendesk.com/hc/en-us/articles/214633103-What-is-a-Peerio-Master-Password-',
-        tfaDetail: 'https://peerio.zendesk.com/hc/en-us/articles/203665635-What-is-two-factor-authentication-',
-        msgSignature: 'https://peerio.zendesk.com/hc/en-us/articles/204394135',
+        fingerprint: whitelabel.FINGERPRINT || 'https://peerio.zendesk.com/hc/en-us/articles/204394135',
+        mpDetail: whitelabel.MP_DETAIL || 'https://peerio.zendesk.com/hc/en-us/articles/214633103-What-is-a-Peerio-Master-Password-',
+        tfaDetail: whitelabel.TFA_DETAIL || 'https://peerio.zendesk.com/hc/en-us/articles/203665635-What-is-two-factor-authentication-',
+        msgSignature: whitelabel.MSG_SIGNATURE || 'https://peerio.zendesk.com/hc/en-us/articles/204394135',
         upgrade: 'route:modal:accountUpgradeSwiper',
         createRoom: 'route:modal:createChannel',
         signup: 'route:app:signupStep1',
         settings: 'route:main:settings',
-        proWelcome: 'https://peerio.zendesk.com/hc/en-us/articles/208395556',
-        proAccount: 'https://account.peerio.com',
-        helpCenter: 'https://peerio.zendesk.com/',
-        contactSupport: 'https://peerio.zendesk.com/hc/en-us/requests/new',
+        proWelcome: whitelabel.PRO_WELCOME || 'https://peerio.zendesk.com/hc/en-us/articles/208395556',
+        proAccount: whitelabel.PRO_ACCOUNT || 'https://account.peerio.com',
+        helpCenter: whitelabel.HELP_CENTER || 'https://peerio.zendesk.com/',
+        contactSupport: whitelabel.CONTACT_SUPPORT || 'https://peerio.zendesk.com/hc/en-us/requests/new',
         socialShareUrl: whitelabel.SOCIAL_SHARE_URL || 'https://www.peerio.com/',
         googleAuth: 'https://support.google.com/accounts/answer/1066447?hl=en',
-        iosApp: 'https://itunes.apple.com/app/peerio-2/id1245026608',
-        androidApp: 'https://play.google.com/store/apps/details?id=com.peerio.app',
+        iosApp: whitelabel.IOS_APP || 'https://itunes.apple.com/app/peerio-2/id1245026608',
+        androidApp: whitelabel.ANDROID_APP || 'https://play.google.com/store/apps/details?id=com.peerio.app',
         googleAuthA: 'https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2&hl=en',
         googleAuthI: 'https://itunes.apple.com/app/google-authenticator/id388497605',
         authy: 'https://authy.com',
-        download: 'https://peerio.com',
-        learnUrlTracking: 'https://peerio.zendesk.com/hc/en-us/articles/115005090766',
-        identityVerification: 'https://peerio.zendesk.com/hc/en-us/articles/204480655-Verifying-a-Peerio-ID-',
+        download: whitelabel.DOWNLOAD || 'https://peerio.com',
+        learnUrlTracking: whitelabel.LEARN_URL_TRACKING || 'https://peerio.zendesk.com/hc/en-us/articles/115005090766',
+        identityVerification: whitelabel.IDENTITY_VERIFICATION || 'https://peerio.zendesk.com/hc/en-us/articles/204480655-Verifying-a-Peerio-ID-',
         jitsiLink: 'https://jitsi.org/',
-        termsUrl: 'https://peerio.com/conditions.html',
-        privacyUrl: 'https://peerio.com/privacy.html'
+        termsUrl: whitelabel.TERMS_URL || 'https://peerio.com/conditions.html',
+        privacyUrl: whitelabel.PRIVACY || 'https://peerio.com/privacy.html'
     };
 
     setUrlMap(cfg.translator.urlMap);
