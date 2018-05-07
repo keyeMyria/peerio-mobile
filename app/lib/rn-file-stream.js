@@ -2,6 +2,7 @@ import { Platform, NativeModules } from 'react-native';
 import RNFS from 'react-native-fs';
 import FileOpener from 'react-native-file-opener';
 import pathUtils from 'path';
+import mime from 'mime-types';
 
 const icebear = require('./peerio-icebear');
 
@@ -86,7 +87,7 @@ export default (fileStream) => {
         static launchViewer(path, title) {
             console.debug(`rn-file-stream.js: opening viewer for ${path}`);
             const extension = fileHelpers.getFileExtension(path);
-            const mimeType = fileHelpers.getMimeType(extension);
+            const mimeType = mime.types[extension];
             return FileOpener.open(path, mimeType, title || path);
         }
 
