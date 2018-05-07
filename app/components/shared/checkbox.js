@@ -1,8 +1,9 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { Text, View, TouchableOpacity } from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
 import { observer } from 'mobx-react/native';
+import Text from '../controls/custom-text';
 import { vars } from '../../styles/styles';
 import testLabel from '../helpers/test-label';
 

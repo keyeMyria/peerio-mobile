@@ -1,8 +1,9 @@
 import React from 'react';
 import { observer } from 'mobx-react/native';
 import { observable } from 'mobx';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import Text from '../controls/custom-text';
 import { vars } from '../../styles/styles';
 import { clientApp } from '../../lib/icebear';
 import { tx, tu, T } from '../utils/translator';
@@ -52,7 +53,7 @@ export default class InlineUrlPreviewConsent extends SafeComponent {
                 onPress={onPress}
                 pressRetentionOffset={vars.pressRetentionOffset}
                 style={{ paddingLeft: 40, paddingVertical: 16 }}>
-                <Text style={{ fontWeight: 'bold', color: colorIsPrimary ? vars.peerioBlue : vars.black54 }}>
+                <Text bold style={{ color: colorIsPrimary ? vars.peerioBlue : vars.black54 }}>
                     {text}
                 </Text>
             </TouchableOpacity>

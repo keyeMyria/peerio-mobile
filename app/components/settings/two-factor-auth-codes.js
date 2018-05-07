@@ -1,9 +1,10 @@
 import React from 'react';
 import { observer } from 'mobx-react/native';
 import { observable } from 'mobx';
-import { View, Text, Platform } from 'react-native';
+import { View, Platform } from 'react-native';
 import RNFS from 'react-native-fs';
 import FileOpener from 'react-native-file-opener';
+import Text from '../controls/custom-text';
 import SafeComponent from '../shared/safe-component';
 import { vars } from '../../styles/styles';
 import { tx } from '../utils/translator';
@@ -25,7 +26,6 @@ const bgStyle = {
 
 const headerStyle = {
     color: vars.txtDark,
-    fontWeight: 'bold',
     fontSize: vars.font.size.bigger,
     marginLeft: vars.spacing.small.midi2x
 };
@@ -53,7 +53,7 @@ const rowRight = [row, { justifyContent: 'flex-end', marginTop: vars.spacing.sma
 
 const column = { flex: 0.5, alignItems: 'center' };
 
-const textStyle = { color: vars.txtDark, fontWeight: 'bold', marginVertical: vars.spacing.small.maxi };
+const textStyle = { color: vars.txtDark, marginVertical: vars.spacing.small.maxi };
 
 /*
 function uuidv4() {
@@ -120,7 +120,7 @@ export default class TwoFactorAuthCodes extends SafeComponent {
         return (
             <View style={bgStyle}>
                 <View>
-                    <Text
+                    <Text bold
                         style={headerStyle}
                         {...testLabel('title_2FABackupCode')} >
                         {tx('title_2FABackupCode')}
@@ -139,21 +139,21 @@ authenticator app.`}
                     <View style={row}>
                         <View style={column}>
                             {this.codes.slice(0, this.codes.length / 2).map(i =>
-                                <Text style={textStyle} key={i}>{i}</Text>
+                                <Text bold style={textStyle} key={i}>{i}</Text>
                             )}
                         </View>
                         <View style={column}>
                             {this.codes.slice(this.codes.length / 2, this.codes.length).map(i =>
-                                <Text style={textStyle} key={i}>{i}</Text>
+                                <Text bold style={textStyle} key={i}>{i}</Text>
                             )}
                         </View>
                     </View>
                     <View style={rowRight}>
-                        {buttons.uppercaseBlueButton(tx('title_download'), () => this.downloadCodes())}
+                        {buttons.blueTextButton(tx('title_download'), () => this.downloadCodes())}
                     </View>
                 </View>
                 <View style={{ left: paddingHorizontal + 12, bottom: paddingVertical, position: 'absolute' }}>
-                    {buttons.uppercaseRedButton('button_2FADeactivate', this.disable2fa)}
+                    {buttons.redTextButton('button_2FADeactivate', this.disable2fa)}
                 </View>
             </View>
         );

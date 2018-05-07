@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { observer } from 'mobx-react/native';
-import { Text, TouchableOpacity, ActivityIndicator, View } from 'react-native';
+import { TouchableOpacity, ActivityIndicator, View } from 'react-native';
 import { t } from 'peerio-translator';
 import { observable } from 'mobx';
 import * as Animatable from 'react-native-animatable';
@@ -11,6 +11,7 @@ import Center from '../controls/center';
 import icons from '../helpers/icons';
 import { vars, circles, pin } from '../../styles/styles';
 import Util from '../helpers/util';
+import Text from '../controls/custom-text';
 
 @observer
 export default class Pin extends SafeComponent {

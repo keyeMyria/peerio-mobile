@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { Text, TouchableOpacity } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import { observer } from 'mobx-react/native';
+import Text from '../controls/custom-text';
 import { vars } from '../../styles/styles';
 
 @observer
@@ -23,7 +24,6 @@ export default class AccountUpgradeToggle extends Component {
         };
 
         const text1Style = [textStyle, {
-            fontWeight: 'bold',
             fontSize: vars.font.size.smaller
         }];
 
@@ -36,7 +36,7 @@ export default class AccountUpgradeToggle extends Component {
                 onPress={this.props.onPress}
                 pressRetentionOffest={vars.pressRetentionOffest}
                 style={toggleContainer}>
-                <Text style={text1Style}>{text1}</Text>
+                <Text bold style={text1Style}>{text1}</Text>
                 <Text style={text2Style}>{text2}</Text>
             </TouchableOpacity>
         );

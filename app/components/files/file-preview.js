@@ -1,8 +1,9 @@
 import React from 'react';
-import { Text, View, TextInput, TouchableOpacity } from 'react-native';
+import { View, TextInput, TouchableOpacity } from 'react-native';
 import { observable, action, when } from 'mobx';
 import { observer } from 'mobx-react/native';
 import ImagePicker from 'react-native-image-crop-picker';
+import Text from '../controls/custom-text';
 import { tx } from '../utils/translator';
 import { vars } from '../../styles/styles';
 import FileTypeIcon from '../files/file-type-icon';
@@ -23,7 +24,8 @@ const inputStyle = {
     color: vars.lighterBlackText,
     paddingVertical: 0,
     paddingLeft: 0,
-    height: vars.searchInputHeight
+    height: vars.searchInputHeight,
+    fontFamily: vars.peerioFontFamily
 };
 
 const thumbnailDim = vars.searchInputHeight * 2;

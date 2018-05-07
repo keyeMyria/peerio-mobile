@@ -42,7 +42,7 @@ const brandingDefines = {
         logo: require('../assets/logo-with-tag.png'),
         darkBlue: '#FF8C00',
         snackbarBg: '#444444',
-        darkTeal: '#FFFFFF',
+        darkTeal: '#004E69',
         peerioBlue: '#FF8C00',
         peerioPurple: '#FF6600',
         peerioTeal: '#FF8C00',

@@ -2,7 +2,8 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { observer } from 'mobx-react/native';
 import { observable, when, reaction, action } from 'mobx';
-import { View, Image, Text, Dimensions, LayoutAnimation, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { View, Image, Dimensions, LayoutAnimation, TouchableOpacity, ActivityIndicator } from 'react-native';
+import Text from '../controls/custom-text';
 import SafeComponent from '../shared/safe-component';
 import Progress from '../shared/progress';
 import FileProgress from './file-progress';
@@ -163,7 +164,6 @@ export default class FileInlineImage extends SafeComponent {
         };
         const text = {
             color: vars.peerioBlue,
-            fontStyle: 'italic',
             marginVertical: 10
         };
         return (
@@ -172,7 +172,7 @@ export default class FileInlineImage extends SafeComponent {
                     {tx('title_imageSizeWarning', { size: util.formatBytes(config.chat.inlineImageSizeLimit) })}
                 </Text>
                 <TouchableOpacity pressRetentionOffset={vars.pressRetentionOffset} onPress={this.forceShow}>
-                    <Text style={text}>{tx('button_displayThisImageAfterWarning')}</Text>
+                    <Text italic style={text}>{tx('button_displayThisImageAfterWarning')}</Text>
                 </TouchableOpacity>
             </View>
         );
@@ -216,13 +216,12 @@ export default class FileInlineImage extends SafeComponent {
     get displayImageOffer() {
         const text = {
             color: vars.peerioBlue,
-            fontStyle: 'italic',
             textAlign: 'center',
             marginVertical: 10
         };
         return (
             <TouchableOpacity pressRetentionOffset={vars.pressRetentionOffset} onPress={() => { this.loadImage = true; }}>
-                <Text style={text}>{tx('button_displayThisImage')}</Text>
+                <Text italic style={text}>{tx('button_displayThisImage')}</Text>
             </TouchableOpacity>
         );
     }
@@ -230,7 +229,6 @@ export default class FileInlineImage extends SafeComponent {
     get updateSettingsOffer() {
         const text = {
             color: vars.txtDate,
-            fontStyle: 'italic',
             marginBottom: 4
         };
         return (
@@ -238,7 +236,7 @@ export default class FileInlineImage extends SafeComponent {
                 <View style={{ paddingTop: 2, marginRight: 4 }}>
                     {icons.coloredAsText('check-circle', vars.confirmColor, 14)}
                 </View>
-                <Text style={text}>
+                <Text italic style={text}>
                     <T k="title_updateSettingsAnyTime">{toSettingsParser}</T>
                 </Text>
             </View>

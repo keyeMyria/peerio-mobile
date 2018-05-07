@@ -1,6 +1,7 @@
 import branding from './branding';
 import vars from './vars';
 import textbox from './textbox';
+import styledTextInput from './styled-text-input';
 import button from './button';
 import circles from './circles';
 import pickerBox from './picker-box';
@@ -25,6 +26,7 @@ const styles = {
     vars,
     helpers,
     textbox,
+    styledTextInput,
     button,
     circles,
     pickerBox,
@@ -41,6 +43,7 @@ export {
     vars,
     helpers,
     textbox,
+    styledTextInput,
     button,
     circles,
     pickerBox,

@@ -1,6 +1,7 @@
 import React from 'react';
 import { observer } from 'mobx-react/native';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
+import Text from '../controls/custom-text';
 import SafeComponent from '../shared/safe-component';
 import routerMain from '../routes/router-main';
 import { vars } from '../../styles/styles';
@@ -28,7 +29,6 @@ export default class HeaderMain extends SafeComponent {
             flexShrink: 1,
             color: vars.white,
             fontSize: vars.font.size.big,
-            fontWeight: 'bold',
             textAlign: 'center',
             alignItems: 'center',
             justifyContent: 'center',
@@ -68,7 +68,7 @@ export default class HeaderMain extends SafeComponent {
                         activeOpacity={titleAction ? 0.2 : 1}
                         onPress={titleAction}
                         pressRetentionOffset={vars.retentionOffset}>
-                        <Text
+                        <Text bold
                             ellipsizeMode="middle"
                             numberOfLines={1}
                             style={[textStyle, { paddingRight, paddingLeft }]}>

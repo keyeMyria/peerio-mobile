@@ -127,13 +127,20 @@ class ContactState extends RoutedState {
         }
     }
 
-    @action getContacts() {
+    @action getPhoneContacts() {
+        // cache contacts so they are not requested each time
+        if (this._cachedPhoneContacts) return Promise.resolve(this._cachedPhoneContacts);
         return new Promise(resolve => RNContacts.getAllWithoutPhotos((err, contacts) => {
             if (err) {
                 console.error(err);
                 resolve([]);
                 return;
             }
+            this._cachedPhoneContacts = contacts;
+            // free memory used by _cachedPhoneContacts after 120s
+            setTimeout(() => {
+                this._cachedPhoneContacts = null;
+            }, 120000);
             resolve(contacts);
         }));
     }
@@ -145,7 +152,7 @@ class ContactState extends RoutedState {
             return;
         }
         this.isInProgress = true;
-        const contacts = await this.getContacts();
+        const contacts = await this.getPhoneContacts();
         const emails = [];
         const hash = {};
         contacts.forEach(contact => {
@@ -194,6 +201,41 @@ class ContactState extends RoutedState {
             .finally(() => {
                 this.isInProgress = false;
             });
+    }
+
+    /**
+     * Searches users device for contacts which have one or more email addresses
+     * @return Object which contains email and fullname pair of each phone contact
+     */
+    @action async getPhoneContactEmails() {
+        const phoneContacts = await this.getPhoneContacts();
+        const contactEmails = [];
+        phoneContacts.forEach(phoneContact => {
+            const { emailAddresses, givenName, familyName } = phoneContact;
+            if (emailAddresses) {
+                emailAddresses.forEach(emailAddress => {
+                    const { email } = emailAddress;
+                    if (email) contactEmails.push({ email, fullName: `${givenName} ${familyName}` });
+                });
+            }
+        });
+        return contactEmails;
+    }
+
+    _resolveCache = {};
+
+    async resolveAndCache(usernameOrEmail) {
+        if (this._resolveCache[usernameOrEmail]) return this._resolveCache[usernameOrEmail];
+        return new Promise(resolve => {
+            const contact = this.store.getContact(usernameOrEmail);
+            this._resolveCache[usernameOrEmail] = contact;
+            when(() => !contact.loading, () => resolve(contact));
+        });
+    }
+
+    // TODO replace with bulk
+    @action batchInvite(emails) {
+        emails.forEach((email) => this.store.inviteNoWarning(email));
     }
 
     onTransition(active, contact) {

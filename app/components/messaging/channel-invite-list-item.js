@@ -3,6 +3,7 @@ import React from 'react';
 import { observable, computed, when } from 'mobx';
 import { observer } from 'mobx-react/native';
 import { View, Text, TouchableOpacity, LayoutAnimation } from 'react-native';
+import Text from '../controls/custom-text';
 import SafeComponent from '../shared/safe-component';
 import { vars } from '../../styles/styles';
 import { t } from '../utils/translator';
@@ -62,9 +63,9 @@ export default class ChannelInviteListItem extends SafeComponent {
         };
 
         const textStyle = {
-            fontSize: vars.fontTitleSize,
+            fontSize: vars.font.size.bigger,
+            color: vars.unreadTextColor
             fontWeight: 'bold',
-            color: vars.txtDark,
             textDecorationLine: this.declinedStyle ? 'line-through' : 'none'
         };
 
@@ -91,8 +92,7 @@ export default class ChannelInviteListItem extends SafeComponent {
                 <TouchableOpacity
                     onPress={this.onPress}
                     style={containerStyle} pressRetentionOffset={vars.pressRetentionOffset}>
-                    <Text
-                        style={textStyle}>
+                    <Text semibold style={textStyle}>
                         {`# ${channelName}`}
                     </Text>
                     <View style={circleStyle}>

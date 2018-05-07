@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { observer } from 'mobx-react/native';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
+import Text from '../controls/custom-text';
 import buttons from '../helpers/buttons';
 import { t, tx } from '../utils/translator';
 import contactState from './contact-state';
@@ -28,7 +29,7 @@ export default class ContactsPlaceholder extends Component {
             <View style={s}>
                 <View style={inner}>
                     <Text>{t('title_importInviteText')}</Text>
-                    {buttons.uppercaseBlueButton(tx('button_importOrInvite'), () => this.importOrInvite())}
+                    {buttons.blueTextButton(tx('button_importOrInvite'), () => this.importOrInvite())}
                 </View>
                 <View style={{ flex: 1, flexGrow: 3 }} />
             </View>

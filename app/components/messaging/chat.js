@@ -1,8 +1,9 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { observer } from 'mobx-react/native';
-import { ScrollView, View, Text, TouchableOpacity, ActivityIndicator, Dimensions, Platform } from 'react-native';
+import { ScrollView, View, TouchableOpacity, ActivityIndicator, Dimensions, Platform } from 'react-native';
 import { observable, when, reaction, computed } from 'mobx';
+import Text from '../controls/custom-text';
 import SafeComponent from '../shared/safe-component';
 import ProgressOverlay from '../shared/progress-overlay';
 import ChatZeroStatePlaceholder from './chat-zero-state-placeholder';
@@ -256,21 +257,6 @@ export default class Chat extends SafeComponent {
         );
     }
 
-    get archiveNotice() {
-        // TODO: archive notice
-        return true || this.props.archiveNotice ? ( // eslint-disable-line
-            <Text style={{
-                textAlign: 'left',
-                marginTop: 0,
-                marginRight: vars.spacing.medium.mini2x,
-                marginBottom: vars.spacing.medium.mini2x,
-                color: vars.txtMedium
-            }}>
-                {tx('title_chatArchive')}
-            </Text>
-        ) : null;
-    }
-
     @computed get zeroStateItem() {
         const zsContainer = {
             borderBottomWidth: 0,
@@ -308,7 +294,6 @@ export default class Chat extends SafeComponent {
                 }}>
                     {tx('title_chatBeginning', { chatName: chat.name })}
                 </Text>
-                {this.archiveNotice}
                 <IdentityVerificationNotice />
             </View>
         );

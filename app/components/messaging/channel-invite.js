@@ -1,7 +1,8 @@
 import React from 'react';
 import { action, observable } from 'mobx';
-import { Image, Text, View } from 'react-native';
+import { Image, View } from 'react-native';
 import { observer } from 'mobx-react/native';
+import Text from '../controls/custom-text';
 import SafeComponent from '../shared/safe-component';
 import { vars } from '../../styles/styles';
 import { tx } from '../utils/translator';
@@ -10,7 +11,7 @@ import buttons from '../helpers/buttons';
 import ButtonText from '../controls/button-text';
 import BackIcon from '../layout/back-icon';
 import { User, chatInviteStore, contactStore } from '../../lib/icebear';
-import routerMain from '../routes/router-main';
+import routes from '../routes/routes';
 import chatState from './chat-state';
 import AvatarCircle from '../shared/avatar-circle';
 import ChannelUpgradeOffer from '../channels/channel-upgrade-offer';
@@ -82,15 +83,15 @@ export default class ChannelInvite extends SafeComponent {
         }
         // if we failed to accept invite, newChat is null
         // and it just goes to the chat list
-        routerMain.chats(newChat);
+        routes.main.chats(newChat);
     }
 
     @action.bound declineInvite() {
         uiState.declinedChannelId = this.invitation.id;
-        routerMain.chats();
+        routes.main.chats();
     }
 
-    get leftIcon() { return <BackIcon action={routerMain.chats} />; }
+    get leftIcon() { return <BackIcon action={routes.main.chats} />; }
 
     renderThrow() {
         const hasPaywall = User.current.channelsLeft <= 0;
@@ -111,7 +112,7 @@ export default class ChannelInvite extends SafeComponent {
                     <Text style={headingStyle}>
                         {tx('title_roomInviteHeading')}
                     </Text>
-                    <Text style={[headingStyle, { fontWeight: vars.font.weight.bold }]}>
+                    <Text bold style={headingStyle}>
                         #{this.invitation.channelName}
                     </Text>
                     <View style={buttonContainer}>
@@ -122,7 +123,7 @@ export default class ChannelInvite extends SafeComponent {
                             textColor={vars.peerioBlue}
                             style={{ width: vars.roundedButtonWidth, textAlign: 'center' }}
                         />
-                        {buttons.uppercasePeerioBlueButton(tx('button_accept'), this.acceptInvite, hasPaywall, null, 'accept')}
+                        {buttons.roundBlueBgButton(tx('button_accept'), this.acceptInvite, hasPaywall, null, 'accept')}
                     </View>
                 </View>
                 <View style={sectionLine} />

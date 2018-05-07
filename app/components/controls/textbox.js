@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { observer } from 'mobx-react/native';
-import { View, Text, TextInput, LayoutAnimation, TouchableOpacity, Platform } from 'react-native';
+import { View, TextInput, LayoutAnimation, TouchableOpacity, Platform } from 'react-native';
 import { observable, reaction } from 'mobx';
 import SafeComponent from '../shared/safe-component';
 import { t } from '../utils/translator';
@@ -9,6 +9,7 @@ import uiState from '../layout/ui-state';
 import { vars, textbox } from '../../styles/styles';
 import icons from '../helpers/icons';
 import testLabel from '../helpers/test-label';
+import Text from '../controls/custom-text';
 
 @observer
 export default class TextBox extends SafeComponent {
@@ -212,7 +213,7 @@ export default class TextBox extends SafeComponent {
                             style={[textbox.inputContainer, icAlert]}>
                             <TextInput
                                 keyboardType={this.props.keyboardType}
-                                style={[style.textbox, { fontSize },
+                                style={[style.textbox, { fontSize, fontFamily: vars.peerioFontFamily },
                                     { height: vars.inputPaddedHeight, top: 0, marginRight: this.secretIcon ? 42 : 0 }]}
                                 ref={ref => { this.textinput = ref; }}
                                 underlineColorAndroid="transparent"

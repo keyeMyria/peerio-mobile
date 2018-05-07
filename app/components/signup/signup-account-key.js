@@ -1,8 +1,9 @@
 import React from 'react';
 import { observer } from 'mobx-react/native';
-import { Text, View, Clipboard, CameraRoll, TouchableOpacity, Platform } from 'react-native';
+import { View, Clipboard, CameraRoll, TouchableOpacity, Platform } from 'react-native';
 import ViewShot from 'react-native-view-shot';
 import { observable } from 'mobx';
+import Text from '../controls/custom-text';
 import ActivityOverlay from '../controls/activity-overlay';
 import { vars } from '../../styles/styles';
 import { config, getFirstLetterUpperCase } from '../../lib/icebear';
@@ -30,7 +31,6 @@ const addPhotoText = {
 
 const addPhotoPlus = [addPhotoText, {
     fontSize: vars.signupFontSize,
-    fontWeight: 'bold',
     color: vars.white
 }];
 
@@ -42,8 +42,6 @@ const textNormal = {
 
 const accountKeyText = {
     color: vars.lighterBlackText,
-    fontFamily: 'Verdana',
-    fontWeight: 'bold',
     fontSize: vars.font.size.big,
     width: 224
 };
@@ -100,7 +98,7 @@ export default class SignupStep1 extends LoginWizardPage {
         const letter = getFirstLetterUpperCase(signupState.firstName || signupState.username);
         return (
             <View>
-                <Text style={addPhotoPlus}>{letter}</Text>
+                <Text bold style={addPhotoPlus}>{letter}</Text>
             </View>
         );
     }
@@ -115,15 +113,15 @@ export default class SignupStep1 extends LoginWizardPage {
                 <View style={accountKeyView}>
                     <Text style={smallText}>{tx('title_yourAccountKey')}</Text>
                     <View style={accountKeyRow}>
-                        <Text {...testLabel('passphrase')} style={accountKeyText} selectable>
+                        <Text bold {...testLabel('passphrase')} style={accountKeyText} selectable>
                             {signupState.passphrase}
                         </Text>
-                        {buttons.uppercaseBlueButton(tx('button_copy'), this.copyAccountKey, false, savingScreenshot)}
+                        {buttons.blueTextButton(tx('button_copy'), this.copyAccountKey, false, savingScreenshot)}
                     </View>
                 </View>
                 <Text style={textNormal}>{tx('title_accountKey2')}</Text>
                 <View style={{ width: 240, alignSelf: 'center', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: vars.spacing.large.midi2x }}>
-                    {/* buttons.uppercasePeerioBlueBgButton(tx(saveTitle), () => this.saveAccountKey(), keySaved, savingScreenshot) */}
+                    {/* buttons.blueBgButton(tx(saveTitle), () => this.saveAccountKey(), keySaved, savingScreenshot) */}
                     {/* signupState.keyBackedUp && icons.plaindark('check-circle') */}
                 </View>
             </View>
@@ -153,7 +151,7 @@ export default class SignupStep1 extends LoginWizardPage {
                 </ViewShot>
                 <View style={buttonRowStyle}>
                     {this.button('button_back', () => signupState.prev())}
-                    {this.button(signupState.keyBackedUp ? 'button_finish' : 'button_next', () => signupState.next(), false, !signupState.nextAvailable)}
+                    {this.button('button_next', () => signupState.next(), false, !signupState.nextAvailable)}
                 </View>
                 <SignupAvatarActionSheet ref={sheet => { this._actionSheet = sheet; }} />
                 <ActivityOverlay large visible={signupState.isInProgress} />

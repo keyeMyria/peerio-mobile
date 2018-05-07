@@ -62,6 +62,7 @@ const vars = {
     confirmColor,
     snackbarBg,
     channelInfoBg,
+    chatFadingOutBg: 'rgb(237,237,238)',
     textWhite100: '#FFF',
     textWhite70: 'rgba(255, 255, 255, .7)',
     textWhite50: 'rgba(255, 255, 255, .5)',
@@ -72,7 +73,9 @@ const vars = {
     textBlack87: 'rgba(0, 0, 0, .87)',
     // Non-text
     black03: 'rgba(0, 0, 0, 0.03)',
+    black05: 'rgba(0, 0, 0, 0.05)',
     black12: 'rgba(0, 0, 0, 0.12)',
+    black25: 'rgba(0, 0, 0, 0.25)',
     black38: 'rgba(0, 0, 0, .38)',
     black54: 'rgba(0, 0, 0, .54)',
     darkBlueBackground05, // darkBlue 5%
@@ -93,6 +96,7 @@ const vars = {
     toggleInactive: '#9B9B9B',
     toggleLineActive: '#B6D3FF',
     toggleLineInactive: '#CFCFCF',
+    peerioFontFamily: 'Open Sans',
 
     circle: 10,
     circleSize: 4,
@@ -110,6 +114,7 @@ const vars = {
     whiteIcon: '#fff',
     usernameHighlight,
     darkIcon: '#0000008A',
+    disabledIcon: '#0000000D',
     txtLight: '#bfdfef',
     txtAlert: '#ff0000aa',
     txtLightGrey: '#7B7B7B',
@@ -129,6 +134,7 @@ const vars = {
     lighterBlackText: 'rgba(0, 0, 0, .87)',
     inputBgInactive: 'rgba(255, 255, 255, .5)',
     inputBgInactiveText: 'rgba(0,0,0, .54)',
+    inputBorderColor: 'rgba(0,0,0, .38)',
     checkboxInactive: 'rgba(0,0,0,.06)',
     checkboxIconInactive: 'rgba(0, 0, 0, .54)',
     checkboxIconActive: peerioBlue,
@@ -159,7 +165,7 @@ const vars = {
     iconMargin: 30,
     imagePreviewSize: 48,
     chatListItemHeight: 48,
-    chatFadingOutBg: 'rgb(237,237,238)',
+    chatListItemDMHeight: 61,
     contactListHeaderHeight: 48,
     roundedButtonWidth: 134,
     wideRoundedButtonWidth: 190,
@@ -167,6 +173,7 @@ const vars = {
     animationDuration: 200,
     progressBarHeight: 4,
     filesListItemHeight: 64,
+    contactlistItemHeight: 56,
     listItemHeight: 56,
     listViewPaddingVertical: 36,
     listViewPaddingHorizontal: 8,
@@ -193,11 +200,6 @@ const vars = {
             bigger: scaleDim(16),
             huge: scaleDim(20),
             massive: scaleDim(24)
-        },
-        weight: {
-            bold: '700',
-            semiBold: '600',
-            regular: '400'
         }
     },
     accountTitleFontSize: scaleDim(37),
@@ -207,9 +209,11 @@ const vars = {
     readReceiptFontSize: scaleDim(9),
     fontTitleSize: 16,
     largeInputWidth: 240,
-    inputHeight: 48,
+    inputHeight: 46,
     searchInputHeight: 32,
     inputPaddingLeft: 10,
+    inputPaddingHorizontal: 8,
+    inputMarginHorizontal: 16,
     inputPaddedHeight: 56,
     inputHeightLarge: 68,
     fabSize: 60,
@@ -221,6 +225,7 @@ const vars = {
     tabCellHeight,
     tabsHeight: tabCellHeight + iPhoneXBottom,
     spacing: {
+        one: scaleDim(1),
         small: {
             mini: scaleDim(2),
             mini2x: scaleDim(4),
@@ -266,6 +271,15 @@ const vars = {
         small: 32,
         medium: 48,
         large: 72
+    },
+    button: {
+        touchableHeight: 48,
+        buttonHeight: 36,
+        minWidth: 72,
+        borderRadius: 24,
+        paddingHorizontal: scaleDim(16),
+        marginVertical: scaleDim(8),
+        fontSize: scaleDim(14)
     }
 };
 

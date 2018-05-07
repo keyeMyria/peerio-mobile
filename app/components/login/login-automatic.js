@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, Text, StatusBar, Dimensions } from 'react-native';
+import { View, StatusBar, Dimensions } from 'react-native';
+import Text from '../controls/custom-text';
 import { t } from '../utils/translator';
 import loginState from './login-state';
 import LoginWizardPage from './login-wizard-page';
@@ -25,12 +26,9 @@ export default class LoginAutomatic extends LoginWizardPage {
             alignItems: 'center',
             backgroundColor: 'rgba(255,255,255,0.12)'
         };
-        const buttonText = {
-            fontWeight: 'bold'
-        };
         return (
             <View style={buttonContainer} key={text} testID={testID}>
-                {this._button(text, onPress, button, buttonText)}
+                {this._button(text, onPress, button, null, null, true)}
             </View>
         );
     }

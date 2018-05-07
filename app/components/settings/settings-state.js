@@ -1,6 +1,7 @@
 import React from 'react';
-import { Text, Clipboard, LayoutAnimation } from 'react-native';
+import { Clipboard, LayoutAnimation } from 'react-native';
 import { observable, action, reaction } from 'mobx';
+import Text from '../controls/custom-text';
 import RoutedState from '../routes/routed-state';
 import { User } from '../../lib/icebear';
 import { popupCopyCancel } from '../shared/popups';
@@ -77,7 +78,7 @@ class SettingsState extends RoutedState {
         }
         if (passphrase) {
             const mp = (
-                <Text style={{ fontWeight: 'bold', fontSize: vars.font.size.normal }}>
+                <Text bold style={{ fontSize: vars.font.size.normal }}>
                     {passphrase}
                 </Text>
             );

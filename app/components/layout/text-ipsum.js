@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import {
-    Text
-} from 'react-native';
+import Text from '../controls/custom-text';
 
 export default class TextIpsum extends Component {
     render() {

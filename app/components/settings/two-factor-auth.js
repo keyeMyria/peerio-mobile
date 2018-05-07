@@ -1,7 +1,8 @@
 import React from 'react';
 import { reaction, observable } from 'mobx';
 import { observer } from 'mobx-react/native';
-import { ScrollView, View, Text, TextInput, Clipboard, ActivityIndicator, Keyboard } from 'react-native';
+import { ScrollView, View, TextInput, Clipboard, ActivityIndicator, Keyboard } from 'react-native';
+import Text from '../controls/custom-text';
 import SafeComponent from '../shared/safe-component';
 import { vars } from '../../styles/styles';
 import snackbarState from '../snackbars/snackbar-state';
@@ -101,9 +102,7 @@ export default class TwoFactorAuth extends SafeComponent {
     get key2FAControl() {
         if (!this.key2fa) return <ActivityIndicator />;
         return (
-            <Text
-                {...testLabel('secretKey')}
-                style={{ fontWeight: 'bold' }}>
+            <Text bold {...testLabel('secretKey')}>
                 {this.key2fa}
             </Text>
         );
@@ -131,7 +130,7 @@ export default class TwoFactorAuth extends SafeComponent {
                             flexDirection: 'row',
                             justifyContent: 'flex-end'
                         }}>
-                            {buttons.uppercaseBlueButton(tx('button_2FACopyKey'), () => this.copyKey(), !this.key2fa)}
+                            {buttons.blueTextButton(tx('button_2FACopyKey'), () => this.copyKey(), !this.key2fa)}
                         </View>
                     </View>
                 </View>
@@ -156,14 +155,15 @@ export default class TwoFactorAuth extends SafeComponent {
                                 color: vars.txtDark,
                                 marginVertical: vars.spacing.small.midi2x,
                                 height: vars.inputHeight,
-                                flexGrow: 1
+                                flexGrow: 1,
+                                fontFamily: vars.peerioFontFamily
                             }}
                             {...testLabel('confirmationCodeInput')}
                             placeholderTextColor={vars.txtDate}
                             placeholder="123456"
                             onChangeText={text => { this.confirmCode = text; }}
                             value={this.confirmCode} />
-                        {buttons.uppercaseBlueButton(tx('button_confirm'),
+                        {buttons.blueTextButton(tx('button_confirm'),
                             () => this.confirm(), !this.confirmCode || !this.key2fa, false, 'button_confirm')}
                     </View>
                 </View>

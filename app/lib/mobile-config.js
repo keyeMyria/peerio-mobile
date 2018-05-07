@@ -29,7 +29,7 @@ export default (c, icebear) => {
         proAccount: 'https://account.peerio.com',
         helpCenter: 'https://peerio.zendesk.com/',
         contactSupport: 'https://peerio.zendesk.com/hc/en-us/requests/new',
-        socialShareUrl: 'https://www.peerio.com/',
+        socialShareUrl: process.env.SOCIAL_SHARE_URL || 'https://www.peerio.com/',
         googleAuth: 'https://support.google.com/accounts/answer/1066447?hl=en',
         iosApp: 'https://itunes.apple.com/app/peerio-2/id1245026608',
         androidApp: 'https://play.google.com/store/apps/details?id=com.peerio.app',

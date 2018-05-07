@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { observer } from 'mobx-react/native';
-import { Text, View, TouchableOpacity } from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
+import Text from '../controls/custom-text';
 import SafeComponent from '../shared/safe-component';
 import { vars } from '../../styles/styles';
 
@@ -38,7 +39,7 @@ export default class ErrorCircle extends SafeComponent {
         return (
             <TouchableOpacity onPress={this.props.onPress} style={containerStyle}>
                 <View style={tofuStyle}>
-                    <Text style={{ color: borderColor, fontSize: vars.font.size.smaller * ratio, fontWeight: 'bold' }}>!</Text>
+                    <Text bold style={{ color: borderColor, fontSize: vars.font.size.smaller * ratio }}>!</Text>
                 </View>
             </TouchableOpacity>
         );

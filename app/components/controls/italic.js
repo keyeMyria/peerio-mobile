@@ -1,16 +1,11 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import {
-    Text
-} from 'react-native';
+import Text from '../controls/custom-text';
 
 export default class Italic extends Component {
     render() {
-        const style = {
-            fontStyle: 'italic'
-        };
         return (
-            <Text style={[style, this.props.style]}>
+            <Text italic style={this.props.style}>
                 {this.props.children}
             </Text>
         );

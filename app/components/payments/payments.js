@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
+import Text from '../controls/custom-text';
 import settingsState from '../settings/settings-state';
 import { vars } from '../../styles/styles';
 import buttons from '../helpers/buttons';
@@ -25,7 +26,7 @@ function upgradeMessage(title) {
     return (
         <View style={container}>
             <Text style={text}>{title}</Text>
-            {buttons.uppercaseBlueButton('button_upgrade',
+            {buttons.blueTextButton('button_upgrade',
                 () => settingsState.upgrade())}
         </View>
     );

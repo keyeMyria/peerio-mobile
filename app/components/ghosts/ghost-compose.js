@@ -28,14 +28,16 @@ const textboxInput = {
     flexShrink: 1,
     fontSize: vars.font.size.bigger,
     color: vars.txtDark,
-    marginLeft: vars.spacing.small.midi2x
+    marginLeft: vars.spacing.small.midi2x,
+    fontFamily: vars.peerioFontFamily
 };
 
 const textArea = {
     fontSize: vars.font.size.normal,
     marginHorizontal: vars.spacing.small.maxi,
     color: vars.txtDark,
-    height: vars.inputHeight
+    height: vars.inputHeight,
+    fontFamily: vars.peerioFontFamily
 };
 
 const shadow = {

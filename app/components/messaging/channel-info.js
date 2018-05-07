@@ -1,7 +1,8 @@
 import React from 'react';
 import { observer } from 'mobx-react/native';
-import { Text, View, TouchableOpacity, TextInput } from 'react-native';
+import { View, TouchableOpacity, TextInput } from 'react-native';
 import { observable } from 'mobx';
+import Text from '../controls/custom-text';
 import SafeComponent from '../shared/safe-component';
 import LayoutModalExit from '../layout/layout-modal-exit';
 import chatState from '../messaging/chat-state';
@@ -19,8 +20,7 @@ const textStyle = {
     color: vars.txtDate,
     marginTop: vars.spacing.small.maxi,
     fontSize: vars.font.size.smaller,
-    marginLeft: vars.spacing.medium.midi,
-    fontWeight: 'bold'
+    marginLeft: vars.spacing.medium.midi
 };
 
 const topicTextStyle = {
@@ -104,15 +104,21 @@ export default class ChannelInfo extends SafeComponent {
         const update = () => {
             chat.changePurpose(this.channelTopic);
         };
+        const placeholderStyle = {
+            paddingLeft: vars.spacing.medium.midi,
+            height: vars.inputHeight,
+            color: vars.txtDark,
+            fontFamily: vars.peerioFontFamily
+        };
         return (
             <View>
-                <Text style={textStyle}>{tx('title_purpose')}</Text>
+                <Text bold style={textStyle}>{tx('title_purpose')}</Text>
                 <TextInput
                     onChangeText={text => { this.channelTopic = text; }}
                     onBlur={update}
                     onEndEditing={update}
                     value={this.channelTopic}
-                    style={{ paddingLeft: vars.spacing.medium.midi, height: vars.inputHeight, color: vars.txtDark }}
+                    style={placeholderStyle}
                     maxLength={config.chat.maxChatPurposeLength} />
             </View>
         );
@@ -121,7 +127,7 @@ export default class ChannelInfo extends SafeComponent {
     get topicTextView() {
         return (
             <View>
-                <Text style={textStyle}>{tx('title_purpose')}</Text>
+                <Text bold style={textStyle}>{tx('title_purpose')}</Text>
                 <Text style={topicTextStyle}>{this.channelTopic}</Text>
             </View>
         );
