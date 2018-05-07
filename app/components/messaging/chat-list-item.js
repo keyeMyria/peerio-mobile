@@ -24,7 +24,6 @@ export default class ChatListItem extends SafeComponent {
         };
         const textNewStyle = {
             fontSize: vars.font.size.smaller,
-            fontWeight: vars.font.weight.semiBold,
             color: vars.unreadTextColor
         };
         return (
