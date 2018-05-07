@@ -18,6 +18,7 @@ import { tx } from '../utils/translator';
 import chatState from '../messaging/chat-state';
 import VideoIcon from '../layout/video-icon';
 import IdentityVerificationNotice from './identity-verification-notice';
+import DmContactInvite from './dm-contact-invite';
 
 const { width } = Dimensions.get('window');
 
@@ -73,7 +74,7 @@ export default class Chat extends SafeComponent {
     }
 
     get showInput() {
-        return !!chatState.currentChat && !chatState.loading;
+        return !!chatState.currentChat && !chatState.loading && !this.chat.isInvite;
     }
 
     _refs = {};
@@ -347,6 +348,7 @@ export default class Chat extends SafeComponent {
     }
 
     renderThrow() {
+        if (this.chat.isInvite) return <DmContactInvite />;
         return (
             <View
                 style={{ flexGrow: 1, paddingBottom: vars.spacing.small.mini2x }}>
