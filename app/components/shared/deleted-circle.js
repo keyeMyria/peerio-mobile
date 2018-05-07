@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { observer } from 'mobx-react/native';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
+import Text from '../controls/custom-text';
 import SafeComponent from '../shared/safe-component';
 import { vars } from '../../styles/styles';
 
@@ -37,7 +38,7 @@ export default class DeletedCircle extends SafeComponent {
         return (
             <View style={containerStyle}>
                 <View style={tofuStyle}>
-                    <Text style={{ color: borderColor, fontSize: vars.font.size.small * ratio, fontWeight: 'bold' }}>-</Text>
+                    <Text bold style={{ color: borderColor, fontSize: vars.font.size.small * ratio }}>-</Text>
                 </View>
             </View>
         );

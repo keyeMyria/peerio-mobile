@@ -1,7 +1,9 @@
 import React from 'react';
 import { observer } from 'mobx-react/native';
-import { View, Text } from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
 import { action } from 'mobx';
+import moment from 'moment';
+import Text from '../controls/custom-text';
 import SafeComponent from '../shared/safe-component';
 import { vars } from '../../styles/styles';
 import FileProgress from './file-progress';

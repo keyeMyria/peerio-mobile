@@ -1,6 +1,6 @@
 import React from 'react';
 import { observer } from 'mobx-react/native';
-import { Text, View, FlatList } from 'react-native';
+import { View, FlatList } from 'react-native';
 import { observable, action, computed } from 'mobx';
 import ActivityOverlay from '../controls/activity-overlay';
 import { headerContainer, textStyle, skipButtonStyle, listHeader, textListTitle, footerContainer, container } from '../../styles/signup-contact-sync';
@@ -17,6 +17,7 @@ import icons from '../helpers/icons';
 import { vars } from '../../styles/styles';
 import uiState from '../layout/ui-state';
 import ListItem from './signup-contact-list-item';
+import Text from '../controls/custom-text';
 
 const _ = require('lodash');
 const iconClear = require('../../assets/file_icons/ic_close.png');

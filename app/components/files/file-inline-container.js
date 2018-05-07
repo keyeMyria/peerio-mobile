@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
+import Text from '../controls/custom-text';
 import SafeComponent from '../shared/safe-component';
 import { vars } from '../../styles/styles';
 import icons from '../helpers/icons';
@@ -33,7 +34,6 @@ const text = {
     flexGrow: 1,
     flexShrink: 1,
     fontSize: vars.font.size.normal,
-    fontWeight: vars.font.weight.semiBold,
     color: vars.txtMedium,
     paddingLeft: padding
 };
@@ -66,7 +66,7 @@ export default class FileInlineContainer extends SafeComponent {
                     </View>
                     <View style={header}>
                         {isLocal && <FileTypeIcon type={fileHelpers.getFileIconType(file.ext)} size="smaller" />}
-                        {!!name && <Text numberOfLines={1} ellipsizeMode="tail" style={text}>{name}</Text>}
+                        {!!name && <Text semibold numberOfLines={1} ellipsizeMode="tail" style={text}>{name}</Text>}
                         {isLocal && <View style={{ flexDirection: 'row' }}>
                             {extraActionIcon}
                             {icons.darkNoPadding(

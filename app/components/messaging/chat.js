@@ -1,8 +1,9 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { observer } from 'mobx-react/native';
-import { ScrollView, View, Image, Text, TouchableOpacity, ActivityIndicator, Dimensions, Platform } from 'react-native';
+import { ScrollView, View, Image, TouchableOpacity, ActivityIndicator, Dimensions, Platform } from 'react-native';
 import { observable, when, reaction, computed } from 'mobx';
+import Text from '../controls/custom-text';
 import SafeComponent from '../shared/safe-component';
 import ProgressOverlay from '../shared/progress-overlay';
 import ChatZeroStatePlaceholder from './chat-zero-state-placeholder';

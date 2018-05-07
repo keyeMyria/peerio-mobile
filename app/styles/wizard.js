@@ -36,7 +36,6 @@ export default {
     },
     textSubTitle: {
         color: vars.txtLight,
-        fontWeight: vars.font.weight.regular,
         fontSize: 22,
         marginTop: 12,
         marginBottom: 30
@@ -46,7 +45,6 @@ export default {
     text: {
         title: textInverse,
         subTitle: [textInverse, {
-            fontWeight: vars.font.weight.regular,
             fontSize: 24,
             marginTop: 12,
             marginBottom: 32

@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { View, Text, ScrollView, Dimensions, LayoutAnimation, Keyboard } from 'react-native';
+import { View, ScrollView, Dimensions, LayoutAnimation, Keyboard } from 'react-native';
 import { observer } from 'mobx-react/native';
 import { observable, reaction, action } from 'mobx';
 import ContactSelectorUniversal from '../contacts/contact-selector-universal';
@@ -13,6 +13,7 @@ import chatState from '../messaging/chat-state';
 import { User, config, socket } from '../../lib/icebear';
 import SnackBarConnection from '../snackbars/snackbar-connection';
 import testLabel from '../helpers/test-label';
+import Text from '../controls/custom-text';
 
 const fillView = { flex: 1, flexGrow: 1, backgroundColor: vars.darkBlueBackground05 };
 
@@ -97,7 +98,6 @@ export default class CreateChannel extends Component {
             flexGrow: 1,
             flexShrink: 1,
             fontSize: vars.font.size.huge,
-            fontWeight: vars.font.weight.semiBold,
             color: vars.textBlack54
         };
         return (
@@ -105,7 +105,7 @@ export default class CreateChannel extends Component {
                 {...testLabel(testId)}
                 accessible={false}>
                 {icons.dark('close', () => chatState.routerModal.discard())}
-                <Text style={textStyle}>{tx('button_createChannel')}</Text>
+                <Text semibold style={textStyle}>{tx('button_createChannel')}</Text>
                 {this.isValid ? this.nextIcon() : this.nextIconDisabled()}
             </View>
         );

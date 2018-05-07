@@ -1,6 +1,7 @@
 import React from 'react';
-import { Text, WebView, Image, View, Platform } from 'react-native';
+import { WebView, Image, View, Platform } from 'react-native';
 import { observable } from 'mobx';
+import Text from '../controls/custom-text';
 import { t, tu, tx } from '../utils/translator';
 import TextInputStateful from '../controls/text-input-stateful';
 import popupState from '../layout/popup-state';
@@ -304,7 +305,6 @@ function popup2FA(title, placeholder, checkBoxText, checked, cancelable) {
     const helperTextStyle = {
         color: vars.subtleText,
         fontSize: vars.font.size.smaller,
-        fontWeight: vars.font.weight.regular,
         paddingVertical: vars.spacing.small.midi
     };
     return new Promise((resolve) => {

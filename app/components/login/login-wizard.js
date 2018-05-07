@@ -86,7 +86,8 @@ export default class LoginWizard extends Wizard {
             marginHorizontal: vars.spacing.medium.maxi2x,
             height: 40,
             backgroundColor: '#FFFFFF90',
-            marginTop: vars.spacing.small.maxi2x
+            marginTop: vars.spacing.small.maxi2x,
+            fontFamily: vars.peerioFontFamily
         };
         return (
             <View style={debugContainer} pointerEvents={this.delayDebugMenu ? 'none' : 'auto'}>

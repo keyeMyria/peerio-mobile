@@ -1,10 +1,8 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { observer } from 'mobx-react/native';
-import { TouchableOpacity, View, Text } from 'react-native';
-// TODO fix imports after merging Fonts
-// import { TouchableOpacity, View } from 'react-native';
-// import Text from './controls/custom-text';
+import { TouchableOpacity, View } from 'react-native';
+import Text from '../controls/custom-text';
 import SafeComponent from '../shared/safe-component';
 import icons from '../helpers/icons';
 import { vars } from '../../styles/styles';

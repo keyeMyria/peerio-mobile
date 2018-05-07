@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Text } from 'react-native';
+import { View, ScrollView } from 'react-native';
 import { observer } from 'mobx-react/native';
+import Text from '../controls/custom-text';
 import { config } from '../../lib/icebear';
 import { vars } from '../../styles/styles';
 import { tx } from '../utils/translator';

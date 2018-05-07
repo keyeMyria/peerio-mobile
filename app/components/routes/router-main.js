@@ -18,10 +18,11 @@ import ContactList from '../contacts/contact-list';
 import ChannelInvite from '../messaging/channel-invite';
 import ContactListInvite from '../contacts/contact-list-invite';
 import DmContactInvite from '../messaging/dm-contact-invite';
-import { fileState, mainState, ghostState, chatState, settingsState, contactState, contactAddState, invitationState } from '../states';
+import { fileState, ghostState, chatState, settingsState, contactState, contactAddState, invitationState } from '../states';
 // import { enablePushNotifications } from '../../lib/push';
 import routes from './routes';
 import loginState from '../login/login-state';
+import preferenceStore from '../settings/preference-store';
 
 class RouterMain extends Router {
     // current route object
@@ -67,7 +68,7 @@ class RouterMain extends Router {
         this.invoked = true;
         this.loading = true;
         // if (EN === 'peeriomobile') await enablePushNotifications();
-        await mainState.init();
+        await preferenceStore.init();
         await chatState.init();
         this.chatStateLoaded = true;
         await fileState.init();

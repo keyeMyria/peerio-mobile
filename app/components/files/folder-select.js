@@ -1,7 +1,8 @@
 import React from 'react';
 import { observer } from 'mobx-react/native';
-import { View, ListView, Text } from 'react-native';
+import { View, ListView } from 'react-native';
 import { observable, reaction, computed } from 'mobx';
+import Text from '../controls/custom-text';
 import SafeComponent from '../shared/safe-component';
 import FolderInnerItem from './folder-inner-item';
 import fileState from './file-state';
@@ -115,7 +116,6 @@ export default class FolderSelect extends SafeComponent {
         };
         const textStyle = {
             fontSize: vars.font.size.normal,
-            fontWeight: vars.font.weight.semiBold,
             color: vars.txtMedium
         };
         const leftIcon = this.currentFolder.isRoot ?
@@ -124,7 +124,7 @@ export default class FolderSelect extends SafeComponent {
         return (
             <View style={container}>
                 {leftIcon}
-                <Center style={style}><Text style={textStyle}>Move file to...</Text></Center>
+                <Center style={style}><Text semibold style={textStyle}>Move file to...</Text></Center>
                 {icons.placeholder()}
             </View>
         );

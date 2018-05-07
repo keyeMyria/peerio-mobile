@@ -1,7 +1,8 @@
 import React from 'react';
 import { observer } from 'mobx-react/native';
-import { ScrollView, View, Text, LayoutAnimation, Platform } from 'react-native';
+import { ScrollView, View, LayoutAnimation, Platform } from 'react-native';
 import { reaction } from 'mobx';
+import Text from '../controls/custom-text';
 import SafeComponent from '../shared/safe-component';
 import popupState from './popup-state';
 import ButtonText from '../controls/button-text';
@@ -89,7 +90,6 @@ export default class PopupLayout extends SafeComponent {
         };
 
         const title = {
-            fontWeight: 'bold',
             fontSize: vars.font.size.big,
             marginBottom: vars.spacing.small.midi2x,
             color: vars.txtDark
@@ -113,7 +113,7 @@ export default class PopupLayout extends SafeComponent {
                 <View style={wrapper}>
                     <View style={container}>
                         <View style={{ padding: vars.spacing.medium.midi2x, flexGrow: 1, flexShrink: 1 }}>
-                            {popup.title ? <Text style={title} >{popup.title}</Text> : null}
+                            {popup.title ? <Text bold style={title} >{popup.title}</Text> : null}
                             {popup.subTitle ? <Text style={subTitle} >{popup.subTitle}</Text> : null}
                             {popup.contents}
                         </View>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { observer } from 'mobx-react/native';
-import { View, Text, TouchableOpacity, Dimensions } from 'react-native';
+import { View, TouchableOpacity, Dimensions } from 'react-native';
+import Text from '../controls/custom-text';
 import uiState from '../layout/ui-state';
 import testLabel from './test-label';
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import { observer } from 'mobx-react/native';
-import { View, ScrollView, Text, TouchableOpacity } from 'react-native';
+import { View, ScrollView, TouchableOpacity } from 'react-native';
+import Text from '../controls/custom-text';
 import SafeComponent from '../shared/safe-component';
 import { tx, tu } from '../utils/translator';
 import { vars } from '../../styles/styles';
@@ -22,7 +23,6 @@ const smallLabel = {
 
 const boldLabel = {
     color: vars.txtDark,
-    fontWeight: 'bold',
     fontSize: vars.font.size.bigger
 };
 
@@ -37,7 +37,6 @@ const descLabel = {
 };
 
 const descIncludesLabel = [descLabel, {
-    fontStyle: 'italic',
     marginBottom: margin
 }];
 
@@ -47,7 +46,7 @@ export default class AccountUpgrade extends SafeComponent {
         return (
             <View style={{ margin, marginBottom, flexDirection: 'row', justifyContent: 'space-between' }}>
                 <Text>
-                    <Text style={boldLabel}>{boldText}</Text>
+                    <Text bold style={boldLabel}>{boldText}</Text>
                     <Text> - </Text>
                     <Text style={mediumLabel}>{normalText}</Text>
                 </Text>
@@ -66,7 +65,7 @@ export default class AccountUpgrade extends SafeComponent {
                 onPress={disabled ? null : onPress}
                 pressRetentionOffset={vars.pressRetentionOffset}
                 style={{ paddingTop: vars.spacing.small.mini }}>
-                <Text style={{ fontWeight: 'bold', color: disabled ? vars.txtMedium : vars.peerioBlue }}>
+                <Text bold style={{ color: disabled ? vars.txtMedium : vars.peerioBlue }}>
                     {tu(text)}
                 </Text>
             </TouchableOpacity>
@@ -114,7 +113,7 @@ export default class AccountUpgrade extends SafeComponent {
                     {choiceItem}
                 </View>
                 <View style={{ backgroundColor: vars.white, margin: marginWhite, padding: paddingWhite }}>
-                    {plan.includes && <Text style={descIncludesLabel}>{plan.includes}</Text>}
+                    {plan.includes && <Text italic style={descIncludesLabel}>{plan.includes}</Text>}
                     <Text style={descLabel}>{plan.info}</Text>
                 </View>
             </View>

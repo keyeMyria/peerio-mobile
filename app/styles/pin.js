@@ -7,7 +7,6 @@ export default {
     message: {
         text: textInverse,
         subTitle: [textInverse, {
-            fontWeight: vars.font.weight.regular,
             fontSize: 22,
             marginTop: 12,
             marginBottom: 10

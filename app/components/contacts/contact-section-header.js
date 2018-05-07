@@ -1,9 +1,10 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { observer } from 'mobx-react/native';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import SafeComponent from '../shared/safe-component';
 import { vars } from '../../styles/styles';
+import Text from '../controls/custom-text';
 
 @observer
 export default class ContactSectionHeader extends SafeComponent {
@@ -18,12 +19,11 @@ export default class ContactSectionHeader extends SafeComponent {
 
         const textStyle = {
             marginLeft: vars.spacing.large.mini,
-            fontWeight: 'bold',
             color: vars.txtMedium
         };
         return (
             <View style={style}>
-                <Text style={textStyle}>{title}</Text>
+                <Text bold style={textStyle}>{title}</Text>
             </View>
         );
     }

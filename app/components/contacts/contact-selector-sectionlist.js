@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { SectionList, Text, View } from 'react-native';
+import { SectionList, View } from 'react-native';
 import { observer } from 'mobx-react/native';
 import Avatar from '../shared/avatar';
 import ContactInviteItem from './contact-invite-item';
 import testLabel from '../helpers/test-label';
 import { vars } from '../../styles/styles';
 import { tx } from '../utils/translator';
+import Text from '../controls/custom-text';
 
 const INITIAL_LIST_SIZE = 10;
 
@@ -43,9 +44,9 @@ export default class ContactSelectorSectionList extends Component {
 
     sectionHeader({ section: { data, key } }) {
         if (!data || !data.length || !key) return null;
-        const s = { fontWeight: 'bold', margin: vars.spacing.small.maxi };
+        const s = { margin: vars.spacing.small.maxi };
         return (
-            <Text style={s}>
+            <Text bold style={s}>
                 {tx(key, { found: data && data.length })}
             </Text>
         );

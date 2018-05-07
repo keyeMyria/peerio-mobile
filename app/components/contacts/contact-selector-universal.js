@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { View, Text, TextInput, ActivityIndicator, LayoutAnimation } from 'react-native';
+import { View, TextInput, ActivityIndicator, LayoutAnimation } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { when, observable, action, reaction, computed } from 'mobx';
 import { observer } from 'mobx-react/native';
@@ -20,6 +20,7 @@ import ContactCollection from './contact-collection';
 import ContactSelectorUserBoxLine from './contact-selector-userbox-line';
 import ContactSelectorSectionList from './contact-selector-sectionlist';
 import testLabel from '../helpers/test-label';
+import Text from '../controls/custom-text';
 
 @observer
 export default class ContactSelectorUniversal extends SafeComponent {
@@ -81,7 +82,8 @@ export default class ContactSelectorUniversal extends SafeComponent {
         const style = {
             flexGrow: 1,
             height,
-            fontSize: vars.font.size.normal
+            fontSize: vars.font.size.normal,
+            fontFamily: vars.peerioFontFamily
         };
         let rightIcon = null;
         if (this.findUserText) {
@@ -132,13 +134,12 @@ export default class ContactSelectorUniversal extends SafeComponent {
             flexGrow: 1,
             flexShrink: 1,
             fontSize: vars.font.size.big,
-            fontWeight: vars.font.weight.semiBold,
             color: vars.textBlack54
         };
         return (
             <View style={container}>
                 {icons.dark('close', this.props.onExit, null, null, 'closeButton')}
-                <Text style={textStyle}>{tx(this.props.title)}</Text>
+                <Text semibold style={textStyle}>{tx(this.props.title)}</Text>
             </View>
         );
     }

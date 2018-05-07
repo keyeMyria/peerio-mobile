@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { Text, View, ActivityIndicator, ScrollView, Dimensions } from 'react-native';
+import { View, ActivityIndicator, ScrollView, Dimensions } from 'react-native';
 import { observer } from 'mobx-react/native';
+import Text from '../controls/custom-text';
 import AccountUpgradeToggle from './account-upgrade-toggle';
 import PaymentsInfoPopup from '../payments/payments-info-popup';
 import payments from '../payments/payments';
@@ -14,10 +15,6 @@ const { width } = Dimensions.get('window');
 const topTitleText = {
     fontSize: vars.accountTitleFontSize,
     color: 'white'
-};
-
-const boldText = {
-    fontWeight: 'bold'
 };
 
 const smallText = {
@@ -40,8 +37,7 @@ const planFooterInfo = [featureListTextMedium, {
 
 const featureSmallText = {
     color: 'white',
-    fontSize: vars.font.size.normal,
-    fontWeight: 'bold'
+    fontSize: vars.font.size.normal
 };
 
 const block0 = {
@@ -97,7 +93,7 @@ export default class AccountUpgradePlan extends Component {
     featureText(text) {
         return (
             <View style={{ marginBottom: vars.spacing.small.maxi }} key={text}>
-                <Text style={featureSmallText}>{text}</Text>
+                <Text bold style={featureSmallText}>{text}</Text>
             </View>
         );
     }
@@ -144,7 +140,7 @@ export default class AccountUpgradePlan extends Component {
                 <ScrollView>
                     <View style={block1}>
                         <Text style={topTitleText}>
-                            {tx('title_appName')} <Text style={boldText}>{tx(title)}</Text>
+                            {tx('title_appName')} <Text bold>{tx(title)}</Text>
                         </Text>
                     </View>
                     <View style={borderView}>

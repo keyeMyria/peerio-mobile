@@ -1,5 +1,4 @@
 import React from 'react';
-import { Text } from 'react-native';
 import { t, T } from '../utils/translator';
 import TextBox from '../controls/textbox';
 import Bold from '../controls/bold';
@@ -7,6 +6,7 @@ import Center from '../controls/center';
 import ActivityOverlay from '../controls/activity-overlay';
 import loginState from './login-state';
 import LoginWizardPage from './login-wizard-page';
+import Text from '../controls/custom-text';
 import { vars } from '../../styles/styles';
 
 const textStyle = {

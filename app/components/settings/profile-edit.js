@@ -1,7 +1,8 @@
 import React from 'react';
 import { observer } from 'mobx-react/native';
-import { Image, View, ScrollView, Text, TouchableOpacity, LayoutAnimation } from 'react-native';
+import { Image, View, ScrollView, TouchableOpacity, LayoutAnimation } from 'react-native';
 import { observable, reaction } from 'mobx';
+import Text from '../controls/custom-text';
 import SafeComponent from '../shared/safe-component';
 import SimpleTextBox from '../shared/simple-text-box';
 import { vars } from '../../styles/styles';
@@ -28,7 +29,8 @@ const textinput = {
     color: vars.txtDark,
     marginLeft: vars.inputPaddingLeft,
     flex: 1,
-    flexGrow: 1
+    flexGrow: 1,
+    fontFamily: vars.peerioFontFamily
 };
 
 const textStatic = {
@@ -156,7 +158,7 @@ export default class ProfileEdit extends SafeComponent {
                 onPress={disabled ? null : onPress}
                 pressRetentionOffset={vars.pressRetentionOffset}
                 style={{ paddingRight: vars.spacing.small.maxi2x, paddingVertical: vars.spacing.small.maxi }}>
-                <Text style={{ fontWeight: 'bold', color: disabled ? vars.txtMedium : vars.peerioBlue }}>
+                <Text bold style={{ color: disabled ? vars.txtMedium : vars.peerioBlue }}>
                     {tu(text)}
                 </Text>
             </TouchableOpacity>
@@ -204,13 +206,12 @@ export default class ProfileEdit extends SafeComponent {
         const contact = contactStore.getContact(User.current.username);
         const style = {
             color: vars.white,
-            fontWeight: 'bold',
             fontSize: vars.profileEditFontSize,
             marginHorizontal: vars.spacing.medium.maxi2x,
             marginVertical: vars.spacing.medium.mini2x
         };
         return (
-            <Text style={style}>
+            <Text bold style={style}>
                 {contact.letter}
             </Text >
         );
@@ -251,10 +252,9 @@ export default class ProfileEdit extends SafeComponent {
                 <View style={[flexRow, { backgroundColor: contact.hasAvatar ? vars.txtDate : contact.color }]}>
                     {contact.hasAvatar ? this.avatar : this.avatarLetter}
                     <View style={{ flexGrow: 1, flexShrink: 1 }}>
-                        <Text
+                        <Text bold
                             {...testLabel('fullName')}
                             style={{
-                                fontWeight: 'bold',
                                 color: vars.white,
                                 fontSize: vars.font.size.bigger,
                                 marginVertical: vars.spacing.small.mini2x

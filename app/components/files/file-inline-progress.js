@@ -2,7 +2,8 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { action } from 'mobx';
 import { observer } from 'mobx-react/native';
-import { View, ActivityIndicator, Text, TouchableOpacity } from 'react-native';
+import { View, ActivityIndicator, TouchableOpacity } from 'react-native';
+import Text from '../controls/custom-text';
 import SafeComponent from '../shared/safe-component';
 import { vars } from '../../styles/styles';
 import { T } from '../utils/translator';
@@ -26,7 +27,7 @@ export default class FileInlineProgress extends SafeComponent {
     get downloadProgress() {
         if (!this.file) return 0;
         const { progress, progressMax } = this.file;
-        return Math.min(Math.ceil(progress / progressMax * 100), 100)
+        return Math.min(Math.ceil(progress / progressMax * 100), 100);
     }
 
     @action.bound onOpen() {
@@ -67,9 +68,8 @@ export default class FileInlineProgress extends SafeComponent {
                             : this.onOpen
                         }
                     >
-                        <Text style={{
+                        <Text semibold style={{
                             color: vars.peerioBlue,
-                            fontWeight: vars.font.weight.semiBold,
                             fontStyle: 'italic'
                         }}>
                             {file.downloading && !this.fileExists &&
