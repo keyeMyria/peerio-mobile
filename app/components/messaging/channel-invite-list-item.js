@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { observable, computed, when } from 'mobx';
 import { observer } from 'mobx-react/native';
-import { View, Text, TouchableOpacity, LayoutAnimation } from 'react-native';
+import { View, TouchableOpacity, LayoutAnimation } from 'react-native';
 import Text from '../controls/custom-text';
 import SafeComponent from '../shared/safe-component';
 import { vars } from '../../styles/styles';
@@ -64,7 +64,7 @@ export default class ChannelInviteListItem extends SafeComponent {
 
         const textStyle = {
             fontSize: vars.font.size.bigger,
-            color: vars.unreadTextColor
+            color: vars.unreadTextColor,
             fontWeight: 'bold',
             textDecorationLine: this.declinedStyle ? 'line-through' : 'none'
         };
