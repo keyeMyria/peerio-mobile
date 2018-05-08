@@ -6,7 +6,7 @@ import Text from '../controls/custom-text';
 import SafeComponent from '../shared/safe-component';
 import Avatar from '../shared/avatar';
 import chatState from './chat-state';
-import { User, contactStore, systemMessages } from '../../lib/icebear';
+import { User, contactStore } from '../../lib/icebear';
 import { tx } from '../utils/translator';
 import { vars } from '../../styles/styles';
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { observable, action } from 'mobx';
-import { Image, Text, View } from 'react-native';
+import { Image, View } from 'react-native';
 import { observer } from 'mobx-react/native';
 import SafeComponent from '../shared/safe-component';
 import { vars } from '../../styles/styles';
@@ -13,6 +13,7 @@ import chatState from '../messaging/chat-state';
 import AvatarCircle from '../shared/avatar-circle';
 import ProgressOverlay from '../shared/progress-overlay';
 import IdentityVerificationNotice from './identity-verification-notice';
+import Text from '../controls/custom-text';
 
 const emojiTada = require('../../assets/emoji/tada.png');
 
