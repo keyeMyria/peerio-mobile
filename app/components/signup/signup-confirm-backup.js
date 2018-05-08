@@ -3,7 +3,6 @@ import { observer } from 'mobx-react/native';
 import { View, Image } from 'react-native';
 import { observable, when } from 'mobx';
 import Text from '../controls/custom-text';
-import TextBox from '../controls/textbox';
 import ActivityOverlay from '../controls/activity-overlay';
 import { vars } from '../../styles/styles';
 import signupState from './signup-state';

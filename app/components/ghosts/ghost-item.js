@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { observer } from 'mobx-react/native';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
 import Menu, { MenuOptions, MenuOption, MenuTrigger } from 'react-native-menu';
 import moment from 'moment';
 import SafeComponent from '../shared/safe-component';
@@ -9,6 +9,7 @@ import ghostState from './ghost-state';
 import icons from '../helpers/icons';
 import { vars } from '../../styles/styles';
 import { mailStore } from '../../lib/icebear';
+import Text from '../controls/custom-text';
 
 const row = {
     flexDirection: 'row',

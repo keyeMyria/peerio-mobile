@@ -1,7 +1,9 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { observer } from 'mobx-react/native';
+/* eslint-disable */
 import { Text as RNText, Platform } from 'react-native';
+/* eslint-enable */
 import SafeComponent from '../shared/safe-component';
 import { vars } from '../../styles/styles';
 

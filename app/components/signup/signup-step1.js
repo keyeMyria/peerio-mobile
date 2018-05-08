@@ -2,7 +2,6 @@ import React from 'react';
 import { observable, action } from 'mobx';
 import { observer } from 'mobx-react/native';
 import { View, TouchableOpacity } from 'react-native';
-import TextBox from '../controls/textbox';
 import Text from '../controls/custom-text';
 // import LanguagePickerBox from '../controls/language-picker-box';
 import Bold from '../controls/bold';
