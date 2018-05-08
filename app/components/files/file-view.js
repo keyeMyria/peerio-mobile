@@ -12,6 +12,7 @@ import FileViewActionSheet from './file-view-action-sheet';
 import ButtonText from '../controls/button-text';
 import MenuIcon from '../layout/menu-icon';
 import { tx } from '../utils/translator';
+import snackbarState from '../snackbars/snackbar-state';
 
 const textStyle = {
     textAlign: 'center',
@@ -60,7 +61,9 @@ export default class FileView extends SafeComponent {
 
     @action.bound onOpen() {
         const { file } = this;
-        file.launchViewer();
+        file.launchViewer().catch(() => {
+            snackbarState.pushTemporary(tx('snackbar_couldntOpenFile'));
+        });
     }
 
     @action.bound onDownload() {

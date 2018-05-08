@@ -7,6 +7,7 @@ import routerModal from '../routes/router-modal';
 import fileState from '../files/file-state';
 import { tx } from '../utils/translator';
 import { config } from '../../lib/icebear';
+import snackbarState from '../snackbars/snackbar-state';
 
 @observer
 export default class InlineImageActionSheet extends SafeComponent {
@@ -21,18 +22,22 @@ export default class InlineImageActionSheet extends SafeComponent {
         return {
             title: tx('button_open'),
             action: () => {
-                when(() => this.image.tmpCached, () => config.FileStream.launchViewer(this.image.tmpCachePath));
+                when(() => this.image.tmpCached,
+                    () => config.FileStream.launchViewer(this.image.tmpCachePath).catch(() => {
+                        snackbarState.pushTemporary(tx('snackbar_couldntOpenFile'));
+                    }));
                 if (!this.image.tmpCached) this.image.tryToCacheTemporarily(true);
             }
         };
     }
 
     get items() {
-        return [
-            this.openItem,
+        const itemsArray = [
             { title: tx('button_share'), action: this.shareImage },
             { title: tx('button_cancel') }
         ];
+        if (this.image && !this.image.isOversizeCutoff) itemsArray.unshift(this.openItem);
+        return itemsArray;
     }
 
     onPress = index => {

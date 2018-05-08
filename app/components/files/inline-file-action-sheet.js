@@ -7,6 +7,7 @@ import routerModal from '../routes/router-modal';
 import fileState from '../files/file-state';
 import { tx } from '../utils/translator';
 import routes from '../routes/routes';
+import snackbarState from '../snackbars/snackbar-state';
 
 @observer
 export default class InlineFileActionSheet extends SafeComponent {
@@ -26,7 +27,9 @@ export default class InlineFileActionSheet extends SafeComponent {
         return {
             title,
             action: () => {
-                when(() => this.fileExists, this.file.launchViewer());
+                when(() => this.fileExists, this.file.launchViewer().catch(() => {
+                    snackbarState.pushTemporary(tx('snackbar_couldntOpenFile'));
+                }));
                 if (!this.file.cached) fileState.download(this.file);
             }
         };

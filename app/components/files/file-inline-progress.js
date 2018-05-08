@@ -5,11 +5,12 @@ import { observer } from 'mobx-react/native';
 import { View, ActivityIndicator, Text, TouchableOpacity } from 'react-native';
 import SafeComponent from '../shared/safe-component';
 import { vars } from '../../styles/styles';
-import { T } from '../utils/translator';
+import { T, tx } from '../utils/translator';
 import fileState from '../files/file-state';
 import icons from '../helpers/icons';
 import FileInlineContainer from './file-inline-container';
 import FileSignatureError from './file-signature-error';
+import snackbarState from '../snackbars/snackbar-state';
 
 @observer
 export default class FileInlineProgress extends SafeComponent {
@@ -26,12 +27,14 @@ export default class FileInlineProgress extends SafeComponent {
     get downloadProgress() {
         if (!this.file) return 0;
         const { progress, progressMax } = this.file;
-        return Math.min(Math.ceil(progress / progressMax * 100), 100)
+        return Math.min(Math.ceil(progress / progressMax * 100), 100);
     }
 
     @action.bound onOpen() {
         if (this.fileExists && !this.file.downloading) {
-            this.file.launchViewer();
+            this.file.launchViewer().catch(() => {
+                snackbarState.pushTemporary(tx('snackbar_couldntOpenFile'));
+            });
         } else {
             fileState.download(this.file);
         }
