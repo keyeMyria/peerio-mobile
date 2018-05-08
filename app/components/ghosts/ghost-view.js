@@ -1,6 +1,6 @@
 import React from 'react';
 import { observer } from 'mobx-react/native';
-import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
+import { View, ScrollView, TouchableOpacity } from 'react-native';
 import Share from 'react-native-share';
 import moment from 'moment';
 import SafeComponent from '../shared/safe-component';
@@ -8,6 +8,7 @@ import { tx } from '../utils/translator';
 // import icons from '../helpers/icons';
 import { vars } from '../../styles/styles';
 import { mailStore } from '../../lib/icebear';
+import Text from '../controls/custom-text';
 
 const padding = vars.spacing.small.midi2x;
 const marginVertical = vars.spacing.small.mini2x;

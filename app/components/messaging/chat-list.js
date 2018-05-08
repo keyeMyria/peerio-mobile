@@ -16,7 +16,7 @@ import PlusBorderIcon from '../layout/plus-border-icon';
 import CreateActionSheet from './create-action-sheet';
 import { tx } from '../utils/translator';
 import uiState from '../layout/ui-state';
-import { scrollHelper } from '../helpers/test-helper';
+// import { scrollHelper } from '../helpers/test-helper';
 import UnreadMessageIndicator from './unread-message-indicator';
 import { vars } from '../../styles/styles';
 

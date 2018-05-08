@@ -1,6 +1,6 @@
 import React from 'react';
 import { observer } from 'mobx-react/native';
-import { View, Text, TextInput, TouchableOpacity } from 'react-native';
+import { View, TextInput, TouchableOpacity } from 'react-native';
 import { observable } from 'mobx';
 import SafeComponent from '../shared/safe-component';
 import { tx } from '../utils/translator';
@@ -11,6 +11,7 @@ import ghostState from './ghost-state';
 import { mailStore } from '../../lib/icebear';
 import fileState from '../files/file-state';
 import { vars } from '../../styles/styles';
+import Text from '../controls/custom-text';
 
 const row = {
     flexDirection: 'row',

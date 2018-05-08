@@ -20,7 +20,12 @@ module.exports = {
         'react/no-array-index-key': 0,
         'max-len': 0,
         'space-before-function-paren': 0,
-        'babel/semi': 1
+        'babel/semi': 1,
+        'no-restricted-imports': [2, { paths: [{
+            name: 'react-native',
+            importNames: ['Text'],
+            message: 'Do not use react-native Text, use custom-text instead'
+        }] }]
     },
     globals: {
         'requestAnimationFrame': false,
