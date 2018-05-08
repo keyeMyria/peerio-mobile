@@ -1,12 +1,13 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import { action } from 'mobx';
 import { observer } from 'mobx-react/native';
 import { View } from 'react-native';
 import Text from '../controls/custom-text';
 import SafeComponent from '../shared/safe-component';
 import Avatar from '../shared/avatar';
 import chatState from './chat-state';
-import { User, contactStore, systemMessages } from '../../lib/icebear';
+import { User, contactStore } from '../../lib/icebear';
 import { tx } from '../utils/translator';
 import { vars } from '../../styles/styles';
 
@@ -87,6 +88,10 @@ export default class ChatListItem extends SafeComponent {
     //     );
     // }
 
+    @action.bound onPress() {
+        chatState.routerMain.chats(this.props.chat);
+    }
+
     renderThrow() {
         if (chatState.collapseDMs) return null;
         if (!this.props || !this.props.chat) return null;
@@ -105,9 +110,6 @@ export default class ChatListItem extends SafeComponent {
         }
 
         const key = chat.id;
-        let onPress;
-        if (chat.isInvite) onPress = () => chatState.routerMain.dmContactInvite(chat);
-        else onPress = () => chatState.routerMain.chats(chat);
         const unread = chat.unreadCount > 0;
         return (
             <Avatar
@@ -124,8 +126,8 @@ export default class ChatListItem extends SafeComponent {
                 hideOnline
                 isDeleted={isDeleted}
                 key={key}
-                onPress={onPress}
-                onPressAvatar={onPress}
+                onPress={this.onPress}
+                onPressAvatar={this.onPress}
             />
         );
     }
