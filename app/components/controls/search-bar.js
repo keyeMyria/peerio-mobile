@@ -1,8 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity, TextInput, Platform } from 'react-native';
-import { vars, button } from '../../styles/styles';
-import icons from '../helpers/icons';
+import { View, TextInput, Platform } from 'react-native';
+import { vars } from '../../styles/styles';
 
 const height = vars.searchInputHeight;
 const fontSize = vars.font.size.bigger;

@@ -1,8 +1,9 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { observer } from 'mobx-react/native';
-import { Text, Dimensions, View, TouchableOpacity } from 'react-native';
+import { Dimensions, View, TouchableOpacity } from 'react-native';
 import moment from 'moment';
+import Text from '../controls/custom-text';
 import SafeComponent from '../shared/safe-component';
 import { vars } from '../../styles/styles';
 import icons from '../helpers/icons';
@@ -72,13 +73,11 @@ export default class FileInnerItem extends SafeComponent {
         const checked = this.props.file && this.props.file.selected;
         const nameStyle = {
             color: vars.txtDark,
-            fontSize: vars.font.size.normal,
-            fontWeight: vars.font.weight.bold
+            fontSize: vars.font.size.normal
         };
         const infoStyle = {
             color: vars.subtleText,
-            fontSize: vars.font.size.smaller,
-            fontWeight: vars.font.weight.regular
+            fontSize: vars.font.size.smaller
         };
         const itemContainerStyle = {
             flex: 1,
@@ -127,7 +126,7 @@ export default class FileInnerItem extends SafeComponent {
                                     />}
                             </View>
                             <View style={{ flexGrow: 1, flexShrink: 1, marginLeft: vars.spacing.medium.mini2x }}>
-                                <Text style={nameStyle} numberOfLines={1} ellipsizeMode="tail">{file.name}</Text>
+                                <Text bold style={nameStyle} numberOfLines={1} ellipsizeMode="tail">{file.name}</Text>
                                 <Text style={infoStyle}>
                                     {file.size && <Text>{file.sizeFormatted}</Text>}
                                     &nbsp;&nbsp;

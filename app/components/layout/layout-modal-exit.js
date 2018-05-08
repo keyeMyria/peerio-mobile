@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { observer } from 'mobx-react/native';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
+import Text from '../controls/custom-text';
 import SafeComponent from '../shared/safe-component';
 import Layout1 from '../layout/layout1';
 import icons from '../helpers/icons';
@@ -24,14 +25,13 @@ export default class LayoutModalExit extends SafeComponent {
             flexShrink: 1,
             flex: 1,
             fontSize: vars.font.size.normal,
-            fontWeight: vars.font.weight.semiBold,
             textAlign: 'center',
             color: 'rgba(0, 0, 0, .54)'
         };
         return (
             <View style={container}>
                 {icons.dark('close', () => this.props.onClose())}
-                <Text style={textStyle} ellipsizeMode="tail" numberOfLines={1}>{this.props.title}</Text>
+                <Text semibold style={textStyle} ellipsizeMode="tail" numberOfLines={1}>{this.props.title}</Text>
                 {this.props.rightIcon || icons.placeholder()}
             </View>
         );

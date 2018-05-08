@@ -3,7 +3,6 @@ import { observer } from 'mobx-react/native';
 import { observable, when } from 'mobx';
 import ActionSheet from 'react-native-actionsheet';
 import SafeComponent from '../shared/safe-component';
-import routerModal from '../routes/router-modal';
 import fileState from '../files/file-state';
 import { tx } from '../utils/translator';
 import routes from '../routes/routes';
@@ -15,7 +14,7 @@ export default class InlineFileActionSheet extends SafeComponent {
 
     sharefile = () => {
         fileState.currentFile = this.file;
-        routerModal.shareFileTo();
+        routes.modal.shareFileTo();
     };
 
     get fileExists() {

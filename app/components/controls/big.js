@@ -1,8 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import {
-    Text
-} from 'react-native';
+import Text from '../controls/custom-text';
 import { vars } from '../../styles/styles';
 
 export default class Big extends Component {

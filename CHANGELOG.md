@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.278.0"></a>
+# [3.278.0](https://github.com/PeerioTechnologies/peerio-mobile/compare/v3.277.0...v3.278.0) (2018-05-08)
+
+
+### Bug Fixes
+
+* applying styles to TU constructs ([baa93e7](https://github.com/PeerioTechnologies/peerio-mobile/commit/baa93e7))
+* eslint instead of eslint-cli ([a57a5f8](https://github.com/PeerioTechnologies/peerio-mobile/commit/a57a5f8))
+* remove archive text from beginning of chat [branch ch6052] ([#189](https://github.com/PeerioTechnologies/peerio-mobile/issues/189)) ([2e9f9e9](https://github.com/PeerioTechnologies/peerio-mobile/commit/2e9f9e9))
+* remove circular dependencies ([f174619](https://github.com/PeerioTechnologies/peerio-mobile/commit/f174619))
+
+
+
 <a name="3.277.0"></a>
 # [3.277.0](https://github.com/PeerioTechnologies/peerio-mobile/compare/v3.276.0...v3.277.0) (2018-05-03)
 

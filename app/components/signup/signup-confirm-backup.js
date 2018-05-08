@@ -1,7 +1,8 @@
 import React from 'react';
 import { observer } from 'mobx-react/native';
-import { Text, View, Image } from 'react-native';
+import { View, Image } from 'react-native';
 import { observable, when } from 'mobx';
+import Text from '../controls/custom-text';
 import ActivityOverlay from '../controls/activity-overlay';
 import { vars } from '../../styles/styles';
 import signupState from './signup-state';
@@ -29,8 +30,7 @@ const textNormal = {
 };
 
 const titleDark = [textNormal, {
-    color: vars.black,
-    fontWeight: 'bold'
+    color: vars.black
 }];
 
 @observer
@@ -69,7 +69,7 @@ export default class SignupConfirmBackup extends LoginWizardPage {
                 <View style={{ flex: 0.7, flexGrow: 1, alignItems: 'flex-start' }}>
                     <View style={innerSmall}>
                         <View style={textDescription}>
-                            <Text style={titleDark}>{tx('title_confirmTitle')}</Text>
+                            <Text bold style={titleDark}>{tx('title_confirmTitle')}</Text>
                             <Text style={textNormal}>{tx('title_confirmContent1')} </Text>
                             <Text style={textNormal}>{tx('title_confirmContent2')}</Text>
                             <Text style={textNormal}>{tx('title_confirmTextInput', { sample: this.confirmTextSample })}</Text>

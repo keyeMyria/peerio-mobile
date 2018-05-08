@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Text, View, TouchableOpacity } from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
 import { observable } from 'mobx';
 import { observer } from 'mobx-react/native';
+import Text from '../controls/custom-text';
 import { tx } from '../utils/translator';
 import { vars } from '../../styles/styles';
 import icons from '../helpers/icons';
@@ -86,7 +87,7 @@ export default class FileSharePreview extends SafeComponent {
         return (
             <Text style={recipientStyle}>
                 {text}
-                <Text style={{ fontStyle: 'italic' }}>
+                <Text italic>
                     {italicText}
                 </Text>
             </Text>);

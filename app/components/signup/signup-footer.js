@@ -1,7 +1,8 @@
 import React from 'react';
 import { observer } from 'mobx-react/native';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
 import { tu } from 'peerio-translator';
+import Text from '../controls/custom-text';
 import SafeComponent from '../shared/safe-component';
 import signupState from '../signup/signup-state';
 import { wizard } from '../../styles/styles';

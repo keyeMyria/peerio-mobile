@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { Text } from 'react-native';
 import { t, has } from 'peerio-translator';
 import { reaction } from 'mobx';
+import Text from '../controls/custom-text';
 import uiState from '../layout/ui-state';
 
 class T extends Component {
@@ -46,9 +46,13 @@ T.propTypes = {
 module.exports = {
     T,
     t(k, params) {
+        const r = t(k, params);
+        if (r instanceof String || typeof r === 'string') return r;
         return React.createElement(T, { k }, params);
     },
     tu(k, params) {
+        const r = t(k, params);
+        if (r.toUpperCase) return r.toUpperCase();
         return React.createElement(T, { k, uppercase: true }, params);
     },
     tx: (k, params) => t(k, params)

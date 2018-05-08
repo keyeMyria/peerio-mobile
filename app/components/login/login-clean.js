@@ -1,6 +1,7 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import { observable, action } from 'mobx';
+import Text from '../controls/custom-text';
 import { t, tx } from '../utils/translator';
 import ActivityOverlay from '../controls/activity-overlay';
 import loginState from './login-state';
@@ -62,7 +63,7 @@ export default class LoginClean extends LoginWizardPage {
             <View style={container}>
                 <DebugMenuTrigger>
                     <View style={{ justifyContent: 'center' }}>
-                        <Text style={[headingStyle1, { marginBottom: vars.spacing.large.midi }]}>
+                        <Text semibold style={[headingStyle1, { marginBottom: vars.spacing.large.midi }]}>
                             {t('title_welcome')}
                         </Text>
                         <Text style={[subHeadingStyle, { marginBottom: vars.spacing.medium.midi }]}>

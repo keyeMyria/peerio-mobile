@@ -95,6 +95,7 @@ const vars = {
     toggleInactive: '#9B9B9B',
     toggleLineActive: '#B6D3FF',
     toggleLineInactive: '#CFCFCF',
+    peerioFontFamily: 'Open Sans',
 
     circle: 10,
     circleSize: 4,
@@ -198,11 +199,6 @@ const vars = {
             bigger: scaleDim(16),
             huge: scaleDim(20),
             massive: scaleDim(24)
-        },
-        weight: {
-            bold: '700',
-            semiBold: '600',
-            regular: '400'
         }
     },
     accountTitleFontSize: scaleDim(37),

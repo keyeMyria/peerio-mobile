@@ -1,8 +1,9 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { observer } from 'mobx-react/native';
-import { Text, View, TouchableOpacity } from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
 import { observable } from 'mobx';
+import Text from '../controls/custom-text';
 import SafeComponent from '../shared/safe-component';
 import LayoutModalExit from '../layout/layout-modal-exit';
 import Avatar from '../shared/avatar';

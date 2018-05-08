@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity, NativeModules, Alert, ListView } from 'react-native';
+import { View, TouchableOpacity, NativeModules, Alert, ListView } from 'react-native';
 import stringify from 'json-stringify-safe';
 import moment from 'moment';
+import Text from '../controls/custom-text';
 import { vars } from '../../styles/styles';
 import { User, config } from '../../lib/icebear';
 

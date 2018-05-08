@@ -1,7 +1,8 @@
 import React from 'react';
 import { observer } from 'mobx-react/native';
-import { Text, View, Image } from 'react-native';
+import { View, Image } from 'react-native';
 import { action } from 'mobx';
+import Text from '../controls/custom-text';
 import { tx } from '../utils/translator';
 import buttons from '../helpers/buttons';
 import contactState from '../contacts/contact-state';

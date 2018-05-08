@@ -1,7 +1,8 @@
 import React from 'react';
 import { observer } from 'mobx-react/native';
-import { View, ListView, Animated, Text } from 'react-native';
+import { View, ListView, Animated } from 'react-native';
 import { observable, reaction, action } from 'mobx';
+import Text from '../controls/custom-text';
 import SafeComponent from '../shared/safe-component';
 import FilesPlaceholder from './files-placeholder';
 import ProgressOverlay from '../shared/progress-overlay';

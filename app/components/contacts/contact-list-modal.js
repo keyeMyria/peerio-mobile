@@ -1,6 +1,6 @@
 import React from 'react';
 import { observer } from 'mobx-react/native';
-import { View, SectionList, Text } from 'react-native';
+import { View, SectionList } from 'react-native';
 import { observable, reaction } from 'mobx';
 import SafeComponent from '../shared/safe-component';
 import ContactsPlaceholder from './contacts-placeholder';
@@ -13,6 +13,7 @@ import chatState from '../messaging/chat-state';
 import { vars } from '../../styles/styles';
 import icons from '../helpers/icons';
 import Center from '../controls/center';
+import Text from '../controls/custom-text';
 
 const INITIAL_LIST_SIZE = 20;
 
@@ -93,13 +94,12 @@ export default class ContactListModal extends SafeComponent {
         };
         const textStyle = {
             fontSize: vars.font.size.normal,
-            fontWeight: vars.font.weight.semiBold,
             color: 'rgba(0, 0, 0, .54)'
         };
         return (
             <View style={container}>
                 {icons.dark('close', this.props.onExit)}
-                <Center style={style}><Text style={textStyle}>{this.props.title}</Text></Center>
+                <Center style={style}><Text semibold style={textStyle}>{this.props.title}</Text></Center>
                 {icons.placeholder()}
             </View>
         );

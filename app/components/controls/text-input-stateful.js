@@ -13,7 +13,7 @@ export default class TextInputStateful extends SafeComponent {
             <View style={{ borderColor: vars.checkboxIconInactive, borderWidth: 1, marginTop: vars.spacing.small.midi2x }}>
                 <TextInput
                     testID={this.props.name}
-                    style={{ height: vars.inputHeight, paddingLeft: vars.iconPadding }}
+                    style={{ height: vars.inputHeight, paddingLeft: vars.iconPadding, fontFamily: vars.peerioFontFamily }}
                     underlineColorAndroid="transparent"
                     value={s.value}
                     selectTextOnFocus

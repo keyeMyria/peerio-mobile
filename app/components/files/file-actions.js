@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { observer } from 'mobx-react/native';
-import { View, Text, TouchableOpacity, Animated } from 'react-native';
+import { View, TouchableOpacity, Animated } from 'react-native';
+import Text from '../controls/custom-text';
 import SafeComponent from '../shared/safe-component';
 import { t, tx } from '../utils/translator';
 import { uiState, fileState } from '../states';

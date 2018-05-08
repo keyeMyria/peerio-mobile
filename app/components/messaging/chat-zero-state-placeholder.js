@@ -1,6 +1,7 @@
 import React from 'react';
 import { observer } from 'mobx-react/native';
-import { View, Text, Image } from 'react-native';
+import { View, Image } from 'react-native';
+import Text from '../controls/custom-text';
 import SafeComponent from '../shared/safe-component';
 import { tx } from '../utils/translator';
 import { vars } from '../../styles/styles';
@@ -25,7 +26,6 @@ const wrapper = {
 const titleStyle = {
     color: vars.peerioBlue,
     fontSize: vars.font.size.massive,
-    fontStyle: 'italic',
     marginTop: vars.spacing.medium.maxi2x,
     marginBottom: vars.isDeviceScreenBig ? vars.spacing.medium.mini : vars.spacing.small.mini2x,
     textAlign: 'center'
@@ -34,7 +34,6 @@ const titleStyle = {
 const headingStyle = {
     color: vars.subtleTextBold,
     fontSize: vars.font.size.big,
-    fontWeight: vars.font.weight.semiBold,
     marginTop: vars.isDeviceScreenBig ? vars.spacing.large.midi : vars.spacing.large.mini2x,
     marginBottom: vars.isDeviceScreenBig ? vars.spacing.small.midi2x : vars.spacing.small.mini2x,
     justifyContent: 'flex-start'
@@ -51,7 +50,7 @@ export default class ChatZeroStatePlaceholder extends SafeComponent {
     title() {
         return (
             <View>
-                <Text style={titleStyle} {...testLabel('title_startSecureChat')}>
+                <Text italic style={titleStyle} {...testLabel('title_startSecureChat')}>
                     {tx('title_startSecureChat')}
                 </Text>
                 <Image
@@ -70,7 +69,7 @@ export default class ChatZeroStatePlaceholder extends SafeComponent {
     roomsUI() {
         return (
             <View style={{ alignItems: 'center' }}>
-                <Text style={headingStyle}>
+                <Text semidbold style={headingStyle}>
                     {tx('title_channels')}
                 </Text>
                 <Text style={descriptionStyle}>
@@ -89,7 +88,7 @@ export default class ChatZeroStatePlaceholder extends SafeComponent {
     dmUI() {
         return (
             <View style={{ alignItems: 'center' }}>
-                <Text style={headingStyle}>
+                <Text semibold style={headingStyle}>
                     {tx('title_zeroChatDmHeading')}
                 </Text>
                 <Text style={descriptionStyle}>

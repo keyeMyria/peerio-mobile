@@ -6,7 +6,6 @@ import SafeComponent from '../shared/safe-component';
 import fileState from '../files/file-state';
 import { tx } from '../utils/translator';
 import routes from '../routes/routes';
-import routerModal from '../routes/router-modal';
 import snackbarState from '../snackbars/snackbar-state';
 
 @observer
@@ -34,7 +33,7 @@ export default class FileViewActionSheet extends SafeComponent {
     }
 
     shareFile = () => {
-        routerModal.shareFileTo();
+        routes.modal.shareFileTo();
     };
     get shareItem() {
         return {

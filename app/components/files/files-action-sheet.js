@@ -7,11 +7,9 @@ import moment from 'moment';
 import SafeComponent from '../shared/safe-component';
 import { tx } from '../utils/translator';
 import { fileState } from '../states';
-import routerModal from '../routes/router-modal';
 import routes from '../routes/routes';
 import { popupInput } from '../shared/popups';
 import { fileHelpers } from '../../lib/icebear';
-import routerMain from '../routes/router-main';
 
 @observer
 export default class FilesActionSheet extends SafeComponent {
@@ -30,7 +28,7 @@ export default class FilesActionSheet extends SafeComponent {
             title: tx('button_share'),
             action: () => {
                 fileState.currentFile = this.file;
-                routerModal.shareFileTo();
+                routes.modal.shareFileTo();
             }
         };
     }
@@ -106,8 +104,8 @@ export default class FilesActionSheet extends SafeComponent {
     onFileInfoPress = () => {
         const { file } = this;
         this._actionSheet.hide();
-        routerModal.discard();
-        routerMain.files(file);
+        routes.modal.discard();
+        routes.modal.files(file);
     };
 
     refActionSheet = ref => { this._actionSheet = ref; };
