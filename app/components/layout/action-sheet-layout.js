@@ -74,9 +74,9 @@ const state = observable({
 
 @observer
 export default class ActionSheetLayout extends SafeComponent {
-    executeAction(button) {
+    async executeAction(button) {
         if (button.disabled) return;
-        ActionSheetLayout.hide();
+        await ActionSheetLayout.hide();
         button.action();
     }
 
@@ -109,35 +109,37 @@ export default class ActionSheetLayout extends SafeComponent {
         }));
     }
 
-    @action static show(config) {
+    @action static async show(config) {
         // Temporary hack for android animation bug
         // fade in of background
         LayoutAnimation.easeInEaseOut();
         if (Platform.OS === 'ios') {
             state.animating = true;
-            setTimeout(() => {
+            await new Promise(resolve => setTimeout(() => {
                 // slide-in of menu
                 LayoutAnimation.easeInEaseOut();
                 state.animating = false;
-            }, 10);
+                resolve();
+            }, 10));
         }
         state.visible = true;
         state.config = config;
         uiState.actionSheetShown = true;
     }
 
-    @action.bound static hide() {
+    @action static async hide() {
         if (!state.visible) return;
         // slide-out of menu
         LayoutAnimation.easeInEaseOut();
         if (Platform.OS === 'ios') {
             state.animating = true;
-            setTimeout(() => {
+            await new Promise(resolve => setTimeout(() => {
                 // fade in of background
                 LayoutAnimation.easeInEaseOut();
                 state.visible = false;
                 state.config = null;
-            }, 10);
+                resolve();
+            }, 10));
         } else {
             state.visible = false;
             state.config = null;
