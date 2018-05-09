@@ -87,7 +87,7 @@ export default (fileStream) => {
         static launchViewer(path, title) {
             console.debug(`rn-file-stream.js: opening viewer for ${path}`);
             const extension = fileHelpers.getFileExtension(path);
-            const mimeType = mime.types[extension];
+            const mimeType = extension ? mime.types[extension] : 'image/jpeg';
             return FileOpener.open(path, mimeType, title || path);
         }
 
