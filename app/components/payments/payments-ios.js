@@ -6,8 +6,8 @@ const { InAppUtils } = NativeModules;
 
 const premiumYearlyID = 'com.peerio.app.messenger.premium.20.yearly';
 const premiumMonthlyID = 'com.peerio.app.messenger.premium.20.monthly';
-const professionalYearlyID = 'com.peerio.app.messenger.professional.500.yearly';
-const professionalMonthlyID = 'com.peerio.app.messenger.professional.500.monthly';
+const professionalYearlyID = process.env.PRO_YEARLY_PLAN || 'com.peerio.app.messenger.professional.500.yearly';
+const professionalMonthlyID = process.env.PRO_MONTHLY_PLAN || 'com.peerio.app.messenger.professional.500.monthly';
 
 const products = [
     premiumYearlyID,

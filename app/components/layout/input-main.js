@@ -73,11 +73,10 @@ export default class InputMain extends SafeComponent {
                         onChangeText={this.onChangeText}
                         value={this.value}
                         placeholder={tx('title_messageInputPlaceholder', { chatName })}
-                        enablesReturnKeyAutomatically
-                        returnKeyType="default"
                         minHeight={vars.iconSizeSmall * 2}
                         maxHeight={146}
                         style={tiStyle}
+                        blurOnSubmit={false}
                         ref={ref => { this.input = ref; }}
                         {...testLabel('textInputMessage')}
                     />

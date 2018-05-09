@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { observer } from 'mobx-react/native';
-import { Text, View, TouchableOpacity, SectionList } from 'react-native';
+import { View, TouchableOpacity, SectionList } from 'react-native';
 import { reaction } from 'mobx';
 import { Menu, MenuOptions, MenuOption, MenuTrigger } from 'react-native-popup-menu';
 import SafeComponent from '../shared/safe-component';
@@ -13,6 +13,7 @@ import { tx } from '../utils/translator';
 import { vars } from '../../styles/styles';
 import { User } from '../../lib/icebear';
 import testLabel from '../helpers/test-label';
+import Text from '../controls/custom-text';
 
 @observer
 export default class MemberList extends SafeComponent {
@@ -81,8 +82,7 @@ export default class MemberList extends SafeComponent {
         };
         const adminTextStyle = {
             color: vars.subtleText,
-            fontSize: vars.font.size.smallerx,
-            fontWeight: vars.font.weight.semiBold
+            fontSize: vars.font.size.smallerx
         };
         const isAdmin = channel.isAdmin(contact);
         const isCurrentUser = contact.username === User.current.username;
@@ -98,7 +98,7 @@ export default class MemberList extends SafeComponent {
                         key={username}
                         message=""
                         hideOnline
-                        backgroundColor={vars.darkBlueBackground05} />
+                        backgroundColor={vars.channelInfoBg} />
                 </View>
                 <View
                     {...testLabel('moreButton')}
@@ -111,7 +111,7 @@ export default class MemberList extends SafeComponent {
                             overflow: 'hidden',
                             marginRight: isCurrentUser ? vars.spacing.huge.midi : vars.spacing.small.maxi2x
                         }}>
-                            <Text style={adminTextStyle}>
+                            <Text semibold style={adminTextStyle}>
                                 {tx('title_admin')}
                             </Text>
                         </View>}

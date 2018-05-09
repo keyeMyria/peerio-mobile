@@ -2,6 +2,179 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.278.0"></a>
+# [3.278.0](https://github.com/PeerioTechnologies/peerio-mobile/compare/v3.277.0...v3.278.0) (2018-05-08)
+
+
+### Bug Fixes
+
+* applying styles to TU constructs ([baa93e7](https://github.com/PeerioTechnologies/peerio-mobile/commit/baa93e7))
+* eslint instead of eslint-cli ([a57a5f8](https://github.com/PeerioTechnologies/peerio-mobile/commit/a57a5f8))
+* remove archive text from beginning of chat [branch ch6052] ([#189](https://github.com/PeerioTechnologies/peerio-mobile/issues/189)) ([2e9f9e9](https://github.com/PeerioTechnologies/peerio-mobile/commit/2e9f9e9))
+* remove circular dependencies ([f174619](https://github.com/PeerioTechnologies/peerio-mobile/commit/f174619))
+
+
+
+<a name="3.277.0"></a>
+# [3.277.0](https://github.com/PeerioTechnologies/peerio-mobile/compare/v3.276.0...v3.277.0) (2018-05-03)
+
+
+### Bug Fixes
+
+* correct progress [ch6566] ([11be196](https://github.com/PeerioTechnologies/peerio-mobile/commit/11be196))
+
+
+### Features
+
+* don't display indicators if the visible area is bigger than items ([f3ea4ba](https://github.com/PeerioTechnologies/peerio-mobile/commit/f3ea4ba))
+
+
+
+<a name="3.276.0"></a>
+# [3.276.0](https://github.com/PeerioTechnologies/peerio-mobile/compare/v3.275.0...v3.276.0) (2018-05-02)
+
+
+
+<a name="3.275.0"></a>
+# [3.275.0](https://github.com/PeerioTechnologies/peerio-mobile/compare/v3.274.0...v3.275.0) (2018-05-02)
+
+
+### Bug Fixes
+
+* sending image to self in DM no longer causes error [branch ch4646] ([#179](https://github.com/PeerioTechnologies/peerio-mobile/issues/179)) ([c84cf4b](https://github.com/PeerioTechnologies/peerio-mobile/commit/c84cf4b))
+
+
+### Features
+
+* redesign of file view, inline file download ([#181](https://github.com/PeerioTechnologies/peerio-mobile/issues/181)) ([e5560f6](https://github.com/PeerioTechnologies/peerio-mobile/commit/e5560f6))
+
+
+
+<a name="3.274.0"></a>
+# [3.274.0](https://github.com/PeerioTechnologies/peerio-mobile/compare/v3.273.0...v3.274.0) (2018-04-28)
+
+
+
+<a name="3.273.0"></a>
+# [3.273.0](https://github.com/PeerioTechnologies/peerio-mobile/compare/v3.272.0...v3.273.0) (2018-04-28)
+
+
+### Bug Fixes
+
+*  medcryptor social share url ([#182](https://github.com/PeerioTechnologies/peerio-mobile/issues/182)) ([bd10ee7](https://github.com/PeerioTechnologies/peerio-mobile/commit/bd10ee7))
+* add NSLocationAlwaysUsageDescription ([5fe63e8](https://github.com/PeerioTechnologies/peerio-mobile/commit/5fe63e8))
+* IAP copy ([#178](https://github.com/PeerioTechnologies/peerio-mobile/issues/178)) ([0f9371f](https://github.com/PeerioTechnologies/peerio-mobile/commit/0f9371f))
+* payment per year ([#177](https://github.com/PeerioTechnologies/peerio-mobile/issues/177)) ([99986ba](https://github.com/PeerioTechnologies/peerio-mobile/commit/99986ba))
+
+
+### Features
+
+* add userNotFoundSendInvite error ([#180](https://github.com/PeerioTechnologies/peerio-mobile/issues/180)) ([343e4cc](https://github.com/PeerioTechnologies/peerio-mobile/commit/343e4cc))
+* remove unused plan ([ec604dd](https://github.com/PeerioTechnologies/peerio-mobile/commit/ec604dd))
+
+
+
+<a name="3.272.0"></a>
+# [3.272.0](https://github.com/PeerioTechnologies/peerio-mobile/compare/v3.271.0...v3.272.0) (2018-04-18)
+
+
+### Bug Fixes
+
+* add ios subject line ([#175](https://github.com/PeerioTechnologies/peerio-mobile/issues/175)) ([d45b234](https://github.com/PeerioTechnologies/peerio-mobile/commit/d45b234))
+* loading screen line colors [branch ch5694] ([#169](https://github.com/PeerioTechnologies/peerio-mobile/issues/169)) ([c062ae8](https://github.com/PeerioTechnologies/peerio-mobile/commit/c062ae8))
+* replace copy ([#176](https://github.com/PeerioTechnologies/peerio-mobile/issues/176)) ([773be82](https://github.com/PeerioTechnologies/peerio-mobile/commit/773be82))
+* updated round blue bg button style and naming convention of all buttons [branch ch5325] ([#168](https://github.com/PeerioTechnologies/peerio-mobile/issues/168)) ([4157466](https://github.com/PeerioTechnologies/peerio-mobile/commit/4157466))
+* white bg colors ([#171](https://github.com/PeerioTechnologies/peerio-mobile/issues/171)) ([8faf4d4](https://github.com/PeerioTechnologies/peerio-mobile/commit/8faf4d4))
+
+
+### Features
+
+* android special ids ([e99c7af](https://github.com/PeerioTechnologies/peerio-mobile/commit/e99c7af))
+* introduce branding to medcryptor ([3e473f9](https://github.com/PeerioTechnologies/peerio-mobile/commit/3e473f9))
+* use appLabel sdk ([b933cec](https://github.com/PeerioTechnologies/peerio-mobile/commit/b933cec))
+
+
+
+<a name="3.271.0"></a>
+# [3.271.0](https://github.com/PeerioTechnologies/peerio-mobile/compare/v3.270.0...v3.271.0) (2018-04-16)
+
+
+### Bug Fixes
+
+* material icon color [branch ch5729] ([#170](https://github.com/PeerioTechnologies/peerio-mobile/issues/170)) ([6cd216c](https://github.com/PeerioTechnologies/peerio-mobile/commit/6cd216c))
+
+
+### Features
+
+* add appLabel config support [ch5740] ([20e56c2](https://github.com/PeerioTechnologies/peerio-mobile/commit/20e56c2))
+
+
+
+<a name="3.270.0"></a>
+# [3.270.0](https://github.com/PeerioTechnologies/peerio-mobile/compare/v3.269.0...v3.270.0) (2018-04-13)
+
+
+### Bug Fixes
+
+* badge text for unread rooms ([#164](https://github.com/PeerioTechnologies/peerio-mobile/issues/164)) ([f9a9ace](https://github.com/PeerioTechnologies/peerio-mobile/commit/f9a9ace))
+* darker color for buttons ([#165](https://github.com/PeerioTechnologies/peerio-mobile/issues/165)) ([4f5c0d6](https://github.com/PeerioTechnologies/peerio-mobile/commit/4f5c0d6))
+
+
+
+<a name="3.269.0"></a>
+# [3.269.0](https://github.com/PeerioTechnologies/peerio-mobile/compare/v3.268.0...v3.269.0) (2018-04-13)
+
+
+### Features
+
+* switch to automatic code signing ([84da4d7](https://github.com/PeerioTechnologies/peerio-mobile/commit/84da4d7))
+
+
+
+<a name="3.268.0"></a>
+# [3.268.0](https://github.com/PeerioTechnologies/peerio-mobile/compare/v3.267.0...v3.268.0) (2018-04-12)
+
+
+### Features
+
+* medcryptor colors ([#163](https://github.com/PeerioTechnologies/peerio-mobile/issues/163)) ([61993ff](https://github.com/PeerioTechnologies/peerio-mobile/commit/61993ff))
+
+
+
+<a name="3.267.0"></a>
+# [3.267.0](https://github.com/PeerioTechnologies/peerio-mobile/compare/v3.265.0...v3.267.0) (2018-04-11)
+
+
+### Bug Fixes
+
+* file share toolbar overlapping files in files list [branch ch5247] ([#157](https://github.com/PeerioTechnologies/peerio-mobile/issues/157)) ([21f737b](https://github.com/PeerioTechnologies/peerio-mobile/commit/21f737b))
+* made files and folders list item height 64px [branch ch5240] ([#156](https://github.com/PeerioTechnologies/peerio-mobile/issues/156)) ([dc8984b](https://github.com/PeerioTechnologies/peerio-mobile/commit/dc8984b))
+* v-align textbox in Room create modal [branch ch5137] ([#154](https://github.com/PeerioTechnologies/peerio-mobile/issues/154)) ([e2b2784](https://github.com/PeerioTechnologies/peerio-mobile/commit/e2b2784))
+
+
+### Features
+
+* NO_DEV_BAR to hide dev bar ([eb5c0b8](https://github.com/PeerioTechnologies/peerio-mobile/commit/eb5c0b8))
+
+
+
+<a name="3.266.0"></a>
+# [3.266.0](https://github.com/PeerioTechnologies/peerio-mobile/compare/v3.265.0...v3.266.0) (2018-04-11)
+
+
+### Bug Fixes
+
+* file share toolbar overlapping files in files list [branch ch5247] ([#157](https://github.com/PeerioTechnologies/peerio-mobile/issues/157)) ([21f737b](https://github.com/PeerioTechnologies/peerio-mobile/commit/21f737b))
+* made files and folders list item height 64px [branch ch5240] ([#156](https://github.com/PeerioTechnologies/peerio-mobile/issues/156)) ([dc8984b](https://github.com/PeerioTechnologies/peerio-mobile/commit/dc8984b))
+* v-align textbox in Room create modal [branch ch5137] ([#154](https://github.com/PeerioTechnologies/peerio-mobile/issues/154)) ([e2b2784](https://github.com/PeerioTechnologies/peerio-mobile/commit/e2b2784))
+
+
+### Features
+
+* NO_DEV_BAR to hide dev bar ([eb5c0b8](https://github.com/PeerioTechnologies/peerio-mobile/commit/eb5c0b8))
+
+
+
 <a name="3.265.0"></a>
 # [3.265.0](https://github.com/PeerioTechnologies/peerio-mobile/compare/v3.260.0...v3.265.0) (2018-04-04)
 

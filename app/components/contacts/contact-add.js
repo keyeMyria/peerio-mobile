@@ -1,6 +1,6 @@
 import React from 'react';
 import { observer } from 'mobx-react/native';
-import { View, ScrollView, Text, TouchableOpacity, LayoutAnimation, Share } from 'react-native';
+import { View, ScrollView, TouchableOpacity, LayoutAnimation, Share } from 'react-native';
 import { observable, reaction, when } from 'mobx';
 import ProgressOverlay from '../shared/progress-overlay';
 import SafeComponent from '../shared/safe-component';
@@ -13,6 +13,7 @@ import contactState from './contact-state';
 import snackbarState from '../snackbars/snackbar-state';
 import buttons from '../helpers/buttons';
 import testLabel from '../helpers/test-label';
+import Text from '../controls/custom-text';
 
 const textinputContainer = {
     backgroundColor: vars.white,
@@ -46,7 +47,8 @@ const textinput = {
     color: vars.txtDark,
     marginLeft: vars.inputPaddingLeft,
     flex: 1,
-    flexGrow: 1
+    flexGrow: 1,
+    fontFamily: vars.peerioFontFamily
 };
 
 const textStatic = {
@@ -118,7 +120,7 @@ export default class ContactAdd extends SafeComponent {
                 const atInd = this.query.indexOf('@');
                 const isEmail = atInd > -1 && atInd === this.query.lastIndexOf('@');
                 if (isEmail) {
-                    warnings.add(`User is not found on Peerio, please invite`);
+                    warnings.add(t('error_userNotFoundSendInvite'));
                     LayoutAnimation.easeInEaseOut();
                     this.toInvite = this.inviteContactDuck(this.query);
                 } else if (!isLegacy) {
@@ -141,9 +143,8 @@ export default class ContactAdd extends SafeComponent {
             username: User.current.username
         });
         const title = tx('title_socialShareInvite');
-        // const url = 'https://www.peerio.com';
         console.log(title, message);
-        Share.share({ message, title });
+        Share.share({ message, title }, { subject: title });
     }
 
     get emailButton() {
@@ -170,7 +171,7 @@ export default class ContactAdd extends SafeComponent {
                 onPress={disabled ? null : onPress}
                 pressRetentionOffset={vars.pressRetentionOffset}
                 style={{ paddingRight: vars.spacing.small.maxi2x, paddingVertical: vars.spacing.small.maxi }}>
-                <Text style={{ fontWeight: 'bold', color: disabled ? vars.txtMedium : vars.peerioBlue }}>
+                <Text bold style={{ color: disabled ? vars.txtMedium : vars.peerioBlue }}>
                     {tu(text)}
                 </Text>
             </TouchableOpacity>
@@ -194,7 +195,7 @@ export default class ContactAdd extends SafeComponent {
             <View style={{ overflow: 'hidden', height: email ? undefined : 0, opacity: invited ? 0.5 : 1 }}>
                 <View style={inviteContainer}>
                     <Text>{email}</Text>
-                    {buttons.uppercaseBlueButton(tx('button_invite'), () => {
+                    {buttons.blueTextButton(tx('button_invite'), () => {
                         mockContact.invited = true;
                         contactStore.invite(email);
                     }, invited)}

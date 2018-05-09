@@ -51,7 +51,8 @@ export default class AutoExpandingTextInput extends Component {
 
         const style = {
             textAlign: 'left',
-            padding: 0
+            padding: 0,
+            fontFamily: vars.peerioFontFamily
         };
 
         return (

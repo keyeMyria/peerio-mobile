@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { observer } from 'mobx-react/native';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
+import Text from '../controls/custom-text';
 import SafeComponent from '../shared/safe-component';
 import { vars } from '../../styles/styles';
 import chatState from './chat-state';
@@ -35,10 +36,7 @@ export default class ChannelListItem extends SafeComponent {
             color: vars.subtleText
         };
 
-        const textUnreadStyle = {
-            fontWeight: vars.font.weight.semiBold,
-            color: vars.unreadTextColor
-        };
+        const textUnreadStyle = { color: vars.unreadTextColor };
 
         const circleStyle = {
             width: vars.unreadCircleWidth,
@@ -52,10 +50,9 @@ export default class ChannelListItem extends SafeComponent {
 
         const textCircleStyle = {
             fontSize: vars.font.size.normal,
-            fontWeight: vars.font.weight.semiBold,
-            color: vars.unreadTextColor
+            color: vars.badgeText
         };
-
+        const hasUnread = unreadCount > 0;
         return (
             <View style={{ backgroundColor: vars.chatItemPressedBackground }}>
                 <TouchableOpacity
@@ -63,10 +60,10 @@ export default class ChannelListItem extends SafeComponent {
                     onPress={this.onPress}
                     style={containerStyle}
                     pressRetentionOffset={vars.pressRetentionOffset}>
-                    <Text style={[textStyle, (unreadCount > 0 && textUnreadStyle)]}>
+                    <Text semibold={hasUnread} style={[textStyle, (hasUnread && textUnreadStyle)]}>
                         {`# ${name}`}
                     </Text>
-                    {unreadCount > 0 && <View style={circleStyle}><Text style={textCircleStyle}>{unreadCount}</Text></View>}
+                    {unreadCount > 0 && <View style={circleStyle}><Text semibold style={textCircleStyle}>{unreadCount}</Text></View>}
                 </TouchableOpacity>
             </View>
         );

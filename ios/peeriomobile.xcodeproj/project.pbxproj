@@ -48,6 +48,12 @@
 		02A076271E6D8876008974C5 /* maincert.com.cer in Resources */ = {isa = PBXBuildFile; fileRef = 02A075FF1E6D880E008974C5 /* maincert.com.cer */; };
 		02A5EE7C1ECA9ECC00ED05C1 /* RNKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = 02A5EE7B1ECA9ECC00ED05C1 /* RNKeychain.m */; };
 		02ADBC5E1EDDA0D600D304BE /* libRCTContacts.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 02ADBC361EDDA0C100D304BE /* libRCTContacts.a */; };
+		02AF5ADD20842C18005056CF /* OpenSansSemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 02AF5AD720842C18005056CF /* OpenSansSemiBold.ttf */; };
+		02AF5ADE20842C18005056CF /* OpenSansItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 02AF5AD820842C18005056CF /* OpenSansItalic.ttf */; };
+		02AF5ADF20842C18005056CF /* OpenSansSemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 02AF5AD920842C18005056CF /* OpenSansSemiBoldItalic.ttf */; };
+		02AF5AE020842C18005056CF /* OpenSansBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 02AF5ADA20842C18005056CF /* OpenSansBoldItalic.ttf */; };
+		02AF5AE120842C18005056CF /* OpenSans.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 02AF5ADB20842C18005056CF /* OpenSans.ttf */; };
+		02AF5AE220842C18005056CF /* OpenSansBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 02AF5ADC20842C18005056CF /* OpenSansBold.ttf */; };
 		02BCD7291DFDE9AF000B8FCF /* libRNFileOpener.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 02BCD7281DFDE9A2000B8FCF /* libRNFileOpener.a */; };
 		02BCD72D1DFE1606000B8FCF /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02BCD72C1DFE1606000B8FCF /* QuickLook.framework */; };
 		02D764D31D9B13B300E7E57C /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 02D763F21D9918E800E7E57C /* libRNVectorIcons.a */; };
@@ -482,6 +488,12 @@
 		02A075FF1E6D880E008974C5 /* maincert.com.cer */ = {isa = PBXFileReference; lastKnownFileType = file; name = maincert.com.cer; path = ../app/assets/maincert.com.cer; sourceTree = "<group>"; };
 		02A5EE7A1ECA9EC400ED05C1 /* RNKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNKeychain.h; sourceTree = "<group>"; };
 		02A5EE7B1ECA9ECC00ED05C1 /* RNKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNKeychain.m; sourceTree = "<group>"; };
+		02AF5AD720842C18005056CF /* OpenSansSemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = OpenSansSemiBold.ttf; path = ../app/assets/fonts/OpenSansSemiBold.ttf; sourceTree = "<group>"; };
+		02AF5AD820842C18005056CF /* OpenSansItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = OpenSansItalic.ttf; path = ../app/assets/fonts/OpenSansItalic.ttf; sourceTree = "<group>"; };
+		02AF5AD920842C18005056CF /* OpenSansSemiBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = OpenSansSemiBoldItalic.ttf; path = ../app/assets/fonts/OpenSansSemiBoldItalic.ttf; sourceTree = "<group>"; };
+		02AF5ADA20842C18005056CF /* OpenSansBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = OpenSansBoldItalic.ttf; path = ../app/assets/fonts/OpenSansBoldItalic.ttf; sourceTree = "<group>"; };
+		02AF5ADB20842C18005056CF /* OpenSans.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = OpenSans.ttf; path = ../app/assets/fonts/OpenSans.ttf; sourceTree = "<group>"; };
+		02AF5ADC20842C18005056CF /* OpenSansBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = OpenSansBold.ttf; path = ../app/assets/fonts/OpenSansBold.ttf; sourceTree = "<group>"; };
 		02BCD7231DFDE9A2000B8FCF /* RNFileOpener.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNFileOpener.xcodeproj; path = "../node_modules/react-native-file-opener/ios/RNFileOpener.xcodeproj"; sourceTree = "<group>"; };
 		02BCD72C1DFE1606000B8FCF /* QuickLook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLook.framework; path = System/Library/Frameworks/QuickLook.framework; sourceTree = SDKROOT; };
 		02D764581D9AAF4D00E7E57C /* peeriomobile.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = peeriomobile.entitlements; path = peeriomobile/peeriomobile.entitlements; sourceTree = "<group>"; };
@@ -937,6 +949,12 @@
 		EE3B3AB15A814B41A0267C44 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				02AF5ADB20842C18005056CF /* OpenSans.ttf */,
+				02AF5ADC20842C18005056CF /* OpenSansBold.ttf */,
+				02AF5ADA20842C18005056CF /* OpenSansBoldItalic.ttf */,
+				02AF5AD820842C18005056CF /* OpenSansItalic.ttf */,
+				02AF5AD720842C18005056CF /* OpenSansSemiBold.ttf */,
+				02AF5AD920842C18005056CF /* OpenSansSemiBoldItalic.ttf */,
 				02A075FF1E6D880E008974C5 /* maincert.com.cer */,
 				02210A831E0191BA006D7AC0 /* sounds */,
 				02E096DB1DAE50E100641B85 /* dict */,
@@ -990,7 +1008,7 @@
 				TargetAttributes = {
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = 7L45B96YPK;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.DataProtection = {
 								enabled = 1;
@@ -1507,6 +1525,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02AF5AE020842C18005056CF /* OpenSansBoldItalic.ttf in Resources */,
 				02210A841E0191BA006D7AC0 /* sounds in Resources */,
 				02321C5D1D80558E00282EB1 /* main.jsbundle in Resources */,
 				0248F0721E5A59BF00C437A9 /* terms.txt in Resources */,
@@ -1518,12 +1537,17 @@
 				51CAD96E068B4E2EAA239290 /* FontAwesome.ttf in Resources */,
 				B73DC4B1F0BD4E63BE1B4BD5 /* Foundation.ttf in Resources */,
 				021C855E1F70C02C0046FFF4 /* include in Resources */,
+				02AF5ADE20842C18005056CF /* OpenSansItalic.ttf in Resources */,
+				02AF5ADF20842C18005056CF /* OpenSansSemiBoldItalic.ttf in Resources */,
 				02E096DC1DAE50E100641B85 /* dict in Resources */,
 				8390076B9DE5486982F0EBE9 /* Ionicons.ttf in Resources */,
 				02DB41591DCD1B1C00E04176 /* Images.xcassets in Resources */,
 				1467A9A8E0304BE0953E715B /* Octicons.ttf in Resources */,
+				02AF5AE220842C18005056CF /* OpenSansBold.ttf in Resources */,
+				02AF5AE120842C18005056CF /* OpenSans.ttf in Resources */,
 				17093292DCFB4EFBB929257F /* Zocial.ttf in Resources */,
 				E19FDAE0C2454345A5CE2523 /* MaterialCommunityIcons.ttf in Resources */,
+				02AF5ADD20842C18005056CF /* OpenSansSemiBold.ttf in Resources */,
 				02726F581EB33C7A00D82BF5 /* libsodium-ios in Resources */,
 				026A54881F9A5F8600D26E34 /* Launch Screen.storyboard in Resources */,
 				8560D839D75A4E9590C8B1F5 /* SimpleLineIcons.ttf in Resources */,
@@ -1580,9 +1604,11 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = peeriomobile/peeriomobile.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Samvel Avanesov (7TA58ZPZB5)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 306;
 				DEAD_CODE_STRIPPING = NO;
-				DEVELOPMENT_TEAM = 7L45B96YPK;
+				DEVELOPMENT_TEAM = "";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
@@ -1645,8 +1671,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.peerio;
 				PRODUCT_NAME = peeriomobile;
-				PROVISIONING_PROFILE = "ae40e780-662f-4a4a-9295-ac33e0990548";
-				PROVISIONING_PROFILE_SPECIFIER = com.peerio.dev;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Debug;
 		};
@@ -1657,8 +1683,10 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = peeriomobile/peeriomobile.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Technologies Peerio Inc. (7L45B96YPK)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 306;
-				DEVELOPMENT_TEAM = 7L45B96YPK;
+				DEVELOPMENT_TEAM = "";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
@@ -1721,7 +1749,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.peerio;
 				PRODUCT_NAME = peeriomobile;
-				PROVISIONING_PROFILE = "1f70bad6-eabe-4771-adb8-bb46b73b0b2e";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Release;
 		};

@@ -1,8 +1,9 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { observer } from 'mobx-react/native';
-import { Text, Dimensions, View } from 'react-native';
+import { Dimensions, View } from 'react-native';
 import moment from 'moment';
+import Text from '../controls/custom-text';
 import SafeComponent from '../shared/safe-component';
 import { vars } from '../../styles/styles';
 import icons from '../helpers/icons';
@@ -28,8 +29,7 @@ export default class RecentFileItem extends SafeComponent {
         };
         const infoStyle = {
             color: vars.extraSubtleText,
-            fontSize: vars.font.size.smaller,
-            fontWeight: vars.font.weight.regular
+            fontSize: vars.font.size.smaller
         };
         const itemContainerStyle = {
             flex: 1,

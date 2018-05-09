@@ -2,7 +2,7 @@ import { when, observable, action, reaction } from 'mobx';
 import RNRestart from 'react-native-restart';
 import mainState from '../main/main-state';
 import settingsState from '../settings/settings-state';
-import { User, validation, fileStore, socket, TinyDb, warnings, config, overrideServer } from '../../lib/icebear';
+import { User, fileStore, socket, TinyDb, warnings, config, overrideServer } from '../../lib/icebear';
 import keychain from '../../lib/keychain-bridge';
 import { rnAlertYesNo } from '../../lib/alerts';
 import { popupSignOutAutologin, popupKeychainError } from '../shared/popups';
@@ -10,13 +10,10 @@ import { tx } from '../utils/translator';
 import RoutedState from '../routes/routed-state';
 import routes from '../routes/routes';
 
-const { validators, addValidation } = validation;
-
 const loginConfiguredKey = 'loginConfigured';
 
 class LoginState extends RoutedState {
     @observable username = '';
-    @observable usernameValid = null;
     @observable firstName = '';
     @observable lastName = '';
     @observable passphrase = '';
@@ -88,7 +85,6 @@ class LoginState extends RoutedState {
                 this.isInProgress = false;
                 console.error(e);
                 User.current = null;
-                this.passphraseValidationMessage = tx('error_wrongAK');
                 return Promise.reject(new Error(this.error));
             });
     }
@@ -150,9 +146,7 @@ class LoginState extends RoutedState {
         });
     };
 
-    async restart() {
-        await RNRestart.Restart();
-    }
+    async restart() { await RNRestart.Restart(); }
 
     async signOut(force) {
         const inProgress = !!fileStore.files.filter(f => f.downloading || f.uploading).length;
@@ -248,7 +242,5 @@ class LoginState extends RoutedState {
 }
 
 const loginState = new LoginState();
-
-addValidation(loginState, 'username', validators.usernameLogin, 0);
 
 export default loginState;

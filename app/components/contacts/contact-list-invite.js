@@ -19,7 +19,7 @@ export default class ContactListInvite extends SafeComponent {
     get layoutTitle() { return tx('button_inviteEmailContact'); }
 
     get leftIcon() {
-        return buttons.uppercaseWhiteButton(tx('button_done'), () => contactAddState.routerMain.contacts());
+        return buttons.whiteTextButton(tx('button_done'), () => contactAddState.routerMain.contacts());
     }
 
     componentWillUnmount() {

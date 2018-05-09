@@ -1,7 +1,8 @@
 import React from 'react';
-import { View, Text, Image, ScrollView, LayoutAnimation, Dimensions } from 'react-native';
+import { View, Image, ScrollView, LayoutAnimation, Dimensions } from 'react-native';
 import { observable, reaction } from 'mobx';
 import { observer } from 'mobx-react/native';
+import Text from '../controls/custom-text';
 import { t, tx } from '../utils/translator';
 import loginState from './login-state';
 import LoginWizardPage, {
@@ -70,7 +71,7 @@ export default class LoginStart extends LoginWizardPage {
             <View style={container}>
                 <DebugMenuTrigger>
                     <View style={headerWelcome}>
-                        <Text style={headingStyle1}>{t('title_welcome')}</Text>
+                        <Text semibold style={headingStyle1}>{t('title_welcome')}</Text>
                         <Text style={subHeadingStyle}>{t('title_welcomeSubHeading')}</Text>
                     </View>
                 </DebugMenuTrigger>
@@ -84,7 +85,7 @@ export default class LoginStart extends LoginWizardPage {
                         {this._scrollItems.map(({ title, subtitle }, i) => (
                             <View style={scrollStyle} key={title}>
                                 <View>
-                                    <Text style={scrollHeadingStyle}>{title}</Text>
+                                    <Text semibold style={scrollHeadingStyle}>{title}</Text>
                                     <Text style={scrollSubHeadingStyle}>{subtitle}</Text>
                                 </View>
                                 <View style={{ flex: 1, paddingBottom: vars.spacing.medium.midi2x, justifyContent: 'flex-end' }}>

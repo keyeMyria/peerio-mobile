@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text } from 'react-native';
+import Text from '../controls/custom-text';
 import Bold from './bold';
 import Italic from './italic';
 import Link from './link';

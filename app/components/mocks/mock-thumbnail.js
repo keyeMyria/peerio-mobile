@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { observer } from 'mobx-react/native';
 import { observable } from 'mobx';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
+import Text from '../controls/custom-text';
 import Thumbnail from '../shared/thumbnail';
 import buttons from '../helpers/buttons';
 import FilesActionSheet from '../files/files-action-sheet';
@@ -39,7 +40,7 @@ export default class MockThumbnail extends Component {
                 <View style={{ margin: 10 }}>
                     <Text>{this.path}</Text>
                 </View>
-                {buttons.uppercasePeerioBlueBgButton('Select image', this.showActionSheet)}
+                {buttons.blueBgButton('Select image', this.showActionSheet)}
                 <FilesActionSheet ref={this.setRef} />
             </View>
         );

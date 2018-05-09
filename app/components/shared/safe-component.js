@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+/* eslint-disable */
 import { Text } from 'react-native';
+/* eslint-enable */
 import { observer } from 'mobx-react/native';
 
 @observer

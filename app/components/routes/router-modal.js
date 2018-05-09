@@ -15,6 +15,7 @@ import AccountUpgradeSwiper from '../settings/account-upgrade-swiper';
 import popupState from '../layout/popup-state';
 import routes from './routes';
 import { vars } from '../../styles/styles';
+import { uiState } from '../states';
 
 class RouterModal extends Router {
     @observable animating = false;
@@ -39,7 +40,8 @@ class RouterModal extends Router {
     add(route, component, isWhite) {
         const r = super.add(route, component);
         r.isWhite = isWhite;
-        this[route] = () => {
+        this[route] = async () => {
+            await uiState.hideAll();
             popupState.discardAllPopups();
             this.flushResolver();
             r.transition();
@@ -59,7 +61,8 @@ class RouterModal extends Router {
         }
     }
 
-    discard(value) {
+    async discard(value) {
+        await uiState.hideAll();
         this.flushResolver(value);
         this.route = null;
     }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Platform } from 'react-native';
+import { View, Platform } from 'react-native';
 import { observer } from 'mobx-react/native';
 import { User } from '../../lib/icebear';
 import buttons from '../helpers/buttons';
@@ -7,6 +7,7 @@ import { tx, T } from '../utils/translator';
 import settingsState from '../settings/settings-state';
 import { vars } from '../../styles/styles';
 import { gradient } from '../controls/effects';
+import Text from '../controls/custom-text';
 
 @observer
 export default class ChannelUpgradeOffer extends Component {
@@ -50,7 +51,7 @@ export default class ChannelUpgradeOffer extends Component {
                     </Text>
                 </View>
                 <View style={buttonStyle}>
-                    {buttons.uppercaseWhiteButtonNoPadding(tx('button_upgrade'), () => settingsState.upgrade(), false, { fontWeight: '600' })}
+                    {buttons.whiteTextButtonNoPadding(tx('button_upgrade'), () => settingsState.upgrade(), false, { fontWeight: '600' })}
                 </View>
             </View>
         ));

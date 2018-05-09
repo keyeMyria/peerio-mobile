@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { observer } from 'mobx-react/native';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
+import Text from '../controls/custom-text';
 import SafeComponent from '../shared/safe-component';
 import { vars } from '../../styles/styles';
 import { t } from '../utils/translator';
@@ -34,7 +35,6 @@ export default class ChannelInviteListItem extends SafeComponent {
 
         const textStyle = {
             fontSize: vars.font.size.bigger,
-            fontWeight: vars.font.weight.semiBold,
             color: vars.unreadTextColor
         };
 
@@ -42,7 +42,7 @@ export default class ChannelInviteListItem extends SafeComponent {
             width: vars.roomInviteCircleWidth,
             height: vars.roomInviteCircleHeight,
             borderRadius: 5,
-            backgroundColor: vars.peerioBlue,
+            backgroundColor: vars.invitedBadgeColor,
             overflow: 'hidden',
             alignItems: 'center',
             justifyContent: 'center'
@@ -50,7 +50,7 @@ export default class ChannelInviteListItem extends SafeComponent {
 
         const textNewStyle = {
             fontSize: vars.font.size.smaller,
-            color: vars.white
+            color: vars.invitedBadgeText
         };
 
         return (
@@ -60,8 +60,7 @@ export default class ChannelInviteListItem extends SafeComponent {
                 <TouchableOpacity
                     onPress={this.onPress}
                     style={containerStyle} pressRetentionOffset={vars.pressRetentionOffset}>
-                    <Text
-                        style={textStyle}>
+                    <Text semibold style={textStyle}>
                         {`# ${channelName}`}
                     </Text>
                     <View style={circleStyle}>

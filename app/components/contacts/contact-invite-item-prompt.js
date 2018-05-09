@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { observer } from 'mobx-react/native';
 import { observable, action } from 'mobx';
@@ -8,6 +8,7 @@ import { vars } from '../../styles/styles';
 import { contactStore } from '../../lib/icebear';
 import buttons from '../helpers/buttons';
 import { t, tx } from '../utils/translator';
+import Text from '../controls/custom-text';
 
 @observer
 export default class ContactInviteItemPrompt extends SafeComponent {
@@ -30,7 +31,7 @@ export default class ContactInviteItemPrompt extends SafeComponent {
                     <Text style={{ color: vars.txtDate }}>{t('title_inviteContactByEmail2', { email })}</Text>
                 </View>
                 <View style={{ alignSelf: 'flex-end', marginTop: vars.spacing.small.maxi2x }}>
-                    {buttons.uppercaseGreenBgButton(title, this.invite, invited)}
+                    {buttons.roundBlueBgButton(title, this.invite, invited)}
                 </View>
             </View>
         );

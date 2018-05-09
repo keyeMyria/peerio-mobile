@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { observer } from 'mobx-react/native';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
+import Text from '../controls/custom-text';
 import SafeComponent from '../shared/safe-component';
 import Avatar from '../shared/avatar';
 import chatState from './chat-state';
@@ -27,13 +28,12 @@ export default class ChatListItem extends SafeComponent {
 
         const circleTextStyle = {
             fontSize: vars.font.size.normal,
-            fontWeight: vars.font.weight.semiBold,
-            color: vars.unreadTextColor
+            color: vars.badgeText
         };
 
         return (
             <View style={circleStyle}>
-                <Text style={circleTextStyle}>
+                <Text semibold style={circleTextStyle}>
                     {`${chat.unreadCount}`}
                 </Text>
             </View>
@@ -44,13 +44,13 @@ export default class ChatListItem extends SafeComponent {
         const m = c.mostRecentMessage;
         if (!m) return null;
         if (m.systemData) {
-            return <Text numberOfLines={1} ellipsizeMode="tail" style={{ fontStyle: 'italic' }}>{systemMessages.getSystemMessageText(m)}</Text>;
+            return <Text italic numberOfLines={1} ellipsizeMode="tail">{systemMessages.getSystemMessageText(m)}</Text>;
         }
         let { username } = m.sender;
         if (username === User.current.username) username = tx('title_you');
         return (
             <Text numberOfLines={1} ellipsizeMode="tail">
-                <Text style={{ fontWeight: 'bold' }}>{username}{`: `}</Text>
+                <Text bold>{username}{`: `}</Text>
                 <Text style={{ color: vars.txtMedium }}>
                     {m.files && m.files.length
                         ? tx('title_filesShared', { count: m.files.length })

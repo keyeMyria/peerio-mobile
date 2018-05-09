@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Text } from 'react-native';
+import { View, ScrollView } from 'react-native';
 import { observer } from 'mobx-react/native';
+import Text from '../controls/custom-text';
+import { config } from '../../lib/icebear';
 import { vars } from '../../styles/styles';
 import { tx } from '../utils/translator';
 import { a } from '../controls/tag-handlers';
@@ -24,9 +26,9 @@ export default class PaymentsInfoPopup extends Component {
                     {this.props.text}
                 </Text>
                 <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-                    {a(tx('title_termsOfUse'), 'https://peerio.com/conditions.html', linkStyle)}
+                    {a(tx('title_termsOfUse'), config.translator.urlMap.termsUrl, linkStyle)}
                     <Text style={popupTextStyle}>   |   </Text>
-                    {a(tx('title_privacyPolicy'), 'https://peerio.com/privacy.html', linkStyle)}
+                    {a(tx('title_privacyPolicy'), config.translator.urlMap.privacyUrl, linkStyle)}
                 </View>
             </ScrollView>
         );

@@ -43,6 +43,9 @@ jobs:
           name: "Install npm modules"
           command: npm install
       - run:
+          name: "Eslint"
+          command: ./node_modules/.bin/eslint --max-warnings=0 app
+      - run:
           name: "Compile and run"
           command: ./node_modules/.bin/react-native run-ios
       - run:

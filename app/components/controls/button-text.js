@@ -1,10 +1,11 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Text, TouchableOpacity } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import { observer } from 'mobx-react/native';
 import SafeComponent from '../shared/safe-component';
 import { vars } from '../../styles/styles';
 import testLabel from '../helpers/test-label';
+import Text from '../controls/custom-text';
 
 @observer
 export default class ButtonText extends SafeComponent {
@@ -15,10 +16,6 @@ export default class ButtonText extends SafeComponent {
         else if (secondary) fontColor = vars.subtleText;
         else if (textColor) fontColor = textColor;
         else fontColor = vars.peerioBlue;
-        const textStyle = {
-            color: fontColor,
-            fontWeight: 'bold'
-        };
         const padding = vars.spacing.small.maxi2x;
         const touchable = {
             padding
@@ -31,7 +28,7 @@ export default class ButtonText extends SafeComponent {
                 style={touchable}
                 disabled={disabled}
                 onPress={disabled ? null : onPress}>
-                <Text style={[textStyle, style]}>
+                <Text bold style={[style, { color: fontColor }]}>
                     {text.toUpperCase ? text.toUpperCase() : text}
                 </Text>
             </TouchableOpacity>

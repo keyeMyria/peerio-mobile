@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { observer } from 'mobx-react/native';
 import { vars } from '../../styles/styles';
+import Text from '../controls/custom-text';
 
 const style = {
     backgroundColor: vars.peerioBlue,

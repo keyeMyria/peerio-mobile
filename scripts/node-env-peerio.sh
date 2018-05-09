@@ -1,5 +1,5 @@
 #!/bin/bash
-export PEERIO_SOCKET_SERVER=wss://icebear.peerio.com/
+source ./env.sh
 
 unset PEERIO_USERNAME
 unset PEERIO_PASSPHRASE

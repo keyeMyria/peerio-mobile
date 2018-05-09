@@ -19,7 +19,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>306</string>
+	<string>1</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<true/>
 	<key>ITSEncryptionExportComplianceCode</key>
@@ -45,8 +45,10 @@
 	<string>Upload images and photos to your encrypted storage</string>
 	<key>NSContactsUsageDescription</key>
 	<string>Access your contacts to find and chat with them</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Access your location always</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Access your location</string>
+	<string>Access your location when in use</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>Upload images and photos to your encrypted storage</string>
 	<key>NSPhotoLibraryUsageDescription</key>
@@ -63,6 +65,18 @@
 		<string>Zocial.ttf</string>
 		<string>MaterialCommunityIcons.ttf</string>
 		<string>SimpleLineIcons.ttf</string>
+		<string>OpenSans.ttf</string>
+		<string>OpenSansBold.ttf</string>
+		<string>OpenSansBoldItalic.ttf</string>
+		<string>OpenSansItalic.ttf</string>
+		<string>OpenSansSemiBold.ttf</string>
+		<string>OpenSansSemiBoldItalic.ttf</string>
+		<string>OpenSans-Bold.ttf</string>
+		<string>OpenSans-BoldItalic.ttf</string>
+		<string>OpenSans-Italic.ttf</string>
+		<string>OpenSans-Regular.ttf</string>
+		<string>OpenSans-SemiBold.ttf</string>
+		<string>OpenSans-SemiBoldItalic.ttf</string>
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>

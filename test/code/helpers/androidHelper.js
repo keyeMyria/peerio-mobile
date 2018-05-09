@@ -1,5 +1,3 @@
-const fs = require('fs');
-
 function selectorWithText(query) {
     return `android=new UiSelector().text("${query}")`;
 }

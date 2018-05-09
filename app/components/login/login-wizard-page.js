@@ -84,7 +84,6 @@ const headingStyle1 = {
     color: vars.textWhite100,
     textAlign: 'center',
     fontSize: vars.font.size.massive,
-    fontWeight: vars.font.weight.semiBold,
     marginBottom: vars.spacing.small.maxi
 };
 
@@ -104,7 +103,6 @@ const scrollHeadingStyle = {
     color: vars.textDarkGrey,
     fontSize: vars.font.size.huge,
     textAlign: 'center',
-    fontWeight: vars.font.weight.semiBold,
     marginBottom: vars.spacing.medium.midi2x
 };
 
@@ -155,21 +153,20 @@ export default class LoginWizardPage extends SafeComponent {
         };
         const buttonText = {
             color: vars.textWhite100,
-            fontWeight: 'bold',
             fontSize: vars.font.size.bigger
         };
         return (
             <View style={buttonContainer} key={text}>
-                {this._button(text, onPress, button, buttonText, disabled)}
+                {this._button(text, onPress, button, buttonText, disabled, true)}
             </View>
         );
     }
 
-    _button(text, onPress, style, textStyle, disabled) {
+    _button(text, onPress, style, textStyle, disabled, bold) {
         return (
             <Button style={[style, disabled && { opacity: 0.5 }]}
                 {...testLabel(text)}
-                textStyle={textStyle}
+                textStyle={textStyle} bold={bold}
                 text={tu(text)}
                 onPress={disabled ? null : onPress} />
         );
@@ -177,7 +174,7 @@ export default class LoginWizardPage extends SafeComponent {
 
     _footerButton(text, onPress, style, disabled) {
         const s = wizard.footer.button.base;
-        return this._button(text, onPress, [s, style], { fontWeight: 'bold' }, disabled);
+        return this._button(text, onPress, [s, style], null, disabled, true);
     }
 
     buttons() {

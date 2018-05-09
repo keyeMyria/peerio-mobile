@@ -1,6 +1,7 @@
 import React from 'react';
-import { Text, Linking } from 'react-native';
+import { Linking } from 'react-native';
 import * as linkify from 'linkifyjs';
+import Text from '../controls/custom-text';
 import { vars } from '../../styles/styles';
 
 export default (m, username) => {
@@ -15,13 +16,13 @@ export default (m, username) => {
         const result = [];
         for (let i = 0; i < items.length; ++i) {
             const token = items[i];
-            if (i % 2) result.push(<Text key={`${i}-hl`} style={s}>{r}</Text>);
+            if (i % 2) result.push(<Text bold key={`${i}-hl`} style={s}>{r}</Text>);
             result.push(<Text key={i}>{n ? n(token) : token}</Text>);
         }
         return result;
     };
 
-    const tagifyUsername = (t) => tagifyExact(t, `@${username}`, { fontWeight: 'bold', backgroundColor: vars.usernameHighlight });
+    const tagifyUsername = (t) => tagifyExact(t, `@${username}`, { backgroundColor: vars.usernameHighlight });
     // const tagifyB = (t) => tagify(t, /<\/*b>/, { fontWeight: 'bold' }, tagifyUsername);
     // const tagifyI = (t) => tagify(t, /<\/*i>/, { fontStyle: 'italic' }, tagifyB);
 

@@ -28,6 +28,13 @@ export default class InlineFileActionSheet extends SafeComponent {
                 }
             },
             {
+                title: tx('button_move'),
+                action: () => {
+                    fileState.currentFile = file;
+                    routes.modal.moveFileTo();
+                }
+            },
+            {
                 title: 'button_delete',
                 isDestructive: true,
                 action: async () => {

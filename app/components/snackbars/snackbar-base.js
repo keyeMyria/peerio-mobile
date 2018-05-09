@@ -1,7 +1,8 @@
 import React from 'react';
 import { observer } from 'mobx-react/native';
-import { Text, Animated, TouchableWithoutFeedback } from 'react-native';
+import { Animated, TouchableWithoutFeedback } from 'react-native';
 import { reaction } from 'mobx';
+import Text from '../controls/custom-text';
 import SafeComponent from '../shared/safe-component';
 import { warnings, warningStates } from '../../lib/icebear';
 import { vars } from '../../styles/styles';
@@ -67,7 +68,7 @@ export default class SnackbarBase extends SafeComponent {
 
     renderThrow() {
         const s = {
-            backgroundColor: vars.darkBlue,
+            backgroundColor: vars.snackbarBg,
             justifyContent: 'flex-start',
             paddingLeft: vars.spacing.medium.mini2x,
             overflow: 'hidden',

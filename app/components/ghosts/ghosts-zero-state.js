@@ -1,8 +1,9 @@
 import React from 'react';
 import { observer } from 'mobx-react/native';
-import { View, Text, Dimensions, Image } from 'react-native';
+import { View, Dimensions, Image } from 'react-native';
 import SafeComponent from '../shared/safe-component';
 import { vars } from '../../styles/styles';
+import Text from '../controls/custom-text';
 
 const ghostZeroState = require('../../assets/ghost-zero-state.png');
 const arrowDownZeroState = require('../../assets/arrow-down-zero-state.png');

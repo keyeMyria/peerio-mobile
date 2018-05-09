@@ -17,10 +17,11 @@ import ContactView from '../contacts/contact-view';
 import ContactList from '../contacts/contact-list';
 import ChannelInvite from '../messaging/channel-invite';
 import ContactListInvite from '../contacts/contact-list-invite';
-import { fileState, mainState, ghostState, chatState, settingsState, contactState, contactAddState, invitationState } from '../states';
+import { fileState, ghostState, chatState, settingsState, contactState, contactAddState, invitationState } from '../states';
 // import { enablePushNotifications } from '../../lib/push';
 import routes from './routes';
 import loginState from '../login/login-state';
+import preferenceStore from '../settings/preference-store';
 
 class RouterMain extends Router {
     // current route object
@@ -65,7 +66,7 @@ class RouterMain extends Router {
         this.invoked = true;
         this.loading = true;
         // if (EN === 'peeriomobile') await enablePushNotifications();
-        await mainState.init();
+        await preferenceStore.init();
         await chatState.init();
         this.chatStateLoaded = true;
         await fileState.init();
@@ -81,7 +82,8 @@ class RouterMain extends Router {
         const route = super.add(key, null);
         route.components = observable.ref(components);
         route.routeState = routeState;
-        this[key] = route.transition = (item, suppressTransition, index) => {
+        this[key] = route.transition = async (item, suppressTransition, index) => {
+            await uiState.hideAll();
             if (this.route !== key) {
                 !suppressTransition && LayoutAnimation.easeInEaseOut();
                 this.onTransition(this.current, false, item);
@@ -131,7 +133,8 @@ class RouterMain extends Router {
         this.current && this.current.routeState && this.current.routeState.fabAction();
     }
 
-    @action back() {
+    @action async back() {
+        await uiState.hideAll();
         if (this.currentIndex > 0) this.currentIndex--;
         this.onTransition(this.current, true);
         if (Platform.OS !== 'android') LayoutAnimation.easeInEaseOut();
