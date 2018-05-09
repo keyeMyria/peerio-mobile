@@ -2,7 +2,7 @@ import { observer } from 'mobx-react/native';
 import SafeComponent from '../shared/safe-component';
 import { tx } from '../utils/translator';
 import { fileState } from '../states';
-import routerModal from '../routes/router-modal';
+import routes from '../routes/routes';
 import ActionSheetLayout from '../layout/action-sheet-layout';
 
 @observer
@@ -17,7 +17,7 @@ export default class InlineFileActionSheet extends SafeComponent {
                 disabled: isLegacy,
                 action: () => {
                     fileState.currentFile = file;
-                    routerModal.shareFileTo();
+                    routes.modal.shareFileTo();
                 }
             },
             {

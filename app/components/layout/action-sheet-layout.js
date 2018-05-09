@@ -1,6 +1,8 @@
 import React from 'react';
 import { observer } from 'mobx-react/native';
+/* eslint-disable */
 import { View, Text, TouchableOpacity, TouchableWithoutFeedback, Dimensions, LayoutAnimation, Platform } from 'react-native';
+/* eslint-enable */
 import { action, observable } from 'mobx';
 import SafeComponent from '../shared/safe-component';
 import { vars } from '../../styles/styles';
@@ -97,7 +99,7 @@ export default class ActionSheetLayout extends SafeComponent {
                 text = disabledButtonTextStyle;
             } else text = buttonTextStyle;
             return (
-                <View style={[container, { backgroundColor: vars.lightGrayBg }]} >
+                <View key={button.title} style={[container, { backgroundColor: vars.lightGrayBg }]} >
                     <TouchableOpacity
                         style={container}
                         onPress={() => this.executeAction(button)} >
@@ -122,8 +124,8 @@ export default class ActionSheetLayout extends SafeComponent {
                 resolve();
             }, 10));
         }
-        state.visible = true;
         state.config = config;
+        state.visible = true;
         uiState.actionSheetShown = true;
     }
 
